@@ -1,0 +1,11 @@
+site_name: MatrixOne Cloud 文档
+theme:
+  name: material
+repo_url: https://github.com/matrixone-cloud/moc-docs
+edit_uri: edit/main/docs/
+extra:
+  homepage: https://www.matrixorigin.cn/MatrixOneCloud
+  version:
+    provider: mike
+extra_css:
+  - stylesheets/extra.css
