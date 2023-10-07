@@ -1,0 +1,126 @@
+name: build and push image
+# 3个功能,
+# 1. 默认更新 main 内容到 dev 文档
+# 2. 更新指定分支版本文档
+# 3. 可以设置指定版本为默认访问版本
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Update Docs Version From Branch, e.g main for dev'
+        required: true
+        default: 'main'
+      is_set_default:
+        description: 'True To Set Default Version When Visited'
+        required: false
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch }} # 可以指定分支 checkout, 但不允许直接修改 gh-pages
+
+      - name: branch status
+        run: |
+          git status
+
+      - name: Prepare
+        id: prep
+        run: |
+          COMMIT_ID=$(git rev-parse HEAD)
+          SHORT_COMMIT_ID=$(git rev-parse --short HEAD)
+          ACR_REGISTRY=registry.cn-hangzhou.aliyuncs.com
+          ACR_NAMESPACE=ack-cos
+          ACR_IMAGE_NAME=matrixonecloud-docs.cn
+          ACR_IMAGE_TAG=${{ inputs.branch }}_${COMMIT_ID}
+          # Set output parameters.
+          # https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+          echo "commit_id=${COMMIT_ID}" >> $GITHUB_OUTPUT
+          echo "short_commit_id=${SHORT_COMMIT_ID}" >> $GITHUB_OUTPUT
+          echo "acr_registry_name=${ACR_REGISTRY}" >> $GITHUB_OUTPUT
+          echo "acr_namespace=${ACR_NAMESPACE}" >> $GITHUB_OUTPUT
+          echo "acr_image_name=${ACR_IMAGE_NAME}" >> $GITHUB_OUTPUT
+          echo "acr_image_tag=${ACR_IMAGE_TAG}" >> $GITHUB_OUTPUT
+
+      - name: show info on the ${{ inputs.branch }} branch, commit ${{ steps.prep.outputs.commit_id }}
+        id: branch_commit
+        env:
+          ACR_REGISTRY: ${{ steps.prep.outputs.acr_registry_name }}
+          ACR_NAMESPACE: ${{ steps.prep.outputs.acr_namespace }}
+          ACR_IMAGE_NAME: ${{ steps.prep.outputs.acr_image_name }}
+          ACR_IMAGE_TAG: ${{ steps.prep.outputs.acr_image_tag }}
+        run: |
+          echo "commit_id:${{ steps.prep.outputs.commit_id }}"
+          echo "short_commit_id:${{ steps.prep.outputs.short_commit_id }}"
+          echo "acr_registry_name:${{ env.ACR_REGISTRY }}"
+          echo "acr_namespace:${{ env.ACR_NAMESPACE }}"
+          echo "acr_image_name:${{ env.ACR_IMAGE_NAME }}"
+          echo "acr_image_tag:${{ env.ACR_IMAGE_TAG }}"
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Intialiaze Python Env
+        run: |
+          git rev-parse --abbrev-ref HEAD
+          pip install -r requirements.txt
+      - name: Git Config
+        run: |
+          git fetch --all
+          git config --global user.email ${{ secrets.GITUSEREMAIL }}
+          git config --global user.name ${{ secrets.GITUSERNAME }}
+
+      - name: Mike dev Version Snapshot
+        if: ${{ inputs.branch == 'main' }}
+        run: |
+          mike deploy --push dev
+      - name: Mike ${{ inputs.branch }} Version Snapshot
+        if: ${{ inputs.branch != 'main' }}
+        run: |
+          mike deploy --push ${{ inputs.branch }}
+
+      - name: Mike Set Default Version
+        if: ${{ inputs.branch == 'main' && inputs.is_set_default }}
+        run: |
+          mike list
+          mike alias -u dev latest
+          mike list
+          mike set-default --push latest
+      - name: Mike Set Default Version
+        if: ${{ inputs.branch != 'main' && inputs.is_set_default }}
+        run: |
+          mike list
+          mike alias -u ${{ inputs.branch }} latest
+          mike list
+          mike set-default --push latest
+
+      - name: login to aliyun ACR
+        env:
+          ACR_REGISTRY: ${{ steps.prep.outputs.acr_registry_name }}
+        uses: aliyun/acr-login@v1
+        with:
+          login-server: ${{ env.ACR_REGISTRY }}
+          username: '${{ secrets.ALIYUN_DOCKER_USER }}'
+          password: '${{ secrets.ALIYUN_DOCKER_PASSWORD }}'
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build ${{ inputs.branch }} && Push
+        uses: docker/build-push-action@v4
+        env:
+          ACR_REGISTRY: ${{ steps.prep.outputs.acr_registry_name }}
+          ACR_NAMESPACE: ${{ steps.prep.outputs.acr_namespace }}
+          ACR_IMAGE_NAME: ${{ steps.prep.outputs.acr_image_name }}
+          ACR_IMAGE_TAG: ${{ steps.prep.outputs.acr_image_tag }}
+        with:
+          context: . # remove git-context restriction https://github.com/docker/build-push-action#git-context
+          push: true
+          tags: |
+            ${{ env.ACR_REGISTRY }}/${{ env.ACR_NAMESPACE }}/${{ env.ACR_IMAGE_NAME }}:${{ env.ACR_IMAGE_TAG }}
+            ${{ env.ACR_REGISTRY }}/${{ env.ACR_NAMESPACE }}/${{ env.ACR_IMAGE_NAME }}:latest
