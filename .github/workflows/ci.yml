@@ -124,3 +124,20 @@ jobs:
           tags: |
             ${{ env.ACR_REGISTRY }}/${{ env.ACR_NAMESPACE }}/${{ env.ACR_IMAGE_NAME }}:${{ env.ACR_IMAGE_TAG }}
             ${{ env.ACR_REGISTRY }}/${{ env.ACR_NAMESPACE }}/${{ env.ACR_IMAGE_NAME }}:latest
+
+      - name: ALI ACR Image Name and Tag from branch ${{ inputs.branch }} ${{ steps.prep.outputs.short_commit_id }}
+        env:
+          REGISTRY: ${{ steps.prep.outputs.acr_registry_name }}
+          NAMESPACE: ${{ steps.prep.outputs.acr_namespace }}
+          IMAGE_NAME: ${{ steps.prep.outputs.acr_image_name }}
+          IMAGE_TAG: ${{ steps.prep.outputs.acr_image_tag }}
+        run: |
+          echo "${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.IMAGE_NAME }}"
+          echo "${{ env.IMAGE_TAG }}"
+          echo "${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}"
+
+      - name: Log out of ALI ACR
+        env:
+          REGISTRY: ${{ steps.prep.outputs.acr_registry_name }}
+        if: always()
+        run: docker logout ${{ env.REGISTRY }}
