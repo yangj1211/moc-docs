@@ -24,17 +24,6 @@ extra_css:
   - stylesheets/extra.css
 extra_javascript:
   - javascripts/extra.js
-extra:
-  homepage: https://www.matrixorigin.cn
-  version:
-    provider: mike
-  alternate:
-    - name: English
-      link: /en/
-      lang: en
-    - name: 中文简体
-      link: /
-      lang: zh
 markdown_extensions:
   - admonition
   - pymdownx.details
@@ -45,7 +34,7 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 nav:
-  - MatrixOne:
+  - MatrixOne-Cloud:
     - 主页: README.md
     - 关于 MatrixOne Cloud:
       - MatrixOne Cloud 简介: MatrixOne-Cloud/Overview/matrixonecloud-introduction.md
