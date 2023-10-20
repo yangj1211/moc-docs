@@ -45,7 +45,7 @@ SLEEP(duration)
        Query OK, 0 rows affected (0.00 sec)
        ```
 
-    3. 查看会话 1 的结果：
+   3. 查看会话 1 的结果：
 
         ```
         mysql> select sleep(200);

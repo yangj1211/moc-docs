@@ -38,9 +38,9 @@ Project
 └── Aggregate
     └── Join
         └── Table Scan
-        └──	Join
-        	  └──Table Scan
-        	  └──Table Scan
+        └── Join
+           └──Table Scan
+           └──Table Scan
 ```
 
 ## 节点类型

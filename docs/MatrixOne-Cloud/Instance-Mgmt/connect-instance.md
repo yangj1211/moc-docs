@@ -28,13 +28,13 @@
 
 ### 通过公网连接
 
-这是一种最快、最简单的方式连接 MatrixOne 实例，但需要注意数据在公网传输时可能面临安全威胁，性能也不一定稳定。您可以结合 IP 白名单 进一步提升安全性。
+这是一种最快、最简单的方式连接 MatrixOne 实例，但需要注意数据在公网传输时可能面临安全威胁，性能也不一定稳定。您可以结合 IP 白名单进一步提升安全性。
 
 ### 通过私网连接
 
-这是一种较为安全和稳定的连接方式。MatrixOne Cloud 实例提供 VPC 终端节点服务，允许用户在自己的 VPC 上设置私网访问连接。更多详细信息请参考[私网访问文档](https://doc.weixin.qq.com/doc/w3_AZUAugYIAOcA82pdv8vQbO0Uxi4mZ?scode=AJsA6gc3AA8EECYkegAZUAugYIAOc)。
+这是一种较为安全和稳定的连接方式。MatrixOne Cloud 实例提供 VPC 终端节点服务，允许用户在自己的 VPC 上设置私网访问连接。
 
-### 3. 通过数据库管理平台连接
+### 通过数据库管理平台连接
 
 MO Cloud 为每个实例提供了界面化的数据库管理平台，用户可以使用浏览器快速、高效地访问和监控数据库。更多详细信息请参考[使用 Web 页面连接](../App-Develop/connect-mo/connect-mo-with-web.md)。
 

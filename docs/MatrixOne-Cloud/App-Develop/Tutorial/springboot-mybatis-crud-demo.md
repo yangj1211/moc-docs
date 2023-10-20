@@ -34,10 +34,10 @@ mysql> create database test;
 
 选择如下依赖项：
 
-- **Spring Web**
-- **MyBatis Framework**
-- **JDBC API**
-- **MySQL Driver**
+* **Spring Web**
+* **MyBatis Framework**
+* **JDBC API**
+* **MySQL Driver**
 
 ![image-20221026152447954](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/mybatis/image-20221026152447954.png)
 

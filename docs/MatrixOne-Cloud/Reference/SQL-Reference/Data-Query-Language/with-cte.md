@@ -58,8 +58,8 @@ SELECT ... FROM <query_name>;
 
 - `<query_definition>`：这是定义递归 CTE 结果集的查询语句。它包含两部分：
 
-    + 初始部分：定义了递归的起始条件和初始结果集。
-    + 递归部分：定义了如何从初始结果集递归地生成下一轮的结果集。
+  - 初始部分：定义了递归的起始条件和初始结果集。
+  - 递归部分：定义了如何从初始结果集递归地生成下一轮的结果集。
 
 - `SELECT ... FROM <query_name>`：在递归 CTE 上使用递归 CTE 的名称进行查询。
 
@@ -122,12 +122,12 @@ FROM EmployeeHierarchy;
 
 - **不支持的特性**：在递归成员的 CTE_query_definition 中不允许使用某些特性，包括：
 
-    + 使用 `SELECT DISTINCT` 关键字进行去重查询。
-    + 使用 `GROUP BY` 对结果进行分组。
-    + 使用 `HAVING` 筛选分组后的结果。
-    + 进行标量聚合，即对一组行应用聚合函数（如 `SUM`、`AVG` 等）得到一个单一的值。
-    + 使用 `LEFT`、`RIGHT`、`OUTER JOIN` 等外连接操作（但是 `INNER JOIN` 是允许的）。
-    + 使用子查询。
+  - 使用 `SELECT DISTINCT` 关键字进行去重查询。
+  - 使用 `GROUP BY` 对结果进行分组。
+  - 使用 `HAVING` 筛选分组后的结果。
+  - 进行标量聚合，即对一组行应用聚合函数（如 `SUM`、`AVG` 等）得到一个单一的值。
+  - 使用 `LEFT`、`RIGHT`、`OUTER JOIN` 等外连接操作（但是 `INNER JOIN` 是允许的）。
+  - 使用子查询。
 
 ## **示例**
 

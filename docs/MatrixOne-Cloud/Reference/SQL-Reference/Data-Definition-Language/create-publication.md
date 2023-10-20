@@ -36,4 +36,4 @@ Query OK, 0 rows affected (0.01 sec)
 
 ## 限制
 
-MatrxiOne 当前仅支持一次发布一个Database。
+MatrxiOne 当前仅支持一次发布一个 Database。

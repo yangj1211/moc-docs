@@ -12,7 +12,7 @@ SHOW CREATE PUBLICATION pubname;
 
 ## **示例**
 
-```sql 
+```sql
 create database t;
 create publication pub3 database t account acc0,acc1;
 mysql> alter publication pub3 account add accx;

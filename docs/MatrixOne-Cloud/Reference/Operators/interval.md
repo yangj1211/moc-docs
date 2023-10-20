@@ -13,8 +13,8 @@ date + INTERVAL expr unit
 date - INTERVAL expr unit
 ```
 
-  + 无论 `+` 运算符的左边或者右边，只要它其中一边的表达式是一个 `date` 或 `datetime` 值，则可以使用 `INTERVAL expr`。
-  + 对于 `-` 运算符，仅仅可以在 `-` 的右边使用 `INTERVAL expr`。
+- 无论 `+` 运算符的左边或者右边，只要它其中一边的表达式是一个 `date` 或 `datetime` 值，则可以使用 `INTERVAL expr`。
+- 对于 `-` 运算符，仅仅可以在 `-` 的右边使用 `INTERVAL expr`。
 
 ## **语法结构**
 
@@ -199,7 +199,7 @@ mysql> SELECT DATE_ADD('2019-01-30', INTERVAL 1 MONTH);
 
 ### 示例 5
 
-`date` 不能用错误的日期，如执行 *2016-07-00* 或格式严重错误的日期则结果为 `NULL`。
+`date` 不能用错误的日期，如执行 _2016-07-00_ 或格式严重错误的日期则结果为 `NULL`。
 
 ```sql
 mysql> SELECT DATE_ADD('2016-07-00', INTERVAL 1 DAY);

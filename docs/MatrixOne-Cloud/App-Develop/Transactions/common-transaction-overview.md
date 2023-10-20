@@ -144,9 +144,9 @@ MatrixOne Cloud 的悲观事务详情可以参见 [MatrixOne Cloud 的悲观事�
 
 ANSI/ISO SQL 定义的标准隔离级别共有四个：
 
-|隔离级别 | 脏写 (Dirty Write)|脏读 (Dirty Read)|不可重复读 (Fuzzy Read)	| 幻读 (Phantom)|
+|隔离级别 | 脏写 (Dirty Write)|脏读 (Dirty Read)|不可重复读 (Fuzzy Read) | 幻读 (Phantom)|
 |--|--|--|--|--|
-|READ UNCOMMITTED|Not Possible|	Possible|Possible|Possible|
+|READ UNCOMMITTED|Not Possible| Possible|Possible|Possible|
 |READ COMMITTED|Not Possible|Not Possible|Possible|Possible|
 |REPEATABLE READ|Not Possible|Not Possible|Not Possible| Possible|
 |SERIALIZABLE|Not Possible|Not Possible|Not Possible|Not Possible|

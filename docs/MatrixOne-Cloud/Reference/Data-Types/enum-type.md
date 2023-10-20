@@ -67,7 +67,7 @@ INSERT INTO enumtable (id, color) VALUES ('04', 2);
 -- 由于 `green` 的索引是 2，所以这条数据插入成功
 ```
 
-- **非空约束对于 ENUM 的限制**
+- __非空约束对于 ENUM 的限制__
 
 假如建表时，我们定义了 `color` 列 `NOT NULL`：
 
@@ -101,4 +101,4 @@ update orders set status= 2 where status='Processing';
 ## 限制
 
 1. 当前修改 ENUM 枚举成员需要使用 `ALTER TABLE` 语句重建表。
-2. MatrixOne 暂不支持**过滤 ENUM 值**和**排序 ENUM 值**。
+2. MatrixOne 暂不支持__过滤 ENUM 值__和__排序 ENUM 值__。

@@ -93,24 +93,24 @@ go version
     ```go
     package main
     import (
-    	"gorm.io/driver/mysql"
-    	"gorm.io/gorm"
-    	"fmt"
+     "gorm.io/driver/mysql"
+     "gorm.io/gorm"
+     "fmt"
       )
     func getDBConn() *gorm.DB {
-	    dsn := "root:111@tcp(127.0.0.1:6001)/test?charset=utf8mb4&parseTime=True&loc=Local" //MO
-	    db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
-	    })
-	    // get connection
-	    if err != nil {
-	    	fmt.Println("Database Connection Failed") //Connection failed
-	    } else {
-	    	fmt.Println("Database Connection Succeed") //Connection succeed
-	    }
-	    return db
+     dsn := "root:111@tcp(127.0.0.1:6001)/test?charset=utf8mb4&parseTime=True&loc=Local" //MO
+     db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+     })
+     // get connection
+     if err != nil {
+      fmt.Println("Database Connection Failed") //Connection failed
+     } else {
+      fmt.Println("Database Connection Succeed") //Connection succeed
+     }
+     return db
         }
     func main() {
-    	getDBConn()
+     getDBConn()
     }
     ```
 
@@ -123,6 +123,6 @@ go version
 
 ## 参考文档
 
-关于使用 Golang 通过 MatrixOne 构建一个简单的 CRUD 的示例，参见 [Golang 基础示例](../../Tutorial/develop-golang-crud-demo.md)。
+关于使用 Golang 通过 MatrixOne 构建一个简单的 CRUD 的示例，参见 [Golang 基础示例](../Tutorial/develop-golang-crud-demo.md)。
 
-关于使用 Gorm 通过 MatrixOne 构建一个简单的 CRUD 的示例，参见 [Gorm 基础示例](../../Tutorial/gorm-golang-crud-demo.md)。
+关于使用 Gorm 通过 MatrixOne 构建一个简单的 CRUD 的示例，参见 [Gorm 基础示例](../Tutorial/gorm-golang-crud-demo.md)。

@@ -34,7 +34,7 @@
     )
 
     func main() {
-      	//Open a new connection to MatrixOne
+       //Open a new connection to MatrixOne
         db, err := sql.Open("mysql", "root:111@tcp(127.0.0.1:6001)/test")
         checkErr(err)
 
