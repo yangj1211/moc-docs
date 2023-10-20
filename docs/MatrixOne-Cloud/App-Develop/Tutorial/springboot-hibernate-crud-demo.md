@@ -36,10 +36,10 @@ mysql> create database test;
 
 选择如下依赖项：
 
-- **Spring Web**
-- **JDBC API**
-- **Spring Data JPA**
-- **MySQL Driver**
+* **Spring Web**
+* **JDBC API**
+* **Spring Data JPA**
+* **MySQL Driver**
 
 ![image-20221027101504418](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/hibernate/image-20221027101504418.png)
 
@@ -646,12 +646,12 @@ http://localhost:8080/bookservice/books
 ### 4. 在数据库中升级 Book，使用 PUT 请求调用以下接口
 
 ```
-	http://localhost:8080/bookservice/books/<id>
+ http://localhost:8080/bookservice/books/<id>
 ```
 
-- 将 Header 中的内容类型设置为 `application/json`。
+* 将 Header 中的内容类型设置为 `application/json`。
 
-- 将 Request Body 设置为原始 JSON 有效负载
+* 将 Request Body 设置为原始 JSON 有效负载
 
 ```
  {

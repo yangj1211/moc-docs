@@ -8,7 +8,7 @@ MatrixOne Cloud 支持使用 Web 页面访问数据库，我们将此访问平�
 
 1. 登录您的 MO Cloud 账号，进入实例管理平台。
 
-    如果您还没有 MO Cloud 账号，您可以点击[注册登录](../Get-Started/quickstart.md)开始注册，或者参照[快速体验 MatrixOne Cloud](../Get-Started/quickstart.md)的注册指南。
+    如果您还没有 MO Cloud 账号，您可以点击[注册登录](../../Get-Started/quickstart.md)开始注册，或者参照[快速体验 MatrixOne Cloud](../../Get-Started/quickstart.md) 的注册指南。
 
 2. 在菜单栏中点击 **Instances** 进入实例列表页面，然后选择实例。
 3. 点击 **Connect**。
@@ -20,12 +20,12 @@ MatrixOne Cloud 支持使用 Web 页面访问数据库，我们将此访问平�
 
 数据库管理平台提供了多种数据库访问功能：
 
-- **Dashboard（仪表盘）：** 在菜单栏中点击 **Dashboard**，可以查看数据库的业务监控信息。详细使用方法请参考[数据监控文档](链接)。
+- **Dashboard（仪表盘）：**在菜单栏中点击 **Dashboard**，可以查看数据库的业务监控信息。详细使用方法请参考[数据监控文档](链接)。
 
-- **Database（数据库）：** 在菜单栏中点击 **Database**，您可以查看和操作数据对象。详细使用方法请参考[相关文档](链接)。
+- **Database（数据库）：**在菜单栏中点击 **Database**，您可以查看和操作数据对象。详细使用方法请参考[相关文档](链接)。
 
-- **Query -> SQL Editor（查询 -> SQL 编辑器）：** 在菜单栏中依次点击 **Query -> SQL Editor**，可以进行 SQL 的编辑和执行。详细使用方法请参考[SQL 编辑器文档](链接)。
+- **Query -> SQL Editor（查询 -> SQL 编辑器）：**在菜单栏中依次点击 **Query -> SQL Editor**，可以进行 SQL 的编辑和执行。详细使用方法请参考 [SQL 编辑器文档](链接)。
 
-- **Query -> Queries History（查询 -> 查询历史）：** 在菜单栏中依次点击 **Query -> Queries History**，您可以查看历史 SQL 查询的执行状态。详细使用方法请参考[查询分析文档](链接)。
+- **Query -> Queries History（查询 -> 查询历史）：**在菜单栏中依次点击 **Query -> Queries History**，您可以查看历史 SQL 查询的执行状态。详细使用方法请参考[查询分析文档](链接)。
 
 希望这些操作指南能够帮助您顺利使用 MatrixOne 数据库管理平台。如果您有任何疑问或需要进一步的帮助，请查看我们的文档或联系支持团队。

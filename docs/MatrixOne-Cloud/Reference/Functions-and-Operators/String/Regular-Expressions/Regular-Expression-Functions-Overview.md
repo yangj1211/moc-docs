@@ -65,7 +65,7 @@ MatrixOne 的正则表达式默认是区分大小写的。如果你希望进行�
 
 **正则表达式函数列表**
 
-|名称	|释义|
+|名称 |释义|
 |---|---|
 |[NOT REGEXP](not-regexp.md)| REGEXP 的否定表达式|
 |[REGEXP_INSTR()](regexp-instr.md) |匹配正则表达式的子串起始索引|

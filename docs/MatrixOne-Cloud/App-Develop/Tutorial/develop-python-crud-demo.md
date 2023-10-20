@@ -34,7 +34,7 @@
     pip3 install cryptography -i https://pypi.tuna.tsinghua.edu.cn/simple
     ```
 
-你可以参考 [Python 连接 MatrixOne 服务](../Develop/connect-mo/python-connect-to-matrixone.md)了解如何通过 `pymysql` 连接到 MatrixOne，本篇文档将指导你如何实现 CRUD（创建、读取、更新、删除)。
+你可以参考 [Python 连接 MatrixOne 服务](../connect-mo/python-connect-to-matrixone.md)了解如何通过 `pymysql` 连接到 MatrixOne，本篇文档将指导你如何实现 CRUD（创建、读取、更新、删除)。
 
 ## 新建表
 
@@ -47,7 +47,7 @@ import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
         host='127.0.0.1',
-	port=6001,
+ port=6001,
         user='root',
         password = "111",
         db='test',
@@ -111,7 +111,7 @@ import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
         host='127.0.0.1',
-	    port=6001,
+     port=6001,
         user='root',
         password = "111",
         db='test',
@@ -168,7 +168,7 @@ import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
         host='127.0.0.1',
-	    port=6001,
+     port=6001,
         user='root',
         password = "111",
         db='test',
@@ -213,7 +213,7 @@ import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
         host='127.0.0.1',
-	    port=6001,
+     port=6001,
         user='root',
         password = "111",
         db='test',
@@ -271,7 +271,7 @@ import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
         host='127.0.0.1',
-	    port=6001,
+     port=6001,
         user='root',
         password = "111",
         db='test',

@@ -1,12 +1,10 @@
-# MatrixOne Cloud权限管理
+# MatrixOne Cloud 权限管理
 
-本篇文章主要介绍 MatrixOne Cloud中的权限管理，包括**管理员权限**、**用户权限**、**角色权限**、**数据库权限**、**表权限**、**发布订阅权限**
-
-
+本篇文章主要介绍 MatrixOne Cloud 中的权限管理，包括**管理员权限**、**用户权限**、**角色权限**、**数据库权限**、**表权限**、**发布订阅权限**
 
 ### 管理员权限
 
-每个MatrixOne Cloud实例创建的时候都会创建一个管理员账号，拥有*管理员权限*的对象可以拥有以下权限：
+每个 MatrixOne Cloud 实例创建的时候都会创建一个管理员账号，拥有*管理员权限*的对象可以拥有以下权限：
 
 |权限 | 含义|
 |---|---|
@@ -81,9 +79,9 @@
 
 ### 发布订阅权限
 
-在 MatrixOne Cloud中，发布订阅是对 MatrixOne Cloud中指定用户的数据库发起的数据共享访问，MatrixOne Cloud允许一个账号下的多个实例及跨账号的实例间进行数据发布订阅。
+在 MatrixOne Cloud 中，发布订阅是对 MatrixOne Cloud 中指定用户的数据库发起的数据共享访问，MatrixOne Cloud 允许一个账号下的多个实例及跨账号的实例间进行数据发布订阅。
 
-__Note:__ 当前 MatrixOne Cloud中仅支持 *moadmin* 和 *accountadmin* 角色才可以进行发布订阅操作。
+**Note:** 当前 MatrixOne Cloud 中仅支持 *moadmin* 和 *accountadmin* 角色才可以进行发布订阅操作。
 
 - **发布端**
 

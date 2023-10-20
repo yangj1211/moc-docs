@@ -42,8 +42,8 @@ mysql> select * from t2 where b not in ('e',"f");
 4 rows in set (0.01 sec)
 
 mysql> select * from t2 where e not in ('2022-02-09 12:00:00') and a in (4,5);
-a	b	c	d	e
-4	d	4.0010	2022-02-11	2022-02-11 12:00:00
+a b c d e
+4 d 4.0010 2022-02-11 2022-02-11 12:00:00
 ```
 
 ## **限制**

@@ -49,7 +49,17 @@ nav:
         - Python 连接: MatrixOne-Cloud/App-Develop/connect-mo/python-connect-to-matrixone.md
         - Golang 连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-to-matrixone-with-go.md
       - 数据写入:
-        - INSERT 插入: MatrixOne-Cloud/App-Develop/insert-data.md
+        - 插入数据:
+          - INSERT 插入: MatrixOne-Cloud/App-Develop/import-data/insert-data.md
+          - 批量插入:
+            - 批量插入概述: MatrixOne-Cloud/App-Develop/import-data/bulk-load/bulk-load-overview.md
+            - 插入 csv 文件: MatrixOne-Cloud/App-Develop/import-data/bulk-load/load-csv.md
+            - 插入 jsonlines 文件: MatrixOne-Cloud/App-Develop/import-data/bulk-load/load-jsonline.md
+            - 从对象存储导入文件: MatrixOne-Cloud/App-Develop/import-data/bulk-load/load-s3.md
+            - Source 插入: MatrixOne-Cloud/App-Develop/import-data/bulk-load/using-source.md
+        - 更新数据: MatrixOne-Cloud/App-Develop/import-data/update-data.md
+        - 删除数据: MatrixOne-Cloud/App-Develop/import-data/delete-data.md
+        - 预处理: MatrixOne-Cloud/App-Develop/import-data/prepared.md
       - 数据读取:
         - 单表读取: MatrixOne-Cloud/App-Develop/read-data/query-data-single-table.md
         - 多表连接查询: MatrixOne-Cloud/App-Develop/read-data/multitable-join-query.md
@@ -81,11 +91,20 @@ nav:
       - 创建实例: MatrixOne-Cloud/Instance-Mgmt/create-instance.md
       - 连接实例: MatrixOne-Cloud/Instance-Mgmt/connect-instance.md
       - 终止和恢复实例: MatrixOne-Cloud/Instance-Mgmt/terminate-recovery-instance.md
+    - 导出数据: MatrixOne-Cloud/App-Develop/export-data/modump.md
+    - 安全:
+      - 身份访问控制: MatrixOne-Cloud/Security/Security-Permission-Overview.md
+      - 网络访问控制:
+        - 设置 IP 白名单: MatrixOne-Cloud/Security/IP-Access.md
+        - TLS 连接 MatrixOne: MatrixOne-Cloud/Security/TLS-introduction.md
+      - 数据访问控制:
+        - 基于角色的访问控制（RBAC）: MatrixOne-Cloud/Security/about-privilege-management.md
     - 参考手册:
       - 系统变量:
         - 系统变量概述: MatrixOne-Cloud/Reference/Variable/system-variables/system-variables-overview.md
         - 系统变量参数:
           - SQL 模式: MatrixOne-Cloud/Reference/Variable/system-variables/sql-mode.md
+          - 保存查询结果支持: MatrixOne-Cloud/Reference/Variable/system-variables/save_query_result.md
           - 时区支持: MatrixOne-Cloud/Reference/Variable/system-variables/timezone.md
           - 大小写敏感支持: MatrixOne-Cloud/Reference/Variable/system-variables/lower_case_tables_name.md
         - 自定义变量: MatrixOne-Cloud/Reference/Variable/custom-variable.md
@@ -381,5 +400,8 @@ nav:
             - VERSION(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/version.md
       - 系统表目录: MatrixOne-Cloud/Reference/System-tables.md
       - 权限分类列表: MatrixOne-Cloud/Reference/access-control-type.md
-      - JDBC:
-        - MatrixOne 的 JDBC 功能支持列表: MatrixOne-Cloud/Reference/JDBC/mo-jdbc-feature-list.md
+      - 使用限制:
+        - MatrixOne 的 JDBC 功能支持列表: MatrixOne-Cloud/Reference/Limitations/mo-jdbc-feature-list.md
+        - MatrixOne DDL 语句分区支持的说明: MatrixOne-Cloud/Reference/Limitations/mo-partition-support.md
+        - MatrixOne 的 Load Data 支持的说明: MatrixOne-Cloud/Reference/Limitations/load-data-support.md
+    - 名词术语表: MatrixOne-Cloud/glossary.md

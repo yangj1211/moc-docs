@@ -1,10 +1,6 @@
 # INSERT 插入
 
-本文档介绍如何使用 SQL 语句在 MO Cloud 中插入数据。
-
-## 开始前准备
-
-已完成[创建实例](../Instance-Mgmt/create-instance.md)。
+本文档介绍如何使用 SQL 语句在 MatrixOne 中插入数据。
 
 ## INSERT INTO 语句
 
@@ -73,7 +69,7 @@ VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway
 
 ## 仅在指定列中插入数据
 
-MO Cloud 也支持使用 SQL 语句仅在特定列中插入数据。
+MatrixOne 也支持使用 SQL 语句仅在特定列中插入数据。
 
 ### 示例
 

@@ -56,7 +56,6 @@ MatrixOne 支持以下注释格式：
    1 row in set (0.01 sec)
    ```
 
-
 ## 限制
 
 MatrixOne 暂不支持嵌套注释。

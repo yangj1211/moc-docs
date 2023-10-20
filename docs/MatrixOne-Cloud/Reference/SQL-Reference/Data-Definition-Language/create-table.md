@@ -243,13 +243,13 @@ mysql> select * from t2;
 
 - `ON DELETE reference_option`：这个参数指定了在引用表中的数据被删除时，应该如何处理与之关联的外键数据。常见的选项包括：
 
-    + `RESTRICT`：如果在引用表中有相关的外键数据存在，不允许删除引用表中的数据。这可以用来防止误删除关联数据，以维护数据的一致性。
+  - `RESTRICT`：如果在引用表中有相关的外键数据存在，不允许删除引用表中的数据。这可以用来防止误删除关联数据，以维护数据的一致性。
 
-    + `CASCADE`：当引用表中的数据被删除时，同时删除与之关联的外键数据。这可以用于级联删除关联数据，以确保数据的完整性。
+  - `CASCADE`：当引用表中的数据被删除时，同时删除与之关联的外键数据。这可以用于级联删除关联数据，以确保数据的完整性。
 
-    + `SET NULL`：当引用表中的数据被删除时，将外键列的值设置为 NULL。这可以用于在删除引用数据时保留外键数据，但断开与引用数据的关联。
+  - `SET NULL`：当引用表中的数据被删除时，将外键列的值设置为 NULL。这可以用于在删除引用数据时保留外键数据，但断开与引用数据的关联。
 
-    + `NO ACTION`：表示不采取任何操作，只是检查是否有关联数据存在。这类似于 `RESTRICT`，但可能在某些数据库中有微小的差异。
+  - `NO ACTION`：表示不采取任何操作，只是检查是否有关联数据存在。这类似于 `RESTRICT`，但可能在某些数据库中有微小的差异。
 
 - `ON UPDATE reference_option`：这个参数指定了在引用表中的数据被更新时，应该如何处理与之关联的外键数据。常见的选项类似于 `ON DELETE reference_option`，用法也类似，只是针对数据更新操作。
 
@@ -273,8 +273,6 @@ CREATE TABLE Orders (
 
 在上述示例中，当 `Customers` 表中的某个客户被删除时，关联的订单数据也会被级联删除，以维护数据的完整性。同样的，`ON UPDATE` 参数也可以用类似的方式来处理更新操作。
 
-有关数据完整性约束的更多信息，参见[数据完整性约束概述](../../../Develop/schema-design/data-integrity/overview-of-integrity-constraint-types.md)。
-
 #### Cluster by
 
 `Cluster by` 是一种用于优化表的物理排列方式的命令。在建表时使用 `Cluster by` 命令，对于无主键的表，可以按照指定的列对表进行物理排序，并将数据行重新排列成与该列的值的顺序相同的顺序。使用 `Cluster by` 提高查询性能。
@@ -282,9 +280,7 @@ CREATE TABLE Orders (
 - 单列语法为：`create table() cluster by col;`  
 - 多列语法为：`create table() cluster by (col1, col2);`  
 
-__Note:__ `Cluster by` 不能和主键同时存在，否则会语法报错；`Cluster by` 只能在建表时指定，不支持动态创建。
-
-更多关于使用 `Cluster by` 进行性能调优，参见[使用 Cluster by 语句调优](../../../Performance-Tuning/optimization-concepts/through-cluster-by.md).
+**Note:** `Cluster by` 不能和主键同时存在，否则会语法报错；`Cluster by` 只能在建表时指定，不支持动态创建。
 
 #### Table PARTITION 和 PARTITIONS
 
@@ -311,8 +307,8 @@ partition_definition:
 
 · 优化查询。
 
-   + where 子句中包含分区条件时，可以只扫描必要的分区。
-   + 涉及聚合函数的查询时，可以容易的在每个分区上并行处理，最终只需汇总得到结果。
+- where 子句中包含分区条件时，可以只扫描必要的分区。
+- 涉及聚合函数的查询时，可以容易的在每个分区上并行处理，最终只需汇总得到结果。
 
 · 对于已经过期或者不需要保存的数据，可以通过删除与这些数据有关的分区来快速删除数据。
 

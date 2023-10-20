@@ -1,6 +1,6 @@
 # MatrixOne 系统数据库和表
 
-MatrixOne 系统数据库和表是 MatrixOne 存储系统信息的地方，你可以通过它们访问系统信息。MatrixOne Cloud在初始化时创建了 5 个系统数据库：`mo_catalog`、`information_schema`、`system_metrcis`、`system`、`mysql` 。系统数据库和表为默认系统内部组件，用户仅能进行读取操作。
+MatrixOne 系统数据库和表是 MatrixOne 存储系统信息的地方，你可以通过它们访问系统信息。MatrixOne Cloud 在初始化时创建了 5 个系统数据库：`mo_catalog`、`information_schema`、`system_metrcis`、`system`、`mysql`。系统数据库和表为默认系统内部组件，用户仅能进行读取操作。
 
 ## `mo_catalog` 数据库
 
@@ -254,12 +254,12 @@ MatrixOne 系统数据库和表是 MatrixOne 存储系统信息的地方，你�
 
 以下表为 `metric` 表的视图：
 
-* `sql_statement_total` 表：执行 SQL 语句的计数器。
-* `sql_statement_errors` 表：执行错误的 SQL 语句的计数器。
-* `sql_transaction_total` 表：事务性 SQL 语句的计数器。
-* `sql_transaction_errors` 表：错误执行的事务性语句的计数器。
-* `server_connections` 表：服务器连接数。
-* `server_storage_usage`：服务器存储使用情况。
+- `sql_statement_total` 表：执行 SQL 语句的计数器。
+- `sql_statement_errors` 表：执行错误的 SQL 语句的计数器。
+- `sql_transaction_total` 表：事务性 SQL 语句的计数器。
+- `sql_transaction_errors` 表：错误执行的事务性语句的计数器。
+- `server_connections` 表：服务器连接数。
+- `server_storage_usage`：服务器存储使用情况。
 
 ## `system` 数据库
 
@@ -299,10 +299,9 @@ MatrixOne 系统数据库和表是 MatrixOne 存储系统信息的地方，你�
 | sql_source_type       | TEXT          | SQL语句源类型                                                   |
 | result_count          | BIGINT(64)    | 统计sql执行结果的行数    |  
 
-
 ## `information_schema` 数据库
 
-**Information Schema** 提供了一种 ANSI 标准方式，用于查看系统的元数据。MatrixOne 除了为 MySQL 兼容性而包含的表之外，还提供了许多自定义的 `information_schema` 表。
+__Information Schema__ 提供了一种 ANSI 标准方式，用于查看系统的元数据。MatrixOne 除了为 MySQL 兼容性而包含的表之外，还提供了许多自定义的 `information_schema` 表。
 
 许多 `INFORMATION_SCHEMA` 表都有相应的 `SHOW` 命令。查询 `INFORMATION_SCHEMA` 可以在表之间进行连接。
 
@@ -356,10 +355,10 @@ MatrixOne 系统数据库和表是 MatrixOne 存储系统信息的地方，你�
 - `COLLATION_NAME`：字符串列的排序规则的名称。
 - `COLUMN_TYPE`：列类型。
 - `COLUMN_KEY`：该列是否被索引。该字段可能具有以下值：
-   - `Empty`：此列未编入索引，或者此列已编入索引并且是多列非唯一索引中的第二列。
-   - `PRI`：此列是主键或多个主键之一。
-   - `UNI`：此列是唯一索引的第一列。
-   - `MUL`：该列是非唯一索引的第一列，其中允许给定值多次出现。
+  - `Empty`：此列未编入索引，或者此列已编入索引并且是多列非唯一索引中的第二列。
+  - `PRI`：此列是主键或多个主键之一。
+  - `UNI`：此列是唯一索引的第一列。
+  - `MUL`：该列是非唯一索引的第一列，其中允许给定值多次出现。
 - `EXTRA`：给定列的任何附加信息。
 - `PRIVILEGES`：当前用户所拥有的对该列的权限。
 - `COLUMN_COMMENT`：列定义中包含的描述。
@@ -472,7 +471,7 @@ MatrixOne 系统数据库和表是 MatrixOne 存储系统信息的地方，你�
 - `TABLE_CATALOG`：视图所属目录的名称。值为 `def`。
 - `TABLE_SCHEMA`：视图所属的数据库的名称。
 - `TABLE_NAME`：视图的名称。
-- `VIEW_DEFINITION`：提供视图定义的 `SELECT` 语句。包含了在 `SHOW Create VIEW` 生成的**创建表**列中看到的大部分内容。
+- `VIEW_DEFINITION`：提供视图定义的 `SELECT` 语句。包含了在 `SHOW Create VIEW` 生成的__创建表__列中看到的大部分内容。
 - `CHECK_OPTION`：`CHECK_OPTION` 属性的值。值为 `NONE`、`CASCADE` 或 `LOCAL`。
 - `IS_UPDATABLE`：在 `CREATE VIEW` 时设置一个名为视图可更新性标志的标志，如果 UPDATE 和 DELETE（以及类似的操作）对视图合法，则标志设置为 `YES（true）`。否则，标志设置为 `NO（false）`。
 - `DEFINER`：创建视图的用户的帐户，格式为 `username@hostname`。

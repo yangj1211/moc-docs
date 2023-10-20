@@ -63,4 +63,3 @@ insert into t1 values(1,2,3);
 -- 此处需要手动提交
 COMMIT；  
 ```
-
