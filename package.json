@@ -1,0 +1,17 @@
+{
+  "name": "moc-docs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:matrixone-cloud/moc-docs.git",
+  "author": "xuoutput <847438919@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "config:zhlint": "node ./scripts/genZhlintConfig",
+    "lint": "npm run config:zhlint && npx zhlint './docs/MatrixOne-Cloud/**/*.md' && npx markdownlint-cli2 './docs/MatrixOne-Cloud/**/*.md'",
+    "lint:fix": "npm run config:zhlint && npx zhlint './docs/MatrixOne-Cloud/**/*.md' --fix && npx markdownlint-cli2-fix './docs/MatrixOne-Cloud/**/*.md'"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "^0.6.0",
+    "zhlint": "^0.7.1"
+  }
+}
