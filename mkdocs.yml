@@ -40,7 +40,7 @@ nav:
     - 快速开始:
       - 快速创建 MatrixOne Cloud（MO Cloud）实例: MatrixOne-Cloud/Get-Started/quickstart.md
     - 应用开发:
-      - 连接到 MatrixOne:
+      - 连接到 MatrixOne Cloud:
         - 客户端工具连接: MatrixOne-Cloud/App-Develop/connect-mo/database-client-tools.md
         - 使用 Web 页面连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-mo-with-web.md
         - Java 连接:
