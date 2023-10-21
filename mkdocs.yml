@@ -92,6 +92,11 @@ nav:
       - 连接实例: MatrixOne-Cloud/Instance-Mgmt/connect-instance.md
       - 终止和恢复实例: MatrixOne-Cloud/Instance-Mgmt/terminate-recovery-instance.md
     - 导出数据: MatrixOne-Cloud/App-Develop/export-data/modump.md
+    - 探索数据:
+      - SQL 编辑器: MatrixOne-Cloud/Data-Explore/sql-editor.md
+      - SQL 工作簿: MatrixOne-Cloud/Data-Explore/sql-workbook.md
+      - 查询分析:
+        - 查询历史: MatrixOne-Cloud/Data-Explore/query-anlysis/queries-history.md
     - 安全:
       - 身份访问控制: MatrixOne-Cloud/Security/Security-Permission-Overview.md
       - 网络访问控制:
@@ -404,4 +409,5 @@ nav:
         - MatrixOne 的 JDBC 功能支持列表: MatrixOne-Cloud/Reference/Limitations/mo-jdbc-feature-list.md
         - MatrixOne DDL 语句分区支持的说明: MatrixOne-Cloud/Reference/Limitations/mo-partition-support.md
         - MatrixOne 的 Load Data 支持的说明: MatrixOne-Cloud/Reference/Limitations/load-data-support.md
-    - 名词术语表: MatrixOne-Cloud/glossary.md
+    - 技术支持: MatrixOne-Cloud/tech-support.md
+    - 术语表: MatrixOne-Cloud/glossary.md
