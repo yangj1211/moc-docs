@@ -8,29 +8,20 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
 
 ## 前期准备
 
-已完成[创建实例](../../Instance-Mgmt/create-instance.md)。。
+- 已完成[创建实例](../../Instance-Mgmt/create-instance.md)。
+- 已经[获取 MatrixOne Cloud 实例的连接命令](../../Instance-Mgmt/create-instance.md#_10)。
 
-## 通过 MySQL Client 连接 MatrixOne 服务
+## 通过 MySQL Client 连接 MatrixOne Cloud服务
 
 1. 下载安装 [MySQL Client](https://dev.mysql.com/downloads/installer/)。
 
-2. 下载完成后，你可以使用 MySQL 命令行客户端来连接 MatrixOne 服务。
+2. 下载完成后，你可以使用 MySQL 命令行客户端来连接 MatrixOne Cloud 服务，只需要复制你获取的MatrixOne Cloud 实例的连接命令，并根据提示输入密码。
 
     ```
-    mysql -h IP -P PORT -uUsername -p
-    ```
-
-    连接符的格式与 MySQL 格式相同，你需要提供用户名和密码。
-
-    此处以内置帐号作为示例：
-
-    - user: root
-    - password: 111
-
-    ```
-    mysql -h host_ip_address -P 6001 -uroot -p
+    mysql -h host_ip_address -P port -u tenant:user:role -p
     Enter password:
     ```
+
 
 3. 连接成功提示如下：
 
@@ -44,36 +35,38 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
     ```
 
 !!! note
-    MatrixOne 与客户端默认是非加密传输，如果需要开启加密传输请参见[数据传输加密](../../Security/TLS-introduction.md)。
+    MatrixOne Cloud 与客户端默认是非加密传输，如果需要开启加密传输请参见[数据传输加密](../../Security/TLS-introduction.md)。
 
-## 通过 Navicat 连接 MatrixOne 服务
+## 通过 Navicat 连接 MatrixOne Cloud 服务
 
 1. 下载安装 [Navicat](https://www.navicat.com/en/products)。
 
 2. 安装 Navicat 完成后，打开 Navicat，点击左上角 **Connection > MySQL**，在弹窗中填入如下参数：
 
-    - **Connction Name**: MatrixOne
-    - **Host**: 127.0.0.1
+    - **Connction Name**: MOCloud
+    - **Host**: host_ip_address
     - **Port**: 6001
-    - **User Name**: root
-    - **Password**: 111
+    - **User Name**: tenant:user:role
+    - **Password**: your_password
     - **Save password**：勾选
 
 3. 点击 **Save** 保存设置。
 
-    ![navicat_config](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/navicat-config.png)
+/Users/cyan/Downloads/navicat-new-fillin.png
+    ![navicat_config](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/develop/navicat-new-fillin.png)
+    
 
-4. 双击左侧数据库目录中的 **MatrixOne**，图标点亮，连接成功。
+4. 双击左侧数据库目录中的 **MOCloud**，图标点亮，连接成功。
 
-5. 连接到 MatrixOne 后，在左侧数据库目录栏，你将看到 6 个默认系统数据库：
+5. 连接到 MOCloud 后，在左侧数据库目录栏，你将看到 4 个默认系统数据库：
 
-    <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/navicat-databases.png"  style="zoom: 60%;" />
+    <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/navicat-4-databases.png"  style="zoom: 60%;" />
 
     右侧窗口可查看有关此连接的基本信息：
 
-    <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/navicat-connection.png"  style="zoom: 60%;" />
+    <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/navicat-database-msg.png"  style="zoom: 60%;" />
 
-## 通过 DBeaver 连接 MatrixOne 服务
+## 通过 DBeaver 连接 MatrixOne Cloud 服务
 
 1. 下载安装 [DBeaver](https://dbeaver.io/download/)。
 
@@ -83,23 +76,27 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
 
     在 **Connect to a database** 窗口的 **Main** 区中填写如下参数：
 
-    - **Host**: 127.0.0.1
+    - **Host**: host_ip_address
     - **Port**: 6001
-    - **Database**: MatrixOne
-    - **User Name**: root
-    - **Password**: 111
+    - **Database**: system
+    - **User Name**: tenant:user:role
+    - **Password**: your_password
     - **Save password locally**: 勾选
+    !!! note
+        初次连接可以将Database选项填写系统库`system`方便连接，后续可根据需求自行修改。 
+    ![dbeaver-new-fillin](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/develop/dbeaver-new-fillin.png) 
+    
+    并点击 **连接详情** 修改连接名称为 **MOCloud** 。
+    ![dbeaver-new-edit-name](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/develop/dbeaver-new-edit-name.png) 
 
-    ![dbeaver-connection](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/dbeaver-connection.png)
+3. 双击左侧目录中的 **MOCloud**，连接 MatrixOne Cloud 服务。你可以在左侧目录树中看到默认的3个系统数据库：
 
-3. 双击左侧目录中的 **MatrixOne**，连接 MatrixOne 服务。你可以在左侧目录树中看到默认的四个系统数据库：
+    ![dbeaver-3-dbs](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/develop/dbeaver-3-dbs.png)
 
-    ![dbeaver-databases](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/dbeaver-databases.png)
+4. 默认情况下，DBeaver 中不展示视图。如需显示完整的系统数据库，你可以右键单击 **MOCloud**，选择 **连接视图** 并打开 **显示系统对象**：
 
-4. 默认情况下，DBeaver 中不展示视图。如需显示完整的系统数据库，你可以右键单击 **MatrixOne**，选择 **Connection view** 并打开 **Show system objects**：
+    <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/develop/dbeaver-show-dbobj.png"  style="zoom: 40%;" />
 
-    <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/show-system-objects.png"  style="zoom: 40%;" />
+    设置完成后，你将看到 5 个系统数据库。
 
-    设置完成后，你将看到 6 个系统数据库。
-
-    ![dbeaver-databases-with-view](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/dbeaver-databases-with-view.png)
+    ![dbeaver-5-dbs](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/develop/dbeaver-5-dbs.png)
