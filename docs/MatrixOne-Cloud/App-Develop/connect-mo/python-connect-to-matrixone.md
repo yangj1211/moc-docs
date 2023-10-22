@@ -1,8 +1,8 @@
 # 使用 Python 连接
 
-MatrixOne 支持 Python 连接，支持 `pymysql` 和 `sqlalchemy` 两种驱动程序。
+MatrixOne Cloud 支持 Python 连接，支持 `pymysql` 和 `sqlalchemy` 两种驱动程序。
 
-本篇文档将指导你了解如何通过这两个 *python* 驱动程序连接 MatrixOne。
+本篇文档将指导你了解如何通过这两个 *python* 驱动程序连接 MatrixOne Cloud。
 
 ## 开始前准备
 
@@ -17,7 +17,7 @@ python3 -V
 
 - 已安装 MySQL 客户端。
 
-## 使用 pymysql 工具连接 MatrixOne 服务
+## 使用 pymysql 工具连接 MatrixOne Cloud 服务
 
 PyMySQL 是一个纯 Python MySQL 客户端库。
 
@@ -32,13 +32,13 @@ PyMySQL 是一个纯 Python MySQL 客户端库。
     pip3 install cryptography -i https://pypi.tuna.tsinghua.edu.cn/simple
     ```
 
-2. 使用 MySQL 客户端连接 MatrixOne。新建一个名称为 *test* 数据库：
+2. 使用 MySQL 客户端连接 MatrixOne Cloud Cloud。新建一个名称为 *test* 数据库：
 
     ```sql
     mysql> create database test;
     ```
 
-3. 创建一个纯文本文件 *pymysql_connect_matrixone.py* 并将代码写入文件：
+3. 创建一个纯文本文件 *pymysql_connect_matrixonecloud.py* 将代码写入文件，并根据你的 MatrixOne Cloud 数据库连接串修改相关的数据库参数：
 
     ```python
     #!/usr/bin/python3
@@ -47,10 +47,10 @@ PyMySQL 是一个纯 Python MySQL 客户端库。
 
     # Open database connection
     db = pymysql.connect(
-            host='127.0.0.1',
-         port=6001,
-            user='root',
-            password = "111",
+            host='host_ip_address',
+            port=6001,
+            user='tenant:user:role',
+            password = "your_password",
             db='test',
             )
     # prepare a cursor object using cursor() method
@@ -71,11 +71,11 @@ PyMySQL 是一个纯 Python MySQL 客户端库。
 4. 打开一个终端，在终端内执行下面的命令：
 
     ```
-    > python3 pymysql_connect_matrixone.py
+    > python3 pymysql_connect_matrixonecloud.py
     Database version : 8.0.30-MatrixOne-v1.0.0-rc1
     ```
 
-## 使用 sqlalchemy 连接 MatrixOne
+## 使用 sqlalchemy 连接 MatrixOne Cloud
 
 SQLAlchemy 是 Python SQL 工具包和对象关系映射器 (ORM)，它为应用开发人员提供了 SQL 的全部功能。
 
@@ -83,12 +83,13 @@ SQLAlchemy 是 Python SQL 工具包和对象关系映射器 (ORM)，它为应用
 
     ```
     pip3 install sqlalchemy
-
+    pip3 install pymysql
     #If you are in China mainland and have a low downloading speed, you can speed up the download by following commands.
     pip3 install sqlalchemy -i https://pypi.tuna.tsinghua.edu.cn/simple
+    pip3 install pymysql -i https://pypi.tuna.tsinghua.edu.cn/simple
     ```
 
-2. 使用 MySQL 客户端连接 MatrixOne。新建一个名称为 *test* 数据库，并且新建一个名称为 *student* 表，然后插入两条数据：
+2. 使用 MySQL 客户端连接 MatrixOne Cloud。新建一个名称为 *test* 数据库，并且新建一个名称为 *student* 表，然后插入两条数据：
 
     ```sql
     mysql> create database test;
@@ -98,14 +99,29 @@ SQLAlchemy 是 Python SQL 工具包和对象关系映射器 (ORM)，它为应用
 
     ```
 
-3. 创建一个纯文本文件 *sqlalchemy_connect_matrixone.py* 并将代码写入文件：
+3. 创建一个纯文本文件 *sqlalchemy_connect_matrixonecloud.py* 将代码写入文件，并根据你的 MatrixOne Cloud 数据库连接串修改相关的数据库参数：
 
     ```python
     #!/usr/bin/python3
     from sqlalchemy import create_engine, text
+    import pymysql
 
-    # Open database connection
-    my_conn = create_engine("mysql+mysqldb://root:111@127.0.0.1:6001/test")
+    # database Config
+    HOST_NAME="host_ip_address"
+    USER_NAME="tenant:user:role"
+    PASSWORD="your_password"
+    DATABASE="test"
+    PORT=6001
+    # connect to DB
+    URL="mysql+pymysql://"+USER_NAME+":"+PASSWORD+"@"+HOST_NAME+":"+str(PORT)+"/"+DATABASE
+    my_conn = create_engine(URL,
+        connect_args= dict(
+            host=HOST_NAME, 
+            port=PORT,
+            user=USER_NAME,
+            password=PASSWORD,
+            )
+        )
 
     # execute SQL query using execute() method.
     query=text("SELECT * FROM student LIMIT 0,10")
@@ -114,14 +130,15 @@ SQLAlchemy 是 Python SQL 工具包和对象关系映射器 (ORM)，它为应用
     # print SQL result
     for row in my_data:
             print("name:", row["name"])
-            print("age:", row["age"])
+            print("age:", row["age"]) 
+
 
     ```
 
 4. 打开一个终端，在终端内执行下面的命令：
 
     ```
-    python3 sqlalchemy_connect_matrixone.py
+    python3 sqlalchemy_connect_matrixonecloud.py
     name: tom
     age: 11
     name: alice
