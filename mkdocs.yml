@@ -108,6 +108,9 @@ nav:
     - 导出数据: MatrixOne-Cloud/App-Develop/export-data/modump.md
     - 探索数据:
       - SQL 编辑器: MatrixOne-Cloud/Data-Explore/sql-editor.md
+      - SQL 工作簿: MatrixOne-Cloud/Data-Explore/sql-workbook.md
+      - 查询分析:
+        - 查询历史: MatrixOne-Cloud/Data-Explore/query-anlysis/queries-history.md
     - 安全:
       - 身份访问控制: MatrixOne-Cloud/Security/Security-Permission-Overview.md
       - 网络访问控制:

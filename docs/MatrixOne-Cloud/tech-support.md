@@ -32,6 +32,6 @@
 
 不管您面临什么技术挑战，我们都在这里为您提供支持。
 
-联系邮箱： moc-support@matrixorigin.io
+联系邮箱：moc-support@matrixorigin.io
 
 您还可以访问 [MatrixOne 官网](https://www.matrixorigin.cn/)，访问更多频道，了解更多资源。
