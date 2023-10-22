@@ -20,19 +20,22 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 ## 在SQL编辑器中执行一条Query
 
 这里我们以系统自带的TPCH10G数据集为例，在SQL编辑器中执行Q1，并展示`查询分析`界面上的执行计划如何展示。首先执行这条SQL，如下图所示：
-![Execute Q1](https://github.com/matrixorigin/artwork/tree/main/docs/moc-cloud/queryprofile_execute_tpch_q1.png?raw=true)
+![Execute Q1](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/queryprofile_execute_tpch.png)
+
+
+
 
 ## 在查询历史中找到这条Query
 
 接下来我们在查询历史中找到这条Query，如下图所示:
 
-![Alt text](https://github.com/matrixorigin/artwork/tree/main/docs/moc-cloud/queryprofile_get_query.png?raw=true)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/queryprofile_get_query.png)
 
 ## 查看该Query的查询分析
 
 点击进入这条Query的查询详情界面，我们可以同时看到它的查询分析（Query Profile）界面，如下图所示：
 
-![Alt text](https://github.com/matrixorigin/artwork/tree/main/docs/moc-cloud/queryprofile_queryprofile.png?raw=true)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/queryprofile_queryprofile.png)
 
 该界面展示了TPCH Q1的整个执行过程，总共分为了4个算子：表扫描(Table Scan)，聚合(Aggregate)，排序(Sort) 及 投影(Project)。
 
@@ -40,7 +43,7 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 另外从Table Scan算子到Aggregate算子中间有一个小箭头，这个箭头上会带有一个数字，这个数字代表的即为本算子输出的数据行数，在这张图里为`58,682,142`行, 这些数据也是下一个算子的输入。
 
-![Alt text](https://github.com/matrixorigin/artwork/tree/main/docs/moc-cloud/queryprofile_details.png?raw=true)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/queryprofile_details.png)
 
 如果我们再选中点击Table Scan算子方块，我们将看到Table Scan算子执行的更多细节。
 
@@ -48,4 +51,4 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 ## 理解MatrixOne的执行计划
 
-对于更详细的MatrixOne的执行计划的细节，请参考[Explain](../Reference/SQL-Reference/Other/Explain/explain.md)的参考手册。
+对于更详细的MatrixOne的执行计划的细节，请参考[Explain](../../Reference/SQL-Reference/Other/Explain/explain.md)的参考手册。
