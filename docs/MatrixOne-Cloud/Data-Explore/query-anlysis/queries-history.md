@@ -10,9 +10,9 @@
 
    ![查询历史页面](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image-7.png)
 
-3. 在此页面，您可以设置特定筛选条件，如数据库、状态、查询类型，以及更多的筛选条件，如 SQL 文本、执行时间、时间范围和你等，以缩小查询范围，快速定位到特定条件下的 SQL 查询记录。点击 **Apply** 按钮，以筛选出符合特定条件的查询记录列表。
+3. 在此页面，您可以设置特定筛选条件，如数据库、状态、查询类型，以及更多的筛选条件，如 SQL 文本、执行时间、时间范围等，以缩小查询范围，快速定位到特定条件下的 SQL 查询记录。点击 **Apply** 按钮，以筛选出符合特定条件的查询记录列表。
 
-4. Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行时间、状态、查询类型、开始时间和你。
+4. Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行时间、状态、查询类型、开始时间。
 
 如果您对查询类型的定义感兴趣，可以参考 [MatrixOne SQL 目录](https://docs.matrixorigin.cn/1.0.0-rc1/MatrixOne/Reference/SQL-Reference/Data-Definition-Language/create-database/)章节。
 
