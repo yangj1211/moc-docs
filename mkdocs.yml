@@ -4,6 +4,7 @@ theme:
   logo: assets/new-logo.png
   features:
     - content.code.copy
+    - content.action.edit
     - navigation.instant
     - navigation.tracking
     - navigation.tabs
