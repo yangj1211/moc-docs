@@ -18,7 +18,7 @@
 
 |  概述   | 快速上手  | 开发指南 | 参考文档   |
 |  ----  | ----  |  ----  | ----  |
-| [MatrixOne 简介](MatrixOne-Cloud/Overview/matrixonecloud-introduction.md)  | [快速开始：注册账号并创建实例](MatrixOne-Cloud/Get-Started/quickstart.md) | [Java 基础示例](MatrixOne-Cloud/App-Develop/Tutorial/develop-java-crud-demo.md)	|[SQL 参考指南](MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-database.md)|
+| [MatrixOne Cloud 简介](MatrixOne-Cloud/Overview/matrixonecloud-introduction.md)  | [快速开始：注册账号并创建实例](MatrixOne-Cloud/Get-Started/quickstart.md) | [Java 基础示例](MatrixOne-Cloud/App-Develop/Tutorial/develop-java-crud-demo.md)	|[SQL 参考指南](MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-database.md)|
 
 ## **持续改进**
 
@@ -26,4 +26,4 @@
 
 ## **加入我们！**
 
-热情洋溢的社区在 [MatrixOne Slack](https://matrixoneworkspace.slack.com/) 频道及 [MatrixOne 官网](https://www.matrixorigin.cn/tutorials)等待着您。
+热情洋溢的社区在 [MatrixOne Slack](https://matrixoneworkspace.slack.com/) 频道及 [MatrixOne 官网](https://www.matrixorigin.cn/)等待着您。
