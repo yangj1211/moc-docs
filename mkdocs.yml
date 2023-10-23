@@ -116,6 +116,9 @@ nav:
       - 查询分析:
         - 查询历史: MatrixOne-Cloud/Data-Explore/query-anlysis/queries-history.md
         - 查询分析: MatrixOne-Cloud/Data-Explore/query-anlysis/query_profile.md
+    - 监控:
+      - 监控指标: MatrixOne-Cloud/Monitor/Monitoring.md
+      - 监控数据: MatrixOne-Cloud/Monitor/Data-Monitoring.md
     - 安全:
       - 身份访问控制: MatrixOne-Cloud/Security/Security-Permission-Overview.md
       - 网络访问控制:
