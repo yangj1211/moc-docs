@@ -26,8 +26,8 @@
 * **我如何批量将数据加载到 MatrixOne？**
 
   MatrixOne 提供了两种批量加载数据的方法：
-  - 在 shell 中使用 `source filename` 命令，你可以加载包含所有 DDL 的 SQL 文件并插入数据语句。
-  - 使用 `load data infile...into table...` 命令，你可以加载一个现有的*. csv* 文件到 MatrixOne。
+  * 在 shell 中使用 `source filename` 命令，你可以加载包含所有 DDL 的 SQL 文件并插入数据语句。
+  * 使用 `load data infile...into table...` 命令，你可以加载一个现有的*. csv* 文件到 MatrixOne。
 
 * **我怎么知道我的查询是如何执行的？**
 

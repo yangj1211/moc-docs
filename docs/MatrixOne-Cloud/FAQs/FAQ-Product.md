@@ -2,7 +2,7 @@
 
 ## Q：**MatrixOne Cloud 是什么？**
 
-A：MatrixOne Cloud 是一个全托管的云原生数据平台，旨在为 HSTAP 数据库 MatrixOne 提供云上服务。这一云上服务显著降低了 MatrixOne 部署和运维的成本。如果您更喜欢纯私有化部署，也可以参考[MatrixOne产品介绍](https://docs.matrixorigin.cn/1.0.0-rc1/MatrixOne/FAQs/product-faqs/)以获取更多信息。
+A：MatrixOne Cloud 是一个全托管的云原生数据平台，旨在为 HSTAP 数据库 MatrixOne 提供云上服务。这一云上服务显著降低了 MatrixOne 部署和运维的成本。如果您更喜欢纯私有化部署，也可以参考 [MatrixOne 产品介绍](https://docs.matrixorigin.cn/1.0.0-rc1/MatrixOne/FAQs/product-faqs/)以获取更多信息。
 
 ## Q：**MatrixOne Cloud 有免费版本吗？**
 
@@ -10,7 +10,7 @@ A：是的，MatrixOne Cloud 目前为每位用户提供最多 5 个免费数据
 
 ## Q：**MatrixOne Cloud 是否兼容 MySQL？**
 
-A：是的，MatrixOne Cloud 几乎完全兼容 MySQL，因此您可以轻松将 MySQL 数据迁移到MatrixOne Cloud 以进行试用或开发。有关更多具体信息，请参考[MySQL 兼容性](https://docs.matrixorigin.cn/1.0.0-rc1/MatrixOne/FAQs/mysql-compatibility/)。
+A：是的，MatrixOne Cloud 几乎完全兼容 MySQL，因此您可以轻松将 MySQL 数据迁移到 MatrixOne Cloud 以进行试用或开发。有关更多具体信息，请参考 [MySQL 兼容性](https://docs.matrixorigin.cn/1.0.0-rc1/MatrixOne/FAQs/mysql-compatibility/)。
 
 ## Q：**MatrixOne Cloud 上的实例指的是什么？**
 
@@ -18,7 +18,7 @@ A：在 MatrixOne Cloud 中，您可以创建多个 MatrixOne(MO) 实例。每�
 
 ## Q：**有哪些方式可以连接到 MatrixOne Cloud 上的实例？**
 
-A：MatrixOne(MO) 实例虽然部署在云上，但支持公网和公有云之间的私网两种访问方式。初期的调研和试用阶段，您可以使用公网直接连接 MO 实例。但在测试或进入生产环境时，建议使用私网访问 MO 实例。从工具访问角度来看，MO 支持多种工具和编程语言，包括 MySQL、JDBC、Python、Go等。此外，MatrixOne Cloud 还提供了一个直观的数据库管理平台，用于查看数据库的运行状态并执行 SQL 语句。获取更多详情，请参考[连接 MatrixOne 实例](https://docs.matrixorigin.cn/1.0.0-rc1/MatrixOne/FAQs/connect-to-mo/)。
+A：MatrixOne(MO) 实例虽然部署在云上，但支持公网和公有云之间的私网两种访问方式。初期的调研和试用阶段，您可以使用公网直接连接 MO 实例。但在测试或进入生产环境时，建议使用私网访问 MO 实例。从工具访问角度来看，MO 支持多种工具和编程语言，包括 MySQL、JDBC、Python、Go 等。此外，MatrixOne Cloud 还提供了一个直观的数据库管理平台，用于查看数据库的运行状态并执行 SQL 语句。获取更多详情，请参考[连接 MatrixOne 实例](https://docs.matrixorigin.cn/1.0.0-rc1/MatrixOne/FAQs/connect-to-mo/)。
 
 ## Q：**什么是 Serverless 实例？它有哪些特点？**
 
@@ -30,11 +30,11 @@ A：Serverless 实例是后付费的，每个整点后将统计前一个小时�
 
 ## Q：**如何查看 Serverless 实例中每条 SQL 的消费？**
 
-A：在 MatrixOne Cloud 实例管理平台的实例列表中，单击要查看的实例的连接按钮和连接到平台按钮，即可登录 MatrixOne Cloud 数据管理平台。然后，点击左侧的"查询" -> "查询历史"菜单，您将看到所有历史查询。MatrixOne Cloud 将统计并显示每一条 SQL 的 CU 消耗数量。默认情况下，CU 列是未显示的，您可以单击列按钮并选中 CU。
+A：在 MatrixOne Cloud 实例管理平台的实例列表中，单击要查看的实例的连接按钮和连接到平台按钮，即可登录 MatrixOne Cloud 数据管理平台。然后，点击左侧的 "查询" -> "查询历史" 菜单，您将看到所有历史查询。MatrixOne Cloud 将统计并显示每一条 SQL 的 CU 消耗数量。默认情况下，CU 列是未显示的，您可以单击列按钮并选中 CU。
 
 ## Q：**实例可以删除吗？删除后可以恢复吗？**
 
-A：是的，您可以在实例列表中单击某个实例的"终止"按钮来删除实例。MatrixOne Cloud 会在删除后自动保留实例 3 天。如果误删，您可以在 3 天内将实例恢复。
+A：是的，您可以在实例列表中单击某个实例的 "终止" 按钮来删除实例。MatrixOne Cloud 会在删除后自动保留实例 3 天。如果误删，您可以在 3 天内将实例恢复。
 
 ## Q：**实例的存储如何计费？**
 
