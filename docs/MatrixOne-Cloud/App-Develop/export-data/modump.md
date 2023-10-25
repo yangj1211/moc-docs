@@ -38,8 +38,10 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 
 ### 1. 下载 mo-dump 二进制文件
 
-- 下载 [Linux 环境 mo-dump 文件](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/modump/linux/mo-dump)
-- 下载 [macOS 环境 mo-dump 文件](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/modump/macos/mo-dump)
+- 下载 [Linux x86 mo-dump 文件](https://github.com/matrixorigin/artwork/blob/main/docs/download/modump/linux-x86/mo-dump)
+- 下载 [Linux ARM mo-dump 文件](https://github.com/matrixorigin/artwork/blob/main/docs/download/modump/linuxarm/mo-dump)
+- 下载 [macOS x86 mo-dump 文件](https://github.com/matrixorigin/artwork/blob/main/docs/download/modump/osx86/mo-dump)
+- 下载 [macOS ARM mo-dump 文件](https://github.com/matrixorigin/artwork/blob/main/docs/download/modump/osarm/mo-dump)
 
 !!! note
     `mo-dump` 文件可以在相同的硬件平台上工作。但是需要注意在 x86 平台中构建的 `mo-dump` 二进制文件在 Darwin ARM 平台中则无法正常工作。你可以在同一套操作系统和硬件平台内构建并使用 `mo-dump` 二进制文件。`mo-dump` 目前只支持 Linux 和 macOS。
