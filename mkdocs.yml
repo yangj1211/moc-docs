@@ -17,7 +17,7 @@ theme:
 repo_url: https://github.com/matrixone-cloud/moc-docs
 edit_uri: edit/main/docs/
 extra:
-  homepage: https://www.matrixorigin.cn/MatrixOneCloud
+  homepage: https://www.matrixorigin.cn/matrixonecloud
   version:
     provider: mike
 extra_css:
