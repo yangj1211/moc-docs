@@ -88,7 +88,7 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
 
     <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/dbeaver-new-edit-name.png"  style="zoom: 40%;" />
 
-3. 双击左侧目录中的 **MatrixOne Cloud**，连接 MatrixOne Cloud 服务。你可以在左侧目录树中看到默认的四个系统数据库：
+3. 双击左侧目录中的 **MatrixOne Cloud**，连接 MatrixOne Cloud 服务。你可以在左侧目录树中看到默认的三个系统数据库：
 
     <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/dbeaver-3-dbs.png"  style="zoom: 40%;" />
 
@@ -96,6 +96,6 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
 
     <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/dbeaver-show-dbobj.png"  style="zoom: 40%;" />
 
-    设置完成后，你将看到 6 个系统数据库。
+    设置完成后，你将看到五个系统数据库。
 
     <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/dbeaver-5-dbs.png"  style="zoom: 40%;" />
