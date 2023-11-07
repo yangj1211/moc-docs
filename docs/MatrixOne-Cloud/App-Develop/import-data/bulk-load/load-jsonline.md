@@ -14,8 +14,6 @@ JSONLines 格式有以下三个要求：
 
 * **UTF-8 编码**：JSON 允许仅使用 ASCII 转义序列对 Unicode 字符串进行编码，但是在文本编辑器中，这些转义难以阅读。JSON Lines 文件的作者可以选择转义字符来处理纯 ASCII 文件。
 
-JSON 允许仅用 ASCII 转义序列编码 Unicode 字符串，但是当在文本编辑器中查看时，这些转义将很难阅读。JSON Lines 文件的作者可以选择转义字符来处理纯 ASCII 文件。
-
 * **每行都是一个合法的 JSON 值**：最常见的值是对象或数组，任何 JSON 值都是合法的。
 
 * **行分隔符为 `\n`**：由于在解析 JSON 值时会隐式忽略周围的空格在支持行分隔符 `\n` 的同时也支持 “\r\n”。
@@ -61,14 +59,6 @@ JSONLines 格式只需要每一行都有一个有效的 JSON 值。但 MatrixOne
 
 ## 语法结构
 
-* 数据文件与 MatrixOne 服务器在同一台机器上：
-
-```
-LOAD DATA INFILE
-    {'filepath'='FILEPATH', 'compression'='COMPRESSION_FORMAT', 'format'='FILE_FORMAT', 'jsondata'='object'/'array'} INTO TABLE table_name [IGNORE x LINES/ROWS]
-    [PARALLEL {'TRUE' | 'FALSE'}];
-```
-
 * 数据文件与 MatrixOne 服务器在不同的机器上：
 
 ```
@@ -108,7 +98,7 @@ LOAD DATA LOCAL INFILE
 |Array| Json 类型|
 |Null| 支持所有类型|
 
-例如，你可以先试用 SQL 语句为 JSONLines 格式文件先创建一个数据表，如下所示：
+例如，你可以先使用 SQL 语句为 JSONLines 格式文件先创建一个数据表，如下所示：
 
 ```
 mysql> create table t1 (name varchar(100), session varchar(100), score int, completed bool);
@@ -141,8 +131,6 @@ load data infile {'filepath'='data.jl.gz', 'compression'='gzip','format'='jsonli
 
 在本教程中将指导你如何加载两个具有对象和数组 json 格式的 jsonline 文件。
 
-**Note:** 本教程中，数据文件与 MatrixOne 服务器在同一台机器上。如果数据文件与 MatrixOne 服务器在不同的机器上，也可以使用 `Load Data` 进行数据导入。
-
 1. 准备数据。你也可以下载使用我们准备好的 *jl* 文件。
 
     * 示例数据 1：*[jsonline_object.jl](https://github.com/matrixorigin/matrixone/blob/main/test/distributed/resources/load_data/jsonline_object.jl)*
@@ -165,10 +153,8 @@ load data infile {'filepath'='data.jl.gz', 'compression'='gzip','format'='jsonli
 3. 启动 MySQL 客户端，连接到 MatrixOne。
 
     ```
-    mysql -h 127.0.0.1 -P 6001 -uroot -p111
+    mysql -h 127.0.0.1 -P 6001 -uroot -p111  --local-infile
     ```
-
-    **Note:** 如果你的数据文件与 MatrixOne 服务器在不同的机器上，即数据文件在你所使用的客户端机器上时，那么你连接 MatrixOne 服务主机需要使用命令行：`mysql -h <mo-host-ip> -P <mo-host-ip> -uroot -p111 --local-infile`；并且导入的命令行需要使用 `LOAD DATA LOCAL INFILE` 语法。
 
 4. 在 MatrixOne 建表：
 
@@ -184,8 +170,8 @@ load data infile {'filepath'='data.jl.gz', 'compression'='gzip','format'='jsonli
 5. 在 MySQL 客户端对对应的文件路径执行 `LOAD DATA`，导入 *jsonline_object.jl* 和 *jsonline_array.jl* 文件：
 
     ```sql
-    load data infile {'filepath'='$filepath/jsonline_object.jl','format'='jsonline','jsondata'='object'} into table t1;
-    load data infile {'filepath'='$filepath/jsonline_array.jl','format'='jsonline','jsondata'='array'} into table t2;
+    load data local infile {'filepath'='$filepath/jsonline_object.jl','format'='jsonline','jsondata'='object'} into table t1;
+    load data local infile {'filepath'='$filepath/jsonline_array.jl','format'='jsonline','jsondata'='array'} into table t2;
     ```
 
 6. 导入成功后，使用如下 SQL 语句查看导入结果：
@@ -198,6 +184,3 @@ load data infile {'filepath'='data.jl.gz', 'compression'='gzip','format'='jsonli
     true 1 var 2020-09-07 2020-09-07 00:00:00 2020-09-07 00:00:00 18 121.11
     true 1 var 2020-09-07 2020-09-07 00:00:00 2020-09-07 00:00:00 18 121.11
     ```
-
-!!! note
-    如果您使用 Docker 启动 MatrixOne，当你需要导入 JSONline 文件时，请确保你已将数据目录挂载到容器。你也可以查看[导入 *csv* 格式数据](load-csv.md)，了解如何使用 Docker 挂载数据。
