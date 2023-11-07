@@ -54,7 +54,7 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ### ACCOUNT 相关
 
-- 多租户 Account 是 MatrixOne Cloud 独有功能，包括 CREATE/ALTER/DROP ACCOUNT 等相关语句。
+- MatrixOne Cloud 中无单独 ACCOUNT 概念，在 MatrixOne Cloud 中创建的每个实例都是一个单独的租户。
 
 ### 权限相关
 
