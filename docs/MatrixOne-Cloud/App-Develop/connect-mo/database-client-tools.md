@@ -13,7 +13,7 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
 
 ## 通过 MySQL Client 连接 MatrixOne Cloud 服务
 
-1. 下载安装 [MySQL Client](https://dev.mysql.com/downloads/installer/)。
+1. 下载安装 [MySQL Client](https://dev.mysql.com/downloads/mysql/)。
 
 2. 下载完成后，你可以使用 MySQL 命令行客户端来连接 MatrixOne Cloud 服务，只需要复制你获取的 MatrixOne Cloud 实例的连接命令，并根据提示输入密码。
 
