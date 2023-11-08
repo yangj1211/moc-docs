@@ -40,7 +40,8 @@ SELECT * FROM employees WHERE last_name = 'Smith';
 ## 示例
 
 ```sql
-CREATE TABLE users (id INT PRIMARY KEY,
+CREATE TABLE users (
+  id INT PRIMARY KEY,
   name VARCHAR(50),
   age INT,
   email VARCHAR(50)
