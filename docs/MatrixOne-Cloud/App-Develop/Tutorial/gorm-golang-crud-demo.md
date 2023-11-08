@@ -2,21 +2,21 @@
 
 本篇文档将指导你如何使用 **golang** 和 **gorm** 构建一个简单的应用程序，并实现 CRUD（创建、读取、更新、删除）功能。
 
-**Gorm** 是 Golang 语言中最流行的 ORM 工具之一。
+**Gorm** 是 Python 语言中最流行的 ORM 工具之一。
 
 ## 开始前准备
 
 相关软件的简单介绍：
 
-* Gorm：基于 golang 的一个神奇的全功能 ORM 库，本次教程主要通过使用 ```gorm.io/gorm``` 和 ```gorm.io/driver/mysql``` 这两个库来让 Go 连接到 MatrixOne Cloud 数据库并完成 CRUD 操作。
+* Gorm：基于 golang 的一个神奇的全功能 ORM 库，本次教程主要通过使用 ```gorm.io/gorm``` 和 ```gorm.io/driver/mysql``` 这两个库来让 Go 连接到 MYSQL 数据库并完成 CRUD 操作。
 
 ### 环境配置
 
 在你开始之前，确认你已经下载并安装了如下软件：
 
-* 已完成[创建实例](../../Instance-Mgmt/create-instance.md)。
+* 确认你已完成安装 MySQL 客户端。
 
-    通过 MySQL 客户端连接 MatrixOne 并创建一个命名为 *test* 的数据库：
+* 已完成[创建实例](../../Instance-Mgmt/create-instance.md)，并通过 MySQL 客户端连接 MatrixOne Cloud 并创建一个命名为 *test* 的数据库：
 
     ```sql
     mysql> create database test;
@@ -24,21 +24,19 @@
 
 * 确认你已完成安装 [Golang 1.18 版本及以上](https://go.dev/dl/)，可以使用下面的命令行确认你的 Golang 版本：
 
-  ```
-  #To check with Golang installation and its version
-  go version
-  ```
-
-* 确认你已完成安装 MySQL 客户端。
+	```
+	#To check with Golang installation and its version
+	go version
+	```
 
 * 确认你已经安装 `gorm.io/gorm` 以及 `gorm.io/driver/mysql`，使用 `go get` 命令安装，代码如下：
 
-  ```
-  go get -u gorm.io/gorm
-  go get -u gorm.io/driver/mysql
-  ```
+	```
+	go get -u gorm.io/gorm
+	go get -u gorm.io/driver/mysql
+	```
 
-你可以参考 [Golang 连接 MatrixOne 服务](../connect-mo/connect-to-matrixone-with-go.md)了解如何通过 `Gorm` 连接到 MatrixOne，本篇文档将指导你如何实现 CRUD（创建、读取、更新、删除）。
+你可以参考 [Golang 连接 MatrixOne Cloud 服务](../connect-mo/connect-to-matrixone-with-go.md)了解如何通过 `Gorm` 连接到 MatrixOne Cloud，本篇文档将指导你如何实现 CRUD（创建、读取、更新、删除）。
 
 ## 新建表
 
@@ -48,43 +46,54 @@
 
 ```go
 package main
-import (
- "fmt"
 
- "gorm.io/driver/mysql"
- "gorm.io/gorm"
- "gorm.io/gorm/logger"
+import (
+	"fmt"
+	"net/url"
+	"strconv"
+
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
+
 // user model
 type USER struct {
- ID       uint `gorm:"primaryKey"`
- CNAME    string
- CADDRESS string
+	ID       uint `gorm:"primaryKey"`
+	CNAME    string
+	CADDRESS string
 }
 
 func getDBConn() *gorm.DB {
- dsn := "root:111@tcp(127.0.0.1:6001)/test?charset=utf8mb4&parseTime=True&loc=Local" //MO
- db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
-    // Logger: logger.Default.LogMode(logger.Info), //print SQL
-  })
- // get connection
- if err != nil {
-  fmt.Println("Database Connection Failed") //Connection failed
- } else {
-  fmt.Println("Database Connection Succeed") //Connection succeed
- }
- return db
+	username := "tenant:user:role" // modify this
+	host := "host_ip_address"      // modify this
+	password := "your_password"    // modify this
+	port := 6001
+	database := "test"
+	encodedUsername := url.QueryEscape(username)
+	dsn := encodedUsername + ":" + password + "@tcp(" + host + ":" + strconv.Itoa(port) + ")/" + database
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+		// Logger: logger.Default.LogMode(logger.Info), //print SQL
+	})
+	// get connection
+	if err != nil {
+		fmt.Println("Database Connection Failed") //Connection failed
+	} else {
+		fmt.Println("Database Connection Succeed") //Connection succeed
+	}
+	return db
 }
 
 func main() {
- //get *gorm.DB
- db := getDBConn()
+	//get *gorm.DB
+	db := getDBConn()
 
- // auto create table
- db.AutoMigrate(&USER{})
+	// auto create table
+	db.AutoMigrate(&USER{})
 }
 
 ```
+
+你可能注意到了，以上的示例代码中使用到了 `url.QueryEscape()` 对 `username` 进行了编码，那是因为 `username` 中存在英文冒号`:`，这样做可以确保连接串中的参数值不会干扰连接串的结构。
 
 你可以取消注释 ```Logger: logger.Default.LogMode(logger.Info)``` 以把转化后的 ```SQL``` 输出出来。
 打开终端，使用以下代码运行此 *go* 文件：
@@ -112,55 +121,65 @@ mysql> show tables;
 
 ```go
 package main
-import (
- "fmt"
 
- "gorm.io/driver/mysql"
- "gorm.io/gorm"
- "gorm.io/gorm/logger"
+import (
+	"fmt"
+	"net/url"
+	"strconv"
+
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
+
 // user model
 type USER struct {
- ID       uint `gorm:"primaryKey"`
- CNAME    string
- CADDRESS string
+	ID       uint `gorm:"primaryKey"`
+	CNAME    string
+	CADDRESS string
 }
 
 func getDBConn() *gorm.DB {
- dsn := "root:111@tcp(127.0.0.1:6001)/test?charset=utf8mb4&parseTime=True&loc=Local" //MO
- db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
- // get connection
- if err != nil {
-  fmt.Println("Database Connection Failed") //Connection failed
- } else {
-  fmt.Println("Database Connection Succeed") //Connection succeed
- }
- return db
+	username := "tenant:user:role" // modify this
+	host := "host_ip_address"      // modify this
+	password := "your_password"    // modify this
+	port := 6001
+	database := "test"
+	encodedUsername := url.QueryEscape(username)
+	dsn := encodedUsername + ":" + password + "@tcp(" + host + ":" + strconv.Itoa(port) + ")/" + database
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	// get connection
+	if err != nil {
+		fmt.Println("Database Connection Failed") //Connection failed
+	} else {
+		fmt.Println("Database Connection Succeed") //Connection succeed
+	}
+	return db
 }
 
 func main() {
- //get *gorm.DB
- db := getDBConn()
+	//get *gorm.DB
+	db := getDBConn()
 
- // auto create table
- db.AutoMigrate(&USER{})
+	// auto create table
+	db.AutoMigrate(&USER{})
 
-  // **Insert users**
- users := []USER{
-  {
-   // ID: 1, //autoincrement
-   CNAME:    "lili",
-   CADDRESS: "Shanghai"},
-  {
-   ID:       111,
-   CNAME:    "zhang",
-   CADDRESS: "Biejing",
-  },
- }
+	// **Insert users**
+	users := []USER{
+		{
+			// ID: 1, //autoincrement
+			CNAME:    "lili",
+			CADDRESS: "Shanghai"},
+		{
+			ID:       111,
+			CNAME:    "zhang",
+			CADDRESS: "Biejing",
+		},
+	}
 
- db.Create(users)
+	db.Create(users)
 
 }
+
 
 ```
 
@@ -190,49 +209,59 @@ mysql> select * from users;
 
 ```go
 package main
-import (
- "fmt"
 
- "gorm.io/driver/mysql"
- "gorm.io/gorm"
- "gorm.io/gorm/logger"
+import (
+	"fmt"
+	"net/url"
+	"strconv"
+
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
+
 // user model
 type USER struct {
- ID       uint `gorm:"primaryKey"`
- CNAME    string
- CADDRESS string
+	ID       uint `gorm:"primaryKey"`
+	CNAME    string
+	CADDRESS string
 }
 
 func getDBConn() *gorm.DB {
- dsn := "root:111@tcp(127.0.0.1:6001)/test?charset=utf8mb4&parseTime=True&loc=Local" //MO
- db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
- // get connection
- if err != nil {
-  fmt.Println("Database Connection Failed") //Connection failed
- } else {
-  fmt.Println("Database Connection Succeed") //Connection succeed
- }
- return db
+	username := "tenant:user:role" // modify this
+	host := "host_ip_address"      // modify this
+	password := "your_password"    // modify this
+	port := 6001
+	database := "test"
+	encodedUsername := url.QueryEscape(username)
+	dsn := encodedUsername + ":" + password + "@tcp(" + host + ":" + strconv.Itoa(port) + ")/" + database
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	// get connection
+	if err != nil {
+		fmt.Println("Database Connection Failed") //Connection failed
+	} else {
+		fmt.Println("Database Connection Succeed") //Connection succeed
+	}
+	return db
 }
 
 func main() {
- //get *gorm.DB
- db := getDBConn()
+	//get *gorm.DB
+	db := getDBConn()
 
- // auto create table
- db.AutoMigrate(&USER{})
+	// auto create table
+	db.AutoMigrate(&USER{})
 
-  // **Query—— String condition**
- res := USER{}
- tx := db.Where("CNAME = ? ", "zhang").Find(&USER{}).Scan(&res)
- if tx.Error != nil {
-  fmt.Println(tx.Error)
-  return
- }
- fmt.Println(res)
+	// **Query—— String condition**
+	res := USER{}
+	tx := db.Where("CNAME = ? ", "zhang").Find(&USER{}).Scan(&res)
+	if tx.Error != nil {
+		fmt.Println(tx.Error)
+		return
+	}
+	fmt.Println(res)
 
 }
+
 
 ```
 
@@ -255,53 +284,63 @@ go run gorm_query.go
 
 ```go
 package main
-import (
- "fmt"
 
- "gorm.io/driver/mysql"
- "gorm.io/gorm"
- "gorm.io/gorm/logger"
+import (
+	"fmt"
+	"net/url"
+	"strconv"
+
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
+
 // user model
 type USER struct {
- ID       uint `gorm:"primaryKey"`
- CNAME    string
- CADDRESS string
+	ID       uint `gorm:"primaryKey"`
+	CNAME    string
+	CADDRESS string
 }
 
 func getDBConn() *gorm.DB {
- dsn := "root:111@tcp(127.0.0.1:6001)/test?charset=utf8mb4&parseTime=True&loc=Local" //MO
- db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
- // get connection
- if err != nil {
-  fmt.Println("Database Connection Failed") //Connection failed
- } else {
-  fmt.Println("Database Connection Succeed") //Connection succeed
- }
- return db
+	username := "tenant:user:role" // modify this
+	host := "host_ip_address"      // modify this
+	password := "your_password"    // modify this
+	port := 6001
+	database := "test"
+	encodedUsername := url.QueryEscape(username)
+	dsn := encodedUsername + ":" + password + "@tcp(" + host + ":" + strconv.Itoa(port) + ")/" + database
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	// get connection
+	if err != nil {
+		fmt.Println("Database Connection Failed") //Connection failed
+	} else {
+		fmt.Println("Database Connection Succeed") //Connection succeed
+	}
+	return db
 }
 
 func main() {
- //get *gorm.DB
- db := getDBConn()
+	//get *gorm.DB
+	db := getDBConn()
 
- // auto create table
- db.AutoMigrate(&USER{})
+	// auto create table
+	db.AutoMigrate(&USER{})
 
-  // **Update**
- aUser := USER{}
- tx := db.Where("CNAME = ? ", "zhang").Find(&USER{}).Scan(&aUser)
- if tx.Error != nil {
-  fmt.Println(tx.Error)
-  return
- }
- res:=db.Model(&aUser).Update("CADDRESS", "HongKong")
-  if res.Error != nil {
-  fmt.Println(tx.Error)
-  return
- }
+	// **Update**
+	aUser := USER{}
+	tx := db.Where("CNAME = ? ", "zhang").Find(&USER{}).Scan(&aUser)
+	if tx.Error != nil {
+		fmt.Println(tx.Error)
+		return
+	}
+	res := db.Model(&aUser).Update("CADDRESS", "HongKong")
+	if res.Error != nil {
+		fmt.Println(tx.Error)
+		return
+	}
 
 }
+
 
 ```
 
@@ -331,53 +370,63 @@ mysql> select * from users;
 
 ```go
 package main
-import (
- "fmt"
 
- "gorm.io/driver/mysql"
- "gorm.io/gorm"
- "gorm.io/gorm/logger"
+import (
+	"fmt"
+	"net/url"
+	"strconv"
+
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
+
 // user model
 type USER struct {
- ID       uint `gorm:"primaryKey"`
- CNAME    string
- CADDRESS string
+	ID       uint `gorm:"primaryKey"`
+	CNAME    string
+	CADDRESS string
 }
 
 func getDBConn() *gorm.DB {
- dsn := "root:111@tcp(127.0.0.1:6001)/test?charset=utf8mb4&parseTime=True&loc=Local" //MO
- db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
- // get connection
- if err != nil {
-  fmt.Println("Database Connection Failed") //Connection failed
- } else {
-  fmt.Println("Database Connection Succeed") //Connection succeed
- }
- return db
+	username := "tenant:user:role" // modify this
+	host := "host_ip_address"      // modify this
+	password := "your_password"    // modify this
+	port := 6001
+	database := "test"
+	encodedUsername := url.QueryEscape(username)
+	dsn := encodedUsername + ":" + password + "@tcp(" + host + ":" + strconv.Itoa(port) + ")/" + database
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	// get connection
+	if err != nil {
+		fmt.Println("Database Connection Failed") //Connection failed
+	} else {
+		fmt.Println("Database Connection Succeed") //Connection succeed
+	}
+	return db
 }
 
 func main() {
- //get *gorm.DB
- db := getDBConn()
+	//get *gorm.DB
+	db := getDBConn()
 
- // auto create table
- db.AutoMigrate(&USER{})
+	// auto create table
+	db.AutoMigrate(&USER{})
 
-  // **Delete**
- aUser := USER{}
- tx := db.Where("CNAME = ? ", "zhang").Find(&USER{}).Scan(&aUser)
- if tx.Error != nil {
-  fmt.Println(tx.Error)
-  return
- }
- res := db.Delete(&aUser)
- if res.Error != nil {
-  fmt.Println(tx.Error)
-  return
- }
+	// **Delete**
+	aUser := USER{}
+	tx := db.Where("CNAME = ? ", "zhang").Find(&USER{}).Scan(&aUser)
+	if tx.Error != nil {
+		fmt.Println(tx.Error)
+		return
+	}
+	res := db.Delete(&aUser)
+	if res.Error != nil {
+		fmt.Println(tx.Error)
+		return
+	}
 
 }
+
 
 ```
 
