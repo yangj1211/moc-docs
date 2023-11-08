@@ -53,7 +53,7 @@ MatrixOne Cloud 采用默认的加密传输，支持 TLS 协议的加密传输�
 你也可以在通过 MySQL 客户端连接 MatrixOne Cloud 时，通过 `--ssl-mode` 参数指定加密连接行为，代码示例如下：
 
 ```sql
-mysql -h host_ip_address -P 6001 -u <accountname>:<username>:<rolename>  -p --ssl-mode=PREFFERED
+mysql -h host_ip_address -P 6001 -u <accountname>:<username>:<rolename>  -p --ssl-mode=PREFERRED
 ```
 
 ssl-mode 取值类型如下：
@@ -61,7 +61,7 @@ ssl-mode 取值类型如下：
 |ssl-mode 取值 | 含义|
 |---|---|
 |DISABLED|不使用 SSL/TLS 建立加密连接，与 skip-ssl 同义。|
-|PREFFERED|默认行为，优先尝试使用 SSL/TLS 建立加密连接，如果无法建则尝试建立非 SSL/TLS 连接。|
+|PREFERRED|默认行为，优先尝试使用 SSL/TLS 建立加密连接，如果无法建则尝试建立非 SSL/TLS 连接。|
 |REQUIRED|只会尝试使用 SSL/TLS 建立加密连接，如果无法建立连接，则会连接失败。|
 |VERIFY_CA|与 REQUIRED 行为一样，并且还会验证 Server 端的 CA 证书是否有效。|
 |VERIFY_IDENTITY|与 VERIFY_CA 行为一样，并且还验证 Server 端 CA 证书中的 host 是否与实际连接的 hostname 是否一致。|
