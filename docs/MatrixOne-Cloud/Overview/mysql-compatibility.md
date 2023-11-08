@@ -54,7 +54,7 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ### ACCOUNT 相关
 
-- MatrixOne Cloud 中无单独 ACCOUNT 概念，在 MatrixOne Cloud 中创建的每个实例都是一个单独的租户。
+- 与 MatrixOne 内核不同，MatrixOne Cloud 中无单独 ACCOUNT 概念，在 MatrixOne Cloud 的一个 Region 中创建的每个实例都属于一个 MatrixOne 分布式集群，其中的每个实例其实都是集群中单独的 ACCOUNT ，无法在 MatrixOne Cloud 实例中再继续创建 ACCOUNT。
 
 ### 权限相关
 
