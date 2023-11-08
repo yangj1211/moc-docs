@@ -29,7 +29,7 @@ MatrixOne Cloud 默认**悲观事务**与**读已提交**隔离级别，这种�
 
 ```sql
 START TRANSACTION;
-UPDATE t1 WHERE id=1;
+UPDATE user WHERE id=1;
 -- 在事务期间执行其他操作，例如修改该记录
 COMMIT;
 ```
