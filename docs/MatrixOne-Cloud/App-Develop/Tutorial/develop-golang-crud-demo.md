@@ -2,26 +2,42 @@
 
 ## 配置环境
 
-- 已完成[创建实例](../../Instance-Mgmt/create-instance.md)。
-- 确认你已完成安装 [Golang 1.18 版本及以上](https://go.dev/dl/)，可以使用下面的命令行确认你的 Golang 版本：
 
-    ```
-    #To check with Golang installation and its version
-    go version
-    ```
+在你开始之前，确认你已经下载并安装了如下软件：
 
-- 确认你已完成安装 MySQL 客户端。
-- 下载并安装 [`Go-MySQL-Driver`](https://github.com/go-sql-driver/mysql) 工具。
+* 确认你已完成安装 MySQL 客户端。
+
+* 已完成[创建实例](../../Instance-Mgmt/create-instance.md)，并通过 MySQL 客户端连接 MatrixOne Cloud 并创建一个命名为 *test* 的数据库：
+
+    ```sql
+    mysql> create database test;
+    ```
+  
+* 确认你已完成安装 [Golang 1.18 版本及以上](https://go.dev/dl/)，可以使用下面的命令行确认你的 Golang 版本：
+
+	```
+	#To check with Golang installation and its version
+	go version
+	```
+
+* 确认你已经安装 `gorm.io/driver/mysql`，使用 `go get` 命令安装，代码如下：
+
+	```
+	go get -u gorm.io/driver/mysql
+	```
+
+
+你可以参考 [Golang 连接 MatrixOne Cloud 服务](../connect-mo/connect-to-matrixone-with-go.md)了解如何通过 `Golang` 连接到 MatrixOne Cloud，本篇文档将指导你如何实现 CRUD（创建、读取、更新、删除）。
 
 ## 步骤
 
-1. 通过 MySQL 客户端连接到 MatrixOne。创建一个名为 *test* 的新数据库。
+1. 通过 MySQL 客户端连接到 MatrixOne Cloud。创建一个名为 *test* 的新数据库。
 
     ```
     mysql> create database test;
     ```
 
-2. 创建一个命名为 `golang_crud_matrixone.go` 的纯文本文件，将下面的代码拷贝至文件内：
+2. 创建一个命名为 `golang_crud_matrixonecloud.go` 的纯文本文件，将下面的代码拷贝至文件内：
 
     ```python
     package main
@@ -34,8 +50,15 @@
     )
 
     func main() {
-       //Open a new connection to MatrixOne
-        db, err := sql.Open("mysql", "root:111@tcp(127.0.0.1:6001)/test")
+       //Open a new connection to MatrixOne Cloud
+        username := "tenant:user:role"  // modify this
+        host := "host_ip_address"       // modify this
+        password := "your_password"     // modify this
+        port := 6001
+        database := "test"              
+        encodedUsername := url.QueryEscape(username)
+        dbConnectionString := encodedUsername + ":" + password + "@tcp(" + host + ":" + strconv.Itoa(port) + ")/" + database
+        db, err := sql.Open("mysql", dbConnectionString)
         checkErr(err)
 
         //Create a table
@@ -112,7 +135,7 @@
 3. 打开一个新的终端，使用如下命令行，执行此 Golang 文件。
 
     ```
-    > go run golang_crud_matrixone.go
+    > go run golang_crud_matrixonecloud.go
     Successfully Created
     1
     1
