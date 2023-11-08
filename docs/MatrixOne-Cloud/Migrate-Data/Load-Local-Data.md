@@ -47,7 +47,7 @@ INTO TABLE tbl_name
 
 ```sql
 -- 将本地目录下的 lineorder_flat.tbl 数据集加载到 MatrixOne 实例中的数据表 lineorder_flat
-LOAD DATA INFILE '/ssb-dbgen-path/lineorder_flat.tbl ' INTO TABLE lineorder_flat;
+LOAD DATA Local INFILE '/ssb-dbgen-path/lineorder_flat.tbl ' INTO TABLE lineorder_flat;
 ```
 
 **限制**
@@ -129,7 +129,7 @@ INTO TABLE tbl_name
 -- 将 /mo_data/ 目录路径下的 data.jl.gz gzip 压缩数据文件导入到 MatrixOne 实例中的数据表 db1.a，并从第二行开始导入。
 
 
-LOAD INTO {'filepath'='/mo_data/data.jl.gz', 'compression'='gzip','format'='jsonline','jsondata'='array'} into table db1.a ignore 1 lines;
+LOAD DATA Local INFILE {'filepath'='/mo_data/data.jl.gz', 'compression'='gzip','format'='jsonline','jsondata'='array'} into table db1.a ignore 1 lines;
 ```
 
 ## 使用 Source 命令导入
