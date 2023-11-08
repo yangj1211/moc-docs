@@ -49,9 +49,9 @@ CREATE TABLE users (
 -- 我们可以在表格上创建一个次级索引来加快按名字查询用户的速度
 CREATE INDEX idx_users_name ON users(name);
 -- 插入一些数据
-INSERT INTO users VALUES ('1', 'John', '30', 'john@gmail.com');
-INSERT INTO users VALUES ('2', 'Tommy', '50', 'tom@gmail.com');
-INSERT INTO users VALUES ('3', 'Ann', '33', 'ann@gmail.com');
+INSERT INTO users VALUES (1, 'John', 30, 'john@gmail.com');
+INSERT INTO users VALUES (2, 'Tommy', 50, 'tom@gmail.com');
+INSERT INTO users VALUES (3, 'Ann', 33, 'ann@gmail.com');
 -- 执行如下查询，数据库可以使用次级索引来快速地查找所有名字为“John”的用户，而不必扫描整个表格。
 mysql> SELECT * FROM users WHERE name = 'John';
 +------+------+------+----------------+
