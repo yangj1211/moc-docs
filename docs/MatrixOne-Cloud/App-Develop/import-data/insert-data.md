@@ -98,18 +98,18 @@ VALUES ('Cardinal', 'Stavanger', 'Norway');
 从一个表复制所有列到另一个表：
 
 ```
-INSERT INTO *table2*
-SELECT * FROM *table1
-*WHERE *condition*;
+INSERT INTO table2
+SELECT * FROM table1
+WHERE condition;
 ```
 
 只从一个表复制一些列到另一个表：
 
 ```
-INSERT INTO *table2* (*column1*, *column2*, *column3*, ...)
-SELECT *column1*, *column2*, *column3*, ...
-FROM *table1*
-WHERE *condition*;
+INSERT INTO table2 (column1, column2, column3, ...)
+SELECT column1, column2, column3, ...
+FROM table1
+WHERE condition;
 ```
 
 ## Northwind 数据库示例
