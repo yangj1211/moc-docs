@@ -2,9 +2,11 @@
 
 本篇文档将指导你在 MySQL 客户端连接 MatrixOne Cloud 时如何完成 *csv* 格式数据导入。
 
-## 语法结构
+在使用 MatrixOne Cloud 时，支持使用 `LOAD DATA LOCAL` 语法将位于**客户端主机**上的 *csv* 数据文件导入至 MatrixOne Cloud 集群，详细语法可参考 [LOAD DATA 语法介绍](../../../Reference/SQL-Reference/Data-Manipulation-Language/load-data.md)。
 
-- 场景一：数据文件与 MatrixOne 服务器在不同的机器上：
+__Note__: *CSV*（逗号分隔值）文件是一种特殊的文件类型，可在 Excel 中创建或编辑，*CSV* 文件不是采用多列的形式存储信息，而是使用逗号分隔的形式存储信息。MatrixOne 可使用的 *CSV* 格式需符合 **RFC4180** 标准。
+
+## 语法结构
 
 ```
 LOAD DATA LOCAL
@@ -22,25 +24,23 @@ INTO TABLE tbl_name
 [PARALLEL {'TRUE' | 'FALSE'}]
 ```
 
-## MySQL Client 中使用 `Load data` 命令导入数据
+## 在 MySQL Client 中使用 `Load data local` 命令导入数据
 
-你可以使用 `Load Data` 从大数据文件中导入数据，本章将介绍如何导入 *csv* 格式文件。
-
-__Note__: *csv*（逗号分隔值）文件是一种特殊的文件类型，可在 Excel 中创建或编辑，*csv* 文件不是采用多列的形式存储信息，而是使用逗号分隔的形式存储信息。
+__Note__: 使用 `Load data local` 命令时，数据文件需位于执行该语句的 MySQL 客户端所在的服务器中。
 
 ### 步骤
 
-#### 数据文件与 MatrixOne 服务器在不同的机器上
+1. 在 MatrixOne Cloud 中创建对应的数据表。
 
-1. 在 MatrixOne 中执行 `LOAD DATA LOCAL` 之前，需要提前在 MatrixOne 中创建完成数据表。
+2. 将数据文件拷贝至 MySQL 客户端所在的服务器中。
 
-2. 启动 MySQL 客户端，连接 MatrixOne：
+3. 使用 MySQL 客户端连接 MatrixOne Cloud ，例如：
 
     ```
-    mysql -h <mo-host-ip> -P 6001 -uroot -p111 --local-infile
+    mysql -h moc.cluster.matrixonecloud.cn -P 6001 -u a123456b_78cd_9e12_fg34_abcd5d6789ef:admin:accountadmin  -p
     ```
 
-3. 在 MySQL 客户端对对应的文件路径执行 `LOAD DATA LOCAL`：
+4. 在 MySQL 客户端中执行 `LOAD DATA LOCAL` 命令：
 
     ```
     mysql> LOAD DATA LOCAL INFILE '/tmp/xxx.csv'
