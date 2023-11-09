@@ -41,9 +41,11 @@ mysql> create database test;
 
 ![image-20221026152447954](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/mybatis/image-20221026152447954.png)
 
-点击 **Create** 创建项目。依赖项列在 *pom.xml* 文件中。通常你无需修改任何东西。
+点击 **Create** 创建项目。
 
-```
+依赖项列在 *pom.xml* 文件中。通常你无需修改任何东西。
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -143,9 +145,9 @@ mysql> create database test;
 
 ### 3. 修改 *application.properties* 文件
 
-进入到 *resources* 文件目录下，配置 *application.properties* 文件，完成 MatrixOne 连接。
+进入到 **src>main>resources** 文件目录下，配置 *application.properties* 文件，完成 MatrixOne 连接。
 
-```
+```properties
 # Application Name
 spring.application.name=MyBatisDemo
 # Database driver
@@ -154,10 +156,13 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.name=defaultDataSource
 
 # Database connection url, modify to MatrixOne address and port, with paratemers
-spring.datasource.url=jdbc:mysql://127.0.0.1:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
+# please modify host_ip_address
+spring.datasource.url=jdbc:mysql://host_ip_address:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
 # Database username and password
-spring.datasource.username=root
-spring.datasource.password=111
+# please modify tenant:user:role 
+spring.datasource.username=tenant:user:role 
+# please modify your_password
+spring.datasource.password=your_password
 
 # Mybatis mapper location
 mybatis.mapper-locations=classpath:mapping/*xml
@@ -171,15 +176,22 @@ server.port=8080
 
 完成环境配置后，我们编写代码来实现一个简单的 CRUD 应用程序。
 
-在完成编写代码后，你将拥有一个如下所示的项目结构。你可以预先创建这些包和 java 类。
+在完成编写代码后，你将拥有一个如下所示的项目结构。你可以预先创建这些包和 java 类，使用下面的命令行先创建目录结构。
+
+```bash
+cd src/main/ && 
+mkdir java/com/example/mybatisdemo/controller java/com/example/mybatisdemo/entity java/com/example/mybatisdemo/mapper java/com/example/mybatisdemo/service resources/mapping&&
+touch java/com/example/mybatisdemo/controller/UserController.java  java/com/example/mybatisdemo/entity/User.java java/com/example/mybatisdemo/mapper/UserMapper.java java/com/example/mybatisdemo/service/UserService.java  resources/mapping/UserMapper.xml
+
+```
 
 我们将为这个演示应用程序编写创建、更新、插入、删除和选择操作。
 
 ![image-20221026155656694](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/mybatis/image-20221026155656694.png)
 
-### 1. UserController.java
+### 1. controller/UserController.java
 
-```
+```java
 package com.example.mybatisdemo.controller;
 
 import com.example.mybatisdemo.entity.User;
@@ -227,9 +239,9 @@ public class UserController {
 }
 ```
 
-### 2. User.java
+### 2. entity/User.java
 
-```
+```java
 package com.example.mybatisdemo.entity;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -292,9 +304,9 @@ public class User {
 }
 ```
 
-### 3. UserMapper.java
+### 3. mapper/UserMapper.java
 
-```
+```java
 package com.example.mybatisdemo.mapper;
 
 import com.example.mybatisdemo.entity.User;
@@ -317,9 +329,9 @@ public interface UserMapper {
 }
 ```
 
-### 4. UserService.java
+### 4. service/UserService.java
 
-```
+```java
 package com.example.mybatisdemo.service;
 
 import com.example.mybatisdemo.entity.User;
@@ -377,7 +389,7 @@ public class UserService {
 
 ### 5. MyBatisDemoApplication.java
 
-```
+```java
 package com.example.mybatisdemo;
 
 import org.mybatis.spring.annotation.MapperScan;
@@ -393,9 +405,9 @@ public class MyBatisDemoApplication {
 }
 ```
 
-### 6. UserMapper.xml
+### 6. mapping/UserMapper.xml
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
@@ -498,7 +510,7 @@ public class MyBatisDemoApplication {
 
 ### 1. 测试新建表
 
-打开你的的浏览器并输入网址：`http://localhost:8080/test/create`
+打开你的的浏览器并输入网址：[http://localhost:8080/test/create](http://localhost:8080/test/create)
 
 ![image-20221026161929338](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/mybatis/image-20221026161929338.png)
 
@@ -535,7 +547,7 @@ PRIMARY KEY (`id`)
 
 ### 2. 测试增加用户
 
-打开你的浏览器并输入网址：`http://localhost:8080/test/add?username=tom&password=123456&address=shanghai`
+打开你的浏览器并输入网址：[http://localhost:8080/test/add?username=tom&password=123456&address=shanghai](http://localhost:8080/test/add?username=tom&password=123456&address=shanghai)
 
 ![image-20221026162317800](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/mybatis/image-20221026162317800.png)
 
@@ -553,7 +565,7 @@ mysql> select * from user;
 
 ### 3. 测试查询用户
 
-打开你的浏览器并输入网址：`http://localhost:8080/test/selectUserByid?id=1`
+打开你的浏览器并输入网址：[http://localhost:8080/test/selectUserByid?id=1](http://localhost:8080/test/selectUserByid?id=1)
 
 ![image-20221026162455058](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/mybatis/image-20221026162455058.png)
 
@@ -561,7 +573,7 @@ mysql> select * from user;
 
 ### 4. 测试更新用户
 
-打开你的浏览器并输入网址：`http://localhost:8080/test/update?id=1&username=tom&password=654321&address=beijing`
+打开你的浏览器并输入网址：[http://localhost:8080/test/update?id=1&username=tom&password=654321&address=beijing](http://localhost:8080/test/update?id=1&username=tom&password=654321&address=beijing)
 
 ![image-20221026162613066](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/mybatis/image-20221026162613066.png)
 
@@ -579,7 +591,7 @@ mysql> select * from user;
 
 ### 5. 测试删除用户
 
-打开你的浏览器并输入网址：`http://localhost:8080/test/delete?id=1`
+打开你的浏览器并输入网址：[http://localhost:8080/test/delete?id=1](http://localhost:8080/test/delete?id=1)
 
 ![image-20221026162756460](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/mybatis/image-20221026162756460.png)
 

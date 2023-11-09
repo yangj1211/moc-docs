@@ -38,15 +38,18 @@ mysql> create database test;
 
 在 *src* 目录下，创建一个名为 `JDBCUtils.java` 的文件，并使用以下代码编辑该文件：
 
-```
+```java
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JDBCUtils {
-    private static String jdbcURL = "jdbc:mysql://127.0.0.1:6001/test";
-    private static String jdbcUsername = "root";
-    private static String jdbcPassword = "111";
+    // please modify host_ip_address
+    private static String jdbcURL = "jdbc:mysql://host_ip_address:6001/test";   
+    // please modify tenant:user:role  
+    private static String jdbcUsername = "tenant:user:role";               
+    // please modify your_password     
+    private static String jdbcPassword = "your_password";                      
 
     public static Connection getConnection() {
         Connection connection = null;
