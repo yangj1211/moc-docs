@@ -129,10 +129,7 @@ load data local infile {'filepath'='data.jl.gz', 'compression'='gzip','format'='
 
 在本教程中将指导你如何加载两个具有对象和数组 json 格式的 jsonline 文件。
 
-1. 准备数据。你也可以下载使用我们准备好的 *jl* 文件。
-
-    * 示例数据 1：*[jsonline_object.jl](https://github.com/matrixorigin/matrixone/blob/main/test/distributed/resources/load_data/jsonline_object.jl)*
-    * 示例数据 2：*[jsonline_array.jl](https://github.com/matrixorigin/matrixone/blob/main/test/distributed/resources/load_data/jsonline_array.jl)*
+1. 准备数据。你也可以下载使用我们准备好的 *jl* 文件，例如：*[jsonline_object.jl](https://github.com/matrixorigin/matrixone/blob/main/test/distributed/resources/load_data/jsonline_object.jl)*
 
 2. 打开终端，进入到 *jl* 文件所在目录，输入下面的命令行，显示文件内的具体内容：
 
@@ -143,9 +140,6 @@ load data local infile {'filepath'='data.jl.gz', 'compression'='gzip','format'='
     {"col1":"true","col2":"1","col3":"var","col4":"2020-09-07","col5":"2020-09-07 00:00:00","col6":"2020-09-07 00:00:00","col7":"18","col8":"121.11"}
     {"col6":"2020-09-07 00:00:00","col7":"18","col8":"121.11","col4":"2020-09-07","col5":"2020-09-07 00:00:00","col1":"true","col2":"1","col3":"var"}
     {"col2":1,"col3":"var","col1":true,"col6":"2020-09-07 00:00:00","col7":"18","col4":"2020-09-07","col5":"2020-09-07 00:00:00","col8":121.11}
-    > head jsonline_array.jl
-    [true,1,"var","2020-09-07","2020-09-07 00:00:00","2020-09-07 00:00:00","18",121.11]
-    ["true","1","var","2020-09-07","2020-09-07 00:00:00","2020-09-07 00:00:00","18","121.11"]
     ```
 
 3. 启动 MySQL 客户端，连接到 MatrixOne Cloud，例如：
@@ -161,15 +155,12 @@ load data local infile {'filepath'='data.jl.gz', 'compression'='gzip','format'='
     use db1;
     drop table if exists t1;
     create table t1(col1 bool,col2 int,col3 varchar, col4 date,col5 datetime,col6 timestamp,col7 decimal,col8 float);
-    drop table if exists t2;
-    create table t2(col1 bool,col2 int,col3 varchar, col4 date,col5 datetime,col6 timestamp,col7 decimal,col8 float);
     ```
 
 5. 在 MySQL 客户端对对应的文件路径执行 `LOAD DATA LOCAL`，导入 *jsonline_object.jl* 和 *jsonline_array.jl* 文件：
 
     ```sql
     load data local infile {'filepath'='$filepath/jsonline_object.jl','format'='jsonline','jsondata'='object'} into table t1;
-    load data local infile {'filepath'='$filepath/jsonline_array.jl','format'='jsonline','jsondata'='array'} into table t2;
     ```
 
 6. 导入成功后，使用如下 SQL 语句查看导入结果：
