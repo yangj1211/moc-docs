@@ -10,8 +10,8 @@ MatrixOne 支持使用 `LOAD DATA` 命令从本地文件系统或 *S3 对象存�
 
 根据*数据文件类型不同*的情况，MatrixOne 支持使用 `LOAD DATA` 命令导入 *csv* 和 *jl* 格式。
 
-- 一种是支持导入 *csv* 格式的数据，具体导入方式可以参考[插入 csv 文件](load-csv.md)。
-- 一种是支持导入 *jl* 格式的数据，即 jsonlines 格式，具体导入方式可以参考[插入 jsonlines 文件](load-jsonline.md)。
+- 支持导入 *csv* 格式的数据，具体导入方式可以参考[插入 csv 文件](load-csv.md)。
+- 支持导入 *jl* 格式的数据，即 jsonlines 格式，具体导入方式可以参考[插入 jsonlines 文件](load-jsonline.md)。
 
 ### 从不同存储位置进行导入
 
