@@ -6,7 +6,7 @@
 
 ### 参数值设置为 0
 
-将 `lower_case_table_names` 设置为 0。标识符存储为原始字符串，名称比较大小写敏感。
+将 `lower_case_table_names` 设置为 0。标识符存储为原始字符串，名称比较时大小写敏感。
 
 **示例**
 
@@ -28,7 +28,7 @@ mysql> select Aa from Tt;
 
 ### 参数值设置为 1
 
-将 `lower_case_table_names` 设置为 1。标识符存储为小写，名称比较大小写不敏感。
+将 `lower_case_table_names` 设置为 1。标识符存储为小写，名称比较时大小写不敏感。
 
 **示例**
 
@@ -132,7 +132,7 @@ lowerCaseTableNames = "0" // 默认为 1
 !!! note
     当前仅支持设置参数为 0 或 1。但暂不支持设置为参数为 2，3 和 4。
 
-- 仅对当前会话开启保存查询结果：
+- 仅对当前会话开启大小写敏感支持：
 
 ```sql
 set global lower_case_table_names = 1;
