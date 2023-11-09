@@ -34,10 +34,10 @@ __Note__: 使用 `Load data local` 命令时，数据文件需位于执行该语
 
 2. 将数据文件拷贝至 MySQL 客户端所在的服务器中。
 
-3. 使用 MySQL 客户端连接 MatrixOne：
+3. 使用 MySQL 客户端连接 MatrixOne Cloud：
 
     ```
-    mysql -h <mo-host-ip> -P 6001 -uroot -p111
+    mysql -h <moc-host-ip> -P 6001 -uroot -p
     ```
 
 4. 在 MySQL 客户端中执行 `LOAD DATA LOCAL` 命令：
