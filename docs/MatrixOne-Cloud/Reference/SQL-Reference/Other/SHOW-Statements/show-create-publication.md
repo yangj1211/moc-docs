@@ -16,7 +16,6 @@ SHOW CREATE PUBLICATION pubname;
 create database t;
 create publication pub3 database t account acc0,acc1;
 mysql> alter publication pub3 account add accx;
-show create publication pub3;
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> show create publication pub3;
