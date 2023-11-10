@@ -34,9 +34,12 @@ MatrixOne 中推荐配置如下：
 
 ```
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://127.0.0.1:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
-spring.datasource.username=root
-spring.datasource.password=111
+# please modify host_ip_address
+spring.datasource.url=jdbc:mysql://host_ip_address:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
+# please modify tenant:user:role 
+spring.datasource.username=tenant:user:role 
+# please modify your_password
+spring.datasource.password=your_password
 mybatis.mapper-locations=classpath:mapping/*xml
 ```
 
@@ -74,21 +77,24 @@ Spring Data JPA 是一个强大的应用框架，它有助于减少样板代码�
 
 - `spring.jpa.hibernate.ddl-auto`：`spring.jpa.hibernate.ddl-auto` 属性采用一个枚举，该枚举以更可控的方式控制模式生成。可能的选项和效果如下表所示。MatrixOne 当前仅支持 *none* 和 *validate*。
 
-| 选项      | 效果                                                       |
-| ----------- | ------------------------------------------------------------ |
-| none        | 无数据库架构初始化                            |
-| create      | 在应用程序启动时删除并创建模式。使用此选项，每次启动时你所有的数据都会消失。 |
-| create-drop | 在启动时创建模式并在上下文关闭时销毁模式。可用于单元测试。 |
-| validate    | 仅检查模式是否与实体匹配。如果模式不匹配，则应用程序启动将失败。不更改数据库。 |
+| 选项        | 效果                                                                                                 |
+| ----------- | ---------------------------------------------------------------------------------------------------- |
+| none        | 无数据库架构初始化                                                                                   |
+| create      | 在应用程序启动时删除并创建模式。使用此选项，每次启动时你所有的数据都会消失。                         |
+| create-drop | 在启动时创建模式并在上下文关闭时销毁模式。可用于单元测试。                                           |
+| validate    | 仅检查模式是否与实体匹配。如果模式不匹配，则应用程序启动将失败。不更改数据库。                       |
 | update      | 仅在必要时更新模式。例如，如果在实体中添加了一个新字段，那么它将简单地为新列更改表，而不会破坏数据。 |
 
 MatrixOne 中推荐配置如下：
 
 ```
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://127.0.0.1:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
-spring.datasource.username=root
-spring.datasource.password=111
+# please modify host_ip_address
+spring.datasource.url=jdbc:mysql://host_ip_address:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
+# please modify tenant:user:role 
+spring.datasource.username=tenant:user:role 
+# please modify your_password
+spring.datasource.password=your_password
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQLDialect
 spring.jpa.hibernate.ddl-auto = validate
 ```

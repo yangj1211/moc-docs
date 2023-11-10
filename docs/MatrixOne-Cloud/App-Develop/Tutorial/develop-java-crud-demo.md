@@ -9,7 +9,7 @@
 
 * 已完成[创建实例](../../Instance-Mgmt/create-instance.md)，通过 MySQL 客户端创建数据库。
 
-```
+```mysql
 mysql> create database test;
 ```
 
@@ -38,15 +38,18 @@ mysql> create database test;
 
 在 *src* 目录下，创建一个名为 `JDBCUtils.java` 的文件，并使用以下代码编辑该文件：
 
-```
+```java
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JDBCUtils {
-    private static String jdbcURL = "jdbc:mysql://127.0.0.1:6001/test";
-    private static String jdbcUsername = "root";
-    private static String jdbcPassword = "111";
+    // please modify host_ip_address
+    private static String jdbcURL = "jdbc:mysql://host_ip_address:6001/test";   
+    // please modify tenant:user:role  
+    private static String jdbcUsername = "tenant:user:role";               
+    // please modify your_password     
+    private static String jdbcPassword = "your_password";                      
 
     public static Connection getConnection() {
         Connection connection = null;
@@ -83,7 +86,7 @@ public class JDBCUtils {
 
 #### 创建（`Create.java`)
 
-```
+```java
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -121,7 +124,7 @@ public class Create {
 
 执行上述代码会在 `test` 数据库中创建一个表，然后你可以在 MySQL 客户端中使用如下代码验证是否创建了表。
 
-```
+```mysql
 mysql> show create table student;
 +---------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Table   | Create Table                                                                                                                                                                                        |
@@ -140,7 +143,7 @@ PRIMARY KEY (`id`)
 
 #### 插入（`Insert.java`）
 
-```
+```java
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -196,7 +199,7 @@ mysql> select * from student;
 
 #### 更新（`Update.java`）
 
-```
+```java
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -246,7 +249,7 @@ mysql> select * from student;
 
 #### 查询（`Select.java`）
 
-```
+```java
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -289,3 +292,53 @@ public class Select {
 运行结果：
 
 ![image-20220927113440917](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/reference/jdbc_select.png)
+
+#### 删除（`Delete.java`）
+
+```java
+package org.example;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class Delete {
+    private static final String DELETE_STUDENT_SQL = "DELETE FROM student WHERE id = ?;";
+
+    public static void main(String[] argv) throws SQLException {
+        Delete deleteRecord = new Delete();
+        deleteRecord.deleteDataById(1);
+    }
+
+    public void deleteDataById(int id) throws SQLException {
+
+        // Step 1: Establishing a Connection
+        try (Connection connection = JDBCUtils.getConnection();
+             // Step 2: Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_STUDENT_SQL)) {
+            preparedStatement.setInt(1, id);
+            System.out.println(preparedStatement);
+            // Step 3: Execute the delete query
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Data deleted successfully.");
+            } else {
+                System.out.println("No data found for the given ID.");
+            }
+
+        } catch (SQLException e) {
+
+            // print SQL exception information
+            JDBCUtils.printSQLException(e);
+        }
+
+        // Step 4: try-with-resource statement will auto close the connection.
+    }
+}
+```
+
+运行结果：
+```mysql
+mysql> select * from student;
+Empty set (0.03 sec)
+```

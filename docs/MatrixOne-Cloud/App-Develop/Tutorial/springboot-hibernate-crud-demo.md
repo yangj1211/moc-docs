@@ -43,9 +43,11 @@ mysql> create database test;
 
 ![image-20221027101504418](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/hibernate/image-20221027101504418.png)
 
-点击 **Create** 创建项目。依赖项列在 *pom.xml* 文件中。通常你无需修改任何东西。
+点击 **Create** 创建项目。
 
-```
+依赖项列在 *pom.xml* 文件中。通常你无需修改任何东西。
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -143,9 +145,9 @@ mysql> create database test;
 
 ### 3. 修改 *application.properties* 文件
 
-进入到 *resources* 文件目录下，配置 *application.properties* 文件，完成 MatrixOne 连接。
+进入到 **src>main>resources** 文件目录下，配置 *application.properties* 文件，完成 MatrixOne 连接。
 
-```
+```properties
 # Application Name
 spring.application.name=jpademo
 # Database driver
@@ -154,10 +156,13 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.name=defaultDataSource
 
 # Database connection url, modify to MatrixOne address and port, with parameters
-spring.datasource.url=jdbc:mysql://127.0.0.1:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
+# please modify host_ip_address
+spring.datasource.url=jdbc:mysql://host_ip_address:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000    
 # Database username and password
-spring.datasource.username=root
-spring.datasource.password=111
+# please modify tenant:user:role 
+spring.datasource.username=tenant:user:role        
+# please modify your_password
+spring.datasource.password=your_password            
 # Web application port
 server.port=8080
 
@@ -172,7 +177,7 @@ spring.jpa.hibernate.ddl-auto = validate
 
 使用 MySQL 客户端连接到 MatrixOne 并执行以下 SQL 语句。你可以将这些 SQL 语句保存在 */resource/database/* 目录下的 *book.sql* 中。
 
-```
+```mysql
 mysql> USE test;
 mysql> CREATE TABLE IF NOT EXISTS `book` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -194,15 +199,22 @@ mysql> INSERT INTO `book` (`id`, `author`, `category`, `name`, `pages`, `price`,
 
 完成环境配置后，我们编写代码来实现一个简单的 CRUD 应用程序。
 
-在完成编写代码后，你将拥有一个如下所示的项目结构。你可以预先创建这些包和 java 类。
+在完成编写代码后，你将拥有一个如下所示的项目结构。你可以预先创建这些包和 java 类，使用下面的命令行先创建目录结构。
+
+```bash
+cd src/main/java/com/example/jpademo/ && 
+mkdir  controller dao entity services &&
+touch controller/BookStoreController.java dao/BookStoreDAO.java dao/IBookStoreDAO.java entity/Book.java services/BookStoreService.java services/IBookStoreService.java
+
+```
 
 我们将为这个演示应用程序编写创建、更新、插入、删除和选择操作。
 
 ![image-20221027105233860](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/tutorial/hibernate/image-20221027105233860.png)
 
-### 1. BookStoreController.java
+### 1. controller/BookStoreController.java
 
-```
+```java
 package com.example.jpademo.controller;
 
 import com.example.jpademo.entity.Book;
@@ -264,9 +276,9 @@ public class BookStoreController {
 }
 ```
 
-### 2. BooStoreDAO.java
+### 2. dao/BooStoreDAO.java
 
-```
+```java
 package com.example.jpademo.dao;
 
 import com.example.jpademo.entity.Book;
@@ -371,7 +383,7 @@ public class BookStoreDAO implements IBookStoreDAO {
 }
 ```
 
-### 3. IBookStoreDAO.java
+### 3. dao/IBookStoreDAO.java
 
 ```
 package com.example.jpademo.dao;
@@ -390,9 +402,9 @@ public interface IBookStoreDAO {
 }
 ```
 
-### 4. Book.java
+### 4. entity/Book.java
 
-```
+```java
 package com.example.jpademo.entity;
 
 import javax.persistence.*;
@@ -486,9 +498,9 @@ public class Book implements Serializable {
 
 ```
 
-### 5. BookStoreService.java
+### 5. services/BookStoreService.java
 
-```
+```java
 package com.example.jpademo.services;
 
 import com.example.jpademo.dao.IBookStoreDAO;
@@ -533,9 +545,9 @@ public class BookStoreService implements IBookStoreService {
 
 ```
 
-### 6. IBookStoreService.java
+### 6. services/IBookStoreService.java
 
-```
+```java
 package com.example.jpademo.services;
 
 import com.example.jpademo.entity.Book;
@@ -555,7 +567,7 @@ public interface IBookStoreService {
 
 ### 7. JpademoApplication
 
-```
+```java
 package com.example.jpademo;
 
 import org.springframework.boot.SpringApplication;

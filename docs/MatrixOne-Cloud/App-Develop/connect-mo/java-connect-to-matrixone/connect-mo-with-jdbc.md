@@ -43,7 +43,7 @@
 
     有关如何使用 JDBC 在 MatrixOne 中开发 CRUD（创建、读取、更新、删除）应用程序的完整示例，参考 [Java CRUD 示例](../../Tutorial/develop-java-crud-demo.md)。
 
-    ```
+    ```java
     package org.example;
 
     import java.sql.Connection;
@@ -55,9 +55,9 @@
     public class Main {
 
 
-        private static String jdbcURL = "jdbc:mysql://127.0.0.1:6001/test";
-        private static String jdbcUsername = "root";
-        private static String jdbcPassword = "111";
+        private static String jdbcURL = "jdbc:mysql://host_ip_address:6001/test";
+        private static String jdbcUsername = "tenant:user:role";
+        private static String jdbcPassword = "your_password";
 
         public static void main(String[] args) {
 
