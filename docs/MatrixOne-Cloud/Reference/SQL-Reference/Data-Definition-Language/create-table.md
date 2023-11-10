@@ -144,14 +144,14 @@ partition_definition:
 
 ```sql
 -- 设置
-create table t1(a int auto_increment primary key) auto_increment = 10;
+create table t1(id int auto_increment primary key) auto_increment = 10;
 ```
 
 在这个例子中，`id` 列是自增列，其起始值为 10，当向表中插入新记录时，`id` 列的值将从 10 开始，每次自动递增 1。如果没有指定 `AUTO_INCREMENT` 的起始值，默认起始值为 1，每次自动递增 1。
 
 !!! note
-    1. MatrixOne 目前仅支持默认的递增步长为 1，无论自增列的初始值为何，每次自动递增都为 1。暂时不支持设置递增步长大小。
-    2. MatrixOne 仅语法上支持使用系统变量 `set @@auto_increment_offset=n` 来设置自增列初始值，实际并不生效。
+    1. MatrixOne Cloud 目前仅支持默认的递增步长为 1，无论自增列的初始值为何，每次自动递增都为 1。暂时不支持设置递增步长大小。
+    2. MatrixOne Cloud 仅语法上支持使用系统变量 `set @@auto_increment_offset=n` 来设置自增列初始值，实际并不生效。
 
 #### PRIMARY KEY
 
@@ -320,7 +320,7 @@ partition_definition:
 
 - **HASH(expr)**
 
-在实际工作中，经常会遇到像会员表这种没有明显可以分区的特征字段的大表。为了把这类的数据进行分区打散，MatrixOne 提供了 `HASH` 分区。基于给定的分区个数，将数据分配到不同的分区，`HASH` 分区只能针对整数进行 `HASH`，对于非整形的字段则通过表达式将其转换成整数。
+在实际工作中，经常会遇到像会员表这种没有明显可以分区的特征字段的大表。为了把这类的数据进行分区打散，MatrixOne Cloud 提供了 `HASH` 分区。基于给定的分区个数，将数据分配到不同的分区，`HASH` 分区只能针对整数进行 `HASH`，对于非整形的字段则通过表达式将其转换成整数。
 
 · HASH 分区，基于给定的分区个数，把数据分配到不同的分区。
 
@@ -681,4 +681,4 @@ mysql> select * from t1 order by a;
 
 1. 不支持使用 `ALTER TABLE table_name DROP PRIMARY KEY` 语句删除表中的主键。
 2. 不支持使用 `ALTER TABLE table_name AUTO_INCREMENT = n;` 语句修改自增列初始值。
-3. 在 MatrixOne 中，仅语法上支持使用系统变量 `set @@auto_increment_increment=n` 来设置递增步长，也仅语法支持使用系统变量 `set @@auto_increment_offset=n` 来设置默认自增列初始值，但实际上并不生效；当前支持设置自增列的初始值 `AUTO_INCREMENT=n`，但步长仍然默认为 1。
+3. 在 MatrixOne Cloud中，仅语法上支持使用系统变量 `set @@auto_increment_increment=n` 来设置递增步长，也仅语法支持使用系统变量 `set @@auto_increment_offset=n` 来设置默认自增列初始值，但实际上并不生效；当前支持设置自增列的初始值 `AUTO_INCREMENT=n`，但步长仍然默认为 1。
