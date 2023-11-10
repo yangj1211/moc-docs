@@ -33,14 +33,8 @@
 
 ### INFILE
 
-- `LOAD DATA INFILE 'file_name'`：
-
-   **命令行使用场景**：需要加载的数据文件与 MatrixOne 主机服务器在同一台机器上。
-   `file_name` 可以是文件的存放位置的相对路径名称，也可以是绝对路径名称。
-
 - `LOAD DATA LOCAL INFILE 'file_name'`：
 
-   **命令行使用场景**：需要加载的数据文件与 MatrixOne 主机服务器不在同一台机器上，即，数据文件在客户机上。
    `file_name` 可以是文件的存放位置的相对路径名称，也可以是绝对路径名称。
 
 ### IGNORE LINES
@@ -57,7 +51,7 @@ LOAD DATA INFILE '/tmp/test.txt' INTO TABLE table1 IGNORE 1 LINES;
 
 对于 `LOAD DATA` 和 `SELECT ... INTO OUTFILE` 语句，`FIELDS` 和 `LINES` 子句的语法是相同的。这两个子句都是可选的，但如果两者都指定，则 `FIELDS` 必须在 `LINES` 之前。
 
-如果指定 `FIELDS` 子句，那么 `FIELDS` 的每个子句（`TERMINATED BY`、`[OPTIONALLY] ENCLOSED BY`）也是可选的，除非你必须至少指定其中一个。
+如果指定 `FIELDS` 子句，那么 `FIELDS` 的每个子句（`TERMINATED BY`、`[OPTIONALLY] ENCLOSED BY`）也是可选的，但是你必须至少指定其中一个。
 
 `LOAD DATA` 也支持使用十六进制 `ASCII` 字符表达式或二进制 `ASCII` 字符表达式作为 `FIELDS ENCLOSED BY` 和 `FIELDS TERMINATED BY` 的参数。
 
@@ -83,7 +77,7 @@ FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n'
 例如，读取使用*逗号*分隔的文件，语法是：
 
 ```
-LOAD DATA INFILE 'data.txt' INTO TABLE table1
+LOAD DATA LOCAL INFILE 'data.txt' INTO TABLE table1
   FIELDS TERMINATED BY ',';
 ```
 
@@ -92,7 +86,7 @@ LOAD DATA INFILE 'data.txt' INTO TABLE table1
 如果你使用如下所示的语句读取文件，将会产生报错，因为它表示的是 `LOAD DATA` 查找字段之间的制表符：
 
 ```
-LOAD DATA INFILE 'data.txt' INTO TABLE table1
+LOAD DATA LOCAL INFILE 'data.txt' INTO TABLE table1
   FIELDS TERMINATED BY '\t';
 ```
 
@@ -105,7 +99,7 @@ LOAD DATA INFILE 'data.txt' INTO TABLE table1
 如下面的例子所示，即表示一部分输入值用可以用引号括起来，另一些可以不用引号括起来：
 
 ```
-LOAD DATA INFILE 'data.txt' INTO TABLE table1
+LOAD DATA LOCAL INFILE 'data.txt' INTO TABLE table1
   FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
 ```
 
@@ -118,7 +112,7 @@ LOAD DATA INFILE 'data.txt' INTO TABLE table1
 例如，*csv* 文件中的行以回车符/换行符对结束，你在加载它时，可以使用 `LINES TERMINATED BY '\r\n'` 或 `LINES TERMINATED BY '\n'`：
 
 ```
-LOAD DATA INFILE 'data.txt' INTO TABLE table1
+LOAD DATA LOCAL INFILE 'data.txt' INTO TABLE table1
   FIELDS TERMINATED BY ',' ENCLOSED BY '"'
   LINES TERMINATED BY '\r\n';
 ```
@@ -130,7 +124,7 @@ LOAD DATA INFILE 'data.txt' INTO TABLE table1
 如果一行不包含前缀，则跳过整行。如下语句所示：
 
 ```
-LOAD DATA INFILE '/tmp/test.txt' INTO TABLE table1
+LOAD DATA LOCAL INFILE '/tmp/test.txt' INTO TABLE table1
   FIELDS TERMINATED BY ','  LINES STARTING BY 'xxx';
 ```
 
@@ -146,7 +140,7 @@ something xxx"def",2
 
 ### SET
 
-MatrixOne 当前仅支持 `SET column_name=nullif(column_name,expr)`。即，当 `column_name = expr`，返回 `NULL`；否则，则返回 `column_name`。例如，`SET a=nullif(a, 1)`，当 a=1 时，返回 `NULL`；否则，返回 a 列原始的值。
+MatrixOne Cloud 当前仅支持 `SET column_name=nullif(column_name,expr)`。即，当 `column_name = expr`，返回 `NULL`；否则，则返回 `column_name`。例如，`SET a=nullif(a, 1)`，当 a=1 时，返回 `NULL`；否则，返回 a 列原始的值。
 
 使用这种方法，可以在加载文件时，设置参数 `SET column_name=nullif(column_name,"null")`，用于返回列中的 `NULL` 值。
 
@@ -161,7 +155,7 @@ MatrixOne 当前仅支持 `SET column_name=nullif(column_name,expr)`。即，当
     null,wederTom,"man"
     ```
 
-2. 在 MatrixOne 中新建一个表 `user`：
+2. 在 MatrixOne Cloud 中新建一个表 `user`：
 
     ```sql
     create database aaa;
@@ -172,7 +166,7 @@ MatrixOne 当前仅支持 `SET column_name=nullif(column_name,expr)`。即，当
 3. 使用下面的命令行将 `test.txt` 导入至表 `user`：
 
     ```sql
-    LOAD DATA INFILE '/tmp/test.txt' INTO TABLE user SET id=nullif(id,"null");
+    LOAD DATA LOCAL INFILE '/tmp/test.txt' INTO TABLE user SET id=nullif(id,"null");
     ```
 
 4. 导入后的表内容如下：
@@ -198,13 +192,13 @@ MatrixOne 当前仅支持 `SET column_name=nullif(column_name,expr)`。即，当
 
 ```sql
 --  打开并行加载
-load data infile 'file_name' into table tbl_name FIELDS TERMINATED BY '|' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES PARALLEL 'TRUE';
+load data local infile 'file_name' into table tbl_name FIELDS TERMINATED BY '|' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES PARALLEL 'TRUE';
 
 --  关闭并行加载
-load data infile 'file_name' into table tbl_name FIELDS TERMINATED BY '|' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES PARALLEL 'FALSE';
+load data local infile 'file_name' into table tbl_name FIELDS TERMINATED BY '|' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES PARALLEL 'FALSE';
 
 --  默认关闭并行加载
-load data infile 'file_name' into table tbl_name FIELDS TERMINATED BY '|' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES;
+load data local infile 'file_name' into table tbl_name FIELDS TERMINATED BY '|' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES;
 ```
 
 !!! note
@@ -214,13 +208,13 @@ load data infile 'file_name' into table tbl_name FIELDS TERMINATED BY '|' ENCLOS
 
 ## 支持的文件格式
 
-在 MatrixOne 当前版本中，`LOAD DATA` 支持 *CSV* 格式和 *JSONLines* 格式文件。
+在 MatrixOne Cloud 当前版本中，`LOAD DATA` 支持 *CSV* 格式和 *JSONLines* 格式文件。
 
 有关导入这两种格式的文档，参见[导入*. csv* 格式数据](../../../App-Develop/import-data/bulk-load/load-csv.md)和[导入 JSONLines 数据](../../../App-Develop/import-data/bulk-load/load-jsonline.md)。
 
 ### *CSV* 格式标准说明
 
-MatrixOne 加载 *CSV* 格式符合 RFC4180 标准，规定 *CSV* 格式如下：
+MatrixOne Cloud 加载 *CSV* 格式符合 RFC4180 标准，规定 *CSV* 格式如下：
 
 1. 每条记录位于单独的一行，由换行符（CRLF）分隔：
 
@@ -412,7 +406,7 @@ Query OK, 0 rows affected (0.02 sec)
 将数据文件导入到 MatrixOne 中的表 t1：
 
 ```sql
-load data infile '<your-local-file-path>/char_varchar.csv' into table t1 fields terminated by'|';
+load data local infile '<your-local-file-path>/char_varchar.csv' into table t1 fields terminated by'|';
 ```
 
 查询结果如下：
@@ -452,7 +446,7 @@ mysql> select * from t1;
 
 ```sql
 delete from t1;
-load data infile '<your-local-file-path>/char_varchar.csv' into table t1 fields terminated by'|' LINES STARTING BY 'aa' ignore 10 lines;
+load data local infile '<your-local-file-path>/char_varchar.csv' into table t1 fields terminated by'|' LINES STARTING BY 'aa' ignore 10 lines;
 ```
 
 查询结果如下：
@@ -491,7 +485,7 @@ mysql> select * from t1;
 ["true","1","var","2020-09-07","2020-09-07 00:00:00","2020-09-07 00:00:00","18","121.11",{"c":1,"b":["a","b",{"q":4}]},"1aza",null,null]
 ```
 
-在 MatrixOne 中建表：
+在 MatrixOne Cloud 中建表：
 
 ```sql
 mysql> drop table if exists t1;
@@ -501,10 +495,10 @@ mysql> create table t1(col1 bool,col2 int,col3 varchar(100), col4 date,col5 date
 Query OK, 0 rows affected (0.03 sec)
 ```
 
-将数据文件导入到 MatrixOne 中的表 t1：
+将数据文件导入到 MatrixOne Cloud 中的表 t1：
 
 ```
-load data infile {'filepath'='<your-local-file-path>/jsonline_array.jl','format'='jsonline','jsondata'='array'} into table t1;
+load data local infile {'filepath'='<your-local-file-path>/jsonline_array.jl','format'='jsonline','jsondata'='array'} into table t1;
 ```
 
 查询结果如下：
@@ -526,7 +520,7 @@ mysql> select * from t1;
 
 ```
 delete from t1;
-load data infile {'filepath'='<your-local-file-path>/jsonline_array.jl','format'='jsonline','jsondata'='array'} into table t1 ignore 1 lines;
+load data local infile {'filepath'='<your-local-file-path>/jsonline_array.jl','format'='jsonline','jsondata'='array'} into table t1 ignore 1 lines;
 ```
 
 查询结果如下：
@@ -547,9 +541,9 @@ mysql> select * from t1;
 
 ## **限制**
 
-1. `REPLACE` 和 `IGNORE` 修饰符用来解决唯一索引的冲突：`REPLACE` 表示若表中已经存在，则用新的数据替换掉旧的数据；`IGNORE` 则表示保留旧的数据，忽略掉新数据。这两个修饰符在 MatrixOne 中尚不支持。
-2. MatrixOne 当前部分支持 `SET`，仅支持 `SET columns_name=nullif(col_name,expr2)`。
+1. `REPLACE` 和 `IGNORE` 修饰符用来解决唯一索引的冲突：`REPLACE` 表示若表中已经存在，则用新的数据替换掉旧的数据；`IGNORE` 则表示保留旧的数据，忽略掉新数据。这两个修饰符在 MatrixOne Cloud 中尚不支持。
+2. MatrixOne Cloud 当前部分支持 `SET`，仅支持 `SET columns_name=nullif(col_name,expr2)`。
 3. 开启并行加载操作时必须要保证文件中每行数据中不包含指定的行结束符，比如 '\n'，否则有可能会导致文件加载时数据出错。
 4. 文件的并行加载要求文件必须是非压缩格式，暂不支持并行加载压缩格式的文件。
-5. 如果你需要用 `LOAD DATA LOCAL` 进行本地加载，则需要使用命令行连接 MatrixOne 服务主机：`mysql -h <mo-host -ip> -P 6001 -uroot -p111 --local-infile`。
-6. MatrixOne 当前暂不支持 `ESCAPED BY`，写入或读取特殊字符与 MySQL 存在一定的差异。
+5. 如果你需要用 `LOAD DATA LOCAL` 进行本地加载，则需要使用命令行连接 MatrixOne Cloud 服务主机：`mysql -h <mo-host -ip> -P 6001 -uroot -p111 --local-infile`。
+6. MatrixOne Cloud 当前暂不支持 `ESCAPED BY`，写入或读取特殊字符与 MySQL 存在一定的差异。
