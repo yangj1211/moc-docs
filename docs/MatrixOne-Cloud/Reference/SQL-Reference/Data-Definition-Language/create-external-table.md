@@ -2,9 +2,9 @@
 
 ## **语法说明**
 
-外部表是指不在数据库里的表，是操作系统上的一个按照一定格式分割的文本文件，或是其他类型的表，对 MatrixOne 来说类似于视图，可以在数据库中像视图一样进行查询等操作，但是外部表在数据库中只有表结构，而数据存放在操作系统中。
+外部表是指不在数据库里的表，是操作系统上的一个按照一定格式分割的文本文件，或是其他类型的表，对 MatrixOne Cloud 来说类似于视图，可以在数据库中像视图一样进行查询等操作，但是外部表在数据库中只有表结构，而数据存放在操作系统中。
 
-本篇文档将讲述如何在 MatrixOne 数据库外建表。
+本篇文档将讲述如何在 MatrixOne Cloud 数据库外建表。
 
 ## **语法结构**
 
@@ -60,4 +60,4 @@ create external table ex_table_cpk(clo1 tinyint,clo2 smallint,clo3 int,clo4 bigi
 
 ## **限制**
 
-当前 MatrixOne 仅支持对外部表进行 `select` 操作，暂时还不支持使用 `delete`、`insert`、`update` 对外部表插入数据。
+当前 MatrixOne Cloud 仅支持对外部表进行 `select` 操作，暂时还不支持使用 `delete`、`insert`、`update` 对外部表插入数据。
