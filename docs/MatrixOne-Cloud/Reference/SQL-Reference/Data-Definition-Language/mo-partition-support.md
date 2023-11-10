@@ -1,8 +1,8 @@
-# MatrixOne DDL 语句分区支持的说明
+# MatrixOne Cloud DDL 语句分区支持的说明
 
-## 1. MatrixOne 支持的分区类型
+## 1. MatrixOne Cloud 支持的分区类型
 
-目前 MatrixOne 的 DDL 语句支持的 6 种分区类型，与 MySQL 官网基本一致，具体如下：
+目前 MatrixOne Cloud 的 DDL 语句支持的 6 种分区类型，与 MySQL 官网基本一致，具体如下：
 
 - KEY Partitioning
 - HASH Partitioning
@@ -56,7 +56,7 @@ ERROR 1503 (HY000): A PRIMARY KEY must include all columns in the table's partit
 
 1. KEY 只接受零个或多个列名的列表。在表有主键的情况下，用作分区键的任何列必须包含表主键的一部分或全部。
 
-    如果没有指定列名作为分区键，则使用表的主键（如果有）。例如，以下 `CREATE TABLE` 语句在 MySQL 中有效。
+    如果没有指定列名作为分区键，则使用表的主键（如果有）。例如，以下 `CREATE TABLE` 语句在 MatrixOne Cloud 中有效。
 
 2. 如果没有主键，但有 UNIQUE KEY，那么 UNIQUE KEY 用于分区键。
 
@@ -77,7 +77,7 @@ PARTITIONS 4;
 !!! note
     其他分区规则与 MySQL 基本保持一致。
 
-## 3. 关于 MatrixOne 分区表达式的说明
+## 3. 关于 MatrixOne Cloud 分区表达式的说明
 
 ​ 在 DDL 语句构建分区表时，会针对每一种分区定义生成一个分区表达式，该分区表达式可用于计算数据的所属的分区。
 
@@ -98,7 +98,7 @@ type PartitionInfo struct {
 }
 ```
 
-其中 `PartitionExpression` 即为分区表达式。分区表达式为 MatrixOne 把分区子句转换为一个表达式进行处理的方式，对每一种分区表达式的构建方式如下：
+其中 `PartitionExpression` 即为分区表达式。分区表达式为 MatrixOne Cloud 把分区子句转换为一个表达式进行处理的方式，对每一种分区表达式的构建方式如下：
 
 ### KEY Partitioning
 
