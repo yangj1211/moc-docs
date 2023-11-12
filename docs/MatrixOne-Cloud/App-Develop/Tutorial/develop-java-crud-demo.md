@@ -45,7 +45,7 @@ import java.sql.SQLException;
 
 public class JDBCUtils {
     // please modify host_ip_address
-    private static String jdbcURL = "jdbc:mysql://host_ip_address:6001/test";   
+    private static String jdbcURL = "jdbc:mysql://moc.cluster.matrixonecloud.cn:6001/test?enabledTLSProtocols=TLSv1.2";   
     // please modify tenant:user:role  
     private static String jdbcUsername = "tenant:user:role";               
     // please modify your_password     
