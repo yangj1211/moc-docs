@@ -39,15 +39,17 @@ mysql> SELECT CAST(a AS FLOAT) a_cast,CAST(b AS UNSIGNED) b_cast,CAST(c AS SIGNE
 +--------+--------+--------+--------+
 | a_cast | b_cast | c_cast | d_cast |
 +--------+--------+--------+--------+
-| 1.0000 |      1 |      1 |     -2 |
+|      1 |      2 |      1 |     -2 |
 +--------+--------+--------+--------+
+1 row in set (0.01 sec)
 
 mysql> SELECT CAST(a AS CHAR) a_cast, CAST(b AS CHAR) b_cast,CAST(c AS DOUBLE) c_cast, CAST(d AS FLOAT) d_cast from t1;
-+--------+--------+--------+---------+
-| a_cast | b_cast | c_cast | d_cast  |
-+--------+--------+--------+---------+
-| 1      | 1.5    | 1.0000 | -2.0000 |
-+--------+--------+--------+---------+
++--------+--------+--------+--------+
+| a_cast | b_cast | c_cast | d_cast |
++--------+--------+--------+--------+
+| 1      | 1.5    |      1 |     -2 |
++--------+--------+--------+--------+
+1 row in set (0.00 sec)
 ```
 
 ## **限制**
