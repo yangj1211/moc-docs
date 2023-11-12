@@ -46,10 +46,10 @@
 import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
-        host='127.0.0.1',
- port=6001,
-        user='root',
-        password = "111",
+        host='moc.cluster.matrixonecloud.cn',
+        port=6001,
+        user='tenant:user:role',
+        password = "passwd",
         db='test',
         cursorclass=pymysql.cursors.DictCursor,
         autocommit=True
@@ -110,10 +110,10 @@ PRIMARY KEY (`id`)
 import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
-        host='127.0.0.1',
-     port=6001,
-        user='root',
-        password = "111",
+        host='moc.cluster.matrixonecloud.cn',
+        port=6001,
+        user='tenant:user:role',
+        password = "passwd",
         db='test',
         cursorclass=pymysql.cursors.DictCursor,
         autocommit=True
@@ -167,10 +167,10 @@ mysql> select * from cars;
 import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
-        host='127.0.0.1',
-     port=6001,
-        user='root',
-        password = "111",
+        host='moc.cluster.matrixonecloud.cn',
+        port=6001,
+        user='tenant:user:role',
+        password = "passwd",
         db='test',
         cursorclass=pymysql.cursors.DictCursor,
         autocommit=True
@@ -212,10 +212,10 @@ with SQL_CONNECTION.cursor() as cursor:
 import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
-        host='127.0.0.1',
-     port=6001,
-        user='root',
-        password = "111",
+        host='moc.cluster.matrixonecloud.cn',
+        port=6001,
+        user='tenant:user:role',
+        password = "passwd",
         db='test',
         cursorclass=pymysql.cursors.DictCursor,
         autocommit=True
@@ -270,10 +270,10 @@ mysql> select * from cars;
 import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
-        host='127.0.0.1',
-     port=6001,
-        user='root',
-        password = "111",
+        host='moc.cluster.matrixonecloud.cn',
+        port=6001,
+        user='tenant:user:role',
+        password = "passwd",
         db='test',
         cursorclass=pymysql.cursors.DictCursor,
         autocommit=True
