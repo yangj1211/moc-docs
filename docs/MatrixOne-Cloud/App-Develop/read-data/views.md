@@ -31,7 +31,7 @@ CREATE TABLE t01(a INTEGER);
 INSERT INTO t01 VALUES (1);
 ```
 
-可以查看一下表 *t00* 的结构：
+可以查看一下表 *t00* 的数据结构：
 
 ```sql
 mysql> select * from t00;
@@ -43,12 +43,12 @@ mysql> select * from t00;
 +------+
 ```
 
-可以查看一下表 *t01* 的结构：
+可以查看一下表 *t01* 的数据结构：
 
 ```sql
 > select * from t01;
 +------+
-| a    |MO Cloud
+| a    |
 +------+
 |    1 |
 +------+
@@ -67,7 +67,7 @@ CREATE VIEW view_name AS query;
 示例如下：
 
 ```sql
-CREATE VIEW v0 AS SELECT t00.a, t01.a AS b FROM t00 LEFT JOIN t01 USING(a);
+mysql> CREATE VIEW v0 AS SELECT t00.a, t01.a AS b FROM t00 LEFT JOIN t01 USING(a);
 Query OK, 0 rows affected (0.02 sec)
 ```
 
@@ -87,7 +87,7 @@ mysql> SELECT * FROM v0;
 
 ## 获取视图相关信息
 
-使用 `SHOW CREATE TABLE|VIEW view_name` 语句：
+使用 `SHOW CREATE VIEW view_name` 语句：
 
 ```sql
 mysql> SHOW CREATE VIEW v0;
