@@ -157,7 +157,7 @@ spring.datasource.name=defaultDataSource
 
 # Database connection url, modify to MatrixOne address and port, with paratemers
 # please modify host_ip_address
-spring.datasource.url=jdbc:mysql://host_ip_address:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
+spring.datasource.url=jdbc:mysql://moc.cluster.matrixonecloud.cn:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000&enabledTLSProtocols=TLSv1.2
 # Database username and password
 # please modify tenant:user:role 
 spring.datasource.username=tenant:user:role 
