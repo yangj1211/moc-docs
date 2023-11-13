@@ -45,7 +45,7 @@ Project
 
 ## 节点类型
 
-MatrixOne 支持以下节点类型。
+MatrixOne Cloud 支持以下节点类型。
 
 | 节点类型       | Explain 中的命名 |
 | --------------- | --------------- |
