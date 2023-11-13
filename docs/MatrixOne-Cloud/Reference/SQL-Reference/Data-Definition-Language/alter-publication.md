@@ -18,7 +18,7 @@ ALTER PUBLICATION pubname ACCOUNT 
 ## 语法解释
 
 - pubname：已存在的发布名称。
-- account_name：可获取该发布的租户名称。
+- account_name：可获取该发布的实例名称。
 
 ## **示例**
 

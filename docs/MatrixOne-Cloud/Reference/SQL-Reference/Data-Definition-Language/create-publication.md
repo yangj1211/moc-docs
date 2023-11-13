@@ -17,7 +17,7 @@ CREATE PUBLICATION pubname
 ## 语法解释
 
 - pubname：发布名称。发布名称必须与当前数据库中任何现有发布的名称不同。
-- database_name：当前租户下已存在的某个数据库名称。
+- database_name：当前实例下已存在的某个数据库名称。
 - account_name：可获取该发布的用户实例名称。
 
 ## **示例**
