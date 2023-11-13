@@ -11,26 +11,28 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 ### `mo-dump` 语法结构
 
 ```
-./mo-dump -u ${user} -p ${password} -h ${host} -P ${port} -db ${database} [--local-infile=true] [-csv] [-tbl ${table}...] -net-buffer-length ${net-buffer-length} > {dumpfilename.sql}
+./mo-dump -u ${user} -p${password} -h ${host} -P ${port} -db ${database} [--local-infile=true] [-csv] [-tbl ${table}...] -net-buffer-length ${net-buffer-length} > {dumpfilename.sql}
 ```
 
 **参数释义**
 
-- **-u [user]**：连接 MatrixOne 服务器的用户名。只有具有数据库和表读取权限的用户才能使用 `mo-dump` 实用程序，默认值 dump。
+- **-u [user]**：连接 MatrixOne 服务的用户名。只有具有数据库和表读取权限的用户才能使用 `mo-dump` 实用程序，默认值：dump。
 
-- **-p [password]**：MatrixOne 用户的有效密码。默认值：111。
+- **-p [password]**：MatrixOne 用户的有效密码。
 
-- **-h [host]**：MatrixOne 服务器的主机 IP 地址。默认值：127.0.0.1
+- **-h [host]**：MatrixOne 服务的主机 IP/HOST 地址。默认值：127.0.0.1。
 
-- **-P [port]**：MatrixOne 服务器的端口。默认值：6001
+- **-P [port]**：MatrixOne 服务的端口。默认值：6001。
 
 - **-db [数据库名称]**：必需参数。要备份的数据库的名称。
 
-- **-net-buffer-length [数据包大小]**：数据包大小，即 SQL 语句字符的总大小。数据包是 SQL 导出数据的基本单位，如果不设置参数，则默认 1048576 Byte（1M），最大可设置 16777216 Byte（16M）。假如这里的参数设置为 16777216 Byte（16M），那么，当要导出大于 16M 的数据时，会把数据拆分成多个 16M 的数据包，除最后一个数据包之外，其它数据包大小都为 16M。
+- **-net-buffer-length [数据包大小]**: 数据包大小，即 SQL 语句字符的总大小。数据包是 SQL 导出数据的基本单位，如果不设置参数，则默认 1048576 Byte（1M），最大可设置 16777216 Byte（16M）。假如这里的参数设置为 16777216 Byte（16M），那么，当要导出大于 16M 的数据时，会把数据拆分成多个 16M 的数据包，除最后一个数据包之外，其它数据包大小都为 16M。
 
-- **-csv**：默认值为 false。当设置为 true 时表示导出的数据为 *CSV* 格式。
+- **-no-data**: 当在命令中显式指定该项时仅导出数据库/包的创建语句，不导出数据。
 
-- **--local-infile**：默认值为 true，仅在参数 **-csv** 设置为 true 时生效。表示支持本地导出 *CSV* 文件。
+- **-csv**：当在命令中显式指定该项时表示导出数据为 *CSV* 格式。
+
+- **-csv-field-delimiter [","]**: 设置 csv 字段分隔符，仅支持一个 utf8 字符，默认值为 “,”。该项仅当设置导出数据格式为 “csv” 时启用。
 
 - **-tbl [表名]**：可选参数。如果参数为空，则导出整个数据库。如果要备份指定表，则可以在命令中指定多个 `-tbl` 和表名。
 
@@ -58,29 +60,27 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 2. 在你本地计算机上打开终端窗口，输入以下命令，连接到 MatrixOne Cloud，并且导出数据库：
 
     ```
-    ./mo-dump -u username -p password -h host_ip_address -P port -db database > exporteddb.sql
+    ./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -P 6001 -db database > exported_db.sql
     ```
 
-例如，如果你在与 MatrixOne Cloud 实例相同的服务器中启动终端，并且你想要生成单个数据库的备份，请运行以下命令。该命令将在 *t.sql* 文件中生成 **t** 数据库的结构和数据的备份。*t.sql* 文件将与您的 `mo-dump` 可执行文件位于同一目录中。
+例如，如果你想要生成单个数据库的备份，请运行以下命令。该命令将在 *t.sql* 文件中生成 **t** 数据库的结构和数据的备份。*t.sql* 文件将与您的 `mo-dump` 可执行文件位于同一目录中。
 
 ```
-./mo-dump -u <accountname>#<username>#<rolename> -p 111 -h freetier-01.cn-hangzhou.cluster.matrixonecloud.cn -P 6001 -db t > t.sql
+./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc.cluster.matrixonecloud.cn -P 6001 -db t > t.sql
 ```
 
 如果你想将数据库 *t* 内的表导出为 *CSV* 格式，参考使用下面的命令：
 
 ```
-./mo-dump -u <accountname>#<username>#<rolename> -p 111 -db t -csv --local-infile=false > ttt.csv
+./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -db t -csv > ttt.csv
 ```
 
 如果要在数据库中生成单个表的备份，可以运行以下命令。该命令将生成命名为 *t* 的数据库的 *t1* 表的备份，其中包含 *t.sql* 文件中的结构和数据。
 
 ```
-./mo-dump -u <accountname>#<username>#<rolename> -p 111 -db t -tbl t1 > t1.sql
+./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -db t -tbl t1 > t1.sql
 ```
 
 ## 限制
 
 - `mo-dump` 仅支持导出单个数据库的备份，如果你有多个数据库需要备份，需要手动运行 `mo-dump` 多次。
-
-- `mo-dump` 暂不支持只导出数据库的结构或数据。如果你想在没有数据库结构的情况下生成数据的备份，或者仅想导出数据库结构，那么，你需要手动拆分 `.sql` 文件。
