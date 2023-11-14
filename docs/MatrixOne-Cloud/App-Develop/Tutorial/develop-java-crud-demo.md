@@ -338,6 +338,7 @@ public class Delete {
 ```
 
 运行结果：
+
 ```mysql
 mysql> select * from student;
 Empty set (0.03 sec)

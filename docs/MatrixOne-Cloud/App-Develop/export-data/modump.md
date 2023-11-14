@@ -32,7 +32,7 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 
 - **-csv**：当在命令中显式指定该项时表示导出数据为 *CSV* 格式。
 
-- **-csv-field-delimiter [","]**: 设置 csv 字段分隔符，仅支持一个 utf8 字符，默认值为 “,”。该项仅当设置导出数据格式为 “csv” 时启用。
+- **-csv-field-delimiter [","]**: 设置 csv 字段分隔符，仅支持一个 utf8 字符，默认值为“,”。该项仅当设置导出数据格式为“csv”时启用。
 
 - **-tbl [表名]**：可选参数。如果参数为空，则导出整个数据库。如果要备份指定表，则可以在命令中指定多个 `-tbl` 和表名。
 
@@ -52,7 +52,7 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 
 `mo-dump` 在命令行中非常易用。参见以下步骤示例，导出 *sql* 文件格式完整数据库：
 
-1. 选择目标实例，点击 **连接 > 通过第三方工具连接**，右侧滑窗内可查阅到 MatrixOne Cloud 上你的实例主机地址、端口号、用户名和密码。
+1. 选择目标实例，点击**连接 > 通过第三方工具连接**，右侧滑窗内可查阅到 MatrixOne Cloud 上你的实例主机地址、端口号、用户名和密码。
 
     !!! note
         mo-dump 暂不支持连接串的用户名格式（即不支持原格式 `<accountname>:<username>:<rolename>`)，需要更改为 `<accountname>#<username>#<rolename>`。

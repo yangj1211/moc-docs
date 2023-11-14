@@ -11,7 +11,7 @@ MatrixOne Cloud 支持将文件从 S3 兼容的对象存储服务加载到数据
 在 MatrixOne Cloud 中，有两种方法可以从 S3 兼容的对象存储中导入数据：
 
 * 使用带有 s3option 的 `Load data` 将文件加载到 MatrixOne Cloud 中。此方法会将数据加载到 MatrixOne Cloud 中，所有接下来的查询都将在 MatrixOne Cloud 中进行。
-* 创建一个带有 s3option 映射到 S3 文件的 “外部表”，并直接查询这个外部表。该方法允许通过 S3 兼容的对象存储服务进行数据访问；每个查询的网络延迟都将被计算在内。
+* 创建一个带有 s3option 映射到 S3 文件的“外部表”，并直接查询这个外部表。该方法允许通过 S3 兼容的对象存储服务进行数据访问；每个查询的网络延迟都将被计算在内。
 
 ## 方式 1: `LOAD DATA`
 
@@ -42,7 +42,7 @@ LOAD DATA
 |external_id| |
 |filepath| 相对文件路径。 /files/*.csv 支持正则表达式。 |
 |region| 对象存储服务区域|
-|compression| S3 文件的压缩格式。如果为空或 "none"，则表示未压缩的文件。支持的字段或压缩格式为“auto”、“none”、“gzip”、“bz2” 和 “lz4”。|
+|compression| S3 文件的压缩格式。如果为空或 "none"，则表示未压缩的文件。支持的字段或压缩格式为“auto”、“none”、“gzip”、“bz2”和“lz4”。|
 
 其他参数与通用 `LOAD DATA` 参数相同，更多信息，参见 [LOAD DATA](../../../Reference/SQL-Reference/Data-Manipulation-Language/load-data.md)。
 
@@ -90,7 +90,7 @@ LOAD DATA URL s3option{"endpoint"='cos.ap-shanghai.myqcloud.com', "access_key_id
 
     ![Retrieve Access Key](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/load_S3/retrieve_access_key.png)
 
-3.  在 MatrixOne Cloud 中创建表，SQL 示例如下：
+3. 在 MatrixOne Cloud 中创建表，SQL 示例如下：
 
     ```sql
     create database db;
@@ -164,7 +164,7 @@ create external table t(...) URL s3option{"endpoint"='<string>', "access_key_id"
 |bucket| S3 需要访问的桶 |
 |filepath| 相对文件路径。 /files/*.csv 支持正则表达式。 |
 |region| 对象存储服务区域|
-|compression| S3 文件的压缩格式。如果为空或 "none"，则表示未压缩的文件。支持的字段或压缩格式为“auto”、“none”、“gzip”、“bz2” 和 “lz4”。|
+|compression| S3 文件的压缩格式。如果为空或 "none"，则表示未压缩的文件。支持的字段或压缩格式为“auto”、“none”、“gzip”、“bz2”和“lz4”。|
 
 其他参数与通用 `LOAD DATA` 参数相同，更多信息，参见 [LOAD DATA](../../../Reference/SQL-Reference/Data-Manipulation-Language/load-data.md)。
 

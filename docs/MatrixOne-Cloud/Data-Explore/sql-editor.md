@@ -26,7 +26,7 @@
 
 ### 1. 在线导入数据
 
-SQL 编辑器支持快速导入数据，启动数据分析。点击 **导入数据**，即可启动导向式数据导入流程。
+SQL 编辑器支持快速导入数据，启动数据分析。点击**导入数据**，即可启动导向式数据导入流程。
 
 MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据和导入自有数据。
 ![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image-1.png)
@@ -78,7 +78,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 
 首次使用时，将默认在 default 的 Workbook 中进行 SQL 编辑和查询，你可以进一步修改 Workbook 的名称。
 
-你也可以在 Workbook 列表上方点击 “+” 号新增自定义 Workbook，若 Workbook 数量较多同时支持搜索功能。
+你也可以在 Workbook 列表上方点击“+”号新增自定义 Workbook，若 Workbook 数量较多同时支持搜索功能。
 
 每个 Workbook 都支持多个版本，你每次编辑将生成草稿版本，点击执行后将保存为正式版本。
 

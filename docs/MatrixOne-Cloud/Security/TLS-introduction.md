@@ -8,7 +8,7 @@ MatrixOne Cloud 采用默认的加密传输，支持 TLS 协议的加密传输�
 
 ### 1. 验证 MatrixOne Cloud 的 SSL 是否启用
 
-1. 登录到 MatrixOne Cloud，选择目标实例，点击 **连接 > 通过第三方工具连接**，右侧滑窗内可查阅到 MatrixOne Cloud 上你的实例连接串。
+1. 登录到 MatrixOne Cloud，选择目标实例，点击**连接 > 通过第三方工具连接**，右侧滑窗内可查阅到 MatrixOne Cloud 上你的实例连接串。
 
 2. 使用 MySQL 客户端连接 MatrixOne Cloud 实例：
 

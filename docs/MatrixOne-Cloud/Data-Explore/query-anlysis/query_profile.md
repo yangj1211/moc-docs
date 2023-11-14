@@ -24,7 +24,7 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 ## 在查询历史中找到这条 Query
 
-接下来我们在查询历史中找到这条 Query，如下图所示:
+接下来我们在查询历史中找到这条 Query，如下图所示：
 
 ![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/queryprofile_get_query.png)
 
@@ -36,9 +36,9 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 该界面展示了 TPCH Q1 的整个执行过程，总共分为了 4 个算子：表扫描 (Table Scan)，聚合 (Aggregate)，排序 (Sort) 及投影 (Project)。
 
-同时每一个小的执行步骤的方块上我们都表明了它的操作对象，执行细节及所消耗的 CPU 及内存资源。比如针对 Table Scan 算子, 可以看到它的操作对象是 `mo_sample_data_tpch_sf10.lineitem` 这张表，同时这个操作消耗的 CPU 资源是 `1.6 core*s`, 即占用了 1 个 CPU 核 1.6秒的时间。而内存则消耗了 `4.7GB`, 这些资源消耗即是我们计算 CU 消耗的基础。我们会根据一定的算法加总所有步骤所消耗的 CPU 和内存资源，即得到这条 Query 消耗的 CU 个数。
+同时每一个小的执行步骤的方块上我们都表明了它的操作对象，执行细节及所消耗的 CPU 及内存资源。比如针对 Table Scan 算子，可以看到它的操作对象是 `mo_sample_data_tpch_sf10.lineitem` 这张表，同时这个操作消耗的 CPU 资源是 `1.6 core*s`, 即占用了 1 个 CPU 核 1.6 秒的时间。而内存则消耗了 `4.7GB`, 这些资源消耗即是我们计算 CU 消耗的基础。我们会根据一定的算法加总所有步骤所消耗的 CPU 和内存资源，即得到这条 Query 消耗的 CU 个数。
 
-另外从 Table Scan 算子到 Aggregate 算子中间有一个小箭头，这个箭头上会带有一个数字，这个数字代表的即为本算子输出的数据行数，在这张图里为 `58,682,142` 行, 这些数据也是下一个算子的输入。
+另外从 Table Scan 算子到 Aggregate 算子中间有一个小箭头，这个箭头上会带有一个数字，这个数字代表的即为本算子输出的数据行数，在这张图里为 `58,682,142` 行，这些数据也是下一个算子的输入。
 
 ![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/queryprofile_details.png)
 

@@ -2,7 +2,6 @@
 
 ## 配置环境
 
-
 在你开始之前，确认你已经下载并安装了如下软件：
 
 * 确认你已完成安装 MySQL 客户端。
@@ -25,7 +24,6 @@
 	```
 	go get -u gorm.io/driver/mysql
 	```
-
 
 你可以参考 [Golang 连接 MatrixOne Cloud 服务](../connect-mo/connect-to-matrixone-with-go.md)了解如何通过 `Golang` 连接到 MatrixOne Cloud，本篇文档将指导你如何实现 CRUD（创建、读取、更新、删除）。
 

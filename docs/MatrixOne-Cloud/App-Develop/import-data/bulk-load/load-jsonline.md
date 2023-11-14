@@ -67,7 +67,7 @@ LOAD DATA LOCAL INFILE
 
 **参数说明**
 
-|参数 | 值|必须/可选 | 描述|
+|参数 | 值 | 必须/可选 | 描述|
 |:-:|:-:|:-:|:-:|
 |filepath|String| 必须 | 文件路径|
 |compression|auto/none/bz2/gzip/lz4|可选 | 压缩格式 |

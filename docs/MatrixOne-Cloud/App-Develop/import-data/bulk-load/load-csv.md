@@ -34,7 +34,7 @@ __Note__: 使用 `Load data local` 命令时，数据文件需位于执行该语
 
 2. 将数据文件拷贝至 MySQL 客户端所在的服务器中。
 
-3. 使用 MySQL 客户端连接 MatrixOne Cloud ，例如：
+3. 使用 MySQL 客户端连接 MatrixOne Cloud，例如：
 
     ```
     mysql -h moc.cluster.matrixonecloud.cn -P 6001 -u a123456b_78cd_9e12_fg34_abcd5d6789ef:admin:accountadmin  -p
@@ -47,7 +47,7 @@ __Note__: 使用 `Load data local` 命令时，数据文件需位于执行该语
     INTO TABLE table_name
     FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY "\r\n";
     ```
-    
+
 ## __限制__
 
 加载 `csv` 格式支持 JSON 类型，但是需要确保 JSON 内不含有字段终止符号，如果 JSON 内含有字段终止符号，那么 JSON 需要用双引号包裹起来。例如：

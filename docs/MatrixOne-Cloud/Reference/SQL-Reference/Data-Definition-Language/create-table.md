@@ -519,7 +519,7 @@ PRIMARY KEY (`col1`)
 +-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.01 sec)
 
--- 创建HASH分区
+-- 创建 HASH 分区
 CREATE TABLE tp7
 (
     col1 INT,
@@ -681,4 +681,4 @@ mysql> select * from t1 order by a;
 
 1. 不支持使用 `ALTER TABLE table_name DROP PRIMARY KEY` 语句删除表中的主键。
 2. 不支持使用 `ALTER TABLE table_name AUTO_INCREMENT = n;` 语句修改自增列初始值。
-3. 在 MatrixOne Cloud中，仅语法上支持使用系统变量 `set @@auto_increment_increment=n` 来设置递增步长，也仅语法支持使用系统变量 `set @@auto_increment_offset=n` 来设置默认自增列初始值，但实际上并不生效；当前支持设置自增列的初始值 `AUTO_INCREMENT=n`，但步长仍然默认为 1。
+3. 在 MatrixOne Cloud 中，仅语法上支持使用系统变量 `set @@auto_increment_increment=n` 来设置递增步长，也仅语法支持使用系统变量 `set @@auto_increment_offset=n` 来设置默认自增列初始值，但实际上并不生效；当前支持设置自增列的初始值 `AUTO_INCREMENT=n`，但步长仍然默认为 1。

@@ -23,12 +23,12 @@ CREATE PUBLICATION pubname
 ## **示例**
 
 ```sql
--- MatrixOne Cloud的某个用户实例创建发布给MatrixOne Cloud的另外两个用户实例acc0和acc1, MatrixOne Cloud的用户实例名一般为类似5e18ef19_7f2a_4762_9626_f3444a529a87的数字。
+-- MatrixOne Cloud 的某个用户实例创建发布给 MatrixOne Cloud 的另外两个用户实例 acc0 和 acc1, MatrixOne Cloud 的用户实例名一般为类似 5e18ef19_7f2a_4762_9626_f3444a529a87 的数字。
 mysql> create database t;
 mysql> create publication pub1 database t account acc0,acc1;
 Query OK, 0 rows affected (0.01 sec)
 
--- MatrixOne Cloud的某个用户实例创建发布广播给整个MatrixOne Cloud同一region上的所有用户。
+-- MatrixOne Cloud 的某个用户实例创建发布广播给整个 MatrixOne Cloud 同一 region 上的所有用户。
 mysql> create database t;
 mysql> create publication pub1 database t;
 Query OK, 0 rows affected (0.01 sec)

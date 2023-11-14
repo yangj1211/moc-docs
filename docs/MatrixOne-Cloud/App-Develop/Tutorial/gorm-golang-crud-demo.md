@@ -93,7 +93,7 @@ func main() {
 
 ```
 
-你可能注意到了，以上的示例代码中使用到了 `url.QueryEscape()` 对 `username` 进行了编码，那是因为 `username` 中存在英文冒号`:`，这样做可以确保连接串中的参数值不会干扰连接串的结构。
+你可能注意到了，以上的示例代码中使用到了 `url.QueryEscape()` 对 `username` 进行了编码，那是因为 `username` 中存在英文冒号 `:`，这样做可以确保连接串中的参数值不会干扰连接串的结构。
 
 你可以取消注释 ```Logger: logger.Default.LogMode(logger.Info)``` 以把转化后的 ```SQL``` 输出出来。
 打开终端，使用以下代码运行此 *go* 文件：
