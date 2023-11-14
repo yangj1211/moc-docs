@@ -65,10 +65,10 @@
 
 | 名称 | 描述|
 |---|-----|
-| [CASE](flow-control-functions/case-when.md) | Case 运算符 |
-| [IF()](flow-control-functions/function_if.md) | If/else 语句 |
-| [IFNULL()](flow-control-functions/function_ifnull.md) | If null/else 语句 |
-| [NULLIF()](flow-control-functions/function_nullif.md) | expr1 = expr2 时返回 NULL |
+| [CASE](flow-control-functions/case-when.md) | CASE WHEN 语句 |
+| [IF()](flow-control-functions/function_if.md) | If 条件判断语句 |
+| [IFNULL()](flow-control-functions/function_ifnull.md) | If 非空条件判断语句 |
+| [NULLIF()](flow-control-functions/function_nullif.md) | expr1 = expr2 时返回 NULL，否则返回 expr1 |
 
 ## [**逻辑运算符**](logical-operators/logical-operators-overview.md)
 
