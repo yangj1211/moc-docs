@@ -351,8 +351,8 @@ nav:
             - TIMESTAMP(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/timestamp.md
             - TIMESTAMPDIFF(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/timestampdiff.md
             - TO_DATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-date.md
-            - TO_DAYS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-seconds.md
-            - TO_SECONDS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-days.md
+            - TO_DAYS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-days.md
+            - TO_SECONDS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-seconds.md
             - UNIX_TIMESTAMP: MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/unix-timestamp.md
             - UTC_TIMESTAMP(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/utc-timestamp.md
             - WEEK(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/week.md
