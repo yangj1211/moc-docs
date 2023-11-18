@@ -4,7 +4,7 @@ MarixOne Cloud 为用户提供了实例间数据快速共享的功能，用户�
 
 ## 发布订阅
 
-数据库的发布订阅（Publish-Subscribe，简称 Pub/Sub）是一种消息传递模式，其中**发布者**将消息发送给一个或多个**订阅者**，而**订阅者**则接收并处理该消息。在这种模式下，发布者和订阅者之间是松耦合的，它们之间不需要直接通信，因此可以提高应用程序的可扩展性和灵活性。
+数据库的发布订阅（Publish-Subscribe，简称 Pub/Sub）是一种消息传递模式，其中**发布者**将消息发送给一个或多个**订阅者**，而**订阅者**则接收并处理该消息。在这种模式下，发布者和订阅者之间是松耦合的，它们之间不需要直接通信，因此可以提高应用程序的可扩展性和灵活性。在MarixOne Cloud中发布者和订阅者都是MarixOne Cloud上的实例。
 
 在数据库中，发布订阅功能通常被用于实时数据更新、缓存同步、业务事件通知等场景。例如，当数据库中某个表的数据发生变化时，可以通过发布订阅功能实时通知订阅者，从而实现实时数据同步和处理。另外，也可以通过发布订阅功能来实现业务事件的通知，例如某个订单被取消、某个库存数量不足等等。
 
@@ -62,143 +62,184 @@ MarixOne Cloud 为用户提供了实例间数据快速共享的功能，用户�
 
 ### 发布订阅示例
 
-![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/pub-sub/example-zh.png)
+<!-- ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/pub-sub/example-zh.png) -->
 
-本章节将给出一个示例，介绍当前在 MatrixOne 集群中，存在 3 个实例，sys、acc1 与 acc2，按照操作顺序对三个实例进行操作：
+需要注意的是，你的实例ID可以通过Mysql连接串来获得，若你还未获得，[点此获取 MarixOne Cloud 实例的连接命令](../Instance-Mgmt/create-instance.md)。
 
-1. **发布者**：sys 实例创建数据库 sub1 与表 t1，并发布 pub1：
+你会获得类似这样的Mysql连接串：
+```bash
+mysql -h freetier-01.cn-hangzhou.cluster.matrixonecloud.cn -P 6001 
+-u 6d966d73_a195_437e_88f8_7f75b3cv6490:admin:accountadmin  -p
+```
+参数 -u 后面的字符串`6d966d73_a195_437e_88f8_7f75b3cv6490:admin:accountadmin` 是完整的用户名，其中以`:`为分隔符的第一段`6d966d73_a195_437e_88f8_7f75b3cv6490`即为你的实例ID。
 
-    ```sql
-    create database sub1;
-    create table sub1.t1(a int,b int);
-    create publication pub1 database sub;
+MarixOne Cloud中实例ID是无规律的字符串，以下的示例中为了方便描述，我们将使用 instance_A、instance_B 等作为替代，复制代码使用时请注意修改。
+
+下面将给出一些示例，介绍当前在 MatrixOne 集群中，发布订阅的操作和权限：
+
+#### 发布订阅数据库
+
+1. **发布者**: 实例 instance_A 创建数据库 mall 与表 customer 并发布此数据库为 pub_mall:
+
+    ```mysql
+    -- instance_A
+    create database mall;
+    CREATE TABLE mall.customer (
+    customer_id INT,
+    customer_name VARCHAR(255)
+    );
+    create publication pub_mall database mall;
     ```
 
-2. **订阅者**：acc1 和 acc2 都创建订阅库 syssub1，于是得到共享的数据表 t1：
+2. **订阅者**: 实例 instance_B 和 实例 instance_C 都创建订阅库 sub_mall （订阅自 instance_A 的 pub_mall），于是得到 instance_A 数据库 mall 中的所有数据：
 
-    ```sql
-    -- acc1 和 acc2 创建订阅库的 sql 语句一致，此处不做赘述
-    create database syssub1 from sys publication pub1;
-    use syssub1;
+    ```mysql
+    -- instance_B && instance_C 
+    create database sub_mall from instance_A publication pub_mall;
+    use sub_mall;
     show tables;
     mysql> show tables;
     +--------------------+
-    | Tables_in_syssub1  |
+    | Tables_in_sub_mall |
     +--------------------+
-    | t1                 |
+    | customer           |
     +--------------------+
-    2 rows in set (0.02 sec)
+    1 row in set (0.11 sec)
     ```
 
-3. **发布者**：sys 实例创建数据表 t2：
+#### 订阅后数据同步更新
 
-    ```sql
-    create table sub1.t2(a text);
+1. **发布者**: instance_A 实例创建数据表 orders：
+
+    ```mysql
+    -- instance_A
+    CREATE TABLE mall.orders (
+    order_id INT,
+    order_date DATE
+    );
     ```
 
-4. **订阅者**：acc1 和 acc2 得到共享的数据表 t1 和 t2：
+2. **订阅者**: 已经订阅 数据库 mall 的 instance_B 和 instance_C 得到更新的数据表orders:
 
-    ```sql
+    ```mysql
+    -- instance_B && instance_C 
+    use sub_mall;
     show tables;
     +--------------------+
-    | Tables_in_syssub1  |
+    | Tables_in_sub_mall |
     +--------------------+
-    | t1                 |
+    | customer           |
+    | orders             |
     +--------------------+
-    | t2                 |
-    +--------------------+
-    2 rows in set (0.02 sec)
+    2 rows in set (0.09 sec)        
     ```
 
-5. **发布者**：sys 实例创建数据库 sub2 与表 t2，并发布 pub2 给实例 acc1 和 acc3：
+#### 发布者可指定有限订阅者
 
-    ```sql
-    create database sub2;
-    create table sub2.t1(a float);
-    create publication pub2 database sub2 account acc1,acc3;
+5. **发布者**: 实例 instance_A 创建数据库 school 与表 student ，并发布 pub_school 给实例 instance_B 和 instance_D:
+
+    ```mysql
+    -- instance_A
+    create database school;
+    CREATE TABLE school.student (
+    student_id INT,
+    student_name VARCHAR(255)
+    );
+    create publication pub_school database school account instance_B,instance_D;
     ```
 
-6. **订阅者**：acc1 和 acc2 都创建订阅库 syssub2，acc1 得到共享的数据表 t1；acc2 创建订阅库 syssub2 失败：
+6. **订阅者**: instance_B 和 instance_C 都创建订阅库 sub_school （订阅自 instance_A 的 pub_school ），instance_B订阅成功并得到数据，instance_C 订阅失败:
 
-    - acc1
-
-    ```sql
-    create database syssub2 from sys publication pub2;
-    use syssub2;
-    mysql> show tables;
-    +--------------------+
-    | Tables_in_syssub2  |
-    +--------------------+
-    | t1                 |
-    +--------------------+
-    2 rows in set (0.02 sec)
+    ```mysql
+    -- instance_B
+    create database sub_school from instance_A publication pub_school;
+    use sub_school;
+    show tables;
+    +----------------------+
+    | Tables_in_sub_school |
+    +----------------------+
+    | student              |
+    +----------------------+
+    1 row in set (0.11 sec)                 
     ```
 
-    - acc2
-
-    ```sql
-    create database syssub2 from sys publication pub2;
-    > ERROR 20101 (HY000): internal error: the account acc3 is not allowed to subscribe the publication pub2
+    ```mysql
+    -- instance_C
+    create database sub_school from instance_A publication pub_school;
+    > ERROR 20101 (HY000): internal error: the account instance_C is not allowed to subscribe the publication pub_school
     ```
 
-7. **发布者**：sys 实例修改发布 pub2 给全部实例：
+#### 发布者可发布给全体
 
-    ```sql
-    alter publication pub2 account all;
+7. **发布者**: instance_A 实例修改发布 pub_school 给全部实例：
+
+    ```mysql
+    -- instance_A
+    alter publication pub_school account all;
     ```
 
-8. **订阅者**：acc2 创建订阅库 syssub2 成功，得到共享的数据表 t1：
+8. **订阅者**: instance_C 创建订阅库 sub_school 成功，得到共享的数据表 student：
 
-    ```sql
-    create database syssub2 from sys publication pub2;
-    use syssub2;
-    mysql> show tables;
+    ```mysql
+    -- instance_C
+    create database sub_school from instance_A publication pub_school;
+    use sub_school;
+    show tables;
+    +----------------------+
+    | Tables_in_sub_school |
+    +----------------------+
+    | student              |
+    +----------------------+
+    1 row in set (0.11 sec)
+    ```
+
+#### 发布者可删除已发布的发布对象，订阅者随即无法连接相关的订阅对象，但是可以删除
+
+9. **发布者**: instance_A 实例删除发布 pub_mall:
+
+    ```mysql
+    -- instance_A
+    drop publication pub_mall;
+    ```
+
+10. **订阅者**: instance_B 连接 sub_mall 失败：
+
+    ```mysql
+    -- instance_B
+    use sub_mall;
+    ERROR 20101 (HY000): internal error: there is no publication pub_mall
+    ```
+
+11. **订阅者**: instance_C 删除 sub_mall:
+
+    ```mysql
+    -- instance_C
+    drop database sub_mall;
+    ```
+
+#### 发布者重新发布已经删除的发布对象，之前的订阅者可以重新连接订阅对象
+
+12. **发布者**: instance_A 实例重新创建 pub_mall:
+
+    ```mysql
+    -- instance_A
+    create publication pub_mall database mall;
+    ```
+
+13. **订阅者**: instance_B 连接 sub_mall 成功：
+
+    ```mysql
+    -- instance_B
+    use sub_mall;
+    show tables;
     +--------------------+
-    | Tables_in_syssub2  |
+    | Tables_in_sub_mall |
     +--------------------+
-    | t1                 |
+    | customer           |
+    | orders             |
     +--------------------+
-    2 rows in set (0.02 sec)
+    2 rows in set (0.21 sec)
     ```
-
-9. **发布者**：sys 实例删除发布 pub1：
-
-    ```sql
-    drop publication pub1;
-    ```
-
-10. **订阅者**：acc1 连接 syspub1 失败：
-
-     ```sql
-     use syssub1;
-     ERROR 20101 (HY000): internal error: there is no publication pub1
-     ```
-
-11. **订阅者**：acc2 删除 syspub1：
-
-     ```sql
-     drop database syssub1;
-     ```
-
-12. **发布者**：sys 实例重新创建 pub1：
-
-     ```sql
-     create publication pub1 database sub;
-     ```
-
-13. **订阅者**：acc1 连接 syspub1 成功：
-
-     ```sql
-     create database syssub1 from sys publication pub1;
-     use syssub1;
-     mysql> show tables;
-     +--------------------+
-     | Tables_in_syssub1  |
-     +--------------------+
-     | t1                 |
-     +--------------------+
-     2 rows in set (0.02 sec)
-     ```
 
 ## 参考文档
 
