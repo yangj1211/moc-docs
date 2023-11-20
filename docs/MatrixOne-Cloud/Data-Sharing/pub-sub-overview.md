@@ -4,7 +4,7 @@ MarixOne Cloud 为用户提供了实例间数据快速共享的功能，用户�
 
 ## 发布订阅
 
-数据库的发布订阅（Publish-Subscribe，简称 Pub/Sub）是一种消息传递模式，其中**发布者**将消息发送给一个或多个**订阅者**，而**订阅者**则接收并处理该消息。在这种模式下，发布者和订阅者之间是松耦合的，它们之间不需要直接通信，因此可以提高应用程序的可扩展性和灵活性。在MarixOne Cloud中发布者和订阅者都是MarixOne Cloud上的实例。
+数据库的发布订阅（Publish-Subscribe，简称 Pub/Sub）是一种消息传递模式，其中**发布者**将消息发送给一个或多个**订阅者**，而**订阅者**则接收并处理该消息。在这种模式下，发布者和订阅者之间是松耦合的，它们之间不需要直接通信，因此可以提高应用程序的可扩展性和灵活性。在 MarixOne Cloud 中发布者和订阅者都是 MarixOne Cloud 上的实例。
 
 在数据库中，发布订阅功能通常被用于实时数据更新、缓存同步、业务事件通知等场景。例如，当数据库中某个表的数据发生变化时，可以通过发布订阅功能实时通知订阅者，从而实现实时数据同步和处理。另外，也可以通过发布订阅功能来实现业务事件的通知，例如某个订单被取消、某个库存数量不足等等。
 
@@ -64,16 +64,18 @@ MarixOne Cloud 为用户提供了实例间数据快速共享的功能，用户�
 
 <!-- ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/pub-sub/example-zh.png) -->
 
-需要注意的是，你的实例ID可以通过Mysql连接串来获得，若你还未获得，[点此获取 MarixOne Cloud 实例的连接命令](../Instance-Mgmt/create-instance.md)。
+需要注意的是，你的实例 ID 可以通过 Mysql 连接串来获得，若你还未获得，[点此获取 MarixOne Cloud 实例的连接命令](../Instance-Mgmt/create-instance.md)。
 
-你会获得类似这样的Mysql连接串：
+你会获得类似这样的 Mysql 连接串：
+
 ```bash
 mysql -h freetier-01.cn-hangzhou.cluster.matrixonecloud.cn -P 6001 
 -u 6d966d73_a195_437e_88f8_7f75b3cv6490:admin:accountadmin  -p
 ```
-参数 -u 后面的字符串`6d966d73_a195_437e_88f8_7f75b3cv6490:admin:accountadmin` 是完整的用户名，其中以`:`为分隔符的第一段`6d966d73_a195_437e_88f8_7f75b3cv6490`即为你的实例ID。
 
-MarixOne Cloud中实例ID是无规律的字符串，以下的示例中为了方便描述，我们将使用 instance_A、instance_B 等作为替代，复制代码使用时请注意修改。
+参数 -u 后面的字符串 `6d966d73_a195_437e_88f8_7f75b3cv6490:admin:accountadmin` 是完整的用户名，其中以 `:` 为分隔符的第一段 `6d966d73_a195_437e_88f8_7f75b3cv6490` 即为你的实例 ID。
+
+MarixOne Cloud 中实例 ID 是无规律的字符串，以下的示例中为了方便描述，我们将使用 instance_A、instance_B 等作为替代，复制代码使用时请注意修改。
 
 下面将给出一些示例，介绍当前在 MatrixOne 集群中，发布订阅的操作和权限：
 
@@ -91,7 +93,7 @@ MarixOne Cloud中实例ID是无规律的字符串，以下的示例中为了方�
     create publication pub_mall database mall;
     ```
 
-2. **订阅者**: 实例 instance_B 和 实例 instance_C 都创建订阅库 sub_mall （订阅自 instance_A 的 pub_mall），于是得到 instance_A 数据库 mall 中的所有数据：
+2. **订阅者**: 实例 instance_B 和实例 instance_C 都创建订阅库 sub_mall（订阅自 instance_A 的 pub_mall），于是得到 instance_A 数据库 mall 中的所有数据：
 
     ```mysql
     -- instance_B && instance_C 
@@ -119,7 +121,7 @@ MarixOne Cloud中实例ID是无规律的字符串，以下的示例中为了方�
     );
     ```
 
-2. **订阅者**: 已经订阅 数据库 mall 的 instance_B 和 instance_C 得到更新的数据表orders:
+2. **订阅者**: 已经订阅数据库 mall 的 instance_B 和 instance_C 得到更新的数据表 orders:
 
     ```mysql
     -- instance_B && instance_C 
@@ -136,7 +138,7 @@ MarixOne Cloud中实例ID是无规律的字符串，以下的示例中为了方�
 
 #### 发布者可指定有限订阅者
 
-5. **发布者**: 实例 instance_A 创建数据库 school 与表 student ，并发布 pub_school 给实例 instance_B 和 instance_D:
+5. **发布者**: 实例 instance_A 创建数据库 school 与表 student，并发布 pub_school 给实例 instance_B 和 instance_D:
 
     ```mysql
     -- instance_A
@@ -148,7 +150,7 @@ MarixOne Cloud中实例ID是无规律的字符串，以下的示例中为了方�
     create publication pub_school database school account instance_B,instance_D;
     ```
 
-6. **订阅者**: instance_B 和 instance_C 都创建订阅库 sub_school （订阅自 instance_A 的 pub_school ），instance_B订阅成功并得到数据，instance_C 订阅失败:
+6. **订阅者**: instance_B 和 instance_C 都创建订阅库 sub_school（订阅自 instance_A 的 pub_school），instance_B 订阅成功并得到数据，instance_C 订阅失败：
 
     ```mysql
     -- instance_B
@@ -240,6 +242,75 @@ MarixOne Cloud中实例ID是无规律的字符串，以下的示例中为了方�
     +--------------------+
     2 rows in set (0.21 sec)
     ```
+
+## 快速复制订阅对象中的数据
+
+由于订阅者对订阅对象仅有读取权限，订阅者无法直接操作订阅对象，但在一些情况下，订阅者需要对订阅对象中的数据进行进一步的操作，订阅者可以使用 `INSERT INTO SELECT` 进行订阅对象的快速复制。
+
+``INSERT INTO SELECT`` 语句从一个表复制数据，然后把数据插入到一个已存在的表中。且目标表中任何已存在的行都不会受影响。
+
+其语法结构如下：
+
+```
+INSERT INTO table2 (column1, column2, column3, ...)
+SELECT column1, column2, column3, ...
+FROM table1
+WHERE condition;
+```
+
+### INSERT INTO SELECT 的示例：快速复制数据表中全部数据
+
+接着上面的示例，下面将给出复制数据表 mall.customer 中的所有数据。
+
+1. instance_B 可以使用 `show create table` 语句快速查看原先的表结构：
+
+    ```mysql
+    -- instance_B
+    mysql> show create table sub_mall.customer;
+    +----------+-------------------------------------------------------------------------------------------------------+
+    | Table    | Create Table                                                                                          |
+    +----------+-------------------------------------------------------------------------------------------------------+
+    | customer | CREATE TABLE `customer` (
+    `customer_id` INT DEFAULT NULL,
+    `customer_name` VARCHAR(255) DEFAULT NULL
+    ) |
+    +----------+-------------------------------------------------------------------------------------------------------+
+    1 row in set (0.15 sec)
+    ```
+
+2. 首先创建自己的数据库和表结构：
+
+    ```mysql
+    create my_mall;
+    use my_mall;
+    CREATE TABLE `customer` (
+    `customer_id` INT DEFAULT NULL,
+    `customer_name` VARCHAR(255) DEFAULT NULL
+    );
+    ```
+
+3. 使用 `INSERT INTO SELECT` 复制所有数据：
+
+    ```mysql
+    INSERT INTO customer SELECT * from sub_mall.customer;
+    ```
+
+4. 查看数据已经全部复制成功：
+
+    ```mysql
+    select * from my_mall.customer;
+    +-------------+---------------+
+    | customer_id | customer_name |
+    +-------------+---------------+
+    |           1 | John          |
+    |           2 | Alice         |
+    |           3 | Bob           |
+    |           4 | Emma          |
+    +-------------+---------------+
+    4 rows in set (0.30 sec)
+    ```
+
+对于更多复杂的操作，你可以根据以上的语法结构自行调整，复制或生成你需要的数据。
 
 ## 参考文档
 
