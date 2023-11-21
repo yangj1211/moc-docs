@@ -6,7 +6,7 @@
 
 MatrixOne Cloud 的架构如下：
 
-![TDengine Cloud 私网连接架构](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/priveteLink-connectInstance-arch.jpg)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/priveteLink-connectInstance-arch.jpg)
 
 有关阿里云私网连接（PrivateLink）概念的更多详细信息，请参阅以下文档：
 
