@@ -43,6 +43,7 @@ nav:
       - 连接到 MatrixOne Cloud:
         - 客户端工具连接: MatrixOne-Cloud/App-Develop/connect-mo/database-client-tools.md
         - 使用 Web 页面连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-mo-with-web.md
+        - 私网连接(privateLink): MatrixOne-Cloud/App-Develop/connect-mo/private-link.md
         - Java 连接:
           - JDBC 连接: MatrixOne-Cloud/App-Develop/connect-mo/java-connect-to-matrixone/connect-mo-with-jdbc.md
           - Java ORMs 连接: MatrixOne-Cloud/App-Develop/connect-mo/java-connect-to-matrixone/connect-mo-with-orm.md
