@@ -19,7 +19,7 @@ python3 -V
 
 ## 使用 pymysql 工具连接 MatrixOne Cloud 服务
 
-PyMySQL 是一个纯 Python MySQL 客户端库。
+PyMySQL 是一个 Python 的 MySQL 客户端库。
 
 1. 下载安装 pymysql 和 cryptography 工具：
 
