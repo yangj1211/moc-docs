@@ -26,7 +26,7 @@ jobs:
           COMMIT_ID=$(git rev-parse HEAD)
           SHORT_COMMIT_ID=$(git rev-parse --short HEAD)
           ACR_REGISTRY=registry.cn-hangzhou.aliyuncs.com
-          ACR_NAMESPACE=ack-cos
+          ACR_NAMESPACE=mocloud
           ACR_IMAGE_NAME=matrixonecloud-docs.cn
           ACR_IMAGE_TAG=${{ inputs.branch }}_${COMMIT_ID}
           # Set output parameters.
