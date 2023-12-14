@@ -439,6 +439,8 @@ nav:
     - 常见问题:
         - SQL 常见问题: MatrixOne-Cloud/FAQs/sql-faqs.md
         - MatrixOne Cloud 常见问题: MatrixOne-Cloud/FAQs/FAQ-Product.md
+    - 版本发布纪要:
+        - '2023': MatrixOne-Cloud/Release-Notes/2023.md
     - 技术支持: MatrixOne-Cloud/tech-support.md
     - 术语表: MatrixOne-Cloud/glossary.md
   - MatrixOne: https://docs.matrixorigin.cn/latest/
