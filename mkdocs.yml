@@ -32,7 +32,7 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 nav:
-  - MatrixOne-Cloud:
+  - MatrixOne Cloud:
     - 主页: README.md
     - 关于 MatrixOne Cloud:
       - MatrixOne Cloud 简介: MatrixOne-Cloud/Overview/matrixonecloud-introduction.md
@@ -441,3 +441,4 @@ nav:
         - MatrixOne Cloud 常见问题: MatrixOne-Cloud/FAQs/FAQ-Product.md
     - 技术支持: MatrixOne-Cloud/tech-support.md
     - 术语表: MatrixOne-Cloud/glossary.md
+  - MatrixOne: https://docs.matrixorigin.cn/latest/
