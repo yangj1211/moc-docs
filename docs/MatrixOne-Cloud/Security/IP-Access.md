@@ -6,16 +6,19 @@
 
 ## 如何设置 IP 白名单
 
-以下是在 MatrixOne Cloud 中开启 IP 白名单的步骤：
+以下是在 MatrixOne Cloud 中设置 IP 白名单的步骤：
 
-1. 使用 MatrixOne Cloud 帐户登录到 MatrixOne Cloud 控制台。
+**实例创建时**
 
-2. 在控制台中，选择并点击进入你要设置 IP 白名单的数据库实例。
+- 使用 MatrixOne Cloud 帐户登录到 MatrixOne Cloud 控制台
+- 点击右上角 **+创建实例**  
+- 在网络策略处选择**允许指定的 IP 访问**，点击添加本地公网 IP，可自动填充，点击 **+ 添加新的 IP**，可添加 IP 白名单
 
-3. 点击进入 **Network Policy > IP Access**，点击 **Edit**。
+**实例创建后**
 
-4. 在弹窗中选择 **Access restriction method**，选择 **Access from spcified IP Address** 前的复选框，可以添加 IP 白名单。
-
-5. 将新的 IP 地址到白名单中后，点击 **Submit**，添加成功。
+- 使用 MatrixOne Cloud 帐户登录到 MatrixOne Cloud 控制台。
+- 在控制台中，选择并点击进入你要设置 IP 白名单的数据库实例。
+- 点击进入**网络策略 > 编辑**
+- 在弹框中选择**允许指定的 IP 访问**，点击**添加本地公网 IP**，可自动填充，点击 **+ 添加新的 IP**，可添加 IP 白名单，也可对已添加的 IP 白名单进行删除或者修改操作。
 
 通过开启 IP 白名单，确保只有受信任的 IP 地址能够访问数据库服务器。请谨慎配置 IP 白名单，并定期审查和更新允许访问的 IP 地址，以保持数据库的安全性。
