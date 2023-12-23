@@ -7,8 +7,10 @@
 Load Data Local 命令是常用的数据导入方式，MatrixOne 实例支持使用 Load Data Local 命令从客户端所在的本地文件系统批量导入 csv 文件或 jsonline 文件。若需使用本地文件导入命令，需要在数据文件所在的服务器上启动客户端连接 MatrixOne Cloud 实例，示例如下：
 
 ```sql
-mysql -h moc.cluster.matrixonecloud.cn -P 6001 -u a123456b_78cd_9e12_fg34_abcd5d6789ef:admin:accountadmin  -p
+mysql -h <host> -P 6001 -u <user_name>  -p --local-infile
 ```
+
+**注意**：如果需要使用本地文件导入，需要在连接 MatrixOne 实例时加上后缀 --local-infile
 
 ### 导入 csv 文件
 
