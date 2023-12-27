@@ -70,21 +70,19 @@ MarixOne Cloud 为用户提供了实例间数据快速共享的功能，用户�
 
 ```bash
 mysql -h freetier-01.cn-hangzhou.cluster.matrixonecloud.cn -P 6001 
--u 6d966d73_a195_437e_88f8_7f75b3cv6490:admin:accountadmin  -p
+-u 499575b7_4b78_403b_8356_ebd767dcxxxx:admin:accountadmin  -p
 ```
 
-参数 -u 后面的字符串 `6d966d73_a195_437e_88f8_7f75b3cv6490:admin:accountadmin` 是完整的用户名，其中以 `:` 为分隔符的第一段 `6d966d73_a195_437e_88f8_7f75b3cv6490` 即为你的实例 ID。
-
-MarixOne Cloud 中实例 ID 是无规律的字符串，以下的示例中为了方便描述，我们将使用 instance_A、instance_B 等作为替代，复制代码使用时请注意修改。
+参数 -u 后面的字符串 `499575b7_4b78_403b_8356_ebd767dcxxxx:admin:accountadmin` 是完整的用户名，其中以 `:` 为分隔符的第一段 `499575b7_4b78_403b_8356_ebd767dcxxx` 即为你的实例 ID。
 
 下面将给出一些示例，介绍当前在 MatrixOne 集群中，发布订阅的操作和权限：
 
 #### 发布订阅数据库
 
-1. **发布者**: 实例 instance_A 创建数据库 mall 与表 customer 并发布此数据库为 pub_mall:
+1. **发布者**: 实例 A 创建数据库 mall 与表 customer 并发布此数据库为 pub_mall:
 
     ```mysql
-    -- instance_A
+    -- 实例 A
     create database mall;
     CREATE TABLE mall.customer (
     customer_id INT,
@@ -93,11 +91,11 @@ MarixOne Cloud 中实例 ID 是无规律的字符串，以下的示例中为了�
     create publication pub_mall database mall;
     ```
 
-2. **订阅者**: 实例 instance_B 和实例 instance_C 都创建订阅库 sub_mall（订阅自 instance_A 的 pub_mall），于是得到 instance_A 数据库 mall 中的所有数据：
+2. **订阅者**: 实例 B 和实例 C 都创建订阅库 sub_mall（订阅自实例 A 的 pub_mall），于是得到实例 A 数据库 mall 中的所有数据：
 
     ```mysql
-    -- instance_B && instance_C 
-    create database sub_mall from instance_A publication pub_mall;
+    -- 实例 B && 实例 C 
+    create database sub_mall from 65758cd2_b40b_4729_b3e4_1959137fxxxx publication pub_mall;
     use sub_mall;
     show tables;
     mysql> show tables;
@@ -111,20 +109,20 @@ MarixOne Cloud 中实例 ID 是无规律的字符串，以下的示例中为了�
 
 #### 订阅后数据同步更新
 
-1. **发布者**: instance_A 实例创建数据表 orders：
+1. **发布者**: 实例 A 创建数据表 orders：
 
     ```mysql
-    -- instance_A
+    --  实例 A
     CREATE TABLE mall.orders (
     order_id INT,
     order_date DATE
     );
     ```
 
-2. **订阅者**: 已经订阅数据库 mall 的 instance_B 和 instance_C 得到更新的数据表 orders:
+2. **订阅者**: 已经订阅数据库 mall 的实例 B 和实例 C 得到更新的数据表 orders:
 
     ```mysql
-    -- instance_B && instance_C 
+    --  实例 B &&  实例 C
     use sub_mall;
     show tables;
     +--------------------+
@@ -138,23 +136,23 @@ MarixOne Cloud 中实例 ID 是无规律的字符串，以下的示例中为了�
 
 #### 发布者可指定有限订阅者
 
-5. **发布者**: 实例 instance_A 创建数据库 school 与表 student，并发布 pub_school 给实例 instance_B 和 instance_D:
+1. **发布者**: 实例 A 创建数据库 school 与表 student，并发布 pub_school 给实例 B 和实例 D:
 
     ```mysql
-    -- instance_A
+    --  实例 A
     create database school;
     CREATE TABLE school.student (
     student_id INT,
     student_name VARCHAR(255)
     );
-    create publication pub_school database school account instance_B,instance_D;
+    create publication pub_school database school account 499575b7_4b78_403b_8356_ebd767dcxxxx,abf2eb89_faf1_40fd_b24c_19bed148xxxx;
     ```
 
-6. **订阅者**: instance_B 和 instance_C 都创建订阅库 sub_school（订阅自 instance_A 的 pub_school），instance_B 订阅成功并得到数据，instance_C 订阅失败：
+2. **订阅者**: 实例 B 和实例 C 都创建订阅库 sub_school（订阅自实例 A 的 pub_school），实例 B 订阅成功并得到数据，实例 C 订阅失败：
 
     ```mysql
-    -- instance_B
-    create database sub_school from instance_A publication pub_school;
+    -- 实例 B 
+    create database sub_school from 65758cd2_b40b_4729_b3e4_1959137fxxxx publication pub_school;
     use sub_school;
     show tables;
     +----------------------+
@@ -166,25 +164,25 @@ MarixOne Cloud 中实例 ID 是无规律的字符串，以下的示例中为了�
     ```
 
     ```mysql
-    -- instance_C
-    create database sub_school from instance_A publication pub_school;
-    > ERROR 20101 (HY000): internal error: the account instance_C is not allowed to subscribe the publication pub_school
+    -- 实例 C
+    create database sub_school from 65758cd2_b40b_4729_b3e4_1959137fxxxx publication pub_school;
+    > ERROR 20101 (HY000): internal error: the account 实例 C is not allowed to subscribe the publication pub_school
     ```
 
 #### 发布者可发布给全体
 
-7. **发布者**: instance_A 实例修改发布 pub_school 给全部实例：
+1. **发布者**: 实例 A 修改发布 pub_school 给全部实例：
 
     ```mysql
-    -- instance_A
+    -- 实例 A
     alter publication pub_school account all;
     ```
 
-8. **订阅者**: instance_C 创建订阅库 sub_school 成功，得到共享的数据表 student：
+2. **订阅者**: 实例 C 创建订阅库 sub_school 成功，得到共享的数据表 student：
 
     ```mysql
-    -- instance_C
-    create database sub_school from instance_A publication pub_school;
+    -- 实例 C
+    create database sub_school from 65758cd2_b40b_4729_b3e4_1959137fxxxx publication pub_school;
     use sub_school;
     show tables;
     +----------------------+
@@ -197,41 +195,41 @@ MarixOne Cloud 中实例 ID 是无规律的字符串，以下的示例中为了�
 
 #### 发布者可删除已发布的发布对象，订阅者随即无法连接相关的订阅对象，但是可以删除
 
-9. **发布者**: instance_A 实例删除发布 pub_mall:
+1. **发布者**: 实例 A 删除发布 pub_mall:
 
     ```mysql
-    -- instance_A
+    -- 实例 A
     drop publication pub_mall;
     ```
 
-10. **订阅者**: instance_B 连接 sub_mall 失败：
+2. **订阅者**: 实例 B 连接 sub_mall 失败：
 
     ```mysql
-    -- instance_B
+    -- 实例 B 
     use sub_mall;
     ERROR 20101 (HY000): internal error: there is no publication pub_mall
     ```
 
-11. **订阅者**: instance_C 删除 sub_mall:
+3. **订阅者**: 实例 C 删除 sub_mall:
 
     ```mysql
-    -- instance_C
+    -- 实例 C 
     drop database sub_mall;
     ```
 
 #### 发布者重新发布已经删除的发布对象，之前的订阅者可以重新连接订阅对象
 
-12. **发布者**: instance_A 实例重新创建 pub_mall:
+1. **发布者**: 实例 A 重新创建 pub_mall:
 
     ```mysql
-    -- instance_A
+    -- 实例 A
     create publication pub_mall database mall;
     ```
 
-13. **订阅者**: instance_B 连接 sub_mall 成功：
+2. **订阅者**: 实例 B 连接 sub_mall 成功：
 
     ```mysql
-    -- instance_B
+    -- 实例 B 
     use sub_mall;
     show tables;
     +--------------------+
@@ -242,6 +240,46 @@ MarixOne Cloud 中实例 ID 是无规律的字符串，以下的示例中为了�
     +--------------------+
     2 rows in set (0.21 sec)
     ```
+
+#### 发布者发布已删除发布对象的同名对象，之前的订阅者可以连接至新的订阅对象
+
+1. **发布者**: 实例 A 删除发布 pub_mall:
+
+    ```mysql
+    -- 实例 A
+    drop publication pub_mall;
+    ```
+
+2. **发布者**: 实例 A 创建数据库 mall2 与表 customer2:
+
+    ```mysql
+    -- 实例 A
+    create database mall2;
+    create table mall2.customer2 (customer_id INT,customer_name VARCHAR(255));
+    ```
+
+3. **发布者**: 实例 A 重新创建 pub_mall:
+
+    ```mysql
+    -- 实例 A
+    create publication pub_mall database mall2;
+    ```
+
+4. **订阅者**: 实例 B 连接 sub_mall 成功：
+
+    ```mysql
+    -- 实例 B 
+    use sub_mall;
+    show tables;
+    +--------------------+
+    | Tables_in_sub_mall |
+    +--------------------+
+    | customer2          |
+    +--------------------+
+    2 rows in set (0.21 sec)
+    ```
+
+可以看到，订阅者无需额外操作，即可连接至最新订阅对象。
 
 ## 快速复制订阅对象中的数据
 
@@ -262,10 +300,10 @@ WHERE condition;
 
 接着上面的示例，下面将给出复制数据表 mall.customer 中的所有数据。
 
-1. instance_B 可以使用 `show create table` 语句快速查看原先的表结构：
+1. 实例 A 可以使用 `show create table` 语句快速查看原先的表结构：
 
     ```mysql
-    -- instance_B
+    -- 实例 A
     mysql> show create table sub_mall.customer;
     +----------+-------------------------------------------------------------------------------------------------------+
     | Table    | Create Table                                                                                          |
