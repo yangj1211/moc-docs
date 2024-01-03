@@ -8,7 +8,7 @@ MO Cloud 采用了存算分离架构，使得计算节点可以根据需要自�
 
 MO Cloud 架构图如下所示：
 
-![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/overview/moc-arch.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/overview/moc_archit.png)
 
 ### 共享存储层
 
