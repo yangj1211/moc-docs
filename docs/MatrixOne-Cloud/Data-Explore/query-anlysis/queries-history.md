@@ -8,13 +8,21 @@
 
 2. 在 MatrixOne Cloud 数据库管理平台中，找到左侧菜单栏中的**查询**，然后选择**查询历史**模块。点击以进入 SQL 查询历史页面。
 
-   ![查询历史页面](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image-7.png)
+在此页面，您可以设置特定筛选条件，如数据库、状态、查询类型，以及更多的筛选条件，如 SQL 文本、执行时间、时间范围等，以缩小查询范围，快速定位到特定条件下的 SQL 查询记录。点击**搜索**按钮，以筛选出符合特定条件的查询记录列表。
 
-3. 在此页面，您可以设置特定筛选条件，如数据库、状态、查询类型，以及更多的筛选条件，如 SQL 文本、执行时间、时间范围等，以缩小查询范围，快速定位到特定条件下的 SQL 查询记录。点击**搜索**按钮，以筛选出符合特定条件的查询记录列表。
+   ![查询历史页面](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/src_history.png)
 
-4. Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行时间、状态、查询类型、开始时间。
+Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行时间、状态、查询类型、开始时间。
 
-如果您对查询类型的定义感兴趣，可以参考 [MatrixOne SQL 目录](https://docs.matrixorigin.cn/1.0.0-rc1/MatrixOne/Reference/SQL-Reference/Data-Definition-Language/create-database/)章节。
+在**SQL 文本**列您可以看到部分SQL前面会有"/ * x queries */"的标志，这是因为记录查询历史的表信息量较大。为了提高查询速度，我们将超轻量级的 tp sqls 按以下规则聚合记录：
+
+- 聚合周期为5s  
+- 聚合 SQL 的条件  
+    - 时间小于 200 ms 的 Insert、Update、Delete、Execute、Select语句  
+    - response_at（响应时间）在聚合周期内的 sql  
+    - sql_source_type：internal_sql(系统内部 SQL 请求)、cloud_nonuser_sql(云平台非用户语句)、external_sql(外部语句)  
+
+其中，符合条件的SQL语句聚合后会显示总的响应时间，"/ * x queries */"中的"x"指的是聚合的条数
 
 ## SQL 查询详情
 
