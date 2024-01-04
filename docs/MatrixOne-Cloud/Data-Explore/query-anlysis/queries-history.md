@@ -14,15 +14,15 @@
 
 Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行时间、状态、查询类型、开始时间。
 
-在**SQL 文本**列您可以看到部分SQL前面会有"/ * x queries */"的标志，这是因为记录查询历史的表信息量较大。为了提高查询速度，我们将超轻量级的 tp sqls 按以下规则聚合记录：
+在 **SQL 文本**列您可以看到部分 SQL 前面会有 "/ *x queries*/" 的标志，这是因为记录查询历史的表信息量较大。为了提高查询速度，我们将超轻量级的 tp sqls 按以下规则聚合记录：
 
-- 聚合周期为5s  
+- 聚合周期为 5s  
 - 聚合 SQL 的条件  
-    - 时间小于 200 ms 的 Insert、Update、Delete、Execute、Select语句  
+    - 时间小于 200 ms 的 Insert、Update、Delete、Execute、Select 语句  
     - response_at（响应时间）在聚合周期内的 sql  
-    - sql_source_type：internal_sql(系统内部 SQL 请求)、cloud_nonuser_sql(云平台非用户语句)、external_sql(外部语句)  
+    - sql_source_type：internal_sql (系统内部 SQL 请求)、cloud_nonuser_sql (云平台非用户语句)、external_sql (外部语句)  
 
-其中，字段**时长**为SQL语句聚合后总的响应时间，"/ * x queries */"中的"x"指的是聚合的条数
+其中，字段**时长**为 SQL 语句聚合后总的响应时间，"/ *x queries*/" 中的 "x" 指的是聚合的条数
 
 ## SQL 查询详情
 
