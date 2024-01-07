@@ -24,7 +24,7 @@
 
 在线 SQL 编辑器支持导入数据、库表查看和选择、SQL 语句编辑、在线执行、结果查看几项功能。
 
-### 1. 在线导入数据
+**在线导入数据**
 
 SQL 编辑器支持快速导入数据，启动数据分析。点击**导入数据**，即可启动导向式数据导入流程。
 
@@ -37,7 +37,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 
 更多数据导入方式介绍可以参照导入数据章节。
 
-### 2. 从 Database 中查看和选择库表
+**从 Database 中查看和选择库表**
 
 在查询编辑器中进行 SQL 语句编写过程中，开发者经常需要查看目标库表中的数据结构和数据类型，提升 SQL 语句编写的效率和准确性。
 
@@ -45,7 +45,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 
 在左侧 Database 区域，当前实例的数据库和数据表将以树形结构呈现，你可以详细查看各个数据库的表结构及各个数据表中的数据类型，同时也可以复制需要的数据库名、表名和列名，快速在编辑器中粘贴使用。
 
-### 3. 编辑和执行 SQL 查询
+**编辑和执行 SQL 查询**
 
 右侧 SQL 编辑区域上方的下拉列表用于数据库选择，你可以在下拉列表中查看和选择目前 SQL 查询使用的数据库。选择数据库后，SQL 语句中可以不包括 dbname 执行，相当于已执行 `use database` 语句。
 
@@ -63,9 +63,9 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 - 你可以在 SQL 执行过程中，手动停止或关闭 Query Tab, Query 都将终止。
   
 !!! note
-    在线 SQL 编辑器目前不支持事务语句，explain 语句，Load local 和 source 相关语句。
+    在线 SQL 编辑器目前不支持以下语句：[`explain`](../Reference/SQL-Reference/Other/Explain/explain.md)，[`Load data local`]( ../Migrate-Data/Load-Local-Data.md), [`source`](../App-Develop/import-data/bulk-load/using-source.md)，[`SELECT INTO...OUTFILE`](https://docs.matrixorigin.cn/1.1.0/MatrixOne/Develop/export-data/select-into-outfile/)和[事务]( ../App-Develop/Transactions/matrixone-transaction-overview/how-to-use.md)相关语句
 
-### 4. 执行结果查看
+**执行结果查看**
 
 右下侧查询结果区域可以查看当前查询的执行结果。若平台顺序执行了多条 SQL 语句，将分多个 Tab 展示和查看。
 
