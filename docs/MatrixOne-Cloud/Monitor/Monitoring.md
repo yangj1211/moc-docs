@@ -4,21 +4,23 @@
 
 ## 实例监控指标
 
-实例监控指标是服务于 MatrixOne Cloud 实例管理平台的运维人员的监控信息，包括：
+实例监控指标是服务于 MatrixOne Cloud 实例管理平台的运维人员的监控信息，您可以点击右上角的实例名列表来切换您想了解的实例信息，包括：平均连接数，CU 使用量和存储用量。对于 CU 和存储的使用信息您也可以直接点击实例界面您想了解的实例，跳转至实例详情中查看。
 
-![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitoring-1.png)
+<div align="center">
+<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitor-6.png width=80% heigth=80%/>
+</div>
 
-### 平均连接数
+- 平均连接数
 
 同时连接到实例的 Session 数。
 
-### CU 使用量
+- CU 使用量
 
-在统计周期内，CU 消耗的总量。
+在统计周期内，CU 消耗的总量。为确保准确性，CU 的使用量统计会有 6 分钟的延迟，因此最新的监控数据都是 0。例如您在 12:00 操作消耗的 CU，当前（12:00）会显示 CU 消耗量为 0，在 12:06 的时候刻度线 12:00 处才会呈现 CU 消耗的波动。
 
-### 存储用量
+- 存储用量
 
-在统计周期内，实例中数据存储的平均使用量。
+在统计周期内，实例中数据存储的平均使用量。存储的使用量每 15 分钟更新一次，体现的是 15 分钟之前的数据。曲线统计点的值是刻度时间段内采集点的平均值。
 
 ## 业务监控指标
 
