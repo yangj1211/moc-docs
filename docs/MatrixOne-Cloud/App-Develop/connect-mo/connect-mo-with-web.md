@@ -26,7 +26,7 @@ MatrixOne Cloud 支持使用 Web 页面访问数据库，我们将此访问平�
 create user u2 identified by '123456';
 ```
 
-- 租户中，在没有被赋予角色的情况下用户是不能做任何操作的。所以我们需要创建一个新的角色。
+- 在租户中，没有被赋予角色的情况下用户是不能做任何操作的。所以我们需要创建一个新的角色。
 
 ```sql
 create role if not exists role2;
