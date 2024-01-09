@@ -79,8 +79,10 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 
 ```
 ./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -db t -tbl t1 > t1.sql
-```
+```  
 
 ## 限制
 
 - `mo-dump` 仅支持导出单个数据库的备份，如果你有多个数据库需要备份，需要手动运行 `mo-dump` 多次。
+
+- `mo-dump` 仅支持导出属于用户自己的数据库，所以在发布订阅中，订阅端通过 `mo-dump` 导出订阅库的 sql 只有订阅语句。
