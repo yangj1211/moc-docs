@@ -106,6 +106,7 @@ nav:
     - 管理实例:
       - 创建实例: MatrixOne-Cloud/Instance-Mgmt/create-instance.md
       - 连接实例: MatrixOne-Cloud/Instance-Mgmt/connect-instance.md
+      - 登录实例: MatrixOne-Cloud/Instance-Mgmt/login-instance.md
       - 终止和恢复实例: MatrixOne-Cloud/Instance-Mgmt/terminate-recovery-instance.md
     - 数据共享: MatrixOne-Cloud/Data-Sharing/pub-sub-overview.md
     - 迁移和导入数据:
