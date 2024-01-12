@@ -14,9 +14,6 @@
 
 Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行时间、状态、查询类型、开始时间。
 
-!!! note
-    为了给用户更好的观测体验，对于非用户操作的 SQL 平台默认是不显示的，可在筛选条件中开启**非用户执行**选项来查看这部分 SQL 的详细信息。
-
 在 **SQL 文本**列您可以看到部分 SQL 前面会有 "/ *x queries*/" 的标志，这是因为记录查询历史的表信息量较大。为了提高查询速度，我们将超轻量级的 tp sqls 按以下规则聚合记录：
 
 - 聚合周期为 5s  
@@ -26,6 +23,10 @@ Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行�
     - sql_source_type：internal_sql (系统内部 SQL 请求)、cloud_nonuser_sql (云平台非用户语句)、external_sql (外部语句)  
 
 其中，字段**时长**为 SQL 语句聚合后总的响应时间，"/ *x queries*/" 中的 "x" 指的是聚合的条数
+
+作为 MatrixOne 的云上数据库管理平台，MatrixOne Cloud 为用户提供了数据库信息的界面化展示，在实例平台上的任何操作都会产生 SQL 从而消耗 CU。但是由于考虑到用户可能更关心业务方面的 SQL，为了给用户更好的观测体验，平台上非用户操作的 SQL（除了 SQL Editor 执行的 SQL）在查询历史中默认是不显示的。对于生产实例来说，平台上非用户操作产生的 CU 也是收费的，可在筛选项中开启**非用户执行**选项来查看这部分 SQL 的详细信息。
+
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/nouser.png)
 
 ## SQL 查询详情
 
