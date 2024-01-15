@@ -36,6 +36,6 @@
 
 ### 通过数据库管理平台连接
 
-MO Cloud 为每个实例提供了界面化的数据库管理平台，用户可以使用浏览器快速、高效地访问和监控数据库。更多详细信息请参考[使用 Web 页面连接](../App-Develop/connect-mo/connect-mo-with-web.md)。
+MO Cloud 为每个实例提供了界面化的数据库管理平台，用户可以使用浏览器快速、高效地访问和监控数据库。更多详细信息请参考[使用 Web 页面连接](../App-Develop/connect-mo/connect-mo-with-web.md)和[登录实例](../Instance-Mgmt/login-instance.md)。
 
 希望这些连接方式的指南能帮助您成功连接到 MatrixOne 实例。如果您有任何疑问或需要进一步的帮助，请查阅我们的文档或联系支持团队。

@@ -59,7 +59,7 @@
 - **用户名：**admin
 - **密码：**创建实例时设置的管理员密码
 
-如需使用普通用户登录，可参考[登录实例](../Instance-Mgmt/login-instance.md)。
+默认使用 admin 用户登录，如需使用普通用户登录，可参考[登录实例](../Instance-Mgmt/login-instance.md)。
 
 ## 运行样例数据
 
