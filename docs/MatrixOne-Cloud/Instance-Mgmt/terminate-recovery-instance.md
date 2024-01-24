@@ -22,41 +22,82 @@
 1. 选择要恢复的实例，然后点击**恢复**按钮。
 2. 在弹窗中确认，实例将在数秒后完全恢复正常状态。
 
-以下是不同实例状态下可进行的操作和其他相关操作：
+## 实例状态
 
-- **实例状态：创建中**
+在云平台中，不同的情况下实例会有不同的状态，而实例状态图标也会有所变化。以下是对不同实例状态下的描述和可进行的操作的说明：
+
+**实例状态：创建中**
+
   - 描述：创建实例中
   - 实例操作：无
   - 其他操作：无
 
-- **实例状态：可用**
+<div align="center">
+<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/instance-mgmt/create.png width=50% heigth=50%/>
+</div>
+
+**实例状态：可用**
+
   - 描述：正常运行中，可以提供服务
   - 实例操作：终止
   - 其他操作：连接、监控、实例详情、编辑消费限制
 
-- **实例状态：无效**
+<div align="center">
+<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/instance-mgmt/active.png width=50% heigth=50%/>
+</div>
+
+**实例状态：限制**
+
+  - 描述：在以下情况实例会呈现限制状态：
+      - 免费实例的 cu 或存储已用完，服务不可用，下月可用，推荐转生产实例。
+      - 生产实例消费已达限额且未开启服务保持，服务不可用。
+      - 生产实例消费已达限额且开启服务保持，服务保持低速运行。
+      - 账户余额不足，生产实例产生欠费情况，服务不可用。
+  - 实例操作：终止
+  - 其他操作：监控、实例详情、编辑限制
+
+<div align="center">
+<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/instance-mgmt/limit.png width=50% heigth=50%/>
+</div>
+
+**实例状态：无效**
+
   - 描述：实例状态异常，无法提供完整服务
   - 实例操作：终止
   - 其他操作：监控、实例详情、编辑限制
 
-- **实例状态：终止中**
+<div align="center">
+<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/instance-mgmt/inactive.png width=50% heigth=50%/>
+</div>
+
+**实例状态：终止中**
+
   - 描述：实例终止中
   - 实例操作：无
   - 其他操作：监控
 
-- **实例状态：恢复中**
-  - 描述：实例恢复中
-  - 实例操作：无
-  - 其他操作：监控
+<div align="center">
+<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/instance-mgmt/terminating.png width=50% heigth=50%/>
+</div>
 
-- **实例状态：升级中**
-  - 描述：实例正在升级中
-  - 实例操作：无
-  - 其他操作：连接、监控、实例详情、编辑消费限制
+**实例状态：已终止**
 
-- **实例状态：已终止**
   - 描述：实例终止
   - 实例操作：恢复
-  - 其他操作：监控
+  - 其他操作：无
+
+<div align="center">
+<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/instance-mgmt/termination.png width=50% heigth=50%/>
+</div>
+
+**实例状态：恢复中**
+
+  - 描述：实例恢复中
+  - 实例操作：无
+  - 其他操作：无
+
+<div align="center">
+<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/instance-mgmt/recoving.png width=50% heigth=50%/>
+</div>
 
 希望这些操作指南能够帮助您更好地管理和恢复 MatrixOne 实例。如有任何疑问或需要进一步的帮助，请继续查看我们的文档或联系支持团队。
