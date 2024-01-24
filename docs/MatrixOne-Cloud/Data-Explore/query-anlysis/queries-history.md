@@ -9,6 +9,8 @@
 2. 在 MatrixOne Cloud 数据库管理平台中，找到左侧菜单栏中的**查询**，然后选择**查询历史**模块。点击以进入 SQL 查询历史页面。
 
 在此页面，您可以设置特定筛选条件，如数据库、状态、查询类型，以及更多的筛选条件，如 SQL 文本、执行时间、时间范围等，以缩小查询范围，快速定位到特定条件下的 SQL 查询记录。点击**搜索**按钮，以筛选出符合特定条件的查询记录列表。
+!!! note
+    当开启 SQL 文本作为筛选条件时，请注意区分大小写。
 
    ![查询历史页面](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/src_history.png)
 
