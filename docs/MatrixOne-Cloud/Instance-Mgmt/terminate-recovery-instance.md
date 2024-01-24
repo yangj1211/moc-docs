@@ -54,7 +54,7 @@
       - 生产实例消费已达限额且开启服务保持，服务保持低速运行。
       - 账户余额不足，生产实例产生欠费情况，服务不可用。
   - 实例操作：终止
-  - 其他操作：监控、实例详情、编辑限制
+  - 其他操作：连接（仅在生产实例消费已达限额且开启服务保持时可操作），监控、实例详情、编辑限制
 
 <div align="center">
 <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/instance-mgmt/limit.png width=50% heigth=50%/>
