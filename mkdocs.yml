@@ -37,6 +37,7 @@ nav:
     - 关于 MatrixOne Cloud:
       - MatrixOne Cloud 简介: MatrixOne-Cloud/Overview/matrixonecloud-introduction.md
       - MySQL 兼容性: MatrixOne-Cloud/Overview/mysql-compatibility.md
+      - MOne 助手: MatrixOne-Cloud/Overview/mone-introduction.md
     - 快速开始:
       - 快速创建 MatrixOne Cloud（MO Cloud）实例: MatrixOne-Cloud/Get-Started/quickstart.md
     - 应用开发:
