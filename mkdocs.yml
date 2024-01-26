@@ -123,6 +123,11 @@ nav:
     - 监控:
       - 监控指标: MatrixOne-Cloud/Monitor/Monitoring.md
       - 监控数据: MatrixOne-Cloud/Monitor/Data-Monitoring.md
+    - 计费:
+      - 账户概览: MatrixOne-Cloud/Charging/account-overview.md
+      - 卡券管理: MatrixOne-Cloud/Charging/coupons-management.md
+      - 收支明细: MatrixOne-Cloud/Charging/revenue-expenditure-details.md
+      - 账单详情: MatrixOne-Cloud/Charging/bill-detail.md
     - 安全:
       - 身份访问控制: MatrixOne-Cloud/Security/Security-Permission-Overview.md
       - 网络访问控制:
