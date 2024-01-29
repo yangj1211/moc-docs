@@ -44,7 +44,6 @@ nav:
       - 连接到 MatrixOne Cloud:
         - 客户端工具连接: MatrixOne-Cloud/App-Develop/connect-mo/database-client-tools.md
         - 使用 Web 页面连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-mo-with-web.md
-        - 私网连接(privateLink): MatrixOne-Cloud/App-Develop/connect-mo/private-link.md
         - Java 连接:
           - JDBC 连接: MatrixOne-Cloud/App-Develop/connect-mo/java-connect-to-matrixone/connect-mo-with-jdbc.md
           - Java ORMs 连接: MatrixOne-Cloud/App-Develop/connect-mo/java-connect-to-matrixone/connect-mo-with-orm.md
@@ -129,6 +128,7 @@ nav:
       - 网络访问控制:
         - 设置 IP 白名单: MatrixOne-Cloud/Security/IP-Access.md
         - TLS 连接 MatrixOne: MatrixOne-Cloud/Security/TLS-introduction.md
+        - 私网连接: MatrixOne-Cloud/Security/private-link.md
       - 数据访问控制:
         - 基于角色的访问控制（RBAC）: MatrixOne-Cloud/Security/about-privilege-management.md
     - 参考手册:
