@@ -2,8 +2,6 @@
 
 ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/charing/revenue-1.png)
 
-- 交易渠道：包含对公转账、支付宝、现金可用余额。暂不支持通过支付宝进行交易。
-
 - 交易类型
     - 充值：对账户进行充值行为
     - 消费：实例消费产生
