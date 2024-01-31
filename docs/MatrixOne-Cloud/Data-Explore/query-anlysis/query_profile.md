@@ -1,6 +1,8 @@
 # 查询分析
 
 本篇文档将指导用户如何通过 MatrixOne Cloud 内置的查询分析（Query Profile）进行在线的 SQL 查询分析。也可以理解成，查询分析模块是将数据库中的 Explain，即解释详细执行计划的能力做成了可视化模块，通过可视化的方式向用户展示这条 SQL 的执行计划。
+!!! note
+    为了提高查询性能，小于 1s 的 SQL 不会被记录执行计划。
 
 ## 什么是执行计划
 
@@ -17,34 +19,67 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 !!! note
     使用 MySQL 客户端连接到 MatrixOne 时，为避免输出结果在终端中换行，可先执行 `pager less -S` 命令。执行命令后，新的 `EXPLAIN` 的输出结果不再换行，可按右箭头 **→** 键水平滚动阅读输出结果。
 
-## 在 SQL 编辑器中执行一条 Query
+## 在查询历史筛选 Query
 
-这里我们以系统自带的 TPCH10G 数据集为例，在 SQL 编辑器中执行 Q1，并展示 `查询分析` 界面上的执行计划如何展示。首先执行这条 SQL，如下图所示：
-![Execute Q1](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/queryprofile_execute_tpch.png)
+我们在查询历史中筛选大于 1s 的 SQL 文本，找到您想了解的 Query，这里我们以系统自带的 TPCH10G 数据集的 Q1 为例，如下图所示：
 
-## 在查询历史中找到这条 Query
-
-接下来我们在查询历史中找到这条 Query，如下图所示：
-
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/queryprofile_get_query.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history_1.png)
 
 ## 查看该 Query 的查询分析
 
 点击进入这条 Query 的查询详情界面，我们可以同时看到它的查询分析（Query Profile）界面，如下图所示：
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/queryprofile_queryprofile.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history_2.png)
 
 该界面展示了 TPCH Q1 的整个执行过程，总共分为了 4 个算子：表扫描 (Table Scan)，聚合 (Aggregate)，排序 (Sort) 及投影 (Project)。
 
-同时每一个小的执行步骤的方块上我们都表明了它的操作对象，执行细节及所消耗的 CPU 及内存资源。比如针对 Table Scan 算子，可以看到它的操作对象是 `mo_sample_data_tpch_sf10.lineitem` 这张表，同时这个操作消耗的 CPU 资源是 `1.6 core*s`, 即占用了 1 个 CPU 核 1.6 秒的时间。而内存则消耗了 `4.7GB`, 这些资源消耗即是我们计算 CU 消耗的基础。我们会根据一定的算法加总所有步骤所消耗的 CPU 和内存资源，即得到这条 Query 消耗的 CU 个数。
+箭头的方向代表了执行的步骤，首先我们会对 `mo_sample_data_tpch_sf10.lineitem` 这张表进行扫描 (Table Scan)，筛选出特定条件的数据，从图中可知道符合条件的数据为 `58,682,142` 行，这些数据作为下一个算子的输入，然后经过聚合 (Aggregate) 运算后输出 `4` 行，再对这 `4` 行数据根据指定字段进行排序 (Sort)，最后从表里选择你所要的列，即进行投影 (Project) 运算。
 
-另外从 Table Scan 算子到 Aggregate 算子中间有一个小箭头，这个箭头上会带有一个数字，这个数字代表的即为本算子输出的数据行数，在这张图里为 `58,682,142` 行，这些数据也是下一个算子的输入。
+我们可以看到，在每一个算子块上我们都表明了它的操作对象，执行细节及所消耗的 CPU 和内存资源。如 Table Scan 算子，我们可以看到它的操作对象是 `mo_sample_data_tpch_sf10.lineitem` 这张表，同时这个操作消耗的 CPU 资源是 `1.6 core*s`，内存则消耗了 `4.7GB`, 这些资源消耗即是我们计算 CU 消耗的基础。我们会根据一定的算法加总所有步骤所消耗的 CPU 和内存资源，即得到这条 Query 消耗的 CU 个数。
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/queryprofile_details.png)
+如果我们再选中点击 Table Scan 算子方块，我们将看到 Table Scan 算子执行的更多细节，如下图：
 
-如果我们再选中点击 Table Scan 算子方块，我们将看到 Table Scan 算子执行的更多细节。
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history_3.png)
 
-在该案例中我们可以看到 Table Scan 算子执行的过程中选中的是 18 个列中的 7 个 `（l_quantity, l_extendedprice, l_discount, l_tax, l_returnflag, l_linestatus, l_shipdate）`, 另外还包含了一个过滤的条件 `(lineitem.l_shipdate <= 1998-08-11)`。
+在该案例中我们可以看到 Table Scan 算子执行的过程中选中的是 18 个列中的 7 个 `（l_quantity, l_extendedprice, l_discount, l_tax, l_returnflag, l_linestatus, l_shipdate）`，另外还包含了一个过滤的条件 `(lineitem.l_shipdate <= 1998-08-11)`。
+
+## MatrixOne 的算子
+
+MatrixOne 目前拥有以下算子：
+
+| 算子名称                     | 算子含义                                                          |
+| ----------------------------| --------------------------------------------------------------- |
+| Values Scan	              | 处理值的扫描|
+| Table Scan	              | 从表中扫描数据|
+| Function Scan	              | 通过表函数生成数据|
+| External Scan	              | 处理外部的数据扫描|
+| Project	                  | 对数据进行投影运算|
+| Sink	                      | 发送数据到某个/些 pipeline|
+| Sink Scan                   | 从 pipeline 接收数据|
+| Recursive Scan	          | 递归读取数据|
+| Aggregate	                  | 对数据进行聚合|
+| Filter	                  | 对数据进行过滤|
+| Join	                      | 对数据进行连接运算|
+| Sample                      |	对数据进行抽样|
+| Sort	                      | 对数据进行排序|
+| Union	                      | 对两个或多个查询的结果集组合|
+| Union All	                  | 对两个或多个查询的结果集组合，包括重复行|
+| Window	                  | 对数据进行范围窗口计算|
+| Insert	                  | 对数据进行插入|
+| Delete	                  | 对数据进行删除|
+| Lock Operator	              | 对操作的数据上锁|
+| Intersect                   | 对两个或多个查询的都存在的行组合|
+| Intersect All	              | 对两个或多个查询的都存在的行组合，包括重复行|
+| Minus	                      | 比较两个查询的结果，返回存在于第一个查询而在第二个查询中不存在的行|
+| On Duplicate Key	          | 对重复的数据进行更新|
+| Pre Insert	              | 整理要写入的数据|
+| Pre Delete	              | 整理要删除的数据|
+| Pre Insert Unique	          | 整理要写入到唯一键隐藏表的数据|
+| Pre Insert 2nd Key	      | 整理要写入到次级索引隐藏表的数据|
+| Time window	              | 对数据进行时间窗口计算|
+| Fill	                      | 对数据进行填充|
+| Partition	                  | 对数据进行排序，并按值切分|
+| Fuzzy filter	              | 对写入/更新的数据进行去重|
 
 ## 理解 MatrixOne 的执行计划
 
