@@ -32,12 +32,14 @@ Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行�
 
 ## SQL 查询详情
 
-- 在列表中，点击 SQL 文本内容，即可进入 SQL 查询详情页。在此页面，您可以详细查看特定 SQL 查询的执行时间、起止时间、事务 ID、会话 ID、CU 消耗等详细信息。
+在列表中，点击 SQL 文本内容，即可进入 SQL 查询详情页。在此页面，您可以详细查看特定 SQL 查询的执行时间、起止时间、事务 ID、会话 ID、CU 消耗、SQL 查询语句内容等详细信息，同时，您也可以查看特定 SQL 查询的查询结果，点击**下载**按钮以导出完整的查询结果。
 
-   ![查询详情页面](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image-8.png)
+   ![查询详情页面](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/query_history-1.png)
 
-- 在此页面，您还可以查看 SQL 查询语句的详细内容，并根据需要进行复制。同时，您也可以查看特定 SQL 查询的查询结果，点击**下载**按钮以导出完整的查询结果。
-!!! note
-    对于非在 sql editor 执行的 SELECT 语句，只保存以 `/* cloud_user */` 和 `/* save_result */` 固定开头的 SELECT 语句的查询结果。若想了解更多 MatrixOne 对于保存查询结果的支持，请查看[保存查询结果支持](https://docs.matrixorigin.cn/1.1.0/MatrixOne/Reference/Variable/system-variables/save_query_result/#_2)。
+需要注意的是，对于非在平台**查询编辑器**执行的 SELECT 语句，只保存以 `/* cloud_user */` 和 `/* save_result */` 固定开头的 SELECT 语句的查询结果，当不带上述 hint 时，Query 将不会显示详细的查询结果，如下图所示：
+
+  ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/query_history-2.png)
+
+若想了解更多 MatrixOne 对于保存查询结果的支持，请查看[保存查询结果支持](https://docs.matrixorigin.cn/1.1.0/MatrixOne/Reference/Variable/system-variables/save_query_result/#_2)。
 
 现在，您已经了解如何访问 SQL 查询历史，筛选查询记录，并查看详细的查询信息。这将有助于您监测和审计 SQL 查询，以确保数据库的正常运行和安全性。
