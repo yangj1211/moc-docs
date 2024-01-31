@@ -2,7 +2,7 @@
 
 本篇文档将指导用户如何通过 MatrixOne Cloud 内置的查询分析（Query Profile）进行在线的 SQL 查询分析。也可以理解成，查询分析模块是将数据库中的 Explain，即解释详细执行计划的能力做成了可视化模块，通过可视化的方式向用户展示这条 SQL 的执行计划。
 !!! note
-    为了提高查询性能，小于 1s 的 SQL 不会被记录执行计划。
+    由于执行计划数据量很大，特别是 OLTP，会消耗较多的计算资源，其次考虑到执行计划大多用于分析执行耗时分布，对于执行时间短的 SQL 本身意义不大，索引我们对小于 1s 的 SQL 的执行计划不作记录。
 
 ## 什么是执行计划
 
@@ -21,7 +21,7 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 ## 在查询历史筛选 Query
 
-我们在查询历史中筛选大于 1s 的 SQL 文本，找到您想了解的 Query，这里我们以系统自带的 TPCH10G 数据集的 Q1 为例，如下图所示：
+我们在查询历史中找到您想了解的 Query，这里我们以系统自带的 TPCH10G 数据集的 Q1 为例，如下图所示：
 
 ![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history_1.png)
 
