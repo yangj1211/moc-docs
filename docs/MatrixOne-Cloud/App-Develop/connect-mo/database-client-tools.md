@@ -10,7 +10,7 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
 
 - 已完成[创建实例](../../Instance-Mgmt/create-instance.md)。
 - 已经[获取 MatrixOne Cloud 实例的连接命令](../../Instance-Mgmt/create-instance.md#_10)。
-- 默认为公网连接，若想使用私网连接请参考章节[私网连接]( ../../Security/private-link.md)完成配置。 
+- 默认为公网连接，若想使用私网连接请参考章节[私网连接]( ../../Security/private-link.md)完成配置。
 
 ## 通过 MySQL Client 连接 MatrixOne Cloud 服务
 
@@ -22,6 +22,9 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
     mysql -h moc.cluster.matrixonecloud.cn -P port -u a123456b_78cd_9e12_fg34_abcd5d6789ef:admin:accountadmin -p
     Enter password:
     ```
+
+!!! note
+    如果需要使用 LOAD DATA LOCAL 语句读取本地文件，需要在连接时添加参数 `--local-infile`。
 
 3. 连接成功提示如下：
 
