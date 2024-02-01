@@ -1,21 +1,21 @@
 # 批量导入概述
 
-MatrixOne 支持使用 `LOAD DATA` 命令将大量行插入至 MatrixOne 数据表，对于 MatrixOne Clound 的实例若需要导入本地数据，可使用 `LOAD DATA LOCAL` 命令，也支持使用 `SOURCE` 命令将表结构和数据导入整个数据库。
+MatrixOne 支持使用 `LOAD DATA` 命令将大量行插入至 MatrixOne 数据表，对于 MatrixOne Cloud 的实例若需要导入本地数据，可使用 `LOAD DATA LOCAL` 命令，也支持使用 `SOURCE` 命令将表结构和数据导入整个数据库。
 
 ## `LOAD DATA LOCAL`
 
-MatrixOne Clound 支持使用 `LOAD DATA LOCAL` 命令从本地文件系统或 *S3 对象存储服务*批量导入 *csv* 文件、*jsonline* 文件。
+MatrixOne Cloud 支持使用 `LOAD DATA LOCAL` 命令从本地文件系统或 *S3 对象存储服务*批量导入 *csv* 文件、*jsonline* 文件。
 
 ### 导入不同的数据格式
 
-根据*数据文件类型不同*的情况，MatrixOne Clound 支持使用 `LOAD DATA  LOCAL` 命令导入 *csv* 和 *jl* 格式。
+根据*数据文件类型不同*的情况，MatrixOne Cloud 支持使用 `LOAD DATA  LOCAL` 命令导入 *csv* 和 *jl* 格式。
 
 - 支持导入 *csv* 格式的数据，具体导入方式可以参考[插入 csv 文件](load-csv.md)。
 - 支持导入 *jl* 格式的数据，即 jsonlines 格式，具体导入方式可以参考[插入 jsonlines 文件](load-jsonline.md)。
 
 ### 从不同存储位置进行导入
 
-根据*数据存储位置不同*的情况，MatrixOne Clound 支持使用 `LOAD DATA LOCAL` 命令从*本地进行导入*和*从对象存储服务（Simple Storage Service, S3) 导入*。
+根据*数据存储位置不同*的情况，MatrixOne Cloud 支持使用 `LOAD DATA LOCAL` 命令从*本地进行导入*和*从对象存储服务（Simple Storage Service, S3) 导入*。
 
 - 从本地导入数据的方式，参考[插入 csv 文件](load-csv.md)或[插入 jsonlines 文件](load-jsonline.md)。
 - 从 S3 导入数据的方式，参考[从对象存储导入文件](load-s3.md)。
