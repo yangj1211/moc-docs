@@ -145,7 +145,7 @@ load data local infile {'filepath'='data.jl.gz', 'compression'='gzip','format'='
 3. 启动 MySQL 客户端，连接到 MatrixOne Cloud，例如：
 
     ```
-    mysql -h moc.cluster.matrixonecloud.cn -P 6001 -u a123456b_78cd_9e12_fg34_abcd5d6789ef:admin:accountadmin  -p
+    mysql -h moc.cluster.matrixonecloud.cn -P 6001 -u a123456b_78cd_9e12_fg34_abcd5d6789ef:admin:accountadmin  -p --local-infile
     ```
 
 4. 在 MatrixOne Cloud 建表：

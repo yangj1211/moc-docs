@@ -38,6 +38,8 @@ mysqldump -h 127.0.0.1 -uroot -proot -d test > a.sql
 
 1. 打开 MySQL 终端并连接到 MatrixOne Cloud。
 
+2. 创建数据库 `test`，进入到数据库 `test`。
+
 2. 通过 `source` 命令将 *sql* 文件导入 MatrixOne Cloud。
 
 ```
@@ -55,7 +57,9 @@ nohup mysql -h moc.cluster.matrixonecloud.cn -P 6001 -u a123456b_78cd_9e12_fg34_
 导入成功后，使用如下 SQL 语句查看导入结果：
 
 ```sql
-select * from tbl;
+use test;
+show tables;
+select * from table_name;
 ```
 
 ## 限制说明

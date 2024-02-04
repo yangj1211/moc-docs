@@ -23,6 +23,9 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
     Enter password:
     ```
 
+!!! note
+    如果需要使用 LOAD DATA LOCAL 语句读取本地文件，需要在连接时添加参数 `--local-infile`。
+
 3. 连接成功提示如下：
 
     ```
