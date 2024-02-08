@@ -24,7 +24,7 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 
 - **-P [port]**：MatrixOne 服务的端口。默认值：6001。
 
-- **-db [数据库名称]**：必需参数。要备份的数据库的名称。
+- **-db [数据库名称]**：必需参数。要备份的数据库的名称。可以指定多个数据库，数据库名称之间用 `,` 分隔。
 
 - **-net-buffer-length [数据包大小]**: 数据包大小，即 SQL 语句字符的总大小。数据包是 SQL 导出数据的基本单位，如果不设置参数，则默认 1048576 Byte（1M），最大可设置 16777216 Byte（16M）。假如这里的参数设置为 16777216 Byte（16M），那么，当要导出大于 16M 的数据时，会把数据拆分成多个 16M 的数据包，除最后一个数据包之外，其它数据包大小都为 16M。
 
@@ -34,21 +34,109 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 
 - **-csv-field-delimiter [","]**: 设置 csv 字段分隔符，仅支持一个 utf8 字符，默认值为“,”。该项仅当设置导出数据格式为“csv”时启用。
 
-- **-tbl [表名]**：可选参数。如果参数为空，则导出整个数据库。如果要备份指定表，则可以在命令中指定多个 `-tbl` 和表名。
+- **-tbl [表名]**：可选参数。如果参数为空，则导出整个数据库。如果要备份指定表，则可以在命令中添加参数 `-tbl` 和 `tableName`。如果指定多个表，表名之间用 `,` 分隔。
 
 ## 如何使用 `mo-dump`
 
-### 1. 下载 mo-dump 二进制文件
+### 安装 mo-dump 工具
 
-- 下载 [Linux x86 mo-dump 文件](https://github.com/matrixorigin/artwork/blob/main/docs/download/modump/linux-x86/mo-dump)
-- 下载 [Linux ARM mo-dump 文件](https://github.com/matrixorigin/artwork/blob/main/docs/download/modump/linuxarm/mo-dump)
-- 下载 [macOS x86 mo-dump 文件](https://github.com/matrixorigin/artwork/blob/main/docs/download/modump/osx86/mo-dump)
-- 下载 [macOS ARM mo-dump 文件](https://github.com/matrixorigin/artwork/blob/main/docs/download/modump/osarm/mo-dump)
+下载方式一和下载方式二需要先安装下载工具 wget 或 curl，如果你未安装，请先自行安装下载工具。
 
+- macOS 下安装
+
+=== "**下载方式一：`wget` 工具下载二进制包**"
+
+     x86 架构系统安装包：
+
+     ```
+     wget https://github.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-darwin-x86_64.zip
+     unzip mo-dump-1.0.0-darwin-x86_64.zip
+     ```
+
+     ARM 架构系统安装包：
+
+     ```
+     wget https://github.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-darwin-arm64.zip
+     unzip mo-dump-1.0.0-darwin-arm64.zip
+     ```
+
+    如 github 原地址下载过慢，您可尝试从以下地址下载镜像包：
+
+    ```
+    wget  https://githubfast.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-darwin-xxx.zip
+    ```
+
+=== "**下载方式二：`curl` 工具下载二进制包**"
+
+     x86 架构系统安装包：
+
+     ```
+     curl -OL https://github.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-darwin-x86_64.zip
+     unzip mo-dump-1.0.0-darwin-x86_64.zip
+     ```
+
+     ARM 架构系统安装包：
+
+     ```
+     curl -OL https://github.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-darwin-arm64.zip
+     unzip mo-dump-1.0.0-darwin-arm64.zip
+     ```
+
+    如 github 原地址下载过慢，您可尝试从以下地址下载镜像包：
+
+    ```
+    curl -OL https://githubfast.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-darwin-xxx.zip
+    ```
+
+- Linux 下安装
+
+=== "**下载方式一：`wget` 工具下载二进制包**"
+
+     x86 架构系统安装包：
+
+     ```
+     wget https://github.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-linux-x86_64.zip
+     unzip mo-dump-1.0.0-linux-x86_64.zip
+     ```
+
+     ARM 架构系统安装包：
+
+     ```
+     wget https://github.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-linux-arm64.zip
+     unzip mo-dump-1.0.0-linux-arm64.zip
+     ```
+
+    如 github 原地址下载过慢，您可尝试从以下地址下载镜像包：
+
+    ```
+    wget  https://githubfast.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-linux-xxx.zip
+    ```
+
+=== "**下载方式二：`curl` 工具下载二进制包**"
+
+     x86 架构系统安装包：
+
+     ```
+     curl -OL https://github.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-linux-x86_64.zip
+     unzip mo-dump-1.0.0-linux-x86_64.zip
+     ```
+
+     ARM 架构系统安装包：
+
+     ```
+     curl -OL https://github.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-linux-arm64.zip
+     unzip mo-dump-1.0.0-linux-arm64.zip
+     ```
+
+    如 github 原地址下载过慢，您可尝试从以下地址下载镜像包：
+
+    ```
+    curl -OL https://githubfast.com/matrixorigin/mo_dump/releases/download/1.0.0/mo-dump-1.0.0-linux-xxx.zip
+    ```
 !!! note
-    `mo-dump` 文件可以在相同的硬件平台上工作。但是需要注意在 x86 平台中构建的 `mo-dump` 二进制文件在 Darwin ARM 平台中则无法正常工作。你可以在同一套操作系统和硬件平台内构建并使用 `mo-dump` 二进制文件。`mo-dump` 目前只支持 Linux 和 macOS。
+    由于 linux 内核的限制，mo-dump 在低版本内核（低于 5.0）的 OS 上可能会出现无法正常运行的情况，此时需要升级您的内核版本。
 
-### 2. 使用 `mo-dump` 导出 MatrixOne Cloud 的数据库
+### 使用 `mo-dump` 导出 MatrixOne Cloud 的数据库
 
 `mo-dump` 在命令行中非常易用。参见以下步骤示例，导出 *sql* 文件格式完整数据库：
 
@@ -63,26 +151,42 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
     ./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -P 6001 -db database > exported_db.sql
     ```
 
-例如，如果你想要生成单个数据库的备份，请运行以下命令。该命令将在 *t.sql* 文件中生成 **t** 数据库的结构和数据的备份。*t.sql* 文件将与您的 `mo-dump` 可执行文件位于同一目录中。
+## 示例
+
+**示例 1**
+
+如果你在与 MatrixOne 实例相同的服务器中启动终端，并且你想要生成单个或多个数据库以及其中所有表的备份，请运行以下命令。该命令将在 *importMydb.sql* 文件中生成 **mydb1** 和 **mydb2** 数据库以及表的结构和数据的备份。*importMydb.sql* 文件会保存在当前目录下：
 
 ```
-./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc.cluster.matrixonecloud.cn -P 6001 -db t > t.sql
+./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -P 6001 -db mydb1,mydb2 > importMydb.sql
 ```
 
-如果你想将数据库 *t* 内的表导出为 *CSV* 格式，参考使用下面的命令：
+**示例 2**
+
+如果你想将数据库 *mydb* 内的表的数据导出为 *CSV* 格式，数据库 *mydb* 中的所有表的数据将会以 `${databaseName}_${tableName}.csv` 的格式导出在当前目录下，生成数据库和表结构以及导入的 SQL 语句将会保存在 *importMydbWithCsv.sql* 文件中：
 
 ```
-./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -db t -csv > ttt.csv
+./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -P 6001 -db mydb -csv > importMydbWithCsv.sql
 ```
 
-如果要在数据库中生成单个表的备份，可以运行以下命令。该命令将生成命名为 *t* 的数据库的 *t1* 表的备份，其中包含 *t.sql* 文件中的结构和数据。
+**示例 3**
+
+如果要在数据库中指定生成某一个表或者某几个表的备份，可以运行以下命令。该命令将生成数据库 *db1* 中 *t1* 表和 *t2* 表的结构和数据备份，保存在 *tab2.sql* 文件中。
 
 ```
-./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -db t -tbl t1 > t1.sql
-```  
+./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -db db1 -tbl t1,t2 > tab2.sql 
+```
+
+**示例 4**
+
+如果要在数据库中某一个表或者某几个表的结构备份，可以运行以下命令。该命令将生成数据库 *db1* 中 *t1* 表和 *t2* 表的结构，保存在 *tab_nodata.sql* 文件中。
+
+```
+./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -db db1  -no-data -tbl t1,t2 > tab_nodata.sql
+```
 
 ## 限制
 
-- `mo-dump` 仅支持导出单个数据库的备份，如果你有多个数据库需要备份，需要手动运行 `mo-dump` 多次。
+- `mo-dump` 暂不支持只导出数据。如果你想在没有数据库和表结构的情况下生成数据的备份，那么，你需要手动拆分 `.sql` 文件。
 
 - `mo-dump` 仅支持导出属于用户自己的数据库，所以在发布订阅中，订阅端通过 `mo-dump` 导出订阅库的 sql 只有订阅语句。
