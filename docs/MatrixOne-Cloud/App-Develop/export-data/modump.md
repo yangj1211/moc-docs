@@ -155,7 +155,7 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 
 **示例 1**
 
-如果你在与 MatrixOne 实例相同的服务器中启动终端，并且你想要生成单个或多个数据库以及其中所有表的备份，请运行以下命令。该命令将在 *importMydb.sql* 文件中生成 **mydb1** 和 **mydb2** 数据库以及表的结构和数据的备份。*importMydb.sql* 文件会保存在当前目录下：
+如果你想要生成单个或多个数据库以及其中所有表的备份，请运行以下命令。该命令将在 *importMydb.sql* 文件中生成 **mydb1** 和 **mydb2** 数据库以及表的结构和数据的备份。*importMydb.sql* 文件会保存在当前目录下：
 
 ```
 ./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -P 6001 -db mydb1,mydb2 > importMydb.sql
