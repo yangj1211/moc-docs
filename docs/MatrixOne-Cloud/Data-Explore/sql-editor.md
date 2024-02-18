@@ -1,16 +1,16 @@
 # **SQL 编辑器**
 
-查询编辑器是 MatrixOne cloud 平台非常重要的一个工具，你可以通过在线 SQL 编辑器，进行 SQL 语句的快速编写、执行、结果查看，还可以将常用的 SQL 语句保存在 WorkBook 中，方便后续使用、参考和对比。
+SQL 编辑器是 MatrixOne cloud 平台非常重要的一个工具，你可以通过在线 SQL 编辑器，进行 SQL 语句的快速编写、执行、结果查看，还可以将常用的 SQL 语句保存在 WorkBook 中，方便后续使用、参考和对比。
 
-本篇文档将指导你如何通过 MatrixOne Cloud 内置的查询编辑器（SQL Editor）进行在线 SQL 查询与数据探索。
+本篇文档将指导你如何通过 MatrixOne Cloud 内置的 SQL 编辑器（SQL Editor）进行在线 SQL 查询与数据探索。
 
 ## 打开 SQL 编辑器
 
-登录 MatrixOne Cloud 实例管理平台，选择目标实例 > 通过云平台连接，进入 MatrixOne Cloud 数据库管理平台，在左侧菜单栏中找到查询 > 查询编辑器模块，点击即可进入查询编辑器页面。
+登录 MatrixOne Cloud 实例管理平台，选择目标实例 > 通过云平台连接，进入 MatrixOne Cloud 数据库管理平台，在左侧菜单栏中找到 SQL 编辑器模块，点击即可进入 SQL 编辑器页面。
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image.png)
+SQL 编辑器模块的页面由 3 部分构成。
 
-查询编辑器模块的页面由 3 部分构成。
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sqleditor-1.png)
 
 - **左侧区域**：显示当前实例已有的数据库表和 Workbook，你可以快速查看和复制所关注的数据库名、表名、列名和已保存在 Workbook 中的 SQL 语句。
 
@@ -39,7 +39,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 
 **从 Database 中查看和选择库表**
 
-在查询编辑器中进行 SQL 语句编写过程中，开发者经常需要查看目标库表中的数据结构和数据类型，提升 SQL 语句编写的效率和准确性。
+在 SQL 编辑器中进行 SQL 语句编写过程中，开发者经常需要查看目标库表中的数据结构和数据类型，提升 SQL 语句编写的效率和准确性。
 
 ![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image-4.png)
 
@@ -50,7 +50,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 右侧 SQL 编辑区域上方的下拉列表用于数据库选择，你可以在下拉列表中查看和选择目前 SQL 查询使用的数据库。选择数据库后，SQL 语句中可以不包括 dbname 执行，相当于已执行 `use database` 语句。
 
 !!! note
-    当你在查询编辑器中重新编辑并执行了一条新的 `use database` 语句且成功后，刷新左侧的 Database 树列表，右侧上方的下拉框中数据库选项将同步切换。
+    当你在 SQL 编辑器中重新编辑并执行了一条新的 `use database` 语句且成功后，刷新左侧的 Database 树列表，右侧上方的下拉框中数据库选项将同步切换。
 
 进一步输入想要查询的 SQL 语句，点击执行按钮，MatrixOne Cloud 将直接在线执行对应 SQL 请求。
 

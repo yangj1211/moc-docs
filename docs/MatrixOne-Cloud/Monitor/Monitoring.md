@@ -26,7 +26,7 @@
 
 业务监控指标是服务于数据应用人员的监控信息，可以在 MatrixOne Cloud 数据库管理平台中找到，其中包括：
 
-![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitoring-2.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitor-2.png)
 
 - 每秒查询次数 (QPS)
 

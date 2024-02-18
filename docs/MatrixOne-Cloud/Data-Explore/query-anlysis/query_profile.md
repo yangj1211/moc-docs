@@ -23,13 +23,13 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 在查询历史中找到您想了解的 Query，这里我们以系统自带的 TPCH10G 数据集的 Q1 为例，如下图所示：
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history_1.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history-1.png)
 
 ## 查看该 Query 的查询分析
 
 点击进入这条 Query 的查询详情界面，我们可以同时看到它的查询分析（Query Profile）界面，如下图所示：
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history_2.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history-2.png)
 
 该界面展示了 TPCH Q1 的整个执行过程，总共分为了 4 个算子：表扫描 (Table Scan)，聚合 (Aggregate)，排序 (Sort) 及投影 (Project)。
 
@@ -39,7 +39,7 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 如果我们再选中点击 Table Scan 算子方块，我们将看到 Table Scan 算子执行的更多细节，如下图：
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history_3.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history-3.png)
 
 在该案例中我们可以看到 Table Scan 算子执行的过程中选中的是 18 个列中的 7 个 `（l_quantity, l_extendedprice, l_discount, l_tax, l_returnflag, l_linestatus, l_shipdate）`，另外还包含了一个过滤的条件 `(lineitem.l_shipdate <= 1998-08-11)`。
 
