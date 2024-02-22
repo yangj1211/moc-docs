@@ -43,7 +43,7 @@ mysql> SELECT LAST_INSERT_ID();
 +------------------+
 ```
 
-但是在 MatrixOne Cloud 中，我们有不同的行为；如果使用单个 `INSERT` 语句插入多行，则 `LAST_INSERT_ID()` 返回为最后插入的行生成的值。与上面的示例一样，当您执行 `INSERT INTO t VALUES (NULL, 'Mary'), (NULL, 'Jane'), (NULL, 'Lisa');` 时，`LAST_INSERT_ID()` 将返回 4。
+但是在 MatrixOne 中，我们有不同的行为；如果使用单个 `INSERT` 语句插入多行，则 `LAST_INSERT_ID()` 返回为最后插入的行生成的值。与上面的示例一样，当您执行 `INSERT INTO t VALUES (NULL, 'Mary'), (NULL, 'Jane'), (NULL, 'Lisa');` 时，`LAST_INSERT_ID()` 将返回 4。
 
 ## **语法结构**
 

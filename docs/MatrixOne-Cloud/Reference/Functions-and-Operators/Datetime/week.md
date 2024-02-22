@@ -14,7 +14,7 @@
 
 |  参数   | 说明 |
 |  ----  | ----  |
-| date  | 必要参数。表示要计算周数的日期。MatrixOne Cloud 默认一周的起始日为星期一，返回值的范围为 0 到 53。 |
+| date  | 必要参数。表示要计算周数的日期。MatrixOne 默认一周的起始日为星期一，返回值的范围为 0 到 53。 |
 
 ## **示例**
 
@@ -56,4 +56,4 @@ mysql> SELECT WEEK(c1) FROM t1;
 
 ## **限制**
 
-MatrixOne Cloud 的 `WEEK()` 函数仅支持 `date` 参数，不支持可选参数 `[, mode]`，这一点是与 MySQL 是不同的。
+MatrixOne 的 `WEEK()` 函数仅支持 `date` 参数，不支持可选参数 `[, mode]`，这一点是与 MySQL 是不同的。

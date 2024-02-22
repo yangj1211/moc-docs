@@ -4,7 +4,7 @@
 
 `SHOW FUNCTION STATUS` 是用来显示数据库中的所有函数的信息，包括函数名、数据库名、创建时间等等。
 
-`SHOW FUNCTION STATUS` 命令只显示用户定义的函数，不包括系统函数。
+`SHOW FUNCTION STATUS` 命令只显示用户定义的函数，不包括系统函数。MatrixOne Cloud 支持 [SQL UDF](../../Data-Definition-Language/create-function-sql.md)
 
 ## **语法结构**
 
@@ -27,24 +27,22 @@ SHOW FUNCTION STATUS LIKE 'my_function%';
 
 ```sql
 create function twosum (x float, y float) returns float language sql as 'select $1 + $2' ;
-create function mysumtable(x int) returns int language sql as 'select mysum(test_val, id) from tbl1 where id = $1';
 create function helloworld () returns int language sql as 'select id from tbl1 limit 1';
 
 mysql> show function status;
 +------+------------+----------+---------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
 | Db   | Name       | Type     | Definer | Modified            | Created             | Security_type | Comment | character_set_client | collation_connection | Database Collation |
 +------+------------+----------+---------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
-| aab  | twosum     | FUNCTION | root    | 2023-03-27 06:25:41 | 2023-03-27 06:25:41 | DEFINER       |         | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
-| aab  | mysumtable | FUNCTION | root    | 2023-03-27 06:25:51 | 2023-03-27 06:25:51 | DEFINER       |         | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
-| aab  | helloworld | FUNCTION | root    | 2023-03-27 06:25:58 | 2023-03-27 06:25:58 | DEFINER       |         | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| db1  | twoadd     | FUNCTION | admin   | 2024-02-22 07:34:30 | 2024-02-22 07:34:30 | DEFINER       |         | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| db1  | helloworld | FUNCTION | admin   | 2024-02-22 07:34:43 | 2024-02-22 07:34:43 | DEFINER       |         | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
 +------+------------+----------+---------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
-3 rows in set (0.00 sec)
+2 rows in set (0.10 sec)
 
 mysql> show function status like 'two%';
 +------+--------+----------+---------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
 | Db   | Name   | Type     | Definer | Modified            | Created             | Security_type | Comment | character_set_client | collation_connection | Database Collation |
 +------+--------+----------+---------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
-| aab  | twosum | FUNCTION | root    | 2023-03-27 06:25:41 | 2023-03-27 06:25:41 | DEFINER       |         | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
+| db1  | twoadd | FUNCTION | admin   | 2024-02-22 07:34:30 | 2024-02-22 07:34:30 | DEFINER       |         | utf8mb4              | utf8mb4_0900_ai_ci   | utf8mb4_0900_ai_ci |
 +------+--------+----------+---------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
-1 row in set (0.01 sec)
+1 row in set (0.10 sec)
 ```

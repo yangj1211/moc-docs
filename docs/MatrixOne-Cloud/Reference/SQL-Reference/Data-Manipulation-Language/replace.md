@@ -151,4 +151,4 @@ mysql> select * from names;
 
 ## **限制**
 
-MatrixOne Cloud 当前不支持使用 `VALUES row_constructor_list` 参数插入的一组值构成的行。
+MatrixOne 当前不支持使用 `VALUES row_constructor_list` 参数插入的一组值构成的行。

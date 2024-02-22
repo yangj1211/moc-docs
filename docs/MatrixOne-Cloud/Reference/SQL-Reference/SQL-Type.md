@@ -100,11 +100,11 @@
 
 ### 除 SELECT STATEMENT 之外，还包含了针对常量的查询 VALUES 语句
 
-- VALUES row_constructor_list [ORDER BY column_designator] [LIMIT number]
+- [SELECT](Data-Query-Language/select.md)
 
-### 以及 modump 工具所对应的内部命令
+### 以及 mo-dump 工具所对应的内部命令
 
-- [导出数据](../../App-Develop/export-data/modump.md)
+- [Export Data](../../App-Develop/export-data/modump.md)
 
 ## **TCL - 事务语言**
 

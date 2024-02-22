@@ -59,13 +59,13 @@
 !!! note
     在正则表达式中，这些特殊字符需要使用 `\` 进行转义，例如 `\\.` 表示匹配一个实际的 `.` 字符，而不是任何字符。
 
-MatrixOne Cloud 的正则表达式默认是区分大小写的。如果你希望进行不区分大小写的匹配，可以使用 `REGEXP_LIKE(column, pattern, 'i')` 这样的语法。其中 `i` 表示不区分大小写。
+MatrixOne 的正则表达式默认是区分大小写的。如果你希望进行不区分大小写的匹配，可以使用 `REGEXP_LIKE(column, pattern, 'i')` 这样的语法。其中 `i` 表示不区分大小写。
 
 ## 参考文档
 
 **正则表达式函数列表**
 
-|名称 |释义|
+|名称	| 释义|
 |---|---|
 |[NOT REGEXP](not-regexp.md)| REGEXP 的否定表达式|
 |[REGEXP_INSTR()](regexp-instr.md) |匹配正则表达式的子串起始索引|

@@ -19,5 +19,5 @@ mysql> SELECT 1 IS NOT TRUE, 0 IS NOT FALSE, NULL IS NOT UNKNOWN;
 +---------------+----------------+---------------------+
 | false         | false          | false               |
 +---------------+----------------+---------------------+
-1 row in set (0.05 sec)
+1 row in set (0.01 sec)
 ```
