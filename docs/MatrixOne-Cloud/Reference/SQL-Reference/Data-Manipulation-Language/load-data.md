@@ -541,9 +541,9 @@ mysql> select * from t1;
 
 ## **限制**
 
-1. `REPLACE` 和 `IGNORE` 修饰符用来解决唯一索引的冲突：`REPLACE` 表示若表中已经存在，则用新的数据替换掉旧的数据；`IGNORE` 则表示保留旧的数据，忽略掉新数据。这两个修饰符在 MatrixOne Cloud 中尚不支持。
-2. MatrixOne Cloud 当前部分支持 `SET`，仅支持 `SET columns_name=nullif(col_name,expr2)`。
+1. `REPLACE` 和 `IGNORE` 修饰符用来解决唯一索引的冲突：`REPLACE` 表示若表中已经存在，则用新的数据替换掉旧的数据；`IGNORE` 则表示保留旧的数据，忽略掉新数据。这两个修饰符在 MatrixOne 中尚不支持。
+2. MatrixOne 当前部分支持 `SET`，仅支持 `SET columns_name=nullif(col_name,expr2)`。
 3. 开启并行加载操作时必须要保证文件中每行数据中不包含指定的行结束符，比如 '\n'，否则有可能会导致文件加载时数据出错。
 4. 文件的并行加载要求文件必须是非压缩格式，暂不支持并行加载压缩格式的文件。
 5. 如果你需要用 `LOAD DATA LOCAL` 进行本地加载，则需要使用命令行连接 MatrixOne Cloud 服务主机：`mysql -h <mo-host -ip> -P 6001 -uroot -p111 --local-infile`。
-6. MatrixOne Cloud 当前暂不支持 `ESCAPED BY`，写入或读取特殊字符与 MySQL 存在一定的差异。
+6. MatrixOne 当前暂不支持 `ESCAPED BY`，写入或读取特殊字符与 MySQL 存在一定的差异。

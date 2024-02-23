@@ -32,11 +32,11 @@ SET time_zone = timezone;
 
 设置 time_zone 的值的格式：
 
-* 值 `SYSTEM` 表示时区应与服务器系统时区相同。
+- 值 `SYSTEM` 表示时区应与服务器系统时区相同。
 
-* 值 `UTC` 表示时区设置为 UTC（Coordinated Universal Time，协调世界时）。仅支持“UTC”缩写作为时区使用。
+- 值 `UTC` 表示时区设置为 UTC（Coordinated Universal Time，协调世界时）。仅支持“UTC”缩写作为时区使用。
 
-* 该值可以作为字符串给出，表示 UTC 时间的偏移，格式为“HH:MM”，带有 + 或 -，例如 `+10:00` 或者 `-6:00`。允许的范围是“-13:59”到“+14:00”。
+- 该值可以作为字符串给出，表示 UTC 时间的偏移，格式为“HH:MM”，带有 + 或 -，例如 `+10:00` 或者 `-6:00`。允许的范围是“-13:59”到“+14:00”。
 
 当前会话时区设置会影响时区敏感时间值的显示和存储。即会影响执行 `NOW()` 等函数查询到的值以及存储在 `TIMESTAMP` 列中和从 `TIMESTAMP` 列中查询到的值。
 
@@ -103,9 +103,9 @@ mysql> select * from t;
 2 rows in set (0.00 sec)
 ```
 
-* `time_zone`：使用 system 的时区。
+- `time_zone`：使用 system 的时区。
 
-* `system_time_zone` 说明 system 使用服务器系统时区。
+- `system_time_zone` 说明 system 使用服务器系统时区。
 
 2. 修改当前时区：
 
@@ -114,8 +114,8 @@ set global time_zone = '+08:00';
 set time_zone = '+08:00';
 ```
 
-* `set global time_zone = '+08:00';`：修改 MatrixOne Cloud 全局时区为北京时间，即我们所在的东 8 区。
-* `set time_zone = '+08:00';`：修改当前会话时区。
+- `set global time_zone = '+08:00';`：修改 MatrixOne 全局时区为北京时间，即我们所在的东 8 区。
+- `set time_zone = '+08:00';`：修改当前会话时区。
 
 ## 限制
 

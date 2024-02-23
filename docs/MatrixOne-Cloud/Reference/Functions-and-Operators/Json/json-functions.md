@@ -5,8 +5,8 @@ MatrixOne 支持以下 JSON 函数：
 |名称 | 描述|
 |---|---|
 |JSON_EXTRACT()|从 JSON 文档返回数据|
-|JSON_QUOTE() |引用 JSON 文档|
-|JSON_UNQUOTE() |取消引用 JSON 值|
+|JSON_QUOTE()	| 引用 JSON 文档|
+|JSON_UNQUOTE()	| 取消引用 JSON 值|
 
 ## JSON_EXTRACT() 函数
 
@@ -36,11 +36,11 @@ mysql> SELECT JSON_EXTRACT('{"id": 14, "name": "Aztalan"}', '$.name');
 
 - 路径可以包含 `*` 或 `**` 通配符：
 
-  - `.[*]` 计算 JSON 对象中所有成员的值。
+   + `.[*]` 计算 JSON 对象中所有成员的值。
 
-  - `[*]` 计算 JSON 数组中所有元素的值。
+   + `[*]` 计算 JSON 数组中所有元素的值。
 
-  - `prefix**suffix`：计算以命名前缀开头并以命名后缀结尾的所有路径。
+   + `prefix**suffix`：计算以命名前缀开头并以命名后缀结尾的所有路径。
 
 - 文档中不存在的路径（或不存在的数据）评估为 `NULL`。
 

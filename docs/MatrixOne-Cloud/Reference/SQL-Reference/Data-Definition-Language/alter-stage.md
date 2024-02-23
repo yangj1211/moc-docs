@@ -36,13 +36,13 @@ ENABLE = { TRUE | FALSE }
 
 - `StageParams`：这是一个参数组，用于指定 Stage 的配置参数。
 
-  - `endpoint`：Stage 的连接 URL，指定对象存储服务的位置。对于不同的对象存储服务（如 Amazon S3、Aliyun OSS、文件系统等），这个 URL 的内容可能有所不同。例如：s3.us-west-2.amazonaws.com
+    - `endpoint`：Stage 的连接 URL，指定对象存储服务的位置。对于不同的对象存储服务（如 Amazon S3、Aliyun OSS、文件系统等），这个 URL 的内容可能有所不同。例如：s3.us-west-2.amazonaws.com
 
-  - `CREDENTIALS`：这是一个 JSON 对象，包含连接到对象存储服务所需的凭证信息，如 `access_key_id`、`secret_access_key` 等。
+    - `CREDENTIALS`：这是一个 JSON 对象，包含连接到对象存储服务所需的凭证信息，如 `access_key_id`、`secret_access_key` 等。
 
 - `directoryTableParams`：这是一个参数组，用于指定 Stage 的目录表（directory table）的配置。
 
-  - `ENABLE`：是否修改启用目录表，值为 `TRUE` 或 `FALSE`。
+    - `ENABLE`：是否修改启用目录表，值为 `TRUE` 或 `FALSE`。
 
 ## **示例**
 

@@ -21,7 +21,7 @@ SELECT * FROM table ORDER BY RAND();
 
 |  参数   | 说明  |
 |  ----  | ----  |
-| seed | 可选参数。是一个整数值，用于指定生成随机数时的种子值。如果不指定 `seed` 参数，则默认以当前时间为种子值。返回值类型与输入类型保持一致。<br> MatrixOne Cloud 暂不支持指定种子值。 |
+| seed | 可选参数。是一个整数值，用于指定生成随机数时的种子值。如果不指定 `seed` 参数，则默认以当前时间为种子值。返回值类型与输入类型保持一致。<br> MatrixOne 暂不支持指定种子值。 |
 
 ## **示例**
 
@@ -72,4 +72,4 @@ mysql> SELECT * FROM Users  ORDER BY RAND() LIMIT 1;
 
 ## **限制**
 
-MatrixOne Cloud 暂不支持指定 `RAND(seed)` 函数的种子值（即 `seed` 参数）。
+MatrixOne 暂不支持指定 `RAND(seed)` 函数的种子值（即 `seed` 参数）。

@@ -34,11 +34,11 @@ create user user_name identified by 'password';
 
 `CREATE USER` 允许这些 `auth_option`：
 
-- 'auth_string'：在 MatrixOne Cloud 中，'auth_string' 为密码，即将密码存储在 *mo_user* 系统表的帐户行中。
+- 'auth_string'：在 MatrixOne 中，'auth_string' 为密码，即将密码存储在 *mo_user* 系统表的帐户行中。
 
 #### DEFAULT ROLE
 
-`DEFAULT ROLE` 子句定义当用户连接到 MatrixOne Cloud 并进行身份验证时，或者当用户在会话期间执行 `SET ROLE` 语句时，角色会变为激活/使用状态。
+`DEFAULT ROLE` 子句定义当用户连接到 MatrixOne 并进行身份验证时，或者当用户在会话期间执行 `SET ROLE` 语句时，角色会变为激活/使用状态。
 
 ```
 create user user_name identified by 'password' default role role_rolename;
@@ -55,4 +55,4 @@ Query OK, 0 rows affected (0.04 sec)
 
 ## **限制**
 
-MatrxiOne Cloud 暂不支持 `CREAT USER COMMENT` 和 `CREAT USER ATTRIBUTE`。
+MatrxiOne 暂不支持 `CREAT USER COMMENT` 和 `CREAT USER ATTRIBUTE`。

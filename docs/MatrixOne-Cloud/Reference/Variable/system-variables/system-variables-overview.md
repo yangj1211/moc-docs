@@ -99,3 +99,7 @@ SHOW SESSION VARIABLES LIKE '%theme%';
 | transaction_read_only | Y | N | int | Y | Both | Y | 0 | 0-1 |
 | version_comment | Y | N | string | Y | Both | N | "MatrixOne" |  |
 | wait_timeout | Y | N | int | Y | Both | Y | 28800 |  1-2147483 |
+
+## 限制
+
+MatrixOne 为兼容 MySQL，SQL 模式只支持 `ONLY_FULL_GROUP_BY` 模式；其他 SQL 模式仅语法支持，实际不起作用。
