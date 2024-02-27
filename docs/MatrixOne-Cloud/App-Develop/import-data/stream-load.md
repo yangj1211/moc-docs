@@ -98,9 +98,9 @@ PyMySQL 是一个纯 Python MySQL 客户端库，下面将指导你如何使用 
 
     # Open database connection
     db = pymysql.connect(
-        host='host_ip_address',
+        host='freetier-01.cn-hangzhou.cluster.matrixonecloud.cn',
         port=6001,
-        user='tenant:user:role',
+        user='585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin',
         password = "your_password",
         db='test',
         )

@@ -37,7 +37,7 @@ __Note__: 使用 `Load data local` 命令时，数据文件需位于执行该语
 3. 使用 MySQL 客户端连接 MatrixOne Cloud，例如：
 
     ```
-    mysql -h moc.cluster.matrixonecloud.cn -P 6001 -u a123456b_78cd_9e12_fg34_abcd5d6789ef:admin:accountadmin  -p --local-infile
+    mysql -h freetier-01.cn-hangzhou.cluster.matrixonecloud.cn -P 6001 -u 585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin  -p --local-infile
     ```
 
 4. 在 MySQL 客户端中执行 `LOAD DATA LOCAL` 命令：

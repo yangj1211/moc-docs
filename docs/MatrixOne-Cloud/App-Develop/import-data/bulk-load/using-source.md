@@ -49,7 +49,7 @@ mysql> source /YOUR_PATH/a.sql
 如果 *sql* 文件较大，可以使用如下命令在后台运行导入任务：
 
 ```
-nohup mysql -h moc.cluster.matrixonecloud.cn -P 6001 -u a123456b_78cd_9e12_fg34_abcd5d6789ef:admin:accountadmin  -p'$pwd' -e 'use dbname; source /YOUR_PATH/a.sql;' &
+nohup mysql -h freetier-01.cn-hangzhou.cluster.matrixonecloud.cn -P 6001 -u 585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin  -p'$pwd' -e 'use dbname; source /YOUR_PATH/a.sql;' &
 ```
 
 #### 3. 检查数据

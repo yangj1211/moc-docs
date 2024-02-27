@@ -46,9 +46,9 @@
 import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
-        host='moc.cluster.matrixonecloud.cn',
+        host='freetier-01.cn-hangzhou.cluster.matrixonecloud.cn',
         port=6001,
-        user='tenant:user:role',
+        user='585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin',
         password = "passwd",
         db='test',
         cursorclass=pymysql.cursors.DictCursor,
@@ -110,9 +110,9 @@ PRIMARY KEY (`id`)
 import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
-        host='moc.cluster.matrixonecloud.cn',
+        host='freetier-01.cn-hangzhou.cluster.matrixonecloud.cn',
         port=6001,
-        user='tenant:user:role',
+        user='585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin',
         password = "passwd",
         db='test',
         cursorclass=pymysql.cursors.DictCursor,
@@ -167,9 +167,9 @@ mysql> select * from cars;
 import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
-        host='moc.cluster.matrixonecloud.cn',
+        host='freetier-01.cn-hangzhou.cluster.matrixonecloud.cn',
         port=6001,
-        user='tenant:user:role',
+        user='585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin',
         password = "passwd",
         db='test',
         cursorclass=pymysql.cursors.DictCursor,
@@ -212,9 +212,9 @@ with SQL_CONNECTION.cursor() as cursor:
 import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
-        host='moc.cluster.matrixonecloud.cn',
+        host='freetier-01.cn-hangzhou.cluster.matrixonecloud.cn',
         port=6001,
-        user='tenant:user:role',
+        user='585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin',
         password = "passwd",
         db='test',
         cursorclass=pymysql.cursors.DictCursor,
@@ -270,9 +270,9 @@ mysql> select * from cars;
 import pymysql.cursors
 
 SQL_CONNECTION = pymysql.connect(
-        host='moc.cluster.matrixonecloud.cn',
+        host='freetier-01.cn-hangzhou.cluster.matrixonecloud.cn',
         port=6001,
-        user='tenant:user:role',
+        user='585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin',
         password = "passwd",
         db='test',
         cursorclass=pymysql.cursors.DictCursor,

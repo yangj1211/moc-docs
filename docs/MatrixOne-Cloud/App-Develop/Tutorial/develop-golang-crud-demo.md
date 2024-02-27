@@ -49,8 +49,8 @@
 
     func main() {
        //Open a new connection to MatrixOne Cloud
-        username := "tenant:user:role"  // modify this
-        host := "host_ip_address"       // modify this
+        username := "585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin"  // modify this
+        host := "freetier-01.cn-hangzhou.cluster.matrixonecloud.cn"       // modify this
         password := "your_password"     // modify this
         port := 6001
         database := "test"              

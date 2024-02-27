@@ -40,6 +40,6 @@ Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行�
 
   ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/src_history_4.png)
 
-若想了解更多 MatrixOne 对于保存查询结果的支持，请查看[保存查询结果支持](https://docs.matrixorigin.cn/1.1.0/MatrixOne/Reference/Variable/system-variables/save_query_result/#_2)。
+若想了解更多 MatrixOne 对于保存查询结果的支持，请查看[保存查询结果支持](https://docs.matrixorigin.cn/1.1.1/MatrixOne/Reference/Variable/system-variables/save_query_result/#_2)。
 
 现在，您已经了解如何访问 SQL 查询历史，筛选查询记录，并查看详细的查询信息。这将有助于您监测和审计 SQL 查询，以确保数据库的正常运行和安全性。

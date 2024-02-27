@@ -47,9 +47,9 @@ PyMySQL 是一个 Python 的 MySQL 客户端库。
 
     # Open database connection
     db = pymysql.connect(
-            host='host_ip_address',
+            host='freetier-01.cn-hangzhou.cluster.matrixonecloud.cn',
             port=6001,
-            user='tenant:user:role',
+            user='585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin',
             password = "your_password",
             db='test',
             )
@@ -72,7 +72,7 @@ PyMySQL 是一个 Python 的 MySQL 客户端库。
 
     ```
     > python3 pymysql_connect_matrixonecloud.py
-    Database version : 8.0.30-MatrixOne-v1.0.0-rc1
+    Database version : 8.0.30-MatrixOne-v1.1.1
     ```
 
 ## 使用 sqlalchemy 连接 MatrixOne Cloud
@@ -107,8 +107,8 @@ SQLAlchemy 是 Python SQL 工具包和对象关系映射器 (ORM)，它为应用
     import pymysql
 
     # database Config
-    HOST_NAME="host_ip_address"
-    USER_NAME="tenant:user:role"
+    HOST_NAME="freetier-01.cn-hangzhou.cluster.matrixonecloud.cn"
+    USER_NAME="585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin"
     PASSWORD="your_password"
     DATABASE="test"
     PORT=6001
