@@ -35,9 +35,9 @@ MatrixOne 中推荐配置如下：
 ```
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 # please modify host_ip_address
-spring.datasource.url=jdbc:mysql://host_ip_address:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
+spring.datasource.url=jdbc:mysql://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
 # please modify tenant:user:role 
-spring.datasource.username=tenant:user:role 
+spring.datasource.username=585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin
 # please modify your_password
 spring.datasource.password=your_password
 mybatis.mapper-locations=classpath:mapping/*xml
@@ -90,9 +90,9 @@ MatrixOne 中推荐配置如下：
 ```
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 # please modify host_ip_address
-spring.datasource.url=jdbc:mysql://host_ip_address:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
+spring.datasource.url=jdbc:mysql://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn:6001/test?characterSetResults=UTF-8&continueBatchOnError=false&useServerPrepStmts=true&alwaysSendSetIsolation=false&useLocalSessionState=true&zeroDateTimeBehavior=CONVERT_TO_NULL&failoverReadOnly=false&serverTimezone=Asia/Shanghai&socketTimeout=30000
 # please modify tenant:user:role 
-spring.datasource.username=tenant:user:role 
+spring.datasource.username=585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin 
 # please modify your_password
 spring.datasource.password=your_password
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQLDialect

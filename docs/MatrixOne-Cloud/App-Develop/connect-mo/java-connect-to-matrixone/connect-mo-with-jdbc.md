@@ -63,8 +63,8 @@
     public class Main {
 
 
-        private static String jdbcURL = "jdbc:mysql://host_ip_address:6001/test";
-        private static String jdbcUsername = "tenant:user:role";
+        private static String jdbcURL = "jdbc:mysql://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn:6001/test";
+        private static String jdbcUsername = "585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin";
         private static String jdbcPassword = "your_password";
 
         public static void main(String[] args) {
