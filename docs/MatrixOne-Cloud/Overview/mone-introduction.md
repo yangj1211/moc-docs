@@ -11,7 +11,9 @@ AI 框架我们采用的是 LangChain，Embedding 使用了 OpenAI Embedding 模
 
 整体流程如下图所示：
 
-![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/overview/mone-1.png)
+<div align="center">
+<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/overview/mone-1.png width=70% heigth=70%/>
+</div>
 
 ## 如何使用 MOne
 
@@ -21,4 +23,4 @@ AI 框架我们采用的是 LangChain，Embedding 使用了 OpenAI Embedding 模
 
 进入提问页面后，您可以点击具体某个推荐问题直接进入应用对话交互，也可提问其它您想了解的与 MatrixOne 有关的问题。我们还提供了答案一键复制的功能，当您获取到您想要的信息，只需点击答案右下角的复制图标即可进行一键复制。如果您对 MOne 助手提供的答案感到满意，也可以给我们点一个赞哦。
 !!! note
-    MOne 助手只能回答与 MatrixOne 相关的产品问题，且问题字数不能超过 200。
+    MOne 助手是基于 LLM 模型开发的，由于 LLM 模型可能存在的一些缺陷，在某些场景下，MOne 助手可能会出现回答不佳的情况。此外，MOne 助手只能回答与 MatrixOne 相关的产品问题，且问题字数不能超过 200。
