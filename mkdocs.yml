@@ -84,10 +84,11 @@ nav:
         - 公共表表达式: MatrixOne-Cloud/App-Develop/read-data/cte.md
       - 应用开发示例:
         - Java 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/develop-java-crud-demo.md
+        - Python 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/develop-python-crud-demo.md
         - SpringBoot 和 JPA 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/springboot-hibernate-crud-demo.md
         - SpringBoot 和 MyBatis 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/springboot-mybatis-crud-demo.md
-        - Python 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/develop-python-crud-demo.md
         - SQLAlchemy 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/sqlalchemy-python-crud-demo.md
+        - Django 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/django-python-crud-demo.md
         - Golang 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/develop-golang-crud-demo.md
         - Gorm 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/gorm-golang-crud-demo.md
       - 事务:
