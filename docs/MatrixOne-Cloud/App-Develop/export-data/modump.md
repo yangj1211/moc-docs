@@ -28,13 +28,15 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 
 - **-net-buffer-length [数据包大小]**: 数据包大小，即 SQL 语句字符的总大小。数据包是 SQL 导出数据的基本单位，如果不设置参数，则默认 1048576 Byte（1M），最大可设置 16777216 Byte（16M）。假如这里的参数设置为 16777216 Byte（16M），那么，当要导出大于 16M 的数据时，会把数据拆分成多个 16M 的数据包，除最后一个数据包之外，其它数据包大小都为 16M。
 
-- **-no-data**: 当在命令中显式指定该项时仅导出数据库/包的创建语句，不导出数据。
+- **-no-data**: 默认值为 false。当设置为 true 时表示不导出数据，仅导出表结构。
 
-- **-csv**：当在命令中显式指定该项时表示导出数据为 *CSV* 格式。
+- **-csv**：默认值为 false。当设置为 true 时表示导出的数据为 csv 格式，生成数据库和表结构以及导入的 SQL 语句将会保存在生成的 sql 文件中，而数据则导出到当前目录下生成的 ${databaseName} _${tableName}. csv 文件中。
 
-- **-csv-field-delimiter [","]**: 设置 csv 字段分隔符，仅支持一个 utf8 字符，默认值为“,”。该项仅当设置导出数据格式为“csv”时启用。
+- **--local-infile**：默认值为 true，仅在参数 -csv 设置为 true 时生效。当参数为 true 时，mo-dump 输出的 sql 文件脚本中为 LOAD DATA LOCAL INFILE。当参数为 false 时，mo-dump 输出的 sql 文件脚本中为 LOAD DATA INFILE。
 
-- **-tbl [表名]**：可选参数。如果参数为空，则导出整个数据库。如果要备份指定表，则可以在命令中添加参数 `-tbl` 和 `tableName`。如果指定多个表，表名之间用 `,` 分隔。
+- **-tbl [tableName]**：可选参数。如果参数为空，则导出整个数据库。如果要备份指定表，则可以在命令中添加参数 `-tbl` 和 `tableName`。如果指定多个表，表名之间用 `,` 分隔。
+
+- **> {importStatement.sql}**：将输出的 SQL 语句存储到文件 *importStatement.sql* 中，否则在屏幕上输出。
 
 ## 如何使用 `mo-dump`
 
