@@ -273,8 +273,8 @@ nav:
             - EXECUTE: MatrixOne-Cloud/Reference/SQL-Reference/Other/Prepared-Statements/execute.md
             - DEALLOCATE: MatrixOne-Cloud/Reference/SQL-Reference/Other/Prepared-Statements/deallocate.md
           - Explain:
-            - EXPLAIN: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain.md
-            - EXPLAIN Output Format: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain-workflow.md
+            - Explain: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain.md
+            - Explain 输出格式: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain-workflow.md
             - Explain Analyze: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain-analyze.md
       - 函数与操作符:
         - 运算符:

@@ -31,56 +31,18 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 ![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history-2.png)
 
-该界面展示了 TPCH Q1 的整个执行过程，总共分为了 4 个算子：表扫描 (Table Scan)，聚合 (Aggregate)，排序 (Sort) 及投影 (Project)。
+该界面展示了 TPCH Q1 的整个执行过程，总共分为了 4 个计划节点：表扫描 (Table Scan)，聚合 (Aggregate)，排序 (Sort) 及投影 (Project)。
 
-箭头的方向代表了执行的步骤，首先我们会对 `mo_sample_data_tpch_sf10.lineitem` 这张表进行扫描 (Table Scan)，筛选出特定条件的数据，从图中可知道符合条件的数据为 `58,682,142` 行，这些数据作为下一个算子的输入，然后经过聚合 (Aggregate) 运算后输出 `4` 行，再对这 `4` 行数据根据指定字段进行排序 (Sort)，最后从表里选择你所要的列，即进行投影 (Project) 运算。
+箭头的方向代表了执行的步骤，首先我们会对 `mo_sample_data_tpch_sf10.lineitem` 这张表进行扫描 (Table Scan)，筛选出特定条件的数据，从图中可知道符合条件的数据为 `58,682,142` 行，这些数据作为下一个节点的输入，然后经过聚合 (Aggregate) 运算后输出 `4` 行，再对这 `4` 行数据根据指定字段进行排序 (Sort)，最后从表里选择你所要的列，即进行投影 (Project) 运算。
 
-我们可以看到，在每一个算子块上我们都表明了它的操作对象，执行细节及所消耗的 CPU 和内存资源。如 Table Scan 算子，我们可以看到它的操作对象是 `mo_sample_data_tpch_sf10.lineitem` 这张表，同时这个操作消耗的 CPU 资源是 `1.6 core*s`，内存则消耗了 `4.7GB`, 这些资源消耗即是我们计算 CU 消耗的基础。我们会根据一定的算法加总所有步骤所消耗的 CPU 和内存资源，即得到这条 Query 消耗的 CU 个数。
+我们可以看到，在每一个节点块上我们都表明了它的操作对象，执行细节及所消耗的 CPU 和内存资源。如 Table Scan 节点，我们可以看到它的操作对象是 `mo_sample_data_tpch_sf10.lineitem` 这张表，同时这个操作消耗的 CPU 资源是 `1.6 core*s`，内存则消耗了 `4.7GB`, 这些资源消耗即是我们计算 CU 消耗的基础。我们会根据一定的算法加总所有步骤所消耗的 CPU 和内存资源，即得到这条 Query 消耗的 CU 个数。
 
-如果我们再选中点击 Table Scan 算子方块，我们将看到 Table Scan 算子执行的更多细节，如下图：
+如果我们再选中点击 Table Scan 节点块，我们将看到 Table Scan 节点执行的更多细节，如下图：
 
 ![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history-3.png)
 
-在该案例中我们可以看到 Table Scan 算子执行的过程中选中的是 18 个列中的 7 个 `（l_quantity, l_extendedprice, l_discount, l_tax, l_returnflag, l_linestatus, l_shipdate）`，另外还包含了一个过滤的条件 `(lineitem.l_shipdate <= 1998-08-11)`。
-
-## MatrixOne 的算子
-
-MatrixOne 目前拥有以下算子：
-
-| 算子名称                     | 算子含义                                                          |
-| ----------------------------| --------------------------------------------------------------- |
-| Values Scan	              | 处理值的扫描|
-| Table Scan	              | 从表中扫描数据|
-| Function Scan	              | 通过表函数生成数据|
-| External Scan	              | 处理外部的数据扫描|
-| Project	                  | 对数据进行投影运算|
-| Sink	                      | 发送数据到某个/些 pipeline|
-| Sink Scan                   | 从 pipeline 接收数据|
-| Recursive Scan	          | 递归读取数据|
-| Aggregate	                  | 对数据进行聚合|
-| Filter	                  | 对数据进行过滤|
-| Join	                      | 对数据进行连接运算|
-| Sample                      |	对数据进行抽样|
-| Sort	                      | 对数据进行排序|
-| Union	                      | 对两个或多个查询的结果集组合|
-| Union All	                  | 对两个或多个查询的结果集组合，包括重复行|
-| Window	                  | 对数据进行范围窗口计算|
-| Insert	                  | 对数据进行插入|
-| Delete	                  | 对数据进行删除|
-| Lock Operator	              | 对操作的数据上锁|
-| Intersect                   | 对两个或多个查询的都存在的行组合|
-| Intersect All	              | 对两个或多个查询的都存在的行组合，包括重复行|
-| Minus	                      | 比较两个查询的结果，返回存在于第一个查询而在第二个查询中不存在的行|
-| On Duplicate Key	          | 对重复的数据进行更新|
-| Pre Insert	              | 整理要写入的数据|
-| Pre Delete	              | 整理要删除的数据|
-| Pre Insert Unique	          | 整理要写入到唯一键隐藏表的数据|
-| Pre Insert 2nd Key	      | 整理要写入到次级索引隐藏表的数据|
-| Time window	              | 对数据进行时间窗口计算|
-| Fill	                      | 对数据进行填充|
-| Partition	                  | 对数据进行排序，并按值切分|
-| Fuzzy filter	              | 对写入/更新的数据进行去重|
+在该案例中我们可以看到 Table Scan 节点执行的过程中选中的是 18 个列中的 7 个 `（l_quantity, l_extendedprice, l_discount, l_tax, l_returnflag, l_linestatus, l_shipdate）`，另外还包含了一个过滤的条件 `(lineitem.l_shipdate <= 1998-08-11)`。
 
 ## 理解 MatrixOne 的执行计划
 
-对于更详细的 MatrixOne 的执行计划的细节，请参考 [Explain](../../Reference/SQL-Reference/Other/Explain/explain.md) 的参考手册。
+对于更详细的 MatrixOne 的执行计划的细节和节点类型，请参考 [Explain](../../Reference/SQL-Reference/Other/Explain/explain.md)和[Explain 输出格式](../../Reference/SQL-Reference/Other/Explain/explain-workflow.md)相关章节说明。
