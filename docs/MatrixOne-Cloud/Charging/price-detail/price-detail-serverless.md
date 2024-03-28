@@ -2,17 +2,7 @@
 
 ## 关于 Compute Unit(CU)
 
-Compute Unit（简称 CU）是 MatrixOne Cloud Serverless 实例的计算资源开销的基本单位，包含 CPU、Memory 和 S3 I/O 的消耗量。其中，CPU 用量 和 Memory 用量 是指在一段时间内的资源消耗，我们将举一个简单的例子帮助你理解这两者的用量计算。
-
-假设一条 SQL 执行了 10s，我们用二维时序图来表示这条 SQL 在 10s 内的内存的用量曲线，则图中阴影面积即为它的 Memory/CPU 用量。
-
-- Memory
-
- <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/charing/memory.png" />
-
-- CPU
-
- <img src="https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/charing/cpu.png"  />
+Compute Unit（简称 CU）是 MatrixOne Cloud Serverless 实例的计算资源开销的基本单位，包含 CPU、Memory 和 S3 I/O 的消耗量。其中，CPU 用量 和 Memory 用量 是指在一段时间内的资源消耗。
 
 以下为 CU 的计费原则：
 
