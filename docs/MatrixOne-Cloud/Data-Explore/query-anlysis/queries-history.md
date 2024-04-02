@@ -8,13 +8,11 @@
 
 2. 在 MatrixOne Cloud 数据库管理平台中，找到左侧菜单栏中的**查询历史**模块。点击以进入 SQL 查询历史页面。
 
-在此页面，您可以设置特定筛选条件，如数据库、状态、查询类型，以及更多的筛选条件，如 SQL 文本、执行时间、时间范围等，以缩小查询范围，快速定位到特定条件下的 SQL 查询记录。点击**搜索**按钮，以筛选出符合特定条件的查询记录列表。
+在此页面，默认显示最近两小时内的查询历史，您可以设置特定筛选条件，如 SQL 类型、时间以及更多的筛选条件，如 SQL 文本、时长、数据库等，以缩小查询范围，快速定位到特定条件下的 SQL 查询记录。点击**搜索**按钮，以筛选出符合特定条件的查询记录列表。
 !!! note
     当开启 SQL 文本作为筛选条件时，请注意区分大小写。
 
-   ![查询历史页面](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/src_history_1.png)
-
-Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行时间、状态、SQL 类型、开始时间、用户和 CU。
+   ![查询历史页面](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/query_history_0.12_1.png)
 
 在 **SQL 文本**列您可以看到部分 SQL 前面会有 "/ *x queries*/" 的标志，这是因为记录查询历史的表信息量较大。为了提高查询速度，我们将超轻量级的 tp sqls 按以下规则聚合记录：
 
@@ -28,7 +26,7 @@ Queries 列表支持显示多个字段，包括 SQL 文本、查询 ID、执行�
 
 作为 MatrixOne 的云上数据库管理平台，MatrixOne Cloud 为用户提供了数据库信息的界面化展示，在实例平台上的任何操作获得的信息都是从数据库中获取的，也就是说在平台的所有操作都会产生 SQL 从而消耗 CU。但是由于考虑到用户可能更关心业务方面的 SQL，为了给用户更好的观测体验，平台上非用户操作的 SQL（除了 SQL Editor 执行的 SQL）在查询历史中默认是不显示的。对于生产实例来说，平台上非用户操作产生的 CU 也是收费的，可在筛选项中开启**非用户执行**选项来查看这部分 SQL 的详细信息。
 
-![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/src_history_2.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/query_history_0.12_2.png)
 
 ## SQL 查询详情
 
