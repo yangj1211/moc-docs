@@ -6,9 +6,7 @@
 
 实例监控指标是服务于 MatrixOne Cloud 实例管理平台的运维人员的监控信息，您可以点击右上角的实例名列表来切换您想了解的实例信息，包括：平均连接数，CU 使用量和存储用量。对于 CU 和存储的使用信息您也可以直接点击实例界面您想了解的实例，跳转至实例详情中查看。
 
-<div align="center">
-<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitor-6.png width=80% heigth=80%/>
-</div>
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitor_0.12_3.png)
 
 - 平均连接数
 
@@ -16,7 +14,7 @@
 
 - CU 使用量
 
-在统计周期内，CU 消耗的总量。为确保准确性，CU 的使用量统计会有 6 分钟的延迟，因此最新的监控数据都是 0。例如您在 12:00 操作消耗的 CU，当前（12:00）会显示 CU 消耗量为 0，在 12:06 的时候刻度线 12:00 处才会呈现 CU 消耗的波动。
+在统计周期内，CU 消耗的总量。
 
 - 存储用量
 
@@ -26,15 +24,19 @@
 
 业务监控指标是服务于数据应用人员的监控信息，可以在 MatrixOne Cloud 数据库管理平台中找到，其中包括：
 
-![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitor-2.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitor_0.12_1.png)
 
 - 每秒查询次数 (QPS)
 
-平均每秒完成的 SQL 查询数量，代表实例的吞吐能力，支持按 SQL 类型进行统计。
+平均每秒完成的 SQL 查询数量，代表实例的吞吐能力。
+
+- 每秒查询事务数 (TPS)
+
+平均每秒完成的事务查询数量，反映了数据库在单位时间内处理事务的能力。
 
 - 查询延迟
 
-平均每条 SQL 查询的执行时间，代表实例的运行性能，同样支持按 SQL 类型进行统计。
+平均每条 SQL 查询的执行时间，代表实例的运行性能，按 SQL 类型进行统计。
 
 - 事务总数
 
@@ -54,14 +56,11 @@
 
 ## 统计时长与统计周期
 
-为了帮助用户从宏观和微观角度分析实例的性能和问题，MatrixOne Cloud 提供了多种统计时长，每种时长对应不同的统计周期。用户可以根据需要自由切换。以下是统计时长与统计周期的映射关系：
+为了帮助用户从宏观和微观角度分析实例的性能和问题，MatrixOne Cloud 提供了多种统计时长，每种时长对应不同的统计周期，默认显示最近 30 分钟的监控数据，用户可以根据需要自由切换。如下图所示：
 
-- Last 30 minutes：1 分钟
-- Last 1 hour：5 分钟
-- Last 6 hours：30 分钟
-- Last 1 day：1 小时
-- Last 1 week：6 小时
-- Last 1 month：1 天
+<div align="center">
+<img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitor_0.12_2.png width=60% heigth=60%/>
+</div>
 
 !!! note
     较短的统计周期更能反映业务的最近变化，而较长的统计周期更适合观察长期趋势和历史问题。
