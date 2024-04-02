@@ -2,7 +2,7 @@
 
 ## CU
 
-Compute Unit（简称 CU）是 MatrixOne Cloud Serverless 实例的计算资源开销的基本单位，每个 SQL 查询都会消耗一定数量的 CU，它包含 CPU、Memory 和对象存储 I/O 的消耗量。
+Compute Unit（简称 CU）是 MatrixOne Cloud Serverless 实例的计算资源开销的基本单位，每个 SQL 查询都会消耗一定数量的 CU，它包含 CPU、Memory、对象存储 I/O 和公网流量的消耗量。
 
 我们定义 1 个 CU 计算资源消耗量 = MO 读取 32KB 数据所消耗的计算资源。以下为 CU 消费数量与其包含资源的对应信息：
 
