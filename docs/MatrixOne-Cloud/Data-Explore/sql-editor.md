@@ -10,9 +10,9 @@ SQL 编辑器是 MatrixOne cloud 平台非常重要的一个工具，你可以�
 
 SQL 编辑器模块的页面由 3 部分构成。
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sqleditor-1.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sql_editor_0.12_1.png)
 
-- **左侧区域**：显示当前实例已有的数据库表和 Workbook，你可以快速查看和复制所关注的数据库名、表名、列名和已保存在 Workbook 中的 SQL 语句。
+- **左侧区域**：显示当前实例已有的数据库表和工作薄，你可以快速查看和复制所关注的数据库名、表名、列名和已保存在工作薄中的 SQL 语句，点击左上角的角标可对左侧区域进行隐藏。
 
 - **右上区域**：SQL 语句编辑区域。你可以在这个区域快速输入、编辑和执行 SQL 语句。
 
@@ -29,7 +29,7 @@ SQL 编辑器模块的页面由 3 部分构成。
 SQL 编辑器支持快速导入数据，启动数据分析。点击**导入数据**，即可启动导向式数据导入流程。
 
 MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据和导入自有数据。
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image-1.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sql_editor_0.12_2.png)
 
 - 导入样例数据：平台将提供典型开源数据集和互动式数据导入指引，无需准备数据即可体验 MatrixOne Cloud 的核心产品功能。现阶段已支持 TPC-H Benchmark 样例数据。
 
@@ -41,7 +41,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 
 在 SQL 编辑器中进行 SQL 语句编写过程中，开发者经常需要查看目标库表中的数据结构和数据类型，提升 SQL 语句编写的效率和准确性。
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image-4.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sql_editor_0.12_3.png)
 
 在左侧 Database 区域，当前实例的数据库和数据表将以树形结构呈现，你可以详细查看各个数据库的表结构及各个数据表中的数据类型，同时也可以复制需要的数据库名、表名和列名，快速在编辑器中粘贴使用。
 
@@ -54,7 +54,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 
 进一步输入想要查询的 SQL 语句，点击执行按钮，MatrixOne Cloud 将直接在线执行对应 SQL 请求。
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image-5.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sql_editor_0.12_4.png)
 
 - 支持使用光标选中部分 SQL 执行，平台将会按顺序执行这些 SQL。
 - 若光标位于 SQL 语句内，则执行该 SQL。
@@ -85,7 +85,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 
 每个 Workbook 都支持多个版本，你每次编辑将生成草稿版本，点击执行后将保存为正式版本。
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image-6.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sql_editor_0.12_5.png)
 
 !!! note
     每个 SQL User 最多可建 100 个 Workbook，每个 Workbook 将保存最近 25 个版本。
