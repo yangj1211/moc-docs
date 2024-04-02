@@ -23,7 +23,7 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 在查询历史中找到您想了解的 Query，这里我们以系统自带的 TPCH10G 数据集的 Q1 为例，如下图所示：
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/history-1.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/query_history_0.12_3.png)
 
 ## 查看该 Query 的查询分析
 
