@@ -1,32 +1,50 @@
 # Serverless 生产实例价格明细
 
-## 关于 Compute Unit(CU)
+## CU
 
-Compute Unit（简称 CU）是 MatrixOne Cloud Serverless 实例的计算资源开销的基本单位，包含 CPU、Memory 和 S3 I/O 的消耗量。其中，CPU 用量 和 Memory 用量 是指在一段时间内的资源消耗。
+Compute Unit（简称 CU）是 MatrixOne Cloud Serverless 实例的计算资源开销的基本单位，每个 SQL 查询都会消耗一定数量的 CU，它包含 CPU、Memory 和对象存储 I/O 的消耗量。
 
-以下为 CU 的计费原则：
+我们定义 1 个 CU 计算资源消耗量 = MO 读取 32KB 数据所消耗的计算资源。以下为 CU 消费数量与其包含资源的对应信息：
 
-| 计费项    | 计费原则           |
-| -------- | ------------------|
-| CPU      | CN 节点按使用量计费  |
-| Memory   | CN 节点按使用量计费  |
-| I/O      | 按 S3 I/O 次数收费        |
+<table>
+  <tr>
+    <th>类型</th>
+    <th>消耗量</th>
+    <th>消费 CU 数</th>
+  </tr>
+  <tr>
+    <td >CPU</td>
+    <td>1 ms*core</td>
+    <td>0.052</td>
+  </tr>
+  <tr>
+    <td >Memory</td>
+    <td>1 GB*s </td>
+    <td>10.9 </td>
+  </tr>
+  <tr>
+    <td >Network（公网）</td>
+    <td>1 KB Network egress</td>
+    <td> 0.74</td>
+  </tr>
+  <tr>
+    <td> Network（私网</td>
+    <td>1 KB Network egress</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td rowspan="2" style="vertical-align: middle;">Storage I/O</td>
+    <td>1 storage read request </td>
+    <td> 0.97 </td>
+  </tr>
+  <tr>
+    <td>1 storage write request</td>
+    <td>0.97</td>
+  </tr>
+</table>
 
-## 价格详情
+目前，MO Cloud 的 CU 定价为 **¥1/10 万-CUs**。
 
-- CU
-
-我们定义 1 个 CU 计算资源消耗量 = MO 读取 40KB 数据所消耗的计算资源。下面是 CU 的价格详情：
-
-| 资源      | 单价                     |
-| -------- | ------------------------ |
-| CPU      |  ¥5.37E-14/per core*ns   |
-| Memory   |  ¥1.05E-23/per byte*ns   |
-| Input    |  ¥1.00E-06/次            |
-| Output   |  ¥1.00E-06/次            |
-
-目前，MO Cloud 的 CU 定价为 **¥10/100 万-CUs**。
-
-- 存储
+## 存储
 
 数据存储是指用户在 MatrixOne Cloud 实例中存入的数据大小，MO Cloud 的存储定价为 **¥0.15/GiB-月**。
