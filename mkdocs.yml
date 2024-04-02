@@ -105,7 +105,9 @@ nav:
             - 使用指南: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/how-to-use.md
             - 应用场景: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/scenario.md
     - 管理实例:
-      - 创建实例: MatrixOne-Cloud/Instance-Mgmt/create-instance.md
+      - 创建实例:
+        - 创建 Serverless 实例: MatrixOne-Cloud/Instance-Mgmt/create-instance/create-serverless-instance.md
+        - 创建 Standard 实例: MatrixOne-Cloud/Instance-Mgmt/create-instance/create-standard-instance.md
       - 连接实例: MatrixOne-Cloud/Instance-Mgmt/connect-instance.md
       - 登录实例: MatrixOne-Cloud/Instance-Mgmt/login-instance.md
       - 终止和恢复实例: MatrixOne-Cloud/Instance-Mgmt/terminate-recovery-instance.md
