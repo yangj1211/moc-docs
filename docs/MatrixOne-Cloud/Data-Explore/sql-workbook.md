@@ -8,7 +8,7 @@
 
 每个工作簿都支持多个版本，你每次编辑将生成草稿版本，点击执行后将保存为正式版本。
 
-![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/image-6.png)
+![Alt text](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sql_editor_0.12_5.png)
 
 !!! note
     每个 SQL User 最多可建 100 个工作簿，每个工作簿将保存最近 25 个版本。
