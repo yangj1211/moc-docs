@@ -76,4 +76,4 @@ class Program
 
 ## 参考文档
 
-关于使用 C# 通过 MatrixOne 构建一个简单的 CRUD 的示例，参见 [C# 基础示例](../../Tutorial/c-net-crud-demo.md)。
+关于使用 C# 通过 MatrixOne 构建一个简单的 CRUD 的示例，参见 [C# 基础示例](../Tutorial/c-net-crud-demo.md)。
