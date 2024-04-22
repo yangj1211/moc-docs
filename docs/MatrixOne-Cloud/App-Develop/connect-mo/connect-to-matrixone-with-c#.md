@@ -2,7 +2,7 @@
 
 MatrixOne Cloud 支持 C# 连接，并且支持 MySQL Connector/NET 驱动。
 
-本篇文档将指导你了解如何使用 C# 连接 MatrixOne。
+本篇文档将指导你了解如何使用 C# 连接 MatrixOne  Cloud。
 
 ## 开始前准备
 
@@ -45,7 +45,7 @@ class Program
     static void Main(string[] args)
     {
         Program n =new Program();
-        string connectionString = "server=127.0.0.1;user=root;database=test;port=6001;password=111";
+        string connectionString = "server=freetier-01.cn-hangzhou.cluster.matrixonecloud.cn;user=585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin;database=test;port=6001;password=xxx";
         using (MySqlConnection connection = new MySqlConnection(connectionString))
         {
             try{
