@@ -9,7 +9,7 @@
 
 在阅读本页面之前，你需要准备以下事项：
 
-- 已完成[创建实例](../../Instance-Mgmt/create-instance.md)。
+- 已完成[创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 - 了解什么是[数据库模式](overview.md)。
 
 ## 什么是数据库

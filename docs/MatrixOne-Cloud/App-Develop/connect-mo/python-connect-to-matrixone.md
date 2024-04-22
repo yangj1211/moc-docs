@@ -6,7 +6,7 @@ MatrixOne Cloud 支持 Python 连接，支持 `pymysql` 和 `sqlalchemy` 两种�
 
 ## 开始前准备
 
-- 已完成[创建实例](../../Instance-Mgmt/create-instance.md)。
+- 已完成[创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 
 - 已安装 [Python 3.8(or plus) version](https://www.python.org/downloads/)。
 

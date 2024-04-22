@@ -16,7 +16,7 @@
 
 在你开始之前，确认你已经下载并安装了如下软件：
 
-1. [创建实例](../../Instance-Mgmt/create-instance.md)。
+1. [创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 
 2. 通过 MySQL 客户端连接 MatrixOne 并创建一个命名为 *test* 的数据库：
 

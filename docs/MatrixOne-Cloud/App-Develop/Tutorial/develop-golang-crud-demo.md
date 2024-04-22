@@ -6,7 +6,7 @@
 
 * 确认你已完成安装 MySQL 客户端。
 
-* 已完成[创建实例](../../Instance-Mgmt/create-instance.md)，并通过 MySQL 客户端连接 MatrixOne Cloud 并创建一个命名为 *test* 的数据库：
+* 已完成[创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)，并通过 MySQL 客户端连接 MatrixOne Cloud 并创建一个命名为 *test* 的数据库：
 
     ```sql
     mysql> create database test;

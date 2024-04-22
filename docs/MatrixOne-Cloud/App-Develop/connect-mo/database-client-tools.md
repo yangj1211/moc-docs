@@ -8,7 +8,7 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
 
 ## 前期准备
 
-- 已完成[创建实例](../../Instance-Mgmt/create-instance.md)。
+- 已完成[创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 - 已经[获取 MatrixOne Cloud 实例的连接命令](../../Instance-Mgmt/create-instance.md#_10)。
 - 默认为公网连接，若想使用私网连接请参考章节[私网连接]( ../../Security/private-link.md)完成配置。
 

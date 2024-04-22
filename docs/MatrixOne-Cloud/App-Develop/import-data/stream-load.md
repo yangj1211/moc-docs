@@ -35,7 +35,7 @@ INTO TABLE tbl_name;
 
 你可以使用 `LOAD DATA INLINE` 将流式数据导入 MatrixOne Cloud，本章将介绍如何进行流式导入，并且给出导入 *csv* 数据的示例。
 
-1. [创建 MatrixOne Cloud 实例](../../Instance-Mgmt/create-instance.md)。
+1. [创建 MatrixOne Cloud 实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 
 2. [通过 MySQL Client 连接 MatrixOne Cloud 服务](../connect-mo/database-client-tools.md#mysql-client-matrixone-cloud)。
 
@@ -65,7 +65,7 @@ INTO TABLE tbl_name;
 
 PyMySQL 是一个纯 Python MySQL 客户端库，下面将指导你如何使用 PyMySQL 进行 `LOAD DATA INLINE` 操作。
 
-1. [创建 MatrixOne Cloud 实例](../../Instance-Mgmt/create-instance.md)。
+1. [创建 MatrixOne Cloud 实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 
 2. [通过 MySQL Client 连接 MatrixOne Cloud 服务](../connect-mo/database-client-tools.md#mysql-client-matrixone-cloud)
 

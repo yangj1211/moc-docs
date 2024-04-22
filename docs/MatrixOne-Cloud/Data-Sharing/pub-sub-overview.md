@@ -64,7 +64,7 @@ MarixOne Cloud 为用户提供了实例间数据快速共享的功能，用户�
 
 ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-sharing/subpub.jpg)
 
-需要注意的是，你的实例 ID 可以通过 Mysql 连接串来获得，若你还未获得，[点此获取 MarixOne Cloud 实例的连接命令](../Instance-Mgmt/create-instance.md)。
+需要注意的是，你的实例 ID 可以通过 Mysql 连接串来获得，若你还未获得，[点此获取 MarixOne Cloud 实例的连接命令](../Instance-Mgmt/connect-instance.md)。
 
 你会获得类似这样的 Mysql 连接串：
 

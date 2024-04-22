@@ -20,7 +20,7 @@
 
 ### 1. 安装构建 MatrixOne
 
-1. [创建实例](../../Instance-Mgmt/create-instance.md)。
+1. [创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 
 2. 在 MySQL 客户端新建一个命名为 `test` 数据库。
 
