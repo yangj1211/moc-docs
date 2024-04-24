@@ -7,7 +7,7 @@
 
 在开始之前，请确保已经下载并安装了以下软件。
 
-* 已完成[创建实例](../../Instance-Mgmt/create-instance.md)，通过 MySQL 客户端创建数据库。
+* 已完成[创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)，通过 MySQL 客户端创建数据库。
 
 ```mysql
 mysql> create database test;

@@ -6,7 +6,7 @@
 
 使用 JDBC 连接 MatrixOne 前，需要完成以下下载安装任务：
 
-1. 已完成[创建实例](../../../Instance-Mgmt/create-instance.md)。
+1. 已完成[创建实例](../../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 2. 下载安装 [JDK 8+ version](https://www.oracle.com/sg/java/technologies/javase/javase8-archive-downloads.html)。
 3. 下载安装 [MySQL 客户端](https://dev.mysql.com/downloads/mysql/)。
 4. 下载安装 JAVA IDE，本篇文档以 [IntelliJ IDEA](https://www.jetbrains.com/idea/) 为例，你也可以下载其他 IDE 工具。

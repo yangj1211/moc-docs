@@ -34,7 +34,7 @@ SELECT ... FROM <query_name>;
 
 你需要确认在开始之前，已经完成了以下任务：
 
-- 已完成[创建实例](../../Instance-Mgmt/create-instance.md)。
+- 已完成[创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 
 ## CTE 语句使用示例
 

@@ -8,7 +8,7 @@
 
 在你开始之前，确认你已经下载并安装了如下软件：
 
-- 已完成[创建实例](../../Instance-Mgmt/create-instance.md)。
+- 已完成[创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 
 - 确认你已完成安装 [Python 3.8(or plus)](https://www.python.org/downloads/)。
 
