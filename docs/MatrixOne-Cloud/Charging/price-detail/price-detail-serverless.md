@@ -28,7 +28,7 @@ Compute Unit（简称 CU）是 MatrixOne Cloud Serverless 实例的计算资源�
     <td> 0.74</td>
   </tr>
   <tr>
-    <td> Network（私网</td>
+    <td> Network（私网）</td>
     <td>1 KB Network egress</td>
     <td>0</td>
   </tr>

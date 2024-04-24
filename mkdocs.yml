@@ -107,7 +107,7 @@ nav:
     - 管理实例:
       - 创建实例:
         - 创建 Serverless 实例: MatrixOne-Cloud/Instance-Mgmt/create-instance/create-serverless-instance.md
-        - 创建 Standard 实例: MatrixOne-Cloud/Instance-Mgmt/create-instance/create-standard-instance.md
+        - 创建标准实例: MatrixOne-Cloud/Instance-Mgmt/create-instance/create-standard-instance.md
       - 连接实例: MatrixOne-Cloud/Instance-Mgmt/connect-instance.md
       - 登录实例: MatrixOne-Cloud/Instance-Mgmt/login-instance.md
       - 终止和恢复实例: MatrixOne-Cloud/Instance-Mgmt/terminate-recovery-instance.md
@@ -133,7 +133,7 @@ nav:
       - 账单详情: MatrixOne-Cloud/Charging/bill-detail.md
       - 价格明细:
         - Serverless 生产实例: MatrixOne-Cloud/Charging/price-detail/price-detail-serverless.md
-        - Standard 实例: MatrixOne-Cloud/Charging/price-detail/price-detail-standard.md
+        - 标准实例: MatrixOne-Cloud/Charging/price-detail/price-detail-standard.md
     - 安全:
       - 身份访问控制: MatrixOne-Cloud/Security/Security-Permission-Overview.md
       - 网络访问控制:
