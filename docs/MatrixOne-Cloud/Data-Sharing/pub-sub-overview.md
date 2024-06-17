@@ -94,9 +94,9 @@ MatrixOne Cloud 为用户提供了集群内跨实例的数据分享功能，极�
 <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-sharing/pub-07.png width=90% heigth=90%/>
 </div>
 
-### 发布已删除发布对象的同名对象
+### 自动订阅同名发布
 
-发布者发布已删除发布对象的同名对象，之前的订阅者无需额外操作，即可连接至最新订阅对象。
+发布者删除发布，再创建同名发布，之前的订阅者无需额外操作，即可连接至最新订阅对象。
 
 <div align="center">
 <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-sharing/pub-08.png width=90% heigth=90%/>
@@ -109,14 +109,9 @@ MatrixOne Cloud 为用户提供了集群内跨实例的数据分享功能，极�
 
 - 只有 ACCOUNTADMIN 或 MOADMIN 角色可以创建发布与订阅。
 - 订阅端由 ACCOUNTADMIN 或 MOADMIN 角色操作访问订阅数据权限。
-- 发布和订阅只在数据库级别实现，目前还不支持直接进行表级别的发布和订阅。
+- 目前只支持数据库级别的发布订阅
 - 一次只能发布一个数据库。
-- 订阅端订阅库只具备读取权限。
-- 删除含有发布的租户需要先删除所有发布后才能删除租户
+- 目前只开放了订阅库读权限。
+- 删除租户前需要删除其所有发布。
 - 发布端不能删除已经发布的数据库。
 - 若发布端删除了发布，但订阅库中的对应对象仍存在，此时订阅端无法访问订阅对象，但可删除对应订阅。
-- 对于发布名称有以下说明：
-    - 组成：数字 0-9，英文字母大小写，_，$
-    - 长度：不大于 64 字符
-- 订阅名称规则和发布名称一致，但订阅名长度最长为 500 字符。
-  
