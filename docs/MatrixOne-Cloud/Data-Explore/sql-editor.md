@@ -84,7 +84,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 
 ### 图表
 
-MatrixOne Cloud 支持以图表形式展示的 SQL 查询结果，通过视觉化手段增强了数据的可访问性，是现代数据分析不可或缺的一部分。用户可以从结果列中挑选一列作为横轴进行数据分组，从结果列中选择多个列作为竖轴的聚合指标，同时为每项聚合指标单独配置相应的聚合运算。
+MatrixOne Cloud 支持以图表形式展示 SQL 查询结果，通过视觉化手段增强了数据的可访问性，是现代数据分析不可或缺的一部分。用户可以从结果列中挑选一列作为横轴进行数据分组，从结果列中选择多个列作为竖轴的聚合指标，同时为每项聚合指标单独配置相应的聚合运算。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sql_editor_0.13_1.png width=70% heigth=70%/>
