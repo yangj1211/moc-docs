@@ -128,6 +128,7 @@ nav:
     - 监控:
       - 监控指标: MatrixOne-Cloud/Monitor/Monitoring.md
       - 监控数据: MatrixOne-Cloud/Monitor/Data-Monitoring.md
+    - 告警: MatrixOne-Cloud/Alarm/alarm-overview.md
     - 事件: MatrixOne-Cloud/Events/event.md
     - 计费:
       - 账户概览: MatrixOne-Cloud/Charging/account-overview.md
@@ -139,8 +140,7 @@ nav:
         - 标准实例: MatrixOne-Cloud/Charging/price-detail/price-detail-standard.md
       - 续费: MatrixOne-Cloud/Charging/renew.md
       - 变更配置: MatrixOne-Cloud/Charging/adjust-policy.md
-      - 退订说明: MatrixOne-Cloud/Charging/cancellation-policy.md
-      
+      - 退订说明: MatrixOne-Cloud/Charging/cancellation-policy.md    
     - 安全:
       - 身份访问控制: MatrixOne-Cloud/Security/Security-Permission-Overview.md
       - 网络访问控制:
