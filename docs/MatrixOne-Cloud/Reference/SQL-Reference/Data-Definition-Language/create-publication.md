@@ -1,39 +1,68 @@
-# **CREATE PUBLICATION**
+# **CREATE...FROM...PUBLICATION...**
 
 ## **语法说明**
 
-`CREATE PUBLICATION` 将一个新的发布添加到当前数据库中。
+`CREATE...FROM...PUBLICATION...` 是订阅方订阅一个由发布方创建的发布，用来获取发布方的共享数据。
 
 ## **语法结构**
 
 ```
-CREATE PUBLICATION pubname
-    DATABASE database_name ACCOUNT
-    [ { ALL
-    | account_name, [, ... ] }]
-    [ COMMENT 'string']
+CREATE DATABASE database_name
+FROM account_name
+PUBLICATION pubname;
 ```
 
 ## 语法解释
 
-- pubname：发布名称。发布名称必须与当前数据库中任何现有发布的名称不同。
-- database_name：当前实例下已存在的某个数据库名称。
-- account_name：可获取该发布的用户实例名称。
+- database_name：订阅方创建的数据库名称。
+- pubname：发布方已发布的发布名称。
+- account_name：可获取该发布的实例名称。
 
 ## **示例**
 
-```sql
--- MatrixOne Cloud 的某个用户实例创建发布给 MatrixOne Cloud 的另外两个用户实例 acc0 和 acc1, MatrixOne Cloud 的用户实例名一般为类似 5e18ef19_7f2a_4762_9626_f3444a529a87 的数字。
-mysql> create database t;
-mysql> create publication pub1 database t account acc0,acc1;
-Query OK, 0 rows affected (0.01 sec)
+1. **发布者**: 实例 A 创建数据库 mall 与表 customer 并发布此数据库为 pub_mall:
 
--- MatrixOne Cloud 的某个用户实例创建发布广播给整个 MatrixOne Cloud 同一 region 上的所有用户。
-mysql> create database t;
-mysql> create publication pub1 database t;
-Query OK, 0 rows affected (0.01 sec)
-```
+    ```sql
+    -- 实例 A
+    create database mall;
+    CREATE TABLE mall.customer (
+    customer_id INT,
+    customer_name VARCHAR(255)
+    );
+    create publication pub_mall database mall;
 
-## 限制
+    mysql> show publications;
+    +-------------+----------+---------------------+-------------+-------------+----------+
+    | publication | database | create_time         | update_time | sub_account | comments |
+    +-------------+----------+---------------------+-------------+-------------+----------+
+    | pub_mall    | mall     | 2024-05-27 09:02:49 | NULL        | *           |          |
+    +-------------+----------+---------------------+-------------+-------------+----------+
 
-MatrxiOne Cloud 当前仅支持一次发布一个 Database。
+    1 row in set (0.17 sec)
+    ```
+
+2. **订阅者**: 实例 B 和实例 C 都创建订阅库 sub_mall（订阅自实例 A 的 pub_mall），于是得到实例 A 数据库 mall 中的所有数据：
+
+    ```sql
+    -- 实例 B && 实例 C 
+    create database sub_mall from 018fb8d3_2b05_7be8_b526_bb62576dxxxx publication pub_mall;
+    use sub_mall;
+
+    mysql> show subscriptions;
+    +----------+--------------------------------------+--------------+---------------------+----------+---------------------+
+    | pub_name | pub_account                          | pub_database | pub_time            | sub_name | sub_time            |
+    +----------+--------------------------------------+--------------+---------------------+----------+---------------------+
+    | pub_mall | 018fb8d3_2b05_7be8_b526_bb62576dxxxx | mall         | 2024-05-27 09:02:49 | sub_mall | 2024-05-27 09:05:44 |
+    +----------+--------------------------------------+--------------+---------------------+----------+---------------------+
+    1 row in set (0.08 sec)
+
+    mysql> show tables;
+    +--------------------+
+    | Tables_in_sub_mall |
+    +--------------------+
+    | customer           |
+    +--------------------+
+    ```
+
+!!! note
+    如果需要取消订阅，可以直接删除已订阅的数据库名称，使用 [`DROP DATABASE`](drop-database.md)。

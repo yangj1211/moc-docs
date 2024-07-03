@@ -2,49 +2,68 @@
 
 ## **语法说明**
 
-`ALTER PUBLICATION` 将一个新的发布添加到当前数据库中。
+`ALTER PUBLICATION` 修改发布内容。
 
 ## **语法结构**
 
 ```
-ALTER PUBLICATION pubname ACCOUNT 
-    { ALL
-    | account_name, [, ... ]
-    | ADD account_name, [, ... ]
-    | DROP account_name, [, ... ]
-    [ COMMENT 'string']
+ALTER PUBLICATION pubname 
+    [ACCOUNT 
+            { ALL
+            | account_name, [, ... ]
+            | ADD account_name, [, ... ]
+            | DROP account_name, [, ... ]]
+    [COMMENT 'string']
+    [DATABASE database_name]
 ```
 
 ## 语法解释
 
 - pubname：已存在的发布名称。
 - account_name：可获取该发布的实例名称。
+- database_name：要修改成的发布库名称。
 
 ## **示例**
 
 ```sql
-create account acc0 admin_name 'root' identified by '111';
-create account acc1 admin_name 'root' identified by '111';
-create account acc2 admin_name 'root' identified by '111';
 create database t;
-create publication pub3 database t account acc0,acc1;
-mysql> alter publication pub3 account add accx;
-show create publication pub3;
-Query OK, 0 rows affected (0.00 sec)
+create publication pub3 database t account 018fb939_e13e_7941_90bb_2aa52796xxxx;
+alter publication pub3 account add 018fb99a_7c5a_78cb_8ac8_68881c12xxxx;
 
 mysql> show create publication pub3;
-+-------------+-----------------------------------------------------------------------+
-| Publication | Create Publication                                                    |
-+-------------+-----------------------------------------------------------------------+
-| pub3        | CREATE PUBLICATION `pub3` DATABASE `t` ACCOUNT `acc0`, `acc1`, `accx` |
-+-------------+-----------------------------------------------------------------------+
-1 row in set (0.01 sec)
++-------------+----------------------------------------------------------------------------------------------------------------------+
+| Publication | Create Publication                                                                                                   |
++-------------+----------------------------------------------------------------------------------------------------------------------+
+| pub3        | CREATE PUBLICATION pub3 DATABASE t ACCOUNT 018fb939_e13e_7941_90bb_2aa52796xxxx,018fb99a_7c5a_78cb_8ac8_68881c12xxxx |
++-------------+----------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.10 sec)
 
 mysql> show publications;
-+------+----------+
-| Name | Database |
-+------+----------+
-| pub3 | t        |
-+------+----------+
-1 row in set (0.00 sec)
++-------------+----------+---------------------+---------------------+---------------------------------------------------------------------------+----------+
+| publication | database | create_time         | update_time         | sub_account                                                               | comments |
++-------------+----------+---------------------+---------------------+---------------------------------------------------------------------------+----------+
+| pub3        | t        | 2024-05-27 10:57:09 | 2024-05-27 10:57:40 | 018fb939_e13e_7941_90bb_2aa52796xxxx,018fb99a_7c5a_78cb_8ac8_68881c12xxxx |          |
++-------------+----------+---------------------+---------------------+---------------------------------------------------------------------------+----------+
+1 row in set (0.18 sec)
+
+alter publication pub3  comment "this is pubs";--修改发布备注
+
+mysql> show publications;
++-------------+----------+---------------------+---------------------+---------------------------------------------------------------------------+--------------+
+| publication | database | create_time         | update_time         | sub_account                                                               | comments     |
++-------------+----------+---------------------+---------------------+---------------------------------------------------------------------------+--------------+
+| pub3        | t        | 2024-05-27 10:57:09 | 2024-05-27 11:01:18 | 018fb939_e13e_7941_90bb_2aa52796xxxx,018fb99a_7c5a_78cb_8ac8_68881c12xxxx | this is pubs |
++-------------+----------+---------------------+---------------------+---------------------------------------------------------------------------+--------------+
+1 row in set (0.23 sec)
+
+create database new_pub3;
+alter publication pub3 database new_pub3;--修改发布数据库
+
+mysql> show publications;
++-------------+----------+---------------------+---------------------+---------------------------------------------------------------------------+--------------+
+| publication | database | create_time         | update_time         | sub_account                                                               | comments     |
++-------------+----------+---------------------+---------------------+---------------------------------------------------------------------------+--------------+
+| pub3        | new_pub3 | 2024-05-27 10:57:09 | 2024-05-27 11:02:07 | 018fb939_e13e_7941_90bb_2aa52796xxxx,018fb99a_7c5a_78cb_8ac8_68881c12xxxx | this is pubs |
++-------------+----------+---------------------+---------------------+---------------------------------------------------------------------------+--------------+
+1 row in set (0.08 sec)
 ```
