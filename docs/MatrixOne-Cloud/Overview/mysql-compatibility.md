@@ -31,7 +31,6 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ### TABLE 相关
 
-- 不支持 `CREATE TABLE .. AS SELECT` 语句。
 - 不支持表定义中的 `ENGINE=`，但 MatrixOne Cloud 会直接忽略 `ENGINE=`。
 - ALTER TABLE 中的这些子句：`CHANGE [COLUMN]`，`MODIFY [COLUMN]`，`RENAME COLUMN`，`ADD [CONSTRAINT [symbol]] PRIMARY KEY`，`DROP PRIMARY KEY` 和 `ALTER COLUMN ORDER BY` 可以在 ALTER TABLE 语句中自由组合使用，但不支持与其他子句一起使用。
 - 临时表暂不支持使用 `ALTER TABLE` 修改表结构。
@@ -41,7 +40,6 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ### VIEW 相关
 
-- 不支持 `CREATE OR REPLACE VIEW`。
 - 不支持 `with check option` 子句。
 - 不支持 `DEFINER` 与 `SQL SECURITY` 子句。
 
@@ -80,7 +78,7 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ### INSERT 相关
 
-- MatrixOne Cloud 不支持 `LOW_PRIORITY`，`DELAYED`，`HIGH_PRIORITY`，`IGNORE` 等修饰符。
+- MatrixOne Cloud 不支持 `LOW_PRIORITY`，`DELAYED`，`HIGH_PRIORITY` 等修饰符。
 
 ### UPDATE 相关
 
@@ -97,7 +95,6 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 ### LOAD 相关
 
 - MatrixOne Cloud 支持 `SET`，但只支持 `SET columns_name=nullif(expr1,expr2)` 的形式。
-- MatrixOne Cloud 不支持 `ESCAPED BY`。
 - MatrixOne Cloud 支持客户端执行 `LOAD DATA LOCAL`，但在连接时必须加入 `--local-infile` 参数。
 - MatrixOne Cloud 支持导入 `JSONlines` 文件，但需要使用一些特殊的语法。
 - MatrixOne Cloud 支持从对象存储导入文件，但需要使用一些特殊的语法。
@@ -128,28 +125,27 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 - TIMESTAMP: MySQL 的最大取值范围是 `'1970-01-01 00:00:01.000000'` UTC 到 `'2038-01-19 03:14:07.999999'` UTC，MatrixOne Cloud 的最大范围 `'0001-01-01 00:00:00'` UTC 到 `'9999-12-31 23:59:59'` UTC。
 - MatrixOne Cloud 支持 UUID 类型。
 - 不支持空间 Spatial 类型。
-- 不支持 BIT，SET 类型。
+- 不支持 SET 类型。
 - 不支持 MEDIUMINT 类型。
 
 ## 索引和约束
 
+- MatrixOne Cloud 支持向量索引。
 - 次级索引仅实现语法，并没有加速效果。
 - 外键不支持 `ON CASCADE DELETE` 级联删除。
 
 ## 分区支持
 
-- 仅支持 `KEY`，`HASH` 两种分区类型。
+- 支持 `KEY`，`HASH`，`RANGE`，`RANGE COLUMNS`，`LIST`，`LIST COLUMNS` 六种分区类型。
+- 支持 `KEY`，`HASH` 两种分区裁剪，其他四种暂未实现。
 - 子分区仅实现语法，未实现功能。
+- `ADD/DROP/TRUNCATE PARTITION` 暂未支持。
 
 ## 函数与操作符
 
 ### 聚合函数
 
 - 支持 MatrixOne Cloud 特有的 Median 中位数函数。
-
-### 时间日期类函数
-
-- MatrixOne Cloud 的 `TO_DATE` 函数与 MySQL 的 `STR_TO_DATE` 函数起到相同功能。
 
 ### CAST 函数
 
@@ -188,18 +184,19 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ## 备份恢复
 
-- 支持物理备份。
-- 不支持 mysqldump 备份工具，仅支持 modump 工具。
+- 支持基于 mobackup 工具的物理备份。
+- 支持快照备份
+- 不支持 mysqldump 备份工具，仅支持 mo-dump 工具。
 - 不支持 binlog 日志备份。
-- 不支持增量备份。
 
 ## 系统变量
 
-- MatrixOne Cloud 的 `lower_case_table_names` 有 5 种模式，默认为 1。
+- MatrixOne 的 `lower_case_table_names` 有 2 种模式，默认为 1。
+- MatrixOne 的 `sql_mode` 只支持 `ONLY_FULL_GROUP_BY` 一种模式
 
 ## 编程语言
 
-- Java，Python，Golang 连接器和 ORM 基本支持，其他语言的连接器及 ORM 可能会碰到兼容性问题。
+- Java，Python，C#，Golang 连接器和 ORM 基本支持，其他语言的连接器及 ORM 可能会碰到兼容性问题。
 
 ## 其他支持工具
 

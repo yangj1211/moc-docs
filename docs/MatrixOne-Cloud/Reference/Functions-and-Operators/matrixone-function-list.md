@@ -8,6 +8,7 @@
 | ------------------------------------------------------ | --------------------------------------- |
 | [ANY_VALUE()](./Aggregate-Functions/any-value.md)      | 在参数范围内任选一个值返回|
 | [AVG()](./Aggregate-Functions/avg.md)                  | 计算参数列的算术平均值。|
+| [BITMAP](./Aggregate-Functions/bitmap.md)              | 一组用于处理位图的内置函数，主要用于计算不同值|
 | [BIT_AND()](./Aggregate-Functions/bit_and.md)          | 计算了列中所有位的按位与|
 | [BIT_OR()](./Aggregate-Functions/bit_or.md)            | 计算了列中所有位的按位或|
 | [BIT_XOR()](./Aggregate-Functions/bit_xor.md)          | 计算了列中所有位的按位异或|
@@ -40,7 +41,10 @@
 | [FROM_UNIXTIME()](./Datetime/from-unixtime.md)        |把内部 UNIX 时间戳值转换为普通格式的日期时间值，以 YYYY-MM-DD HH:MM:SS 或 YYYYMMDDHHMMSS 格式来显示|
 | [MINUTE()](./Datetime/minute.md)                      |返回时间参数的分钟|
 | [MONTH()](./Datetime/month.md)                        |返回日期参数的月份|
+| [NOW()](./Datetime/now.md)                            |返回当前日期和时间的 'YYYY-MM-DD HH:MM:SS' 格式的值。|
 | [SECOND()](./Datetime/second.md)                      |返回时间参数的秒数|
+| [STR_TO_DATE()](./Datetime/str-to-date.md)            |按照指定日期或时间显示格式，将字符串转换为日期或日期时间类型|
+| [SYSDATE()](./Datetime/sysdate.md)                    |返回当前日期和时间的 'YYYY-MM-DD HH:MM:SS' 格式的值。|
 | [TIME()](./Datetime/time.md)                          |提取时间或日期时间的时间部分并将其作为字符串返回|
 | [TIMEDIFF()](./Datetime/timediff.md)                  |返回两个时间参数之间的差值|
 | [TIMESTAMP()](./Datetime/timestamp.md)                |将日期或日期时间参数作为日期时间值返回|
@@ -92,6 +96,7 @@
 | [FIELD()](./String/field.md)                   | 返回第一个字符串 str 在字符串列表 (str1,str2,str3,...) 中的位置 |
 | [FIND_IN_SET()](./String/find-in-set.md)       | 在逗号分隔的字符串列表中查找指定字符串的位置。|
 | [FORMAT()](./String/format.md)                 | 用于将数字格式设置为 "#,###,###.##" 格式，并四舍五入到小数点后一位。|
+| [FROM_BASE64()](./String/from_base64.md)       | 用于将 Base64 编码的字符串转换回原始的二进制数据（或文本数据）。|
 | [HEX()](./String/hex.md)                       | 返回参数的十六进制字符串形式|
 | [INSTR()](./String/instr.md)                   | 返回子字符串在给定字符串中首次出现的位置。|
 | [LCASE()](./String/lcase.md)                   | 用于将给定的字符串转换为小写形式。|
@@ -101,19 +106,23 @@
 | [LOWER()](./String/lower.md)                   | 用于将给定的字符串转换为小写形式。|
 | [LPAD()](./String/lpad.md)                     | 用于在字符串左侧填充。|
 | [LTRIM()](./String/ltrim.md)                   | 将输入字符串的前部空格去除，返回处理后的字符。|
+| [MD5()](./String/md5.md)                       | 将输入字符串生成一个 32 字符长的十六进制 MD5 哈希值。|
 | [OCT()](./String/oct.md)                       | 返回参数的八进制值的字符串|
 | [REPEAT()](./String/repeat.md)                 | 用于将输入的字符串重复 n 次，并返回一个新的字符串|
 | [REVERSE()](./String/reverse.md)               | 将 str 字符串中的字符顺序翻转输出。|
 | [RPAD()](./String/rpad.md)                     | 用于在字符串右侧填充|
 | [RTRIM()](./String/rtrim.md)                   | 将输入字符串的后方空格去除|
+| [SHA1()/SHA()](./String/sha1.md)               | 用于计算并返回给定字符串的 SHA-1 哈希值。|
 | [SHA2()](./String/sha2.md)                     | 返回输入字符串的 SHA2 哈希值。|
 | [SPACE()](./String/space.md)                   | 返回 N 个空格组成的字符串。|
 | [SPLIT_PART()](./String/split_part.md)         | 用于在给定的分隔符基础上将一个字符串分解成多个部分|
 | [STARTSWITH()](./String/startswith.md)         | 字符串如果以指定前缀开始返回 1，否则则返回 0。|
 | [SUBSTRING()](./String/substring.md)           | 返回一个从指定位置开始的子字符串|
 | [SUBSTRING_INDEX()](./String/substring-index.md)| 以分隔符为索引，获取不同索引位的字符。|
+| [TO_BASE64()](./String/to_base64.md)           | 用于将字符串转换为 Base64 编码的字符串|
 | [TRIM()](./String/trim.md)                     | 返回一个字符串，删除不需要的字符。|
 | [UCASE()](./String/ucase.md)                   | 用于将给定的字符串转换为大写形式。|
+| [UNHEX()](./String/unhex.md)                   | 用于将十六进制字符串转换为相应的二进制字符串。|
 | [UPPER()](./String/upper.md)                   | 用于将给定的字符串转换为大写形式。|
 
 ## 正则表达式
@@ -136,9 +145,14 @@
 | [CAST()](./Vector/misc.md)                           | 用于显式将一个向量从一个向量类型转换为另一个向量类型|
 | [SUMMATION()](./Vector/misc.md)                      | 返回向量中所有元素的总和|
 | [INNER_PRODUCT()](./Vector/inner_product.md)         | 用于计算两个向量之间的内积/点积|
+| [CLUSTER_CENTERS()](./Vector/cluster_centers.md)       | 用于确定向量列的 K 个聚类中心 |
+| [COSINE_DISTANCE()](./Vector/cosine_distance.md)     | 用于计算两个向量的余弦距离。|
 | [COSINE_SIMILARITY()](./Vector/cosine_similarity.md) | 衡量了两个向量之间夹角的余弦值，通过它们在多维空间中的接近程度来表示它们的相似性|
+| [L2_DISTANCE()](./Vector/l2_distance.md)             |用于计算两个向量之间的欧几里得距离|
 | [L1_NORM()](./Vector/l1_norm.md)                     | 用于计算 l1/曼哈顿/TaxiCab 范数|
 | [L2_NORM()](./Vector/l2_norm.md)                     | 用于计算 l2/欧几里得范数|
+| [NORMALIZE_L2()](./Vector/normalize_l2.md)           | 用于执行欧几里得归一化|
+| [SUBVECTOR()](./Vector/subvector.md)                 | 用于从向量中提取子向量|
 | [VECTOR_DIMS()](./Vector/vector_dims.md)             | 用于确定向量的维度|
 
 ## 表函数
@@ -178,5 +192,6 @@
 | 函数名称                        | 作用                                     |
 | ------------------------------ | --------------------------------------- |
 | [SAMPLE()](./Other/sample.md)  | 主要用于快速缩减查询范围|
+| [SERIAL_EXTRACT()](./Other/serial_extract.md)    | 用于提取序列/元组值中的各个元素|
 | [SLEEP()](./Other/sleep.md)    | 将当前查询暂停（睡眠）指定的秒数|
 | [UUID()](./Other/uuid.md)      | 返回根据 RFC 4122 生成国际通用唯一标识符|
