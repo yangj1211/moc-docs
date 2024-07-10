@@ -1,12 +1,12 @@
-# **LOAD DATA**
+# **LOAD DATA INFILE**
 
 ## **概述**
 
-`LOAD DATA` 语句可以极快地将文本文件中的行读入表中。你可以从服务器主机或 [S3 兼容对象存储](../../../App-Develop/import-data/bulk-load/load-s3.md)读取该文件。
+`LOAD DATA INFILE` 语句可以极快地将文本文件中的行读入表中。你可以从服务器主机或 [S3 兼容对象存储](../../../App-Develop/import-data/bulk-load/load-s3.md)读取该文件。
 
-- 将文件读回表中，使用 `LOAD DATA`。
+- 将文件读回表中，使用 `LOAD DATA INFILE`。
 - 将表中的数据写入文件，使用 `SELECT ... INTO OUTFILE`。
-- `FIELDS` 和 `LINES` 子句的语法对于 `LOAD DATA` 和 `SELECT ... INTO OUTFILE` 这两个语句的使用方式一致，使用 Fields 和 Lines 参数来指定如何处理数据格式。
+- `FIELDS` 和 `LINES` 子句的语法对于 `LOAD DATA INFILE` 和 `SELECT ... INTO OUTFILE` 这两个语句的使用方式一致，使用 Fields 和 Lines 参数来指定如何处理数据格式。
 
 ## **语法结构**
 
@@ -18,6 +18,7 @@
     [{FIELDS | COLUMNS}
         [TERMINATED BY 'string']
         [[OPTIONALLY] ENCLOSED BY 'char']
+        [ENCASPED BY 'char']
     ]
     [LINES
         [STARTING BY 'string']
@@ -26,6 +27,7 @@
     [IGNORE number {LINES | ROWS}]
     [SET column_name_1=nullif(column_name_1, expr1), column_name_2=nullif(column_name_2, expr2)...]
     [PARALLEL {'TRUE' | 'FALSE'}]
+    [STRICT {'TRUE' | 'FALSE'}]
 ```
 
 **参数解释**
@@ -34,8 +36,14 @@
 
 ### INFILE
 
+- `LOAD DATA INFILE 'file_name'`：
+
+   **命令行使用场景**：需要加载的数据文件与 MatrixOne 主机服务器在同一台机器上。
+   `file_name` 可以是文件的存放位置的相对路径名称，也可以是绝对路径名称。
+
 - `LOAD DATA LOCAL INFILE 'file_name'`：
 
+   **命令行使用场景**：需要加载的数据文件与 MatrixOne 主机服务器不在同一台机器上，即，数据文件在客户机上。
    `file_name` 可以是文件的存放位置的相对路径名称，也可以是绝对路径名称。
 
 ### CHARACTER SET
@@ -43,7 +51,7 @@
 如果文件内容使用与默认值不同的字符集，可使用 `CHARACTER SET` 指定字符集。例如，你可以使用 `CHARACTER SET utf8` 指定导入内容字符集为 utf8：
 
 ```
-LOAD DATA INFILE 'yourfilepath' INTO TABLE xx CHARACTER SET utf8;
+LOAD DATA LOCAL INFILE 'yourfilepath' INTO TABLE xx CHARACTER SET utf8;
 ```
 
 !!! note
@@ -54,7 +62,7 @@ LOAD DATA INFILE 'yourfilepath' INTO TABLE xx CHARACTER SET utf8;
 `IGNORE number LINES` 子句可用于忽略文件开头的行。例如，你可以使用 `IGNORE 1 LINES` 跳过包含列名的初始标题行：
 
 ```
-LOAD DATA INFILE '/tmp/test.txt' INTO TABLE table1 IGNORE 1 LINES;
+LOAD DATA LOCAL INFILE '/tmp/test.txt' INTO TABLE table1 IGNORE 1 LINES;
 ```
 
 ### FIELDS 和 LINES 参数说明
@@ -63,19 +71,20 @@ LOAD DATA INFILE '/tmp/test.txt' INTO TABLE table1 IGNORE 1 LINES;
 
 对于 `LOAD DATA` 和 `SELECT ... INTO OUTFILE` 语句，`FIELDS` 和 `LINES` 子句的语法是相同的。这两个子句都是可选的，但如果两者都指定，则 `FIELDS` 必须在 `LINES` 之前。
 
-如果指定 `FIELDS` 子句，那么 `FIELDS` 的每个子句（`TERMINATED BY`、`[OPTIONALLY] ENCLOSED BY`）也是可选的，但是你必须至少指定其中一个。
+如果指定 `FIELDS` 子句，那么 `FIELDS` 的每个子句（`TERMINATED BY`、`[OPTIONALLY] ENCLOSED BY`）也是可选的，除非你必须至少指定其中一个。
 
 `LOAD DATA` 也支持使用十六进制 `ASCII` 字符表达式或二进制 `ASCII` 字符表达式作为 `FIELDS ENCLOSED BY` 和 `FIELDS TERMINATED BY` 的参数。
 
 如果不指定处理数据的参数，则使用默认值如下：
 
 ```
-FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n'
+FIELDS TERMINATED BY '\t' ENCLOSED BY '"' ESCAPED BY '\\' LINES TERMINATED BY '\n'
 ```
 
 !!! note
-    - `FIELDS TERMINATED BY ','`：以且仅以 `,`、`|` 或 `\t` 作为分隔符。
+    - `FIELDS TERMINATED BY '\t'`：以且仅以 `\t` 作为分隔符。
     - `ENCLOSED BY '"'`：以且仅以 `"` 作为包括符。
+    - `ESCAPED BY '\\'`：以且仅以 `\` 作为转义符。
     - `LINES TERMINATED BY '\n'`：以且仅以 `\n` 或 `\r\n` 作为行间分隔符。
 
 **FIELDS TERMINATED BY**
@@ -84,7 +93,7 @@ FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n'
 
 `FIELDS TERMINATED BY` 指定的值可以超过一个字符。
 
-- **正确示例**：
+**示例**：
 
 例如，读取使用*逗号*分隔的文件，语法是：
 
@@ -92,17 +101,6 @@ FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n'
 LOAD DATA LOCAL INFILE 'data.txt' INTO TABLE table1
   FIELDS TERMINATED BY ',';
 ```
-
-- **错误示例**：
-
-如果你使用如下所示的语句读取文件，将会产生报错，因为它表示的是 `LOAD DATA` 查找字段之间的制表符：
-
-```
-LOAD DATA LOCAL INFILE 'data.txt' INTO TABLE table1
-  FIELDS TERMINATED BY '\t';
-```
-
-这样可能会导致结果被解释为每个输入行都是一个字段，你可能会遇到 `ERROR 20101 (HY000): internal error: the table column is larger than input data column` 错误。
 
 **FIELDS ENCLOSED BY**
 
@@ -116,6 +114,148 @@ LOAD DATA LOCAL INFILE 'data.txt' INTO TABLE table1
 ```
 
 如果 `ENCLOSED BY` 前不加 `OPTIONALLY`，比如说，`ENCLOSED BY '"'` 就表示使用双引号把各个字段都括起来。
+
+**FIELDS ESCAPED BY**
+
+`FIELDS ESCAPED BY` 允许你指定一个转义字符，默认值 `\\`，代表 `\` 是个转义符号，如果 `FIELDS ESCAPED BY` 字符不为空，则删除该字符，并且后续字符将按字面意思作为字段值的一部分。
+
+但一些双字符序列有着特殊含义，如下表：
+
+|  转义序列  | 序列表示的字符     |
+|  -------- | -------------------- |
+| \0        | 空格符 |
+| \b        | 退格符 |
+| \n        | 换行符 |
+| \r        | 回车符 |
+| \t        | 制表符 |
+| \z        | 结束符（Ctl+Z）|
+
+**示例**
+
+- 示例 1
+
+data.txt 内容如下：
+
+```
+(base) admin@admindeMacBook-Pro case % cat data.txt 
+1	a\\b
+```
+
+连接 mo 执行以下语句，将 data.txt 内容导入到 t1：
+
+```sql
+create table t1(n1 int,n2 varchar(255));
+load data local infile 'Users/admin/test/case/data.txt' into table t1;
+
+mysql> select * from t1;
++------+------+
+| n1   | n2   |
++------+------+
+|    1 | a\b  |
++------+------+
+1 row in set (0.00 sec)
+```
+
+n2 的结果为 `a\b`，因为第一个 `\` 为转义符，被删除了。
+
+- 示例 2
+
+data.txt 内容如下：
+
+```
+(base) admin@admindeMacBook-Pro case % cat data.txt 
+1	a\\b
+```
+
+连接 mo 执行以下语句，将 data.txt 内容导入到 t2：
+
+```sql
+create table t2(n1 int,n2 varchar(255));
+load data local infile 'Users/admin/test/case/data.txt' into table t2 fields escaped by 'a';
+
+mysql> select * from t2;
++------+------+
+| n1   | n2   |
++------+------+
+|    1 | \\b  |
++------+------+
+1 row in set (0.00 sec)
+```
+
+n2 的结果为 `\\b`，因为在这里我们指定了转义符为 `a`，所以 `a` 被删除了。
+
+- 示例 3
+
+data.txt 内容如下：
+
+```
+(base) admin@admindeMacBook-Pro case % cat data.txt 
+1	a\\ b
+```
+
+连接 mo 执行以下语句，将 data.txt 内容导入到 t1：
+
+```sql
+create table t3(n1 int,n2 varchar(255));
+load data local infile 'Users/admin/test/case/data.txt' into table t3 fields escaped by '';
+
+mysql> SELECT * FROM t3;
++------+------+
+| n1   | n2   |
++------+------+
+|    1 | a\\b |
++------+------+
+1 row in set (0.01 sec)
+```
+
+n2 的结果为 `a\\b`，当 ESCAPED BY 为空时，原样读取不对字符做转义处理。
+
+- 示例 4
+
+data.txt 内容如下：
+
+```
+(base) admin@admindeMacBook-Pro case % cat data.txt 
+1	a\0b
+2	c\bd
+3	a\nb
+4	a\rb
+5	a\tb
+6	a\Zb
+```
+
+连接 mo 执行以下语句，将 data.txt 内容导入到 t4：
+
+```sql
+create table t3(n1 int,n2 varchar(255));
+load data local infile 'Users/admin/test/case/data.txt' into table t4;
+
+mysql> select * from t1;
++------+------+
+| n1   | n2   |
++------+------+
+|    1 | a b  |
+|    2 | d  |
+|    3 | a
+b  |
+b  | 4 | a
+|    5 | a	b  |
+|    6 | ab  |
++------+------+
+6 rows in set (0.01 sec)
+```
+
+n1=1 时，n2 的结果为 `a b`，因为 `\0` 为空格符；
+
+n=2 时，n2 的结果为 `d`，因为 `\b` 为退格符，`a` 被删除；
+
+n=3 时，n2 的结果为 `a` 加换行后的 `b`，因为 `\n` 为换行符；
+
+n=4 时，n2 的结果为 `a` 加换回车后的 `b`，因为 `\r` 为回车符；
+
+n=5 时，n2 的结果为 `a  b` 的 b，因为 `\t` 为制表；
+
+n=6 时，n2 的结果为 `ab`，因为 `\z` 为结束符。
 
 **LINES TERMINATED BY**
 
@@ -152,7 +292,7 @@ something xxx"def",2
 
 ### SET
 
-MatrixOne Cloud 当前仅支持 `SET column_name=nullif(column_name,expr)`。即，当 `column_name = expr`，返回 `NULL`；否则，则返回 `column_name`。例如，`SET a=nullif(a, 1)`，当 a=1 时，返回 `NULL`；否则，返回 a 列原始的值。
+MatrixOne 当前仅支持 `SET column_name=nullif(column_name,expr)`。即，当 `column_name = expr`，返回 `NULL`；否则，则返回 `column_name`。例如，`SET a=nullif(a, 1)`，当 a=1 时，返回 `NULL`；否则，返回 a 列原始的值。
 
 使用这种方法，可以在加载文件时，设置参数 `SET column_name=nullif(column_name,"null")`，用于返回列中的 `NULL` 值。
 
@@ -167,7 +307,7 @@ MatrixOne Cloud 当前仅支持 `SET column_name=nullif(column_name,expr)`。即
     null,wederTom,"man"
     ```
 
-2. 在 MatrixOne Cloud 中新建一个表 `user`：
+2. 在 MatrixOne 中新建一个表 `user`：
 
     ```sql
     create database aaa;
@@ -200,7 +340,7 @@ MatrixOne Cloud 当前仅支持 `SET column_name=nullif(column_name,expr)`。即
 
 例如，对于 2 个 G 的大文件，使用两个线程去进行加载，第 2 个线程先拆分定位到 1G 的位置，然后一直往后读取并进行加载。这样就可以做到两个线程同时读取大文件，每个线程读取 1G 的数据。
 
-**开启/关闭并行加载命令行示例**：
+**示例**：
 
 ```sql
 --  打开并行加载
@@ -216,7 +356,21 @@ load data local infile 'file_name' into table tbl_name FIELDS TERMINATED BY '|' 
 !!! note
     `[PARALLEL {'TRUE' | 'FALSE'}]` 内字段，当前仅支持 `TRUE` 或 `FALSE`，且大小写不敏感。
 
-**Note:** `LOAD` 语句中如果不加 `PARALLEL` 字段，对于 *CSV* 文件，是默认关闭并行加载；对于 *JSONLines* 文件，默认开启并行加载。如果 *CSV* 文件中有行结束符，比如 '\n'，那么有可能会导致文件加载时数据出错。如果文件过大，建议从换行符为起止点手动拆分文件后再开启并行加载。
+__Note:__ `LOAD` 语句中如果不加 `PARALLEL` 字段，对于 *CSV* 文件，是默认关闭并行加载；对于 *JSONLines* 文件，默认开启并行加载。如果 *CSV* 文件中有行结束符，比如 '\n'，那么有可能会导致文件加载时数据出错。如果文件过大，建议从换行符为起止点手动拆分文件后再开启并行加载。
+
+### STRICT
+
+MO 支持使用 `STRICT` 参数指定文件并行切割的方式，只有在 `PARALLEL` 为 `TRUE` 时有效。`STRICT` 的默认值为 `TRUE`，表明使用预读检测的方式切割，它不仅依赖于换行符进行分割，还会进行预读，以验证其是否与表的列定义相匹配，只有当数据符合列定义时，才会将其作为有效的分割点进行处理。而当参数为 `FALSE` 时，则在切分文件并行导入时利用换行符（默认为\n）进行切割，在数据有换行符情况下，有可能会切分出错。
+
+**示例**：
+
+```sql
+-- 开启预读模式
+load data localinfile 'file_name' into table tbl_name PARALLEL 'TRUE' STRICT 'TRUE';
+
+-- 关闭预读模式
+load data local infile 'file_name' into table tbl_name PARALLEL 'TRUE' STRICT 'FALSE';
+```
 
 ## 支持的文件格式
 
