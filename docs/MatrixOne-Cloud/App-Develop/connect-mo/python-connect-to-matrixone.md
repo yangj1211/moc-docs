@@ -94,53 +94,53 @@ SQLAlchemy 是 Python SQL 工具包和对象关系映射器 (ORM)，它为应用
     ```sql
     mysql> create database test;
     mysql> use test;
-    mysql> create table student (name varchar(20), age int);
-    mysql> insert into student values ("tom", 11), ("alice", "10");
+    mysql> create table student (id int primary key,name varchar(20), age int);
+    mysql> insert into student values (1,"tom", 11), (2,"alice", "10");
 
     ```
 
 3. 创建一个纯文本文件 *sqlalchemy_connect_matrixonecloud.py* 将代码写入文件，并根据你的 MatrixOne Cloud 数据库连接串修改相关的数据库参数：
 
     ```python
-    #!/usr/bin/python3
-    from sqlalchemy import create_engine, text
-    import pymysql
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import declarative_base as _declarative_base
+    from sqlalchemy import Column, Integer, String
+    from sqlalchemy.orm import sessionmaker
 
-    # database Config
-    HOST_NAME="freetier-01.cn-hangzhou.cluster.matrixonecloud.cn"
-    USER_NAME="585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin"
-    PASSWORD="your_password"
-    DATABASE="test"
-    PORT=6001
-    # connect to DB
-    URL="mysql+pymysql://"+USER_NAME+":"+PASSWORD+"@"+HOST_NAME+":"+str(PORT)+"/"+DATABASE
-    my_conn = create_engine(URL,
-        connect_args= dict(
-            host=HOST_NAME, 
-            port=PORT,
-            user=USER_NAME,
-            password=PASSWORD,
-            )
-        )
+    #使用 SQLAlchemy 创建到 MatrixOne 的连接字符串，并创建一个引擎（Engine）
+    username="585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx%3Aadmin%3Aaccountadmin"
+    password="xxx"
+    host="freetier-01.cn-hangzhou.cluster.matrixonecloud.cn"
+    port="6001"
+    dbname="test"
 
-    # execute SQL query using execute() method.
-    query=text("SELECT * FROM student LIMIT 0,10")
-    my_data=my_conn.execute(query)
+    connection_string = "mysql+pymysql://" +username+":"+password+"@"+host+":"+port+"/"+dbname
 
-    # print SQL result
-    for row in my_data:
-            print("name:", row["name"])
-            print("age:", row["age"]) 
+    engine = create_engine(connection_string)
 
+    Base = _declarative_base()
 
+    #定义一个 Python 类来映射 student 表。
+    class Student(Base):
+        __tablename__ = 'student'
+        id = Column(Integer, primary_key=True)
+        name = Column(String)
+        age = Column(Integer)
+
+    #使用 sessionmaker 创建一个会话来执行查询
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    #使用 SQLAlchemy 的查询接口来查询 student 表中的数据。
+    users = session.query(Student).all()
+    for user in users:
+        print(f'ID: {user.id}, Name: {user.name}, Age: {user.age}')
     ```
 
 4. 打开一个终端，在终端内执行下面的命令：
 
     ```
     python3 sqlalchemy_connect_matrixonecloud.py
-    name: tom
-    age: 11
-    name: alice
-    age: 10
+    ID: 1, Name: tom, Age: 11
+    ID: 2, Name: alice, Age: 10
     ```
