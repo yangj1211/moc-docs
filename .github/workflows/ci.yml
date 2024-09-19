@@ -65,8 +65,8 @@ jobs:
         uses: aliyun/acr-login@v1
         with:
           login-server: ${{ env.ACR_REGISTRY }}
-          username: '${{ secrets.ALIYUN_DOCKER_USER }}'
-          password: '${{ secrets.ALIYUN_DOCKER_PASSWORD }}'
+          username: '${{ secrets.NEW_ACR_USERNAME }}'
+          password: '${{ secrets.NEW_ACR_PASSWORD }}'
 
       - name: Set up Docker Buildx
         id: buildx
