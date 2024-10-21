@@ -1,22 +1,24 @@
-# **CREATE...FROM...PUBLICATION...**
+# **CREATE PUBLICATION**
 
 ## **语法说明**
 
-`CREATE...FROM...PUBLICATION...` 是订阅方订阅一个由发布方创建的发布，用来获取发布方的共享数据。
+`CREATE PUBLICATION` 将一个新的发布添加到当前数据库中。
 
 ## **语法结构**
 
 ```
-CREATE DATABASE database_name
-FROM account_name
-PUBLICATION pubname;
+CREATE PUBLICATION pubname
+    DATABASE database_name ACCOUNT
+    [ { ALL
+    | account_name, [, ... ] }]
+    [ COMMENT 'string']
 ```
 
 ## 语法解释
 
-- database_name：订阅方创建的数据库名称。
-- pubname：发布方已发布的发布名称。
-- account_name：可获取该发布的实例名称。
+- pubname：发布名称。发布名称必须与当前数据库中任何现有发布的名称不同。
+- database_name：当前租户下已存在的某个数据库名称。
+- account_name：可获取该发布的租户名称。
 
 ## **示例**
 
