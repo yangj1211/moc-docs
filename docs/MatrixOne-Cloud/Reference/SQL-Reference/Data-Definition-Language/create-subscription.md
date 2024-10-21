@@ -21,8 +21,6 @@ PUBLICATION pubname;
 ## **示例**
 
 ```sql
-
-
 -- 假设会话 1 为发布方，由发布方先发布一个数据库给另外一个接受方
 create database sys_db_1;
 use sys_db_1;
