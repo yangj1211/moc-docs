@@ -46,29 +46,11 @@ MatrixOne Cloud 的架构如下：
 7. 可用区交换机如果存在要选择在端点服务所在可用区，不存在请创建一个；这里默认要填两个，这些交换机会用于不同的可用区，以实现高可用性和容错能力。
 
 8. 单击创建端点。等待创建成功，在终端节点详情页面您即可得到 **终端节点服务域名**。
-
-### 步骤三：配置 ECS 服务器
-
-1. 查看可用区与交换
-
-    - 在 **终端节点服务详情页面**，选择 **可用区与交换机**（或网卡）选项卡。
-    - 确认 **终端节点服务** 所属的 **VPC** 和 **可用区** 信息。
-  
     <div align="center">
         <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/privatelink-1.png width=80% heigth=80%/>
     </div>
 
-    <div align="center">
-        <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/privatelink-3.png width=80% heigth=80%/>
-    </div>
-
-2. 添加 ECS 实例到相同的 VPC 和可用区
-
-    - 进入 **ECS 控制台**，选择要与终端节点服务连接的 **ECS 实例**，并确保它位于与 **终端节点服务** 相同的 **VPC** 和 **可用区**。
-
-    ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/privatelink-2.png)
-
-### 步骤四：在您的 ECS 主机连接 MatrixOne Cloud 服务
+### 步骤三：在您的 ECS 主机连接 MatrixOne Cloud 服务
 
 1. 确保您的 ECS 主机已经安装 Mysql Client 客户端。
 2. 使用 MySQL 客户端连接 MatrixOne Cloud 服务时，需将 **host** 设置为 **终端节点服务的域名**。
