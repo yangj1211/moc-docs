@@ -2,7 +2,10 @@
 
 ## 介绍
 
-阿里云私网连接（PrivateLink）是一种高可用、可扩展的技术，您可以使用它将您的应用程序连接到阿里云同一个地域或者不同地域的 MatrixOne Cloud 实例。"私有网络连接" 允许您阿里云中的应用程序通过您的私有 IP 地址连接到 MatrixOne Cloud 实例的私有网关地址，而不是公共互联网网关地址。既节省公共互联网的网络流量开销，又提高了连接 MatrixOne Cloud 实例的带宽。
+阿里云的私网连接（PrivateLink）是一项私有网络连接服务，允许应用程序通过私有 IP 地址与云服务进行安全、私密的通信。通过 PrivateLink，您可以将应用程序连接到位于阿里云同一地区（region）的 MatrixOne Cloud 实例，这不仅节省了公网流量，还提升了连接带宽，从而实现更加高效、稳定的网络访问。
+
+!!! note
+    为了获得更高的网络稳定性和最低延迟，推荐您将应用部署在与 MatrixOne Cloud 实例相同的可用区。
 
 MatrixOne Cloud 的架构如下：
 
@@ -17,7 +20,7 @@ MatrixOne Cloud 的架构如下：
 
 ### 步骤一：在 MatrixOne Cloud 实例管理平台获取私网连接相关信息
 
-在 MatrixOne Cloud 实例管理平台的实例列表中，找到需要访问的 MatrixOne 实例，依次点击**连接 > 通过第三方工具连接>私网连接**，这时可以获取服务名称，可用区 ID，区域 ID。
+在 MatrixOne Cloud 实例管理平台的实例列表中，找到需要访问的 MatrixOne 实例，依次点击**连接 > 通过第三方工具连接>私网连接**，这时可以获取服务名称，可用区 ID，地区 ID。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/priveteLink-connect.png width=80% heigth=80%/>
