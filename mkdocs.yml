@@ -119,6 +119,7 @@ nav:
       - 导入 TPCH 样例数据: MatrixOne-Cloud/Migrate-Data/import-tpch.md
       - 导入对象存储数据: MatrixOne-Cloud/Migrate-Data/Load-S3.md
       - 导入本地数据: MatrixOne-Cloud/Migrate-Data/Load-Local-Data.md
+      - MySQL数据迁移: MatrixOne-Cloud/Migrate-Data/ninedata-mysql.md
     - 导出数据: MatrixOne-Cloud/App-Develop/export-data/modump.md
     - 探索数据:
       - SQL 编辑器: MatrixOne-Cloud/Data-Explore/sql-editor.md
