@@ -133,6 +133,7 @@ nav:
     - 告警: MatrixOne-Cloud/Alarm/alarm-overview.md
     - 事件: MatrixOne-Cloud/Events/event.md
     - 计费:
+      - 充值: MatrixOne-Cloud/Charging/recharge.md
       - 账户概览: MatrixOne-Cloud/Charging/account-overview.md
       - 卡券管理: MatrixOne-Cloud/Charging/coupons-management.md
       - 收支明细: MatrixOne-Cloud/Charging/revenue-expenditure-details.md
