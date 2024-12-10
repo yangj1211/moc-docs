@@ -526,6 +526,10 @@ nav:
     - 版本发布纪要:
         - '2024': MatrixOne-Cloud/Release-Notes/2024.md
         - '2023': MatrixOne-Cloud/Release-Notes/2023.md
+    - 相关协议: 
+        - 隐私协议: MatrixOne-Cloud/Protocol/privacy-policy.md
+        - 服务条款: MatrixOne-Cloud/Protocol/terms-of-service.md
+        - 服务等级协议: MatrixOne-Cloud/Protocol/service-level-agreement.md
     - 技术支持: MatrixOne-Cloud/tech-support.md
     - 术语表: MatrixOne-Cloud/glossary.md
   - MatrixOne: https://docs.matrixorigin.cn/latest/
