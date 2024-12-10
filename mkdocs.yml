@@ -39,7 +39,7 @@ nav:
       - MySQL 兼容性: MatrixOne-Cloud/Overview/mysql-compatibility.md
       - MOne 助手: MatrixOne-Cloud/Overview/mone-introduction.md
     - 快速开始:
-      - 快速创建 MatrixOne Cloud（MO Cloud）实例: MatrixOne-Cloud/Get-Started/quickstart.md
+      - 快速创建 MatrixOne Intelligence 实例: MatrixOne-Cloud/Get-Started/quickstart.md
       - 快速上手向量能力: MatrixOne-Cloud/Get-Started/vector.md
     - 应用开发:
       - 连接到 MatrixOne Cloud:

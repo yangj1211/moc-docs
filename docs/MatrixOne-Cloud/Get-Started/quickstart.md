@@ -1,27 +1,25 @@
-# 快速创建 MatrixOne Cloud（MO Cloud）实例
+# 快速创建 MatrixOne Intelligence 实例
 
-在本篇文档中，我们将指导您快速创建和使用 MatrixOne Cloud (MO Cloud) 实例。
+在本篇文档中，我们将指导您快速创建和使用 MatrixOne Intelligence 实例。
 
-## 第一步：创建 MO Cloud 账户
+## 第一步：创建 MatrixOne Intelligence 账户
 
-### 1. 申请注册 MO Cloud
+### 1. 注册 MatrixOne Intelligence
 
-如果您想尝试 MO Cloud 1.0 版本前的内测版本，可以通过以下步骤进行申请注册。
+- 访问 [MatrixOne Intelligence 注册页面](https://www.matrixorigin.cn/moc-signup)。
+- 填写您的注册信息，并点击**注册**。
 
-- 访问 [MO Cloud 试用申请页面](https://www.matrixorigin.cn/moc-trial)。
-- 填写您的申请信息，并提交申请。我们会尽快审核您的申请。
+**注意：**注册时填写的邮箱将自动注册成为您的 MatrixOne Intelligence 账户。
 
-**注意：**申请试用时填写的邮箱将自动注册成为您的 MO Cloud 账户。
+### 2. 激活 MatrixOne Intelligence 账户
 
-### 2. 激活 MO Cloud 账户
+当您点击注册后，我们会发送一封激活邮件到您提供的邮箱地址。请按照邮件中的链接完成激活。
 
-一旦您的试用申请获得批准，我们会发送一封激活邮件到您提供的邮箱地址。请按照邮件中的链接完成激活。
+### 3. 登录 MatrixOne Intelligence 账户
 
-### 3. 登录 MO Cloud 账户
+激活成功后，会跳转到登录界面，输入账户密码即可登录至 MatrixOne Intelligence 实例管理平台。
 
-激活成功后，会跳转到登录界面，输入账户密码即可登录至 MO Cloud 实例管理平台。
-
-## 第二步：创建一个 MO Serverless 实例
+## 第二步：创建一个 Serverless 实例
 
 ### 1. 打开实例创建页面
 
@@ -67,6 +65,6 @@
 - 在编辑器上方的数据库下拉框中选择 **mo_sample_data_tpch_sf1**。
 - 在**快捷互动**窗口的**导入数据**中点击**试一试**，将其中的查询语句复制到编辑器中，然后点击**执行**执行查询。
 
-现在，您已经成功创建了一个 MO Serverless 实例并运行了样例数据集的查询。希望这个教程对您有所帮助！
+现在，您已经成功创建了一个 Serverless 实例并运行了样例数据集的查询。希望这个教程对您有所帮助！
 
 如果您需要更多帮助，请继续查看我们的文档或联系支持团队。
