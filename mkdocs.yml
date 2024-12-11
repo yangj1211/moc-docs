@@ -115,6 +115,8 @@ nav:
       - 登录实例: MatrixOne-Cloud/Instance-Mgmt/login-instance.md
       - 终止和恢复实例: MatrixOne-Cloud/Instance-Mgmt/terminate-recovery-instance.md
     - 数据分享: MatrixOne-Cloud/Data-Sharing/pub-sub-overview.md
+    - 备份恢复:
+      - 快照: MatrixOne-Cloud/Backup-Restore/snapshot.md
     - 迁移和导入数据:
       - 导入 TPCH 样例数据: MatrixOne-Cloud/Migrate-Data/import-tpch.md
       - 导入对象存储数据: MatrixOne-Cloud/Migrate-Data/Load-S3.md
