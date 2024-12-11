@@ -144,6 +144,7 @@ nav:
         - Serverless 生产实例: MatrixOne-Cloud/Charging/price-detail/price-detail-serverless.md
         - 标准实例: MatrixOne-Cloud/Charging/price-detail/price-detail-standard.md
       - 续费: MatrixOne-Cloud/Charging/renew.md
+      - 现金透支: MatrixOne-Cloud/Charging/overdraft.md
       - 变更配置: MatrixOne-Cloud/Charging/adjust-policy.md
       - 退订说明: MatrixOne-Cloud/Charging/cancellation-policy.md    
     - 安全:
