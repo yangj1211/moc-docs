@@ -1,6 +1,6 @@
 # Source 插入
 
-本篇文档将指导你使用 `source` 命令批量导入数据至 MatrixOne Cloud。
+本篇文档将指导你使用 `source` 命令批量导入数据至 MatrixOne Intelligence。
 
 ## 语法结构
 
@@ -12,7 +12,7 @@ SOURCE /path/to/your/sql_script.sql;
 
 ## 教程示例
 
-在本教程中将指导你如何使用 `source` 命令将数据从 MySQL 迁移至 MatrixOne Cloud。
+在本教程中将指导你如何使用 `source` 命令将数据从 MySQL 迁移至 MatrixOne Intelligence。
 
 ### 步骤
 
@@ -32,15 +32,15 @@ mysqldump -h IP_ADDRESS -uUSERNAME -pPASSWORD -d DB_NAME1 DB_NAME2 ... OUTPUT_FI
 mysqldump -h 127.0.0.1 -uroot -proot -d test > a.sql
 ```
 
-#### 2. 导入至 MatrixOne Cloud
+#### 2. 导入至 MatrixOne Intelligence
 
-将整个表结构和数据导入到 MatrixOne Cloud 中。
+将整个表结构和数据导入到 MatrixOne Intelligence 中。
 
-1. 打开 MySQL 终端并连接到 MatrixOne Cloud。
+1. 打开 MySQL 终端并连接到 MatrixOne Intelligence。
 
 2. 创建数据库 `test`，进入到数据库 `test`。
 
-2. 通过 `source` 命令将 *sql* 文件导入 MatrixOne Cloud。
+2. 通过 `source` 命令将 *sql* 文件导入 MatrixOne Intelligence。
 
 ```
 mysql> source /YOUR_PATH/a.sql
@@ -64,4 +64,4 @@ select * from table_name;
 
 ## 限制说明
 
-MatrixOne Cloud 已经支持 MySQL 的建表语句，因此可以顺畅的将 MySQL 表迁移到 MatrixOne Cloud 上。不过需要注意，在迁移过程中，不兼容 MySQL 部分关键字，如 `engine=` 等，在 MatrixOne Cloud 中会被自动忽略，也不会影响表结构的迁移。
+MatrixOne Intelligence 已经支持 MySQL 的建表语句，因此可以顺畅的将 MySQL 表迁移到 MatrixOne Intelligence 上。不过需要注意，在迁移过程中，不兼容 MySQL 部分关键字，如 `engine=` 等，在 MatrixOne Intelligence 中会被自动忽略，也不会影响表结构的迁移。

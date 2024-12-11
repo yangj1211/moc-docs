@@ -1,6 +1,6 @@
 # save_query_result 保存查询结果支持
 
-MatrixOne Cloud 默认开启 `save_query_result`，开启后会保存查询结果。
+MatrixOne Intelligence 默认开启 `save_query_result`，开启后会保存查询结果。
 
 对保存查询结果有影响的参数有三个：
 

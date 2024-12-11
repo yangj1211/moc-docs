@@ -1,6 +1,6 @@
 # 快速上手向量能力
 
-本文介绍了 MatrixOne Cloud 向量数据特征及在相关领域的应用，旨在为用户提供一个入门级别的最佳实践指引。
+本文介绍了 MatrixOne Intelligence 向量数据特征及在相关领域的应用，旨在为用户提供一个入门级别的最佳实践指引。
 
 ## 什么是向量？
 
@@ -33,7 +33,7 @@
 
 ### 向量类型
 
-在 MatrixOne Cloud 中，向量被定义为一种特殊的一维数据类型，类似于编程中的数组，但目前仅支持 float32 和 float64 两种数值类型，分别表示为 vecf32 和 vecf64。创建向量列时，可以指定其维度，例如 vecf32(3) ，这表示向量的长度为 3，最大支持达到 65,535 维，而不支持字符串或整型。
+在 MatrixOne Intelligence 中，向量被定义为一种特殊的一维数据类型，类似于编程中的数组，但目前仅支持 float32 和 float64 两种数值类型，分别表示为 vecf32 和 vecf64。创建向量列时，可以指定其维度，例如 vecf32(3) ，这表示向量的长度为 3，最大支持达到 65,535 维，而不支持字符串或整型。
 
 ```sql
 create table t1(a int, b vecf32(3), c vecf64(3))
@@ -49,7 +49,7 @@ mysql> select * from t1;
 
 ### 向量检索
 
-MatrixOne Cloud 支持多种向量相似度函数，如常见余弦相似度，欧几里得距离和内积等。
+MatrixOne Intelligence 支持多种向量相似度函数，如常见余弦相似度，欧几里得距离和内积等。
 
 ```sql
 create table vec_table(a int, b vecf32(3), c vecf64(3));
@@ -85,7 +85,7 @@ mysql> select inner_product(b,"[1,5,6]") from vec_table;
 
 ### 向量索引
 
-向量索引可以在大规模数据集中高效地查找和检索相似向量。目前，MatrixOne Cloud 支持使用欧几里得距离度量的 IVFFLAT 类型的向量索引。
+向量索引可以在大规模数据集中高效地查找和检索相似向量。目前，MatrixOne Intelligence 支持使用欧几里得距离度量的 IVFFLAT 类型的向量索引。
 
 ```sql
 create table vec_table(a int, b vecf32(3), c vecf64(3));
@@ -111,7 +111,7 @@ RAG 的工作流程通常包括以下几个步骤：
 <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/get-started/rag.png width=80% heigth=80%/>
 </div>
 
-Matrxione 作为超融合数据库，自带向量能力，这在 RAG 应用中起着重要的作用。以下我们利用 MatrixOne Cloud 的向量能力快速构建一个 Native RAG 应用。
+Matrxione 作为超融合数据库，自带向量能力，这在 RAG 应用中起着重要的作用。以下我们利用 MatrixOne Intelligence 的向量能力快速构建一个 Native RAG 应用。
 
 ### 前置依赖
 
@@ -129,7 +129,7 @@ pip install pymysql
 
 **步骤一：** 建表并开启向量索引
 
-连接 MatrixOne Cloud，建立一个名为 rag_tab 的表来存储文本信息和对应的向量信息，然后开启向量索引。
+连接 MatrixOne Intelligence，建立一个名为 rag_tab 的表来存储文本信息和对应的向量信息，然后开启向量索引。
 
 ```sql
 create table rag_tab(content text,embedding vecf32(1024));
@@ -139,7 +139,7 @@ SET GLOBAL experimental_ivf_index = 1;
 
 **步骤二：** 构建应用
 
-创建 python 文件 rag_example.py，写入以下内容。该脚本主要作用是利用 mxbai-embed-large 嵌入模型将文本进行向量化，然后存到 MatrixOne Cloud 表中。然后把问题也进行向量化，利用 MatrixOne Cloud 的向量检索找出最相似的文本块，最后结合大语言模型 llama2 得出答案。
+创建 python 文件 rag_example.py，写入以下内容。该脚本主要作用是利用 mxbai-embed-large 嵌入模型将文本进行向量化，然后存到 MatrixOne Intelligence 表中。然后把问题也进行向量化，利用 MatrixOne Intelligence 的向量检索找出最相似的文本块，最后结合大语言模型 llama2 得出答案。
 
 ```sql
 vi ./rag_example.py

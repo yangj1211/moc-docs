@@ -1,8 +1,8 @@
 # 使用 Golang 连接
 
-MatrixOne Cloud 支持 Golang 连接，并且支持 [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql)。
+MatrixOne Intelligence 支持 Golang 连接，并且支持 [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql)。
 
-本篇文档将指导你了解如何使用 `Golang` 以及 `Gorm` 连接 MatrixOne Cloud。
+本篇文档将指导你了解如何使用 `Golang` 以及 `Gorm` 连接 MatrixOne Intelligence。
 
 ## 开始前准备
 
@@ -19,7 +19,7 @@ MatrixOne Cloud 支持 Golang 连接，并且支持 [Go-MySQL-Driver](https://gi
 
 - 已安装 [Git](https://git-scm.com/downloads) 工具，如果你没有安装，可以点击 [Git](https://git-scm.com/downloads) 至官方网站进行下载安装。
 
-## 使用 Golang 连接 MatrixOne Cloud 服务
+## 使用 Golang 连接 MatrixOne Intelligence 服务
 
 `Go-MySQL-Driver` 是一个用于 Go 语言的 MySQL 驱动程序，它实现了 Go 标准库中 `database/sql` 接口的方法，使得 Go 语言程序可以通过这个驱动程序连接和操作 MySQL 数据库。
 
@@ -33,7 +33,7 @@ MatrixOne Cloud 支持 Golang 连接，并且支持 [Go-MySQL-Driver](https://gi
     > go get -u github.com/go-sql-driver/mysql
     ```
 
-2. 使用 MySQL 客户端连接 MatrixOne Cloud。新建一个名称为 *test* 数据库：
+2. 使用 MySQL 客户端连接 MatrixOne Intelligence。新建一个名称为 *test* 数据库：
 
     ```sql
     mysql> create database test;
@@ -81,7 +81,7 @@ MatrixOne Cloud 支持 Golang 连接，并且支持 [Go-MySQL-Driver](https://gi
     Database Connection Succeed
     ```
 
-## 使用 Gorm 连接 MatrixOne Cloud 服务
+## 使用 Gorm 连接 MatrixOne Intelligence 服务
 
 ```gorm``` 是一个基于 golang 的一个神奇的全功能 ORM 库，我们将使用 ```gorm.io/gorm``` 和 ```gorm.io/driver/mysql``` 这两个库来让 Go 连接到 MYSQL 数据库。
 
@@ -92,7 +92,7 @@ MatrixOne Cloud 支持 Golang 连接，并且支持 [Go-MySQL-Driver](https://gi
     go get -u gorm.io/driver/mysql
     ```
 
-2. 使用 MySQL 客户端连接 MatrixOne Cloud。新建一个名称为 *test* 数据库：
+2. 使用 MySQL 客户端连接 MatrixOne Intelligence。新建一个名称为 *test* 数据库：
 
     ```sql
     mysql> create database test;
@@ -144,6 +144,6 @@ MatrixOne Cloud 支持 Golang 连接，并且支持 [Go-MySQL-Driver](https://gi
 
 ## 参考文档
 
-关于使用 Golang 通过 MatrixOne Cloud 构建一个简单的 CRUD 的示例，参见 [Golang 基础示例](../Tutorial/develop-golang-crud-demo.md)。
+关于使用 Golang 通过 MatrixOne Intelligence 构建一个简单的 CRUD 的示例，参见 [Golang 基础示例](../Tutorial/develop-golang-crud-demo.md)。
 
-关于使用 Gorm 通过 MatrixOne Cloud 构建一个简单的 CRUD 的示例，参见 [Gorm 基础示例](../Tutorial/gorm-golang-crud-demo.md)。
+关于使用 Gorm 通过 MatrixOne Intelligence 构建一个简单的 CRUD 的示例，参见 [Gorm 基础示例](../Tutorial/gorm-golang-crud-demo.md)。

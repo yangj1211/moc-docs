@@ -1,10 +1,10 @@
 # 导入 TPC-H 样例数据
 
-本篇文档将指导你如何使用 MatrixOne Cloud 平台页面轻松导入 TPC-H 样例数据。
+本篇文档将指导你如何使用 MatrixOne Intelligence 平台页面轻松导入 TPC-H 样例数据。
 
 **步骤**
 
-1. 登录你的 MatrixOne Cloud 账号，并选择目标 MatrixOne Cloud 实例。点击**通过云平台连接**进入 MatrixOne Cloud 数据库管理平台。在左侧菜单栏中，找到**查询**并选择**查询编辑器**模块，然后点击进入 SQL 编辑器页面。
+1. 登录你的 MatrixOne Intelligence 账号，并选择目标 MatrixOne Intelligence 实例。点击**通过云平台连接**进入 MatrixOne Intelligence 数据库管理平台。在左侧菜单栏中，找到**查询**并选择**查询编辑器**模块，然后点击进入 SQL 编辑器页面。
 
 2. 在 SQL 编辑器界面中，你将看到一个**导入**按钮。
 
@@ -14,7 +14,7 @@
 
 3. 单击**导入**按钮后，你将看到一个交互式引导弹窗。按顺序选择**试用样例数据**、**TPC-H 基准测试**和**导入 TPC-H 数据**，这样你就成功加载了 TPC-H 样例数据。
 
-    - MatrixOne Cloud 现在提供 TPC-H 1GB 和 10GB 两种样例数据库。
+    - MatrixOne Intelligence 现在提供 TPC-H 1GB 和 10GB 两种样例数据库。
     - TPC-H 样例数据加载速度非常快，而且不会占用你的存储空间，这得益于 MatrixOne 的租户间数据发布订阅功能。
 
     <div align="center">

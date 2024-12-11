@@ -1,18 +1,18 @@
-# MatrixOne Cloud：云原生数据平台的未来
+# MatrixOne Intelligence：云原生数据平台的未来
 
-MatrixOne Cloud (MO Cloud) 是一个全托管云原生数据平台，它提供了 HSTAP 数据库 MatrixOne (MO) 的云上服务，极大简化了 MO 的部署和运维成本。所提供的 Serverless 实例支持计算资源的自动弹性伸缩以及按 SQL 用量计费，帮助用户不再关注数据库的复杂性，而是应用程序及 SQL 本身。MO Cloud 目前支持在阿里云上创建数据库实例。
+MatrixOne Intelligence (MO Intelligence) 是一个全托管云原生数据平台，它提供了 HSTAP 数据库 MatrixOne (MO) 的云上服务，极大简化了 MO 的部署和运维成本。所提供的 Serverless 实例支持计算资源的自动弹性伸缩以及按 SQL 用量计费，帮助用户不再关注数据库的复杂性，而是应用程序及 SQL 本身。MO Intelligence 目前支持在阿里云上创建数据库实例。
 
-## MatrixOne Cloud 架构
+## MatrixOne Intelligence 架构
 
-MO Cloud 采用了存算分离架构，使得计算节点可以根据需要自由扩缩容，同时通过冷热分离的存储方案，最大程度地降低了存储成本。
+MO Intelligence 采用了存算分离架构，使得计算节点可以根据需要自由扩缩容，同时通过冷热分离的存储方案，最大程度地降低了存储成本。
 
-MO Cloud 架构图如下所示：
+MO Intelligence 架构图如下所示：
 
 ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/overview/moc_archit.png)
 
 ### 共享存储层
 
-这一层包括共享存储（Shared Storage）和共享日志（Log Service）。在 TN 节点完成冲突检测后，事务的日志将被写入 Log Service，从而确保高性能的日志读写。这一层还基于统一存储引擎 TAE，支持数据的行列存储和处理，将数据可靠地存储到 S3 等存储介质。通过 Cache 和 S3 的冷热数据分级存储策略，MO Cloud 不仅简化了数据的缓存、迁移和校验等操作，还提高了数据操作的并发能力，降低了存储成本。
+这一层包括共享存储（Shared Storage）和共享日志（Log Service）。在 TN 节点完成冲突检测后，事务的日志将被写入 Log Service，从而确保高性能的日志读写。这一层还基于统一存储引擎 TAE，支持数据的行列存储和处理，将数据可靠地存储到 S3 等存储介质。通过 Cache 和 S3 的冷热数据分级存储策略，MO Intelligence 不仅简化了数据的缓存、迁移和校验等操作，还提高了数据操作的并发能力，降低了存储成本。
 
 ### 事务层
 
@@ -24,11 +24,11 @@ MO Cloud 架构图如下所示：
 
 ### 云服务层
 
-云服务层是 MO Cloud 中各项服务的集合，它们协调着 MO Cloud 的各个组件，以处理用户的请求。这些服务包括身份认证和访问控制、基础设施管理、数据库实例管理、查询分析以及数据安全等，为用户提供了全面的云服务支持。
+云服务层是 MO Intelligence 中各项服务的集合，它们协调着 MO Intelligence 的各个组件，以处理用户的请求。这些服务包括身份认证和访问控制、基础设施管理、数据库实例管理、查询分析以及数据安全等，为用户提供了全面的云服务支持。
 
-## MatrixOne Cloud 核心特性
+## MatrixOne Intelligence 核心特性
 
-MO Cloud 注重用户体验，提供了一系列核心特性，让用户轻松驾驭数据平台：
+MO Intelligence 注重用户体验，提供了一系列核心特性，让用户轻松驾驭数据平台：
 
 ### 零门槛部署
 
@@ -55,4 +55,4 @@ MO Cloud 注重用户体验，提供了一系列核心特性，让用户轻松�
 - **多公有云部署：**支持在不同公有云的 DaaS 服务上部署，满足多应用不同地域的访问需求。
 - **混合云部署：**支持混合云部署，无论是公有云还是 On-premise，都能提供统一的部署和管理方案，让你的数据更灵活，更可控。
 
-MO Cloud 是数据平台的未来，为用户提供了卓越的性能、高度的弹性和极致的用户体验，帮助企业更好地应对数据管理和分析的挑战，走向数据驱动的未来。不管你是开发者、数据工程师还是企业领导，MO Cloud 都将是你实现数据愿景的理想之选。现在就体验 MO Cloud，开启数据之旅！
+MO Intelligence 是数据平台的未来，为用户提供了卓越的性能、高度的弹性和极致的用户体验，帮助企业更好地应对数据管理和分析的挑战，走向数据驱动的未来。不管你是开发者、数据工程师还是企业领导，MO Intelligence 都将是你实现数据愿景的理想之选。现在就体验 MO Intelligence，开启数据之旅！

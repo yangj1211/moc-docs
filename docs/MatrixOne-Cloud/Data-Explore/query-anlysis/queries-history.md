@@ -4,9 +4,9 @@
 
 ## SQL 查询记录
 
-1. 登录到 MatrixOne Cloud 实例管理平台。选择目标实例，然后点击**通过云平台连接**以访问 MatrixOne Cloud 数据库管理平台。
+1. 登录到 MatrixOne Intelligence 实例管理平台。选择目标实例，然后点击**通过云平台连接**以访问 MatrixOne Intelligence 数据库管理平台。
 
-2. 在 MatrixOne Cloud 数据库管理平台中，找到左侧菜单栏中的**查询历史**模块。点击以进入 SQL 查询历史页面。
+2. 在 MatrixOne Intelligence 数据库管理平台中，找到左侧菜单栏中的**查询历史**模块。点击以进入 SQL 查询历史页面。
 
 在此页面，默认显示最近两小时内的查询历史，您可以设置特定筛选条件，如 SQL 类型、时间以及更多的筛选条件，如 SQL 文本、时长、数据库等，以缩小查询范围，快速定位到特定条件下的 SQL 查询记录。点击**搜索**按钮，以筛选出符合特定条件的查询记录列表。
 !!! note
@@ -24,7 +24,7 @@
 
 其中，字段**时长**为 SQL 语句聚合后总的响应时间，"/ *x queries*/" 中的 "x" 指的是聚合的条数
 
-作为 MatrixOne 的云上数据库管理平台，MatrixOne Cloud 为用户提供了数据库信息的界面化展示，在实例平台上的任何操作获得的信息都是从数据库中获取的，也就是说在平台的所有操作都会产生 SQL 从而消耗 CU。但是由于考虑到用户可能更关心业务方面的 SQL，为了给用户更好的观测体验，平台上非用户操作的 SQL（除了 SQL Editor 执行的 SQL）在查询历史中默认是不显示的。对于生产实例来说，平台上非用户操作产生的 CU 也是收费的，可在筛选项中开启**非用户执行**选项来查看这部分 SQL 的详细信息。
+作为 MatrixOne 的云上数据库管理平台，MatrixOne Intelligence 为用户提供了数据库信息的界面化展示，在实例平台上的任何操作获得的信息都是从数据库中获取的，也就是说在平台的所有操作都会产生 SQL 从而消耗 CU。但是由于考虑到用户可能更关心业务方面的 SQL，为了给用户更好的观测体验，平台上非用户操作的 SQL（除了 SQL Editor 执行的 SQL）在查询历史中默认是不显示的。对于生产实例来说，平台上非用户操作产生的 CU 也是收费的，可在筛选项中开启**非用户执行**选项来查看这部分 SQL 的详细信息。
 
 ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/query_history_0.12_2.png)
 
@@ -38,6 +38,6 @@
 
   ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/src_history_4.png)
 
-若想了解更多 MatrixOne 对于保存查询结果的支持，请查看[保存查询结果支持](https://docs.matrixorigin.cn/v24.1.2.3/MatrixOne/Reference/Variable/system-variables/save_query_result/#_2)。
+若想了解更多 MatrixOne 对于保存查询结果的支持，请查看[保存查询结果支持](https://docs.matrixorigin.cn/v24.2.0.1/MatrixOne/Reference/Variable/system-variables/save_query_result/#_2)。
 
 现在，您已经了解如何访问 SQL 查询历史，筛选查询记录，并查看详细的查询信息。这将有助于您监测和审计 SQL 查询，以确保数据库的正常运行和安全性。

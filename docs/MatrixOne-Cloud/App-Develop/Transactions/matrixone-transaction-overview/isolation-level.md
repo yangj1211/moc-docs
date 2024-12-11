@@ -2,7 +2,7 @@
 
 ## 读已提交
 
-MatrixOne Cloud 默认**读已提交（Read Committed）**隔离级别，它的特点如下：
+MatrixOne Intelligence 默认**读已提交（Read Committed）**隔离级别，它的特点如下：
 
 - 在不同的事务之间，只能读到其他事务已经提交的数据，对于未提交的数据，无法查看。
 - 读已提交的隔离级别，能够有效防止脏写和脏读，但是不能避免不可重复读与幻读。
@@ -17,7 +17,7 @@ MatrixOne Cloud 默认**读已提交（Read Committed）**隔离级别，它的�
 
 你可以参照下面的示例，来理解**读已提交**隔离级别。
 
-首先在 MatrixOne Cloud 中，我们建立一个命名为 `test` 的数据库与表 `t1`，并插入数据：
+首先在 MatrixOne Intelligence 中，我们建立一个命名为 `test` 的数据库与表 `t1`，并插入数据：
 
 ```sql
 create database test;
@@ -112,7 +112,7 @@ SELECT * FROM t1;
 
 ## 快照隔离
 
-在 MatrixOne Cloud 中，也支持快照隔离（Snapshot Isolation），为了与 MySQL 隔离级别保持一致，MatrixOne Cloud 快照隔离又叫做可重复读（REPEATABLE READS）。该级别的隔离实现原理如下：
+在 MatrixOne Intelligence 中，也支持快照隔离（Snapshot Isolation），为了与 MySQL 隔离级别保持一致，MatrixOne Intelligence 快照隔离又叫做可重复读（REPEATABLE READS）。该级别的隔离实现原理如下：
 
 ### 快照隔离原理
 
@@ -124,7 +124,7 @@ SELECT * FROM t1;
 
 你可以参照下面的示例，来帮助理解快照隔离。
 
-首先在 MatrixOne Cloud 中，我们建立一个数据库 *test* 与表 *t1*：
+首先在 MatrixOne Intelligence 中，我们建立一个数据库 *test* 与表 *t1*：
 
 ```
 create database test;

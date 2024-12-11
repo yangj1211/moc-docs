@@ -1,10 +1,10 @@
-# 使用 NineData 将 MySQL 数据写入 MatrixOne Cloud
+# 使用 NineData 将 MySQL 数据写入 MatrixOne Intelligence
 
-本章节将以从阿里云 MySQL RDS 向 MatrixOne Cloud 转移数据为例来介绍如何使用 Ninedata 将 MySQL 数据写入到 MatrixOne Cloud。
+本章节将以从阿里云 MySQL RDS 向 MatrixOne Intelligence 转移数据为例来介绍如何使用 Ninedata 将 MySQL 数据写入到 MatrixOne Intelligence。
 
 ## 开始前准备
 
-- 完成[MatrixOne Cloud 实例创建](../Get-Started/quickstart.md)。
+- 完成[MatrixOne Intelligence 实例创建](../Get-Started/quickstart.md)。
   
 - 完成[NineData 在线平台的注册](https://console.ninedata.cloud/user/register)。
 
@@ -62,7 +62,7 @@
 
 2. 点击创建数据源，并选择在`自建数据库`的`关系型数据库`一栏中选择 MySQL
 
-3. 依次设置好阿里云 MySQL RDS 的数据源信息和 MatrixOne Cloud 的数据源信息，设置如图所示：
+3. 依次设置好阿里云 MySQL RDS 的数据源信息和 MatrixOne Intelligence 的数据源信息，设置如图所示：
 
    ![dataSourceSetup](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/import/ninedata/dataSourceSetup.png)
 

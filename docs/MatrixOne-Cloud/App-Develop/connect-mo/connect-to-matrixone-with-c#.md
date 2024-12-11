@@ -1,6 +1,6 @@
 # C# 连接
 
-MatrixOne Cloud 支持 C# 连接，并且支持 MySQL Connector/NET 驱动。
+MatrixOne Intelligence 支持 C# 连接，并且支持 MySQL Connector/NET 驱动。
 
 本篇文档将指导你了解如何使用 C# 连接 MatrixOne  Cloud。
 

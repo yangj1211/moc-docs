@@ -1,10 +1,10 @@
 # 监控指标
 
-本节将详细介绍 MatrixOne Cloud 提供的各种监控指标。
+本节将详细介绍 MatrixOne Intelligence 提供的各种监控指标。
 
 ## 实例监控指标
 
-实例监控指标是服务于 MatrixOne Cloud 实例管理平台的运维人员的监控信息，您可以点击右上角的实例名列表来切换您想了解的实例信息，包括：平均连接数，CU 使用量和存储用量。对于 CU 和存储的使用信息您也可以直接点击实例界面您想了解的实例，跳转至实例详情中查看。
+实例监控指标是服务于 MatrixOne Intelligence 实例管理平台的运维人员的监控信息，您可以点击右上角的实例名列表来切换您想了解的实例信息，包括：平均连接数，CU 使用量和存储用量。对于 CU 和存储的使用信息您也可以直接点击实例界面您想了解的实例，跳转至实例详情中查看。
 
 ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitor_0.12_3.png)
 
@@ -22,7 +22,7 @@
 
 ## 业务监控指标
 
-业务监控指标是服务于数据应用人员的监控信息，可以在 MatrixOne Cloud 数据库管理平台中找到，其中包括：
+业务监控指标是服务于数据应用人员的监控信息，可以在 MatrixOne Intelligence 数据库管理平台中找到，其中包括：
 
 ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitor_0.12_1.png)
 
@@ -56,7 +56,7 @@
 
 ## 统计时长与统计周期
 
-为了帮助用户从宏观和微观角度分析实例的性能和问题，MatrixOne Cloud 提供了多种统计时长，每种时长对应不同的统计周期，默认显示最近 30 分钟的监控数据，用户可以根据需要自由切换。如下图所示：
+为了帮助用户从宏观和微观角度分析实例的性能和问题，MatrixOne Intelligence 提供了多种统计时长，每种时长对应不同的统计周期，默认显示最近 30 分钟的监控数据，用户可以根据需要自由切换。如下图所示：
 
 <div align="center">
 <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/monitor/monitor_0.12_2.png width=60% heigth=60%/>

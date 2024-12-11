@@ -1,10 +1,10 @@
 # 贡献指南
 
-本文档将会指导您如何参与 MatrixOne Cloud 文档的建设。
+本文档将会指导您如何参与 MatrixOne Intelligence 文档的建设。
 
 ## 贡献类型
 
-我们鼓励您通过以下方式为 MatrixOne Cloud 文档做出贡献：
+我们鼓励您通过以下方式为 MatrixOne Intelligence 文档做出贡献：
 
 - 如果您发现文档中存在任何过时、模糊或者错误的地方，请[创建一个 Issue](https://github.com/matrixone-cloud/moc-docs/issues/new) 以告知我们。您还可以提出在浏览文档时遇到的有关网站本身的任何问题。
 - 对于显而易见的问题，如拼写错误或链接失效，您可以直接[创建一个 Pull Request](https://github.com/matrixone-cloud/moc-docs/compare) 进行修复。

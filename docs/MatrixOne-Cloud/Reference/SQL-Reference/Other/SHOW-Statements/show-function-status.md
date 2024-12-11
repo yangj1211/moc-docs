@@ -4,7 +4,7 @@
 
 `SHOW FUNCTION STATUS` 是用来显示数据库中的所有函数的信息，包括函数名、数据库名、创建时间等等。
 
-`SHOW FUNCTION STATUS` 命令只显示用户定义的函数，不包括系统函数。MatrixOne Cloud 支持 [SQL UDF](../../Data-Definition-Language/create-function-sql.md)
+`SHOW FUNCTION STATUS` 命令只显示用户定义的函数，不包括系统函数。MatrixOne Intelligence 支持 [SQL UDF](../../Data-Definition-Language/create-function-sql.md)
 
 ## **语法结构**
 

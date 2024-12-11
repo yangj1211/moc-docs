@@ -45,15 +45,15 @@ MatrixOne 的保留关键字列表可参见[该详细列表](../Reference/Langua
 
 在 MatrixOne 中，只有一种情况需要区分大小写：如果你创建的表和属性带有 \`\`，\`\` 中的名称需要注意大小写。查询这个表名或属性名，那么表名和属性名也需要被包含在\`\`里。
 
-* **如何将数据导入到 MatrixOne Cloud 中？**
+* **如何将数据导入到 MatrixOne Intelligence 中？**
 
 MatrixOne 支持与 MySQL 相同的 [`INSERT`](../App-Develop/import-data/insert-data.md) 数据插入语句，可以通过 `INSERT` 进行实时数据写入，同时也支持 [`LOAD DATA`](../App-Develop/import-data/bulk-load/bulk-load-overview.md) 的离线批量导入语句。
 
-在 MatrixOne Cloud 中，还可以通过应用界面上提供的 [`导入数据`](../App-Develop/import-data/bulk-load/load-s3.md) 功能离线将存储在对象存储中的 `csv` 文件或者 `jsonline` 文件导入实例。还可以通过数据发布订阅的方式，快速获取已经存储在其他实例上的数据。
+在 MatrixOne Intelligence 中，还可以通过应用界面上提供的 [`导入数据`](../App-Develop/import-data/bulk-load/load-s3.md) 功能离线将存储在对象存储中的 `csv` 文件或者 `jsonline` 文件导入实例。还可以通过数据发布订阅的方式，快速获取已经存储在其他实例上的数据。
 
-* **如何将数据从 MatrixOne Cloud 导出到文件？**
+* **如何将数据从 MatrixOne Intelligence 导出到文件？**
 
-在 MatrixOne Cloud 中，你可以使用 [`mo-dump`](../App-Develop/export-data/modump.md) 这个二进制工具把数据导出成 SQL 或者 csv 文件。
+在 MatrixOne Intelligence 中，你可以使用 [`mo-dump`](../App-Develop/export-data/modump.md) 这个二进制工具把数据导出成 SQL 或者 csv 文件。
 
 * **MatrixOne 是否支持事务？支持的事务隔离级别是什么？**
 
@@ -71,4 +71,4 @@ MatrixOne 支持 ACID（原子性、一致性、隔离性、持久性）的事�
   EXPLAIN SELECT col1 FROM tbl1;
   ```
 
-  也可以在 MatrixOne Cloud 数据库管理平台提供的 [`查询分析`](../Data-Explore/query-anlysis/query_profile.md) 模块中查看图形化的执行计划。
+  也可以在 MatrixOne Intelligence 数据库管理平台提供的 [`查询分析`](../Data-Explore/query-anlysis/query_profile.md) 模块中查看图形化的执行计划。

@@ -1,8 +1,8 @@
 # 使用 Python 连接
 
-MatrixOne Cloud 支持 Python 连接，支持 `pymysql` 和 `sqlalchemy` 两种驱动程序。
+MatrixOne Intelligence 支持 Python 连接，支持 `pymysql` 和 `sqlalchemy` 两种驱动程序。
 
-本篇文档将指导你了解如何通过这两个 *python* 驱动程序连接 MatrixOne Cloud。
+本篇文档将指导你了解如何通过这两个 *python* 驱动程序连接 MatrixOne Intelligence。
 
 ## 开始前准备
 
@@ -17,7 +17,7 @@ python3 -V
 
 - 已安装 MySQL 客户端。
 
-## 使用 pymysql 工具连接 MatrixOne Cloud 服务
+## 使用 pymysql 工具连接 MatrixOne Intelligence 服务
 
 PyMySQL 是一个 Python 的 MySQL 客户端库。
 
@@ -32,13 +32,13 @@ PyMySQL 是一个 Python 的 MySQL 客户端库。
     pip3 install cryptography -i https://pypi.tuna.tsinghua.edu.cn/simple
     ```
 
-2. 使用 MySQL 客户端连接 MatrixOne Cloud Cloud。新建一个名称为 *test* 数据库：
+2. 使用 MySQL 客户端连接 MatrixOne Intelligence Cloud。新建一个名称为 *test* 数据库：
 
     ```sql
     mysql> create database test;
     ```
 
-3. 创建一个纯文本文件 *pymysql_connect_matrixonecloud.py* 将代码写入文件，并根据你的 MatrixOne Cloud 数据库连接串修改相关的数据库参数：
+3. 创建一个纯文本文件 *pymysql_connect_matrixonecloud.py* 将代码写入文件，并根据你的 MatrixOne Intelligence 数据库连接串修改相关的数据库参数：
 
     ```python
     #!/usr/bin/python3
@@ -72,10 +72,10 @@ PyMySQL 是一个 Python 的 MySQL 客户端库。
 
     ```
     > python3 pymysql_connect_matrixonecloud.py
-    Database version : 8.0.30-MatrixOne-v1.2.3
+    Database version : 8.0.30-MatrixOne-v2.0.1
     ```
 
-## 使用 sqlalchemy 连接 MatrixOne Cloud
+## 使用 sqlalchemy 连接 MatrixOne Intelligence
 
 SQLAlchemy 是 Python SQL 工具包和对象关系映射器 (ORM)，它为应用开发人员提供了 SQL 的全部功能。
 
@@ -89,7 +89,7 @@ SQLAlchemy 是 Python SQL 工具包和对象关系映射器 (ORM)，它为应用
     pip3 install pymysql -i https://pypi.tuna.tsinghua.edu.cn/simple
     ```
 
-2. 使用 MySQL 客户端连接 MatrixOne Cloud。新建一个名称为 *test* 数据库，并且新建一个名称为 *student* 表，然后插入两条数据：
+2. 使用 MySQL 客户端连接 MatrixOne Intelligence。新建一个名称为 *test* 数据库，并且新建一个名称为 *student* 表，然后插入两条数据：
 
     ```sql
     mysql> create database test;
@@ -99,7 +99,7 @@ SQLAlchemy 是 Python SQL 工具包和对象关系映射器 (ORM)，它为应用
 
     ```
 
-3. 创建一个纯文本文件 *sqlalchemy_connect_matrixonecloud.py* 将代码写入文件，并根据你的 MatrixOne Cloud 数据库连接串修改相关的数据库参数：
+3. 创建一个纯文本文件 *sqlalchemy_connect_matrixonecloud.py* 将代码写入文件，并根据你的 MatrixOne Intelligence 数据库连接串修改相关的数据库参数：
 
     ```python
     from sqlalchemy import create_engine

@@ -1,6 +1,6 @@
 # 查询分析
 
-本篇文档将指导用户如何通过 MatrixOne Cloud 内置的查询分析（Query Profile）进行在线的 SQL 查询分析。也可以理解成，查询分析模块是将数据库中的 Explain，即解释详细执行计划的能力做成了可视化模块，通过可视化的方式向用户展示这条 SQL 的执行计划。
+本篇文档将指导用户如何通过 MatrixOne Intelligence 内置的查询分析（Query Profile）进行在线的 SQL 查询分析。也可以理解成，查询分析模块是将数据库中的 Explain，即解释详细执行计划的能力做成了可视化模块，通过可视化的方式向用户展示这条 SQL 的执行计划。
 !!! note
     由于执行计划的保存会消耗一些资源，考虑到其主要用于分析和改进慢查询，因此云平台仅保存执行时长大于 1s 的 SQL 的执行计划。
 
@@ -14,7 +14,7 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 用户可以使用 `EXPLAIN` 可查看 MatrixOne 执行某条 SQL 语句时的执行计划。
 
-`EXPLAIN` 可以和 `SELECT`、`DELETE`、`INSERT`、`REPLACE`、`UPDATE` 语句结合使用。当 `EXPLAIN` 与可解释的语句一起使用时，MatrixOne 会解释它将如何处理该语句，包括有关表如何连接以及连接顺序的信息。MatrixOne Cloud 中暂时不支持通过在 SQL 编辑器中使用 `EXPLAIN` 查询执行计划，而是提供了 `查询分析` 的可视化界面向用户展示执行计划，如果用户希望查看 `EXPLAIN` 的原始信息的时候，可以通过 MySQL 客户端连接 MatrixOne Cloud 的实例进行执行。
+`EXPLAIN` 可以和 `SELECT`、`DELETE`、`INSERT`、`REPLACE`、`UPDATE` 语句结合使用。当 `EXPLAIN` 与可解释的语句一起使用时，MatrixOne 会解释它将如何处理该语句，包括有关表如何连接以及连接顺序的信息。MatrixOne Intelligence 中暂时不支持通过在 SQL 编辑器中使用 `EXPLAIN` 查询执行计划，而是提供了 `查询分析` 的可视化界面向用户展示执行计划，如果用户希望查看 `EXPLAIN` 的原始信息的时候，可以通过 MySQL 客户端连接 MatrixOne Intelligence 的实例进行执行。
 
 !!! note
     使用 MySQL 客户端连接到 MatrixOne 时，为避免输出结果在终端中换行，可先执行 `pager less -S` 命令。执行命令后，新的 `EXPLAIN` 的输出结果不再换行，可按右箭头 **→** 键水平滚动阅读输出结果。

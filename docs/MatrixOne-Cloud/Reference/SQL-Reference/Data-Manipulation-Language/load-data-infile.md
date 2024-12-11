@@ -374,7 +374,7 @@ load data local infile 'file_name' into table tbl_name PARALLEL 'TRUE' STRICT 'F
 
 ## 支持的文件格式
 
-在 MatrixOne Cloud 当前版本中，`LOAD DATA` 支持 *CSV* 格式和 *JSONLines* 格式文件。
+在 MatrixOne Intelligence 当前版本中，`LOAD DATA` 支持 *CSV* 格式和 *JSONLines* 格式文件。
 
 有关导入这两种格式的文档，参见[导入*. csv* 格式数据](../../../App-Develop/import-data/bulk-load/load-csv.md)和[导入 JSONLines 数据](../../../App-Develop/import-data/bulk-load/load-jsonline.md)。
 
@@ -383,7 +383,7 @@ load data local infile 'file_name' into table tbl_name PARALLEL 'TRUE' STRICT 'F
 
 ### *CSV* 格式标准说明
 
-MatrixOne Cloud 加载 *CSV* 格式符合 RFC4180 标准，规定 *CSV* 格式如下：
+MatrixOne Intelligence 加载 *CSV* 格式符合 RFC4180 标准，规定 *CSV* 格式如下：
 
 1. 每条记录位于单独的一行，由换行符（CRLF）分隔：
 
@@ -654,7 +654,7 @@ mysql> select * from t1;
 ["true","1","var","2020-09-07","2020-09-07 00:00:00","2020-09-07 00:00:00","18","121.11",{"c":1,"b":["a","b",{"q":4}]},"1aza",null,null]
 ```
 
-在 MatrixOne Cloud 中建表：
+在 MatrixOne Intelligence 中建表：
 
 ```sql
 mysql> drop table if exists t1;
@@ -664,7 +664,7 @@ mysql> create table t1(col1 bool,col2 int,col3 varchar(100), col4 date,col5 date
 Query OK, 0 rows affected (0.03 sec)
 ```
 
-将数据文件导入到 MatrixOne Cloud 中的表 t1：
+将数据文件导入到 MatrixOne Intelligence 中的表 t1：
 
 ```
 load data local infile {'filepath'='<your-local-file-path>/jsonline_array.jl','format'='jsonline','jsondata'='array'} into table t1;
@@ -714,5 +714,5 @@ mysql> select * from t1;
 2. MatrixOne 当前部分支持 `SET`，仅支持 `SET columns_name=nullif(col_name,expr2)`。
 3. 开启并行加载操作时必须要保证文件中每行数据中不包含指定的行结束符，比如 '\n'，否则有可能会导致文件加载时数据出错。
 4. 文件的并行加载要求文件必须是非压缩格式，暂不支持并行加载压缩格式的文件。
-5. 如果你需要用 `LOAD DATA LOCAL` 进行本地加载，则需要使用命令行连接 MatrixOne Cloud 服务主机：`mysql -h <mo-host -ip> -P 6001 -uroot -p111 --local-infile`。
+5. 如果你需要用 `LOAD DATA LOCAL` 进行本地加载，则需要使用命令行连接 MatrixOne Intelligence 服务主机：`mysql -h <mo-host -ip> -P 6001 -uroot -p111 --local-infile`。
 6. MatrixOne 当前暂不支持 `ESCAPED BY`，写入或读取特殊字符与 MySQL 存在一定的差异。

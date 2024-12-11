@@ -2,17 +2,17 @@
 
 ## **语法说明**
 
-`GRANT` 语句将权限和角色分配给 MatrixOne Cloud 用户和角色。
+`GRANT` 语句将权限和角色分配给 MatrixOne Intelligence 用户和角色。
 
 ### GRANT 概述
 
-系统权限是 MatrixOne Cloud 实例 Admin 管理员的权限。Admin 管理员可以创建和删除其他*用户（Users）*，管理*用户（Users）*，并给他们授予角色与权限。
+系统权限是 MatrixOne Intelligence 实例 Admin 管理员的权限。Admin 管理员可以创建和删除其他*用户（Users）*，管理*用户（Users）*，并给他们授予角色与权限。
 
 要使用 `GRANT` 授予其他用户或角色权限，你首先必须具有 `WITH GRANT OPTION` 权限，并且你必须具有你正在授予的权限。了解你当前角色的授权情况或其他角色的授权情况，请使用 `SHOW GRANTS` 语句，更多信息，参见 [SHOW GRANTS](../Other/SHOW-Statements/show-grants.md)。
 
 `REVOKE` 语句与 `GRANT` 相关，允许租户删除用户权限。有关 `REVOKE` 的更多信息，请参阅 [REVOKE](revoke.md)。
 
-一般情况下，一个集群默认有一个 *root*，*root* 首先使用 `CREATE ACCOUNT` 创建一个新账户，并定义它的非特权权限，例如它的密码，然后租户使用 `CREATE USER` 创建用户并使用 `GRANT` 对其赋权。`ALTER ACCOUNT` 可用于修改现有租户的非特权特征。`REVOKE` 用于修改现有用户的权限特征。如需了解 MatrixOne Cloud 支持的权限以及不同层级的权限，请参阅 [MatrixOne Cloud 权限分类](../../access-control-type.md)。
+一般情况下，一个集群默认有一个 *root*，*root* 首先使用 `CREATE ACCOUNT` 创建一个新账户，并定义它的非特权权限，例如它的密码，然后租户使用 `CREATE USER` 创建用户并使用 `GRANT` 对其赋权。`ALTER ACCOUNT` 可用于修改现有租户的非特权特征。`REVOKE` 用于修改现有用户的权限特征。如需了解 MatrixOne Intelligence 支持的权限以及不同层级的权限，请参阅 [MatrixOne Intelligence 权限分类](../../access-control-type.md)。
 
 `GRANT` 在成功执行后，得到结果 `Query OK, 0 rows affected`。要查看操作产生的权限，请使用 [SHOW GRANTS](../Other/SHOW-Statements/show-grants.md)
 

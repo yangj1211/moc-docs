@@ -4,19 +4,19 @@
 
 ## 步骤一：登录账号，开始创建
 
-1. 登录您的 MO Cloud 账号，进入实例管理平台。
+1. 登录您的 MO Intelligence 账号，进入实例管理平台。
 
-    如果您还没有 MO Cloud 账号，您可以点击[注册登录](https://www.matrixorigin.cn/moc-trial)开始注册，或者参照[快速体验 MatrixOne Cloud](../../Get-Started/quickstart.md) 的注册指南。
+    如果您还没有 MO Intelligence 账号，您可以点击[注册登录](https://www.matrixorigin.cn/moc-trial)开始注册，或者参照[快速体验 MatrixOne Intelligence](../../Get-Started/quickstart.md) 的注册指南。
 
 2. 在菜单栏中点击**实例**进入实例列表页面，然后点击 **+创建实例**。
 
 ## 步骤二：选择实例
 
-MO Cloud 提供了两种实例类型：可自动扩缩容的 Serverless 实例和拥有独立稳定的计算资源的标准实例。在此选择**Serverless**。
+MO Intelligence 提供了两种实例类型：可自动扩缩容的 Serverless 实例和拥有独立稳定的计算资源的标准实例。在此选择**Serverless**。
 
 ## 步骤三：选择公有云服务商及地区
 
-MatrixOne Cloud 支持在阿里云创建实例。
+MatrixOne Intelligence 支持在阿里云创建实例。
 
 | 地理区域    | 地区名 | 地点 |
 | ----------- | ------ | ---- |
@@ -28,7 +28,7 @@ MatrixOne Cloud 支持在阿里云创建实例。
 
     如果您想创建生产实例，可以通过线下充值或者使用我们发放的代金券方式为您的平台账户充值，只要账户里有钱就可以创建和使用 serverless 生产实例。  
 
-    选择**生产使用**，MO Cloud 会为该实例配置独立的、可根据业务需求自动伸缩的计算资源，从而实现近乎极致的性能。此外，您可以配置以下选项：
+    选择**生产使用**，MO Intelligence 会为该实例配置独立的、可根据业务需求自动伸缩的计算资源，从而实现近乎极致的性能。此外，您可以配置以下选项：
 
     **消费限制**
 
@@ -72,7 +72,7 @@ MatrixOne Cloud 支持在阿里云创建实例。
 
 ### 管理员密码
 
-在创建 MO Cloud 实例时，您需要设置实例的最高权限管理员（admin）的密码。为了保障数据库的安全性，密码需符合以下规则：
+在创建 MO Intelligence 实例时，您需要设置实例的最高权限管理员（admin）的密码。为了保障数据库的安全性，密码需符合以下规则：
 
 - 至少包含 8 个字符
 - 必须包含至少一个数字
@@ -81,7 +81,7 @@ MatrixOne Cloud 支持在阿里云创建实例。
 
 ### 网络策略
 
-MatrixOne Cloud 设置了两种网络安全策略
+MatrixOne Intelligence 设置了两种网络安全策略
 
 - 允许所有公网 IP 访问  
 默认设置为**允许所有公网 IP 访问**

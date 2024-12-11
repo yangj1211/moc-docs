@@ -1,12 +1,12 @@
 # SQL 编辑器
 
-SQL 编辑器是 MatrixOne cloud 平台非常重要的一个工具，你可以通过在线 SQL 编辑器，进行 SQL 语句的快速编写、执行、结果查看，还可以将常用的 SQL 语句保存在 WorkBook 中，方便后续使用、参考和对比。
+SQL 编辑器是 MatrixOne Intelligence 平台非常重要的一个工具，你可以通过在线 SQL 编辑器，进行 SQL 语句的快速编写、执行、结果查看，还可以将常用的 SQL 语句保存在 WorkBook 中，方便后续使用、参考和对比。
 
-本篇文档将指导你如何通过 MatrixOne Cloud 内置的 SQL 编辑器（SQL Editor）进行在线 SQL 查询与数据探索。
+本篇文档将指导你如何通过 MatrixOne Intelligence 内置的 SQL 编辑器（SQL Editor）进行在线 SQL 查询与数据探索。
 
 ## 打开 SQL 编辑器
 
-登录 MatrixOne Cloud 实例管理平台，选择目标实例 > 通过云平台连接，进入 MatrixOne Cloud 数据库管理平台，在左侧菜单栏中找到 SQL 编辑器模块，点击即可进入 SQL 编辑器页面。
+登录 MatrixOne Intelligence 实例管理平台，选择目标实例 > 通过云平台连接，进入 MatrixOne Intelligence 数据库管理平台，在左侧菜单栏中找到 SQL 编辑器模块，点击即可进入 SQL 编辑器页面。
 
 SQL 编辑器模块的页面由 3 部分构成。
 
@@ -30,15 +30,15 @@ SQL 编辑器模块的页面由 3 部分构成。
 
 SQL 编辑器支持快速导入数据，启动数据分析。点击**导入数据**，即可启动导向式数据导入流程。
 
-MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据和导入自有数据。
+MatrixOne Intelligence 在线数据导入支持两种导入方式：导入样例数据和导入自有数据。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sql_editor_0.12_2.png width=70% heigth=70%/>
 </div>
 
-- 导入样例数据：平台将提供典型开源数据集和互动式数据导入指引，无需准备数据即可体验 MatrixOne Cloud 的核心产品功能。现阶段已支持 TPC-H Benchmark 样例数据。
+- 导入样例数据：平台将提供典型开源数据集和互动式数据导入指引，无需准备数据即可体验 MatrixOne Intelligence 的核心产品功能。现阶段已支持 TPC-H Benchmark 样例数据。
 
-- 导入自有数据：现阶段 MatrixOne Cloud 支持你从本地客户端直接导入数据集，也可以从你自己的阿里云 OSS 中导入数据。
+- 导入自有数据：现阶段 MatrixOne Intelligence 支持你从本地客户端直接导入数据集，也可以从你自己的阿里云 OSS 中导入数据。
 
 更多数据导入方式介绍可以参照导入数据章节。
 
@@ -59,7 +59,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 !!! note
     当你在 SQL 编辑器中重新编辑并执行了一条新的 `use database` 语句且成功后，刷新左侧的 Database 树列表，右侧上方的下拉框中数据库选项将同步切换。
 
-进一步输入想要查询的 SQL 语句，点击执行按钮，MatrixOne Cloud 将直接在线执行对应 SQL 请求。
+进一步输入想要查询的 SQL 语句，点击执行按钮，MatrixOne Intelligence 将直接在线执行对应 SQL 请求。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sql_editor_0.13_2.png width=70% heigth=70%/>
@@ -72,7 +72,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 - 你可以在 SQL 执行过程中，手动停止或关闭 Query Tab, Query 都将终止。
   
 !!! note
-    在线 SQL 编辑器目前不支持以下语句：[`explain`](../Reference/SQL-Reference/Other/Explain/explain.md)，[`Load data local`]( ../Migrate-Data/Load-Local-Data.md), [`source`](../App-Develop/import-data/bulk-load/using-source.md)，[`SELECT INTO...OUTFILE`](https://docs.matrixorigin.cn/v24.1.2.3/MatrixOne/Develop/export-data/select-into-outfile/), [事务]( ../App-Develop/Transactions/matrixone-transaction-overview/how-to-use.md)以及[临时表](../App-Develop/schema-design/create-temporary-table.md)相关语句
+    在线 SQL 编辑器目前不支持以下语句：[`explain`](../Reference/SQL-Reference/Other/Explain/explain.md)，[`Load data local`]( ../Migrate-Data/Load-Local-Data.md), [`source`](../App-Develop/import-data/bulk-load/using-source.md)，[`SELECT INTO...OUTFILE`](https://docs.matrixorigin.cn/v24.2.0.1/MatrixOne/Develop/export-data/select-into-outfile/), [事务]( ../App-Develop/Transactions/matrixone-transaction-overview/how-to-use.md)以及[临时表](../App-Develop/schema-design/create-temporary-table.md)相关语句
 
 ### 查询结果
 
@@ -84,7 +84,7 @@ MatrixOne Cloud 在线数据导入支持两种导入方式：导入样例数据�
 
 ### 图表
 
-MatrixOne Cloud 支持以图表形式展示 SQL 查询结果，通过视觉化手段增强了数据的可访问性，是现代数据分析不可或缺的一部分。用户可以从结果列中挑选一列作为横轴进行数据分组，从结果列中选择多个列作为竖轴的聚合指标，同时为每项聚合指标单独配置相应的聚合运算。
+MatrixOne Intelligence 支持以图表形式展示 SQL 查询结果，通过视觉化手段增强了数据的可访问性，是现代数据分析不可或缺的一部分。用户可以从结果列中挑选一列作为横轴进行数据分组，从结果列中选择多个列作为竖轴的聚合指标，同时为每项聚合指标单独配置相应的聚合运算。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/sqleditor/sql_editor_0.13_1.png width=70% heigth=70%/>

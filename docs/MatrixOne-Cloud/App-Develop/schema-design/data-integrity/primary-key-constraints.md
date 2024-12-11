@@ -53,4 +53,4 @@ Query OK, 1 row affected (0.01 sec)
 
 ## 限制
 
-MatrixOne Cloud 暂不支持删除 `PRIMARY KEY` 约束。
+MatrixOne Intelligence 暂不支持删除 `PRIMARY KEY` 约束。

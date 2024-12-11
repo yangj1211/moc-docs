@@ -9,14 +9,14 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
 ## 前期准备
 
 - 已完成[创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
-- 已经[获取 MatrixOne Cloud 实例的连接命令](../../Instance-Mgmt/create-instance.md#_10)。
+- 已经[获取 MatrixOne Intelligence 实例的连接命令](../../Instance-Mgmt/create-instance.md#_10)。
 - 默认为公网连接，若想使用私网连接请参考章节[私网连接]( ../../Security/private-link.md)完成配置。
 
-## 通过 MySQL Client 连接 MatrixOne Cloud 服务
+## 通过 MySQL Client 连接 MatrixOne Intelligence 服务
 
 1. 下载安装 [MySQL Client](https://dev.mysql.com/downloads/mysql/)。
 
-2. 下载完成后，你可以使用 MySQL 命令行客户端来连接 MatrixOne Cloud 服务，只需要复制你获取的 MatrixOne Cloud 实例的连接命令，并根据提示输入密码。
+2. 下载完成后，你可以使用 MySQL 命令行客户端来连接 MatrixOne Intelligence 服务，只需要复制你获取的 MatrixOne Intelligence 实例的连接命令，并根据提示输入密码。
 
     ```
     mysql -h freetier-01.cn-hangzhou.cluster.matrixonecloud.cn -P 6001 -u 585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin  -p
@@ -30,7 +30,7 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
 
     ```
     Welcome to the MySQL monitor. Commands end with ; or \g. Your MySQL connection id is 1031
-    Server version: 8.0.30-MatrixOne-v1.2.3 MatrixOne
+    Server version: 8.0.30-MatrixOne-v2.0.1 MatrixOne
     Copyright (c) 2000, 2022, Oracle and/or its affiliates.
 
     Oracle is a registered trademark of Oracle Corporation and/or its affiliates. Other names may be trademarks of their respective owners.
@@ -38,9 +38,9 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
     ```
 
 !!! note
-    MatrixOne Cloud 与客户端默认是非加密传输，如果需要开启加密传输请参见[数据传输加密](../../Security/TLS-introduction.md)。
+    MatrixOne Intelligence 与客户端默认是非加密传输，如果需要开启加密传输请参见[数据传输加密](../../Security/TLS-introduction.md)。
 
-## 通过 Navicat 连接 MatrixOne Cloud 服务
+## 通过 Navicat 连接 MatrixOne Intelligence 服务
 
 1. 下载安装 [Navicat](https://www.navicat.com/en/products)。
 
@@ -61,7 +61,7 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
 
 4. 双击左侧数据库目录中的 **moc**，图标点亮，连接成功。
 
-5. 连接到 MatrixOne Cloud 后，在左侧数据库目录栏，你将看到 5 个默认系统数据库：
+5. 连接到 MatrixOne Intelligence 后，在左侧数据库目录栏，你将看到 5 个默认系统数据库：
 
     <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/navicat-2.png width=50% heigth=50%/>
@@ -73,7 +73,7 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/navicat-3.png width=30% heigth=30%/>
     </div>
 
-## 通过 DBeaver 连接 MatrixOne Cloud 服务
+## 通过 DBeaver 连接 MatrixOne Intelligence 服务
 
 1. 下载安装 [DBeaver](https://dbeaver.io/download/)。
 
@@ -104,7 +104,7 @@ MatrixOne 现在支持通过以下几种数据库客户端工具的方式连接 
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/dbeaver-2.png width=60% heigth=60%/>
     </div>
 
-3. 双击左侧目录中的 **moc**，连接 MatrixOne Cloud 服务。你可以在左侧目录树中看到默认的三个系统数据库：
+3. 双击左侧目录中的 **moc**，连接 MatrixOne Intelligence 服务。你可以在左侧目录树中看到默认的三个系统数据库：
 
     <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/dbeaver-3.png width=60% heigth=60%/>

@@ -19,13 +19,13 @@ commit;
 
 完成转账后，无论系统是否重启，数据已经完成了持久化，体现了事务的持久性。
 
-## MatrixOne Cloud 的悲观事务与读已提交
+## MatrixOne Intelligence 的悲观事务与读已提交
 
-MatrixOne Cloud 默认**悲观事务**与**读已提交**隔离级别，这种组合方式使性能达到最优。
+MatrixOne Intelligence 默认**悲观事务**与**读已提交**隔离级别，这种组合方式使性能达到最优。
 
 悲观事务（Pessimistic Transaction）是指在事务期间，持有资源的过程中，将资源锁定，以避免其他并发事务对该资源的修改或读取。悲观事务假定并发事务可能会对资源进行操作，并防止这种情况发生。
 
-在 MatrixOne Cloud 中，可以使用 `UPDATE ... WHERE...` 语句来实现悲观锁定，该语句会锁定符合条件的记录，直到事务提交或回滚。例如，下面的 SQL 语句锁定了 `user` 表中 `id=1` 的记录：
+在 MatrixOne Intelligence 中，可以使用 `UPDATE ... WHERE...` 语句来实现悲观锁定，该语句会锁定符合条件的记录，直到事务提交或回滚。例如，下面的 SQL 语句锁定了 `user` 表中 `id=1` 的记录：
 
 ```sql
 START TRANSACTION;

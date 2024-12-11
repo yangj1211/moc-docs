@@ -1,6 +1,6 @@
 # MatrixOne 系统数据库和表
 
-MatrixOne 系统数据库和表是 MatrixOne 存储系统信息的地方，你可以通过它们访问系统信息。MatrixOne Cloud 在初始化时创建了 5 个系统数据库：`mo_catalog`、`information_schema`、`system_metrcis`、`system`、`mysql`。系统数据库和表为默认系统内部组件，用户仅能进行读取操作。
+MatrixOne 系统数据库和表是 MatrixOne 存储系统信息的地方，你可以通过它们访问系统信息。MatrixOne Intelligence 在初始化时创建了 5 个系统数据库：`mo_catalog`、`information_schema`、`system_metrcis`、`system`、`mysql`。系统数据库和表为默认系统内部组件，用户仅能进行读取操作。
 
 ## `mo_catalog` 数据库
 

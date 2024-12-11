@@ -1,6 +1,6 @@
 # 连接 MatrixOne 实例
 
-在 MatrixOne Cloud 实例创建完成后，您可以使用以下方法来连接到该实例。
+在 MatrixOne Intelligence 实例创建完成后，您可以使用以下方法来连接到该实例。
 
 ## 连接工具方式
 
@@ -32,10 +32,10 @@
 
 ### 通过私网连接
 
-这是一种较为安全和稳定的连接方式。MatrixOne Cloud 实例提供 VPC 终端节点服务，允许用户在自己的 VPC 上设置私网访问连接。
+这是一种较为安全和稳定的连接方式。MatrixOne Intelligence 实例提供 VPC 终端节点服务，允许用户在自己的 VPC 上设置私网访问连接。
 
 ### 通过数据库管理平台连接
 
-MO Cloud 为每个实例提供了界面化的数据库管理平台，用户可以使用浏览器快速、高效地访问和监控数据库。更多详细信息请参考[使用 Web 页面连接](../App-Develop/connect-mo/connect-mo-with-web.md)和[登录实例](../Instance-Mgmt/login-instance.md)。
+MO Intelligence 为每个实例提供了界面化的数据库管理平台，用户可以使用浏览器快速、高效地访问和监控数据库。更多详细信息请参考[使用 Web 页面连接](../App-Develop/connect-mo/connect-mo-with-web.md)和[登录实例](../Instance-Mgmt/login-instance.md)。
 
 希望这些连接方式的指南能帮助您成功连接到 MatrixOne 实例。如果您有任何疑问或需要进一步的帮助，请查阅我们的文档或联系支持团队。
