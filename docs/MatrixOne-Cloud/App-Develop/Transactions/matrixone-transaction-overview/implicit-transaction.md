@@ -1,10 +1,10 @@
 # 隐式事务
 
-在 MatrixOne Cloud 的事务类别中，隐式事务还遵循以下规则：
+在 MatrixOne Intelligence 的事务类别中，隐式事务还遵循以下规则：
 
 ## 隐式事务规则
 
-- MatrixOne Cloud 在 `AUTOCOMMIT` 发生变化时，对于隐式事务未提交的情况会进行错误处理，并向用户提示需要先提交变化。
+- MatrixOne Intelligence 在 `AUTOCOMMIT` 发生变化时，对于隐式事务未提交的情况会进行错误处理，并向用户提示需要先提交变化。
 
 - 在 `AUTOCOMMIT=0` 且当前存在活跃事务的情况下，禁止修改自动提交与隔离级别，以及管理类与参数设置命令，例如 `SET`、`CREATE USER/ROLE` 或授权操作也将被限制。
 
@@ -18,9 +18,9 @@
 
 - 当存在未提交内容的隐式事务时，若启动一个显式事务，则会强制提交之前未提交的内容。
 
-## MatrixOne Cloud 与 MySQL 隐式事务的区别
+## MatrixOne Intelligence 与 MySQL 隐式事务的区别
 
-在 MatrixOne Cloud 中，如果开启了隐式事务（`SET AUTOCOMMIT=0`），则所有操作都需要手动执行 `COMMIT` 或 `ROLLBACK` 来结束事务。相比之下，MySQL 在遇到 DDL 或类似 `SET` 语句时会自动提交。
+在 MatrixOne Intelligence 中，如果开启了隐式事务（`SET AUTOCOMMIT=0`），则所有操作都需要手动执行 `COMMIT` 或 `ROLLBACK` 来结束事务。相比之下，MySQL 在遇到 DDL 或类似 `SET` 语句时会自动提交。
 
 ### MySQL 隐式事务行为
 
@@ -91,7 +91,7 @@ mysql> select @@SQL_SELECT_LIMIT;
 1 row in set (0.00 sec)
 ```
 
-**MatrixOne Cloud 隐式事务行为示例**
+**MatrixOne Intelligence 隐式事务行为示例**
 
 ```sql
 mysql> select @@SQL_SELECT_LIMIT;

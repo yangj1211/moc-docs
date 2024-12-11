@@ -1,6 +1,6 @@
 # 流式导入
 
-本文档介绍如何使用 SQL 语句在 MatrixOne Cloud 中进行流式导入数据。具体来说，MatrixOne Cloud 支持使用 `LOAD DATA INLINE` 语法对以 *csv* 格式组织的字符串进行导入，导入速度较 `INSERT` 操作更快。
+本文档介绍如何使用 SQL 语句在 MatrixOne Intelligence 中进行流式导入数据。具体来说，MatrixOne Intelligence 支持使用 `LOAD DATA INLINE` 语法对以 *csv* 格式组织的字符串进行导入，导入速度较 `INSERT` 操作更快。
 
 ## 语法结构
 
@@ -33,13 +33,13 @@ INTO TABLE tbl_name;
 
 ## MySQL Client 中使用 `LOAD DATA INLINE` 命令导入数据
 
-你可以使用 `LOAD DATA INLINE` 将流式数据导入 MatrixOne Cloud，本章将介绍如何进行流式导入，并且给出导入 *csv* 数据的示例。
+你可以使用 `LOAD DATA INLINE` 将流式数据导入 MatrixOne Intelligence，本章将介绍如何进行流式导入，并且给出导入 *csv* 数据的示例。
 
-1. [创建 MatrixOne Cloud 实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
+1. [创建 MatrixOne Intelligence 实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 
-2. [通过 MySQL Client 连接 MatrixOne Cloud 服务](../connect-mo/database-client-tools.md#mysql-client-matrixone-cloud)。
+2. [通过 MySQL Client 连接 MatrixOne Intelligence 服务](../connect-mo/database-client-tools.md#mysql-client-matrixone-cloud)。
 
-3. 在 MatrixOne Cloud 数据库中执行 `LOAD DATA INLINE` 之前，需要提前创建数据表 `user`:
+3. 在 MatrixOne Intelligence 数据库中执行 `LOAD DATA INLINE` 之前，需要提前创建数据表 `user`:
 
     ```mysql
 
@@ -65,11 +65,11 @@ INTO TABLE tbl_name;
 
 PyMySQL 是一个纯 Python MySQL 客户端库，下面将指导你如何使用 PyMySQL 进行 `LOAD DATA INLINE` 操作。
 
-1. [创建 MatrixOne Cloud 实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
+1. [创建 MatrixOne Intelligence 实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)。
 
-2. [通过 MySQL Client 连接 MatrixOne Cloud 服务](../connect-mo/database-client-tools.md#mysql-client-matrixone-cloud)
+2. [通过 MySQL Client 连接 MatrixOne Intelligence 服务](../connect-mo/database-client-tools.md#mysql-client-matrixone-cloud)
 
-3. 使用 MySQL 客户端连接 MatrixOne Cloud 实例，新建一个名称为 *test* 数据库和 *user* 的数据表：
+3. 使用 MySQL 客户端连接 MatrixOne Intelligence 实例，新建一个名称为 *test* 数据库和 *user* 的数据表：
 
     ```sql
     mysql> create database test;

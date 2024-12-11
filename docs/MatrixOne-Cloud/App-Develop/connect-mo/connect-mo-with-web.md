@@ -1,14 +1,14 @@
 # 使用 Web 页面连接 MatrixOne 实例
 
-MatrixOne Cloud 支持使用 Web 页面访问数据库，我们将此访问平台称为数据库管理平台。这个平台特别适合数据库管理员和数据分析师使用，提供了丰富的可视化数据库操作功能，包括数据业务监控、数据对象查看与操作、查询历史记录、查询编辑器等。
+MatrixOne Intelligence 支持使用 Web 页面访问数据库，我们将此访问平台称为数据库管理平台。这个平台特别适合数据库管理员和数据分析师使用，提供了丰富的可视化数据库操作功能，包括数据业务监控、数据对象查看与操作、查询历史记录、查询编辑器等。
 
 ## 访问入口
 
-在 MatrixOne Cloud 实例管理平台的实例列表中，找到您需要访问的数据库实例卡片，然后按照以下步骤进入数据库管理平台：
+在 MatrixOne Intelligence 实例管理平台的实例列表中，找到您需要访问的数据库实例卡片，然后按照以下步骤进入数据库管理平台：
 
-1. 登录您的 MO Cloud 账号，进入实例管理平台。
+1. 登录您的 MO Intelligence 账号，进入实例管理平台。
 
-    如果您还没有 MO Cloud 账号，您可以点击[注册登录](https://www.matrixorigin.cn/moc-trial)开始注册，或者参照[快速体验 MatrixOne Cloud](../../Get-Started/quickstart.md) 的注册指南。
+    如果您还没有 MO Intelligence 账号，您可以点击[注册登录](https://www.matrixorigin.cn/moc-trial)开始注册，或者参照[快速体验 MatrixOne Intelligence](../../Get-Started/quickstart.md) 的注册指南。
 
 2. 在菜单栏中点击**实例**进入实例列表页面，然后选择实例。
 3. 点击**连接**。

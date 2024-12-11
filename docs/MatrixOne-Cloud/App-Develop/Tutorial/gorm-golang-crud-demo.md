@@ -16,7 +16,7 @@
 
 * 确认你已完成安装 MySQL 客户端。
 
-* 已完成[创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)，并通过 MySQL 客户端连接 MatrixOne Cloud 并创建一个命名为 *test* 的数据库：
+* 已完成[创建实例](../../Instance-Mgmt/create-instance/create-serverless-instance.md)，并通过 MySQL 客户端连接 MatrixOne Intelligence 并创建一个命名为 *test* 的数据库：
 
     ```sql
     mysql> create database test;
@@ -36,7 +36,7 @@
 	go get -u gorm.io/driver/mysql
 	```
 
-你可以参考 [Golang 连接 MatrixOne Cloud 服务](../connect-mo/connect-to-matrixone-with-go.md)了解如何通过 `Gorm` 连接到 MatrixOne Cloud，本篇文档将指导你如何实现 CRUD（创建、读取、更新、删除）。
+你可以参考 [Golang 连接 MatrixOne Intelligence 服务](../connect-mo/connect-to-matrixone-with-go.md)了解如何通过 `Gorm` 连接到 MatrixOne Intelligence，本篇文档将指导你如何实现 CRUD（创建、读取、更新、删除）。
 
 ## 新建表
 

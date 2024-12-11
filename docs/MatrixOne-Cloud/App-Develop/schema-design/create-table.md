@@ -15,7 +15,7 @@
 
 ## 什么是表
 
-表是 MatrixOne Cloud 数据库中的一种逻辑对象，它从属于某个数据库，用于保存数据。
+表是 MatrixOne Intelligence 数据库中的一种逻辑对象，它从属于某个数据库，用于保存数据。
 
 表以行和列的形式组织数据记录，一张表至少有一列。若在表中定义了 n 个列，那么每一行数据都将拥有与这 n 个列中数据格式完全一致的字段。
 
@@ -74,7 +74,7 @@ N_COMMENT    VARCHAR(152)
 | N_REGIONKEY | INTEGER  | 地区区号，唯一标识 | 所有标识都应该是 INTEGER 类型的            |
 | N_COMMENT   | VARCHAR  | comment 信息        | varchar 类型，且不超过 152 字符            |
 
-MatrixOne Cloud 支持许多其他的列数据类型，包含整数、浮点数、时间等，参见[数据类型](../../Reference/Data-Types/data-types.md)。
+MatrixOne Intelligence 支持许多其他的列数据类型，包含整数、浮点数、时间等，参见[数据类型](../../Reference/Data-Types/data-types.md)。
 
 **创建一个复杂表**
 
@@ -112,7 +112,7 @@ PRIMARY KEY (O_ORDERKEY)
 
 ## 添加列约束
 
-除主键约束外，MatrixOne Cloud 还支持其他的列约束，如：非空约束 NOT NULL、默认值 DEFAULT 等。
+除主键约束外，MatrixOne Intelligence 还支持其他的列约束，如：非空约束 NOT NULL、默认值 DEFAULT 等。
 
 ### **填充默认值**
 
@@ -220,7 +220,7 @@ SHOW TABLES IN `modatabase`;
 
 ### 命名表时应遵守的规则
 
-- 使用完全限定的表名称（例如：`CREATE TABLE {database_name}.{table_name}`）。这是因为你在不指定数据库名称时，MatrixOne Cloud 将使用你 SQL 会话中的当前数据库。若你未在 SQL 会话中使用 `USE {databasename};` 来指定数据库，MatrixOne Cloud 将会返回错误。
+- 使用完全限定的表名称（例如：`CREATE TABLE {database_name}.{table_name}`）。这是因为你在不指定数据库名称时，MatrixOne Intelligence 将使用你 SQL 会话中的当前数据库。若你未在 SQL 会话中使用 `USE {databasename};` 来指定数据库，MatrixOne Intelligence 将会返回错误。
 
 - 请使用有意义的表名，例如，若你需要创建一个用户表，你可以使用名称：*user*，*t_user*，*users* 等，或遵循你公司或组织的命名规范。如果你的公司或组织没有相应的命名规范，可参考表命名规范。
 

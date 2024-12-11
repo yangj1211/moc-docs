@@ -1,6 +1,6 @@
 # 使用 modump 导出数据
 
-MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
+MatrixOne Intelligence 支持使用 `mo-dump` 导出数据。
 
 ## 什么是 `mo-dump`
 
@@ -138,16 +138,16 @@ MatrixOne Cloud 支持使用 `mo-dump` 导出数据。
 !!! note
     由于 linux 内核的限制，mo-dump 在低版本内核（低于 5.0）的 OS 上可能会出现无法正常运行的情况，此时需要升级您的内核版本。
 
-### 使用 `mo-dump` 导出 MatrixOne Cloud 的数据库
+### 使用 `mo-dump` 导出 MatrixOne Intelligence 的数据库
 
 `mo-dump` 在命令行中非常易用。参见以下步骤示例，导出 *sql* 文件格式完整数据库：
 
-1. 选择目标实例，点击**连接 > 通过第三方工具连接**，右侧滑窗内可查阅到 MatrixOne Cloud 上你的实例主机地址、端口号、用户名和密码。
+1. 选择目标实例，点击**连接 > 通过第三方工具连接**，右侧滑窗内可查阅到 MatrixOne Intelligence 上你的实例主机地址、端口号、用户名和密码。
 
     !!! note
         mo-dump 暂不支持连接串的用户名格式（即不支持原格式 `<accountname>:<username>:<rolename>`)，需要更改为 `<accountname>#<username>#<rolename>`。
 
-2. 在你本地计算机上打开终端窗口，输入以下命令，连接到 MatrixOne Cloud，并且导出数据库：
+2. 在你本地计算机上打开终端窗口，输入以下命令，连接到 MatrixOne Intelligence，并且导出数据库：
 
     ```
     ./mo-dump -u <accountname>#<username>#<rolename> -p password -h moc_host_address -P 6001 -db database > exported_db.sql

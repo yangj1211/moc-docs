@@ -1,4 +1,4 @@
-site_name: MatrixOne Cloud 文档
+site_name: MatrixOne Intelligence 文档
 theme:
   name: material
   logo: assets/new-logo.png
@@ -32,17 +32,17 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 nav:
-  - MatrixOne Cloud:
+  - MatrixOne Intelligence:
     - 主页: README.md
-    - 关于 MatrixOne Cloud:
-      - MatrixOne Cloud 简介: MatrixOne-Cloud/Overview/matrixonecloud-introduction.md
+    - 关于 MatrixOne Intelligence:
+      - MatrixOne Intelligence 简介: MatrixOne-Cloud/Overview/matrixonecloud-introduction.md
       - MySQL 兼容性: MatrixOne-Cloud/Overview/mysql-compatibility.md
       - MOne 助手: MatrixOne-Cloud/Overview/mone-introduction.md
     - 快速开始:
       - 快速创建 MatrixOne Intelligence 实例: MatrixOne-Cloud/Get-Started/quickstart.md
       - 快速上手向量能力: MatrixOne-Cloud/Get-Started/vector.md
     - 应用开发:
-      - 连接到 MatrixOne Cloud:
+      - 连接到 MatrixOne Intelligence:
         - 客户端工具连接: MatrixOne-Cloud/App-Develop/connect-mo/database-client-tools.md
         - 使用 Web 页面连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-mo-with-web.md
         - Java 连接:
@@ -96,7 +96,7 @@ nav:
         - C# 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/c-net-crud-demo.md
       - 事务:
         - 事务通用概念: MatrixOne-Cloud/App-Develop/Transactions/common-transaction-overview.md
-        - MatrixOne Cloud 的事务:
+        - MatrixOne Intelligence 的事务:
           - 概述: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/overview.md
           - 显式事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/explicit-transaction.md
           - 隐式事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/implicit-transaction.md
@@ -104,7 +104,7 @@ nav:
           - 乐观事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/optimistic-transaction.md
           - 隔离级别: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/isolation-level.md
           - MVCC: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/mvcc.md
-          - 如何使用 MatrixOne Cloud 事务:
+          - 如何使用 MatrixOne Intelligence 事务:
             - 使用指南: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/how-to-use.md
             - 应用场景: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/scenario.md
     - 管理实例:
@@ -526,7 +526,7 @@ nav:
         - MatrixOne 的 Load Data 支持的说明: MatrixOne-Cloud/Reference/Limitations/load-data-support.md
     - 常见问题:
         - SQL 常见问题: MatrixOne-Cloud/FAQs/sql-faqs.md
-        - MatrixOne Cloud 常见问题: MatrixOne-Cloud/FAQs/FAQ-Product.md
+        - MatrixOne Intelligence 常见问题: MatrixOne-Cloud/FAQs/FAQ-Product.md
     - 版本发布纪要:
         - '2024': MatrixOne-Cloud/Release-Notes/2024.md
         - '2023': MatrixOne-Cloud/Release-Notes/2023.md

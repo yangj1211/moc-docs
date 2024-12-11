@@ -1,8 +1,8 @@
 # **MySQL 兼容性**
 
-本篇文章主要对比并介绍 MatrixOne Cloud 数据库的 MySQL 模式以及原生 MySQL 数据库的兼容性信息。
+本篇文章主要对比并介绍 MatrixOne Intelligence 数据库的 MySQL 模式以及原生 MySQL 数据库的兼容性信息。
 
-MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语法都具有高度的兼容性。此外，MatrixOne Cloud 也对常见的 MySQL 周边工具提供了支持，如 Navicat，MySQL Workbench，JDBC 等。然而，由于 MatrixOne Cloud 的技术架构不同，且仍处于发展和完善阶段，因此有一些功能尚未得到支持。本节将主要从以下几个方面详述 MatrixOne Cloud 数据库的 MySQL 模式与原生 MySQL 数据库的区别：
+MatrixOne Intelligence 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语法都具有高度的兼容性。此外，MatrixOne Intelligence 也对常见的 MySQL 周边工具提供了支持，如 Navicat，MySQL Workbench，JDBC 等。然而，由于 MatrixOne Intelligence 的技术架构不同，且仍处于发展和完善阶段，因此有一些功能尚未得到支持。本节将主要从以下几个方面详述 MatrixOne Intelligence 数据库的 MySQL 模式与原生 MySQL 数据库的区别：
 
 - DDL 语句
 - DCL 语句
@@ -31,7 +31,7 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ### TABLE 相关
 
-- 不支持表定义中的 `ENGINE=`，但 MatrixOne Cloud 会直接忽略 `ENGINE=`。
+- 不支持表定义中的 `ENGINE=`，但 MatrixOne Intelligence 会直接忽略 `ENGINE=`。
 - ALTER TABLE 中的这些子句：`CHANGE [COLUMN]`，`MODIFY [COLUMN]`，`RENAME COLUMN`，`ADD [CONSTRAINT [symbol]] PRIMARY KEY`，`DROP PRIMARY KEY` 和 `ALTER COLUMN ORDER BY` 可以在 ALTER TABLE 语句中自由组合使用，但不支持与其他子句一起使用。
 - 临时表暂不支持使用 `ALTER TABLE` 修改表结构。
 - 使用 `CREATE TABLE ... CLUSTER BY...` 所建的表，不支持使用 `ALTER TABLE` 修改表结构。
@@ -45,14 +45,14 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ### SEQUENCE 相关
 
-- MySQL 不支持 SEQUENCE 对象，而 MatrixOne Cloud 可以通过 CREATE SEQUENCE 创建一个序列，MatrixOne Cloud 的语法与 PostgreSQL 相同。
+- MySQL 不支持 SEQUENCE 对象，而 MatrixOne Intelligence 可以通过 CREATE SEQUENCE 创建一个序列，MatrixOne Intelligence 的语法与 PostgreSQL 相同。
 - 在表中使用 SEQUENCE 时，需要注意 `auto_increment` 与 `sequence` 不能一起用，否则会报错。
 
 ## DCL 语句
 
 ### ACCOUNT 相关
 
-- 与 MatrixOne 内核不同，MatrixOne Cloud 中无单独 ACCOUNT 概念，在 MatrixOne Cloud 的一个 Region 中创建的每个实例都属于一个 MatrixOne 分布式集群，其中的每个实例其实都是集群中单独的 ACCOUNT，无法在 MatrixOne Cloud 实例中再继续创建 ACCOUNT。
+- 与 MatrixOne 内核不同，MatrixOne Intelligence 中无单独 ACCOUNT 概念，在 MatrixOne Intelligence 的一个 Region 中创建的每个实例都属于一个 MatrixOne 分布式集群，其中的每个实例其实都是集群中单独的 ACCOUNT，无法在 MatrixOne Intelligence 实例中再继续创建 ACCOUNT。
 
 ### 权限相关
 
@@ -61,14 +61,14 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ### SHOW 相关
 
-- MatrixOne Cloud 不支持对某些对象进行 SHOW 操作，包括 `TRIGGER`，`FUNCTION`，`EVENT`，`PROCEDURE`，`ENGINE` 等。
-- 由于架构上的不同，MatrixOne Cloud 实现了部分 SHOW 命令仅出于语法的兼容性，这些命令不会产生任何输出，如 `SHOW STATUS/PRIVILEGES` 等。
+- MatrixOne Intelligence 不支持对某些对象进行 SHOW 操作，包括 `TRIGGER`，`FUNCTION`，`EVENT`，`PROCEDURE`，`ENGINE` 等。
+- 由于架构上的不同，MatrixOne Intelligence 实现了部分 SHOW 命令仅出于语法的兼容性，这些命令不会产生任何输出，如 `SHOW STATUS/PRIVILEGES` 等。
 - 有些命令虽然在语法上与 MySQL 相同，但由于实现方式的不同，其结果与 MySQL 会有较大差异，如：`SHOW GRANTS`，`SHOW ERRORS`，`SHOW VARIABLES`，`SHOW PROCESSLIST`。
-- MatrixOne Cloud 提供了一些特有的 SHOW 命令以方便其自身的管理，包括 `SHOW BACKEND SERVERS`，`SHOW ACCOUNTS`，`SHOW ROLES`，`SHOW NODE LIST` 等。
+- MatrixOne Intelligence 提供了一些特有的 SHOW 命令以方便其自身的管理，包括 `SHOW BACKEND SERVERS`，`SHOW ACCOUNTS`，`SHOW ROLES`，`SHOW NODE LIST` 等。
 
 ### 关于 SET
 
-- MatrixOne Cloud 的系统变量与 MySQL 存在较大差异，大部分只是为了实现语法的兼容性，目前实际可设置的参数包括：`ROLE`，`SQL_MODE`，`TIME_ZONE`。
+- MatrixOne Intelligence 的系统变量与 MySQL 存在较大差异，大部分只是为了实现语法的兼容性，目前实际可设置的参数包括：`ROLE`，`SQL_MODE`，`TIME_ZONE`。
 
 ## DML 语句
 
@@ -78,30 +78,30 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ### INSERT 相关
 
-- MatrixOne Cloud 不支持 `LOW_PRIORITY`，`DELAYED`，`HIGH_PRIORITY` 等修饰符。
+- MatrixOne Intelligence 不支持 `LOW_PRIORITY`，`DELAYED`，`HIGH_PRIORITY` 等修饰符。
 
 ### UPDATE 相关
 
-- MatrixOne Cloud 不支持使用 `LOW_PRIORITY` 和 `IGNORE` 修饰符。
+- MatrixOne Intelligence 不支持使用 `LOW_PRIORITY` 和 `IGNORE` 修饰符。
 
 ### DELETE 相关
 
-- MatrixOne Cloud 不支持 `LOW_PRIORITY`，`QUICK`，`IGNORE` 等修饰符。
+- MatrixOne Intelligence 不支持 `LOW_PRIORITY`，`QUICK`，`IGNORE` 等修饰符。
 
 ### 子查询相关
 
-- MatrixOne Cloud 不支持 `IN` 的多层关联子查询。
+- MatrixOne Intelligence 不支持 `IN` 的多层关联子查询。
 
 ### LOAD 相关
 
-- MatrixOne Cloud 支持 `SET`，但只支持 `SET columns_name=nullif(expr1,expr2)` 的形式。
-- MatrixOne Cloud 支持客户端执行 `LOAD DATA LOCAL`，但在连接时必须加入 `--local-infile` 参数。
-- MatrixOne Cloud 支持导入 `JSONlines` 文件，但需要使用一些特殊的语法。
-- MatrixOne Cloud 支持从对象存储导入文件，但需要使用一些特殊的语法。
+- MatrixOne Intelligence 支持 `SET`，但只支持 `SET columns_name=nullif(expr1,expr2)` 的形式。
+- MatrixOne Intelligence 支持客户端执行 `LOAD DATA LOCAL`，但在连接时必须加入 `--local-infile` 参数。
+- MatrixOne Intelligence 支持导入 `JSONlines` 文件，但需要使用一些特殊的语法。
+- MatrixOne Intelligence 支持从对象存储导入文件，但需要使用一些特殊的语法。
 
 ### EXPLAIN 相关
 
-- MatrixOne Cloud 的 `Explain` 和 `Explain Analyze` 打印格式均参照 PostgreSQL，与 MySQL 有较大不同。
+- MatrixOne Intelligence 的 `Explain` 和 `Explain Analyze` 打印格式均参照 PostgreSQL，与 MySQL 有较大不同。
 - 不支持 JSON 类型的输出。
 
 ### 其他
@@ -118,19 +118,19 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ## 数据类型
 
-- BOOL: 与 MySQL 的布尔值类型实际上是 int 不同，MatrixOne Cloud 的布尔值是一个新的类型，它的值只能是 true 或 false。
-- DECIMAL：DECIMAL(P,D)，MatrixOne Cloud 的有效数字 P 和小数点后的位数 D 最大精度均为 38 位，MySQL 则分别为 65 和 30。
-- 浮点数：MySQL8.0.17 后废弃 Float(M,D) 及 Double(M,D) 用法，但 MatrixOne Cloud 仍保留该用法。
-- DATETIME: MySQL 的最大取值范围为 `'1000-01-01 00:00:00'` 到 `'9999-12-31 23:59:59'`，MatrixOne Cloud 的最大范围为 `'0001-01-01 00:00:00'` 到 `'9999-12-31 23:59:59'`。
-- TIMESTAMP: MySQL 的最大取值范围是 `'1970-01-01 00:00:01.000000'` UTC 到 `'2038-01-19 03:14:07.999999'` UTC，MatrixOne Cloud 的最大范围 `'0001-01-01 00:00:00'` UTC 到 `'9999-12-31 23:59:59'` UTC。
-- MatrixOne Cloud 支持 UUID 类型。
+- BOOL: 与 MySQL 的布尔值类型实际上是 int 不同，MatrixOne Intelligence 的布尔值是一个新的类型，它的值只能是 true 或 false。
+- DECIMAL：DECIMAL(P,D)，MatrixOne Intelligence 的有效数字 P 和小数点后的位数 D 最大精度均为 38 位，MySQL 则分别为 65 和 30。
+- 浮点数：MySQL8.0.17 后废弃 Float(M,D) 及 Double(M,D) 用法，但 MatrixOne Intelligence 仍保留该用法。
+- DATETIME: MySQL 的最大取值范围为 `'1000-01-01 00:00:00'` 到 `'9999-12-31 23:59:59'`，MatrixOne Intelligence 的最大范围为 `'0001-01-01 00:00:00'` 到 `'9999-12-31 23:59:59'`。
+- TIMESTAMP: MySQL 的最大取值范围是 `'1970-01-01 00:00:01.000000'` UTC 到 `'2038-01-19 03:14:07.999999'` UTC，MatrixOne Intelligence 的最大范围 `'0001-01-01 00:00:00'` UTC 到 `'9999-12-31 23:59:59'` UTC。
+- MatrixOne Intelligence 支持 UUID 类型。
 - 不支持空间 Spatial 类型。
 - 不支持 SET 类型。
 - 不支持 MEDIUMINT 类型。
 
 ## 索引和约束
 
-- MatrixOne Cloud 支持向量索引。
+- MatrixOne Intelligence 支持向量索引。
 - 次级索引仅实现语法，并没有加速效果。
 - 外键不支持 `ON CASCADE DELETE` 级联删除。
 
@@ -145,7 +145,7 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ### 聚合函数
 
-- 支持 MatrixOne Cloud 特有的 Median 中位数函数。
+- 支持 MatrixOne Intelligence 特有的 Median 中位数函数。
 
 ### CAST 函数
 
@@ -165,8 +165,8 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ## 存储引擎
 
-- MatrixOne Cloud 的 TAE 存储引擎是完全独立研发的，不支持 MySQL 的 InnoDB，MyISAM 等引擎。
-- MatrixOne Cloud 中仅有 TAE 一种存储引擎，无需使用 `ENGINE=XXX` 来更换引擎。
+- MatrixOne Intelligence 的 TAE 存储引擎是完全独立研发的，不支持 MySQL 的 InnoDB，MyISAM 等引擎。
+- MatrixOne Intelligence 中仅有 TAE 一种存储引擎，无需使用 `ENGINE=XXX` 来更换引擎。
 
 ## 安全与权限
 
@@ -178,8 +178,8 @@ MatrixOne Cloud 与 MySQL 8.0 的协议，以及 MySQL 8.0 常用的功能和语
 
 ## 事务
 
-- MatrixOne Cloud 默认为悲观事务。
-- 与 MySQL 不同，MatrixOne Cloud 中的 DDL 语句是事务性的，可以在一个事务中回滚 DDL 操作。
+- MatrixOne Intelligence 默认为悲观事务。
+- 与 MySQL 不同，MatrixOne Intelligence 中的 DDL 语句是事务性的，可以在一个事务中回滚 DDL 操作。
 - 不支持表级锁 `LOCK/UNLOCK TABLE`。
 
 ## 备份恢复

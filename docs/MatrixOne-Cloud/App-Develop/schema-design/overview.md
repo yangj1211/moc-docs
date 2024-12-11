@@ -1,6 +1,6 @@
 # 数据库模式设计概述
 
-本篇文章简要概述了 MatrixOne Cloud 的数据库模式。本篇概述主要介绍 MatrixOne Cloud 数据库相关术语和后续的数据读写示例。
+本篇文章简要概述了 MatrixOne Intelligence 的数据库模式。本篇概述主要介绍 MatrixOne Intelligence 数据库相关术语和后续的数据读写示例。
 
 ## 关键术语 - 数据库模式
 
@@ -8,13 +8,13 @@
 
 ## 数据库 Database
 
-MatrixOne Cloud 数据库或 MatrixOne Cloud Database，为表的集合。
+MatrixOne Intelligence 数据库或 MatrixOne Intelligence Database，为表的集合。
 
-你可以使用 `SHOW DATABASES;` 查看 MatrixOne Cloud 所包含的默认数据库。你也可以使用 `CREATE DATABASE database_name;` 创建一个新的数据库。
+你可以使用 `SHOW DATABASES;` 查看 MatrixOne Intelligence 所包含的默认数据库。你也可以使用 `CREATE DATABASE database_name;` 创建一个新的数据库。
 
 ## 表 Table
 
-MatrixOne Cloud 所指的表或 Table，从属于 MatrixOne Cloud 的某个数据库。
+MatrixOne Intelligence 所指的表或 Table，从属于 MatrixOne Intelligence 的某个数据库。
 
 表包含数据行。每行数据中的每个值都属于一个特定的列。每列都只允许单一数据类型的数据值。
 
@@ -31,13 +31,13 @@ MatrixOne Cloud 所指的表或 Table，从属于 MatrixOne Cloud 的某个数�
 
 ## 其他对象
 
-MatrixOne Cloud 支持一些和表同级的对象：
+MatrixOne Intelligence 支持一些和表同级的对象：
 
-- 视图：视图是一张虚拟表，该虚拟表的结构由创建视图时的 SELECT 语句定义，MatrixOne Cloud 暂不支持物化视图。
+- 视图：视图是一张虚拟表，该虚拟表的结构由创建视图时的 SELECT 语句定义，MatrixOne Intelligence 暂不支持物化视图。
 - 临时表：临时表是数据不持久化的表。
 
 ## 访问控制
 
-MatrixOne Cloud 支持基于用户或角色的访问控制。你可以通过角色或直接指向用户，从而授予用户查看、修改或删除数据对象和数据模式的权限。
+MatrixOne Intelligence 支持基于用户或角色的访问控制。你可以通过角色或直接指向用户，从而授予用户查看、修改或删除数据对象和数据模式的权限。
 
-更多信息，参见 [MatrixOne Cloud 中的访问控制](../../Security/about-privilege-management.md)。
+更多信息，参见 [MatrixOne Intelligence 中的访问控制](../../Security/about-privilege-management.md)。

@@ -1,6 +1,6 @@
 # 插入 jsonlines 文件
 
-本篇文档将指导你如何将 JSONLines 格式数据（即 *jl* 或 *jsonl* 文件）通过 `LOAD DATA LOCAL` 命令导入 MatrixOne Cloud。
+本篇文档将指导你如何将 JSONLines 格式数据（即 *jl* 或 *jsonl* 文件）通过 `LOAD DATA LOCAL` 命令导入 MatrixOne Intelligence。
 
 ## 有关 JSONLines 格式
 
@@ -18,9 +18,9 @@ JSONLines 格式有以下三个要求：
 
 * **行分隔符为 `\n`**：由于在解析 JSON 值时会隐式忽略周围的空格在支持行分隔符 `\n` 的同时也支持 `\r\n`。
 
-## 对于 MatrixOne Cloud 有效的 JSONLines 格式
+## 对于 MatrixOne Intelligence 有效的 JSONLines 格式
 
-JSONLines 格式只需要每一行都有一个有效的 JSON 值。但 MatrixOne Cloud 需要更结构化的 JSONLines 格式，在 MatrixOne Cloud 中只允许具有相同类型值和普通结构的 JSON 对象或 JSON 数组。如果您的 JSONLines 文件有嵌套结构，MatrixOne Cloud 暂时不支持加载它。
+JSONLines 格式只需要每一行都有一个有效的 JSON 值。但 MatrixOne Intelligence 需要更结构化的 JSONLines 格式，在 MatrixOne Intelligence 中只允许具有相同类型值和普通结构的 JSON 对象或 JSON 数组。如果您的 JSONLines 文件有嵌套结构，MatrixOne Intelligence 暂时不支持加载它。
 
 一个有效对象 JSONLines 示例：
 
@@ -78,9 +78,9 @@ LOAD DATA LOCAL INFILE
 
 **JSONLines 格式数据的 DDL 指南**
 
-在将 JSONLines 数据加载到 MatrixOne Cloud 之前，你需要先创建一个表。
+在将 JSONLines 数据加载到 MatrixOne Intelligence 之前，你需要先创建一个表。
 
-由于 JSON 数据类型与 MatrixOne Cloud 的数据类型不同，参见下表，可以查看 JSON 数据类型对应到 MatrixOne Cloud 中时的数据类型：
+由于 JSON 数据类型与 MatrixOne Intelligence 的数据类型不同，参见下表，可以查看 JSON 数据类型对应到 MatrixOne Intelligence 中时的数据类型：
 
 |JSON 类型 |  MatrixOne 中的数据类型|
 |:-:|:-:|
@@ -112,7 +112,7 @@ mysql> create table t1 (name varchar(100), session varchar(100), score int, comp
 
 **示例**
 
-以下代码段是将 JSONLines 文件加载到 MatrixOne Cloud 的完整 SQL 示例。
+以下代码段是将 JSONLines 文件加载到 MatrixOne Intelligence 的完整 SQL 示例。
 
 ```
 #Load a BZIP2 compressed jsonline object file
@@ -142,13 +142,13 @@ load data local infile {'filepath'='data.jl.gz', 'compression'='gzip','format'='
     {"col2":1,"col3":"var","col1":true,"col6":"2020-09-07 00:00:00","col7":"18","col4":"2020-09-07","col5":"2020-09-07 00:00:00","col8":121.11}
     ```
 
-3. 启动 MySQL 客户端，连接到 MatrixOne Cloud，例如：
+3. 启动 MySQL 客户端，连接到 MatrixOne Intelligence，例如：
 
     ```
     mysql -h freetier-01.cn-hangzhou.cluster.matrixonecloud.cn -P 6001 -u 585b49fc_852b_4bd1_b6d1_d64bc1d8xxxx:admin:accountadmin  -p --local-infile
     ```
 
-4. 在 MatrixOne Cloud 建表：
+4. 在 MatrixOne Intelligence 建表：
 
     ```sql
     create database db1;

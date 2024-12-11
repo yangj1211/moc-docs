@@ -2,7 +2,7 @@
 
 ## 实现
 
-AI 框架我们采用的是 LangChain，Embedding 使用了 OpenAI Embedding 模型，OpenAI LLM 大模型使用的是 GPT-3.5-Turbo。Matrixone Cloud 调用 OpenAI embedding 接口为每段文本生成向量表示，基于 MatrixOne 的向量化能力完成向量存储和相似度搜索，收集相似度最高的文本，调用 GPT 3.5 模型提炼优化文本，最终得到最为贴近的答案。
+AI 框架我们采用的是 LangChain，Embedding 使用了 OpenAI Embedding 模型，OpenAI LLM 大模型使用的是 GPT-3.5-Turbo。MatrixOne Intelligence 调用 OpenAI embedding 接口为每段文本生成向量表示，基于 MatrixOne 的向量化能力完成向量存储和相似度搜索，收集相似度最高的文本，调用 GPT 3.5 模型提炼优化文本，最终得到最为贴近的答案。
 
 实现的过程包括两部分：  
 

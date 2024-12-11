@@ -6,11 +6,11 @@ S3（Simple Storage Service）对象存储是指亚马逊的简单存储服务�
 
 AWS S3 十多年来一直非常成功，因此它成为了对象存储的标准。因此几乎所有主流公有云厂商都提供了兼容 S3 的对象存储服务。
 
-MatrixOne Cloud 支持将文件从 S3 兼容的对象存储服务加载到数据库中。MatrixOne Cloud 支持 AWS 和国内主流云厂商（阿里云、腾讯云等）。
+MatrixOne Intelligence 支持将文件从 S3 兼容的对象存储服务加载到数据库中。MatrixOne Intelligence 支持 AWS 和国内主流云厂商（阿里云、腾讯云等）。
 
-在 MatrixOne Cloud 中，有两种方法可以从 S3 兼容的对象存储中导入数据：
+在 MatrixOne Intelligence 中，有两种方法可以从 S3 兼容的对象存储中导入数据：
 
-* 使用带有 s3option 的 `Load data` 将文件加载到 MatrixOne Cloud 中。此方法会将数据加载到 MatrixOne Cloud 中，所有接下来的查询都将在 MatrixOne Cloud 中进行。
+* 使用带有 s3option 的 `Load data` 将文件加载到 MatrixOne Intelligence 中。此方法会将数据加载到 MatrixOne Intelligence 中，所有接下来的查询都将在 MatrixOne Intelligence 中进行。
 * 创建一个带有 s3option 映射到 S3 文件的“外部表”，并直接查询这个外部表。该方法允许通过 S3 兼容的对象存储服务进行数据访问；每个查询的网络延迟都将被计算在内。
 
 ## 方式 1: `LOAD DATA`
@@ -60,7 +60,7 @@ LOAD DATA URL s3option{"endpoint"='cos.ap-shanghai.myqcloud.com', "access_key_id
 ```
 
 !!! note
-    MatrixOne Cloud 提供了 S3 验证信息的安全保证，例如 `access_key_id` 和 `secret_access_key` 敏感信息在系统表（statement_info）记录里将被隐藏，保证你的账户安全。
+    MatrixOne Intelligence 提供了 S3 验证信息的安全保证，例如 `access_key_id` 和 `secret_access_key` 敏感信息在系统表（statement_info）记录里将被隐藏，保证你的账户安全。
 
 ### 教程：从 AWS S3 加载文件
 
@@ -90,7 +90,7 @@ LOAD DATA URL s3option{"endpoint"='cos.ap-shanghai.myqcloud.com', "access_key_id
 
     ![Retrieve Access Key](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/load_S3/retrieve_access_key.png)
 
-3. 在 MatrixOne Cloud 中创建表，SQL 示例如下：
+3. 在 MatrixOne Intelligence 中创建表，SQL 示例如下：
 
     ```sql
     create database db;
@@ -99,7 +99,7 @@ LOAD DATA URL s3option{"endpoint"='cos.ap-shanghai.myqcloud.com', "access_key_id
     create table t1(col1 char(225), col2 varchar(225), col3 text, col4 varchar(225));
     ```
 
-4. 将文件导入 MatrixOne Cloud：
+4. 将文件导入 MatrixOne Intelligence：
 
     ```
     LOAD DATA URL s3option{"endpoint"='s3.us-east-1.amazonaws.com', "access_key_id"='XXXXXX', "secret_access_key"='XXXXXX', "bucket"='test-loading', "filepath"='char_varchar_1.csv', "region"='us-east-1', "compression"='none'} INTO TABLE t1;
@@ -152,7 +152,7 @@ create external table t(...) URL s3option{"endpoint"='<string>', "access_key_id"
 ```
 
 !!! note
-    MatrixOne Cloud 当前仅支持对外部表进行 `select`，暂不支持 `delete`，`insert`，`update`。
+    MatrixOne Intelligence 当前仅支持对外部表进行 `select`，暂不支持 `delete`，`insert`，`update`。
 
 **参数说明**
 
@@ -204,7 +204,7 @@ create external table t1(col1 char(225)) url s3option{"endpoint"='cos.ap-shangha
 
     ![Retrieve Access Key](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/docs/develop/load_S3/retrieve_access_key.png)
 
-3. 在 MatrixOne Cloud 中，指定 S3 文件到外部表：
+3. 在 MatrixOne Intelligence 中，指定 S3 文件到外部表：
 
     ```sql
     create database db;
@@ -245,9 +245,9 @@ create external table t1(col1 char(225)) url s3option{"endpoint"='cos.ap-shangha
     21 rows in set (1.32 sec)
     ```
 
-5. （选做）如果需要将外部表数据导入到 MatrixOne Cloud 中的数据表，使用如下 SQL 语句：
+5. （选做）如果需要将外部表数据导入到 MatrixOne Intelligence 中的数据表，使用如下 SQL 语句：
 
-    在 MatrixOne Cloud 中新建一个表 *t2*：
+    在 MatrixOne Intelligence 中新建一个表 *t2*：
 
     ```sql
     create table t2(col1 char(225), col2 varchar(225), col3 text, col4 varchar(225));

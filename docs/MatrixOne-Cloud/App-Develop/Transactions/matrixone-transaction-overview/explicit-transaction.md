@@ -1,6 +1,6 @@
 # 显式事务
 
-在 MatrixOne Cloud 的事务类别中，显式事务还遵循以下规则：
+在 MatrixOne Intelligence 的事务类别中，显式事务还遵循以下规则：
 
 ## 显式事务规则
 
@@ -17,7 +17,7 @@
 |显式事务与自动提交 | 当 `AUTOCOMMIT=1` 时，MySQL 不会对事务进行任何更改，每个语句都会在一个新的自动提交事务中执行。|当 `AUTOCOMMIT=0` 时，每个语句都会在显式开启的事务中执行，直到显式提交或回滚事务。|
 |显式事务与非自动提交 | 当 `AUTOCOMMIT=1` 时，MySQL 会在每个语句执行后自动提交未提交的事务。|当 `AUTOCOMMIT=0` 时，每个语句都会在显式开启的事务中执行，直到显式提交或回滚事务。|
 
-**MySQL 与 MatrixOne Cloud 显式事务行为示例**
+**MySQL 与 MatrixOne Intelligence 显式事务行为示例**
 
 ```sql
 mysql> CREATE TABLE Accounts (account_number INT PRIMARY KEY, balance DECIMAL(10, 2));
@@ -61,7 +61,7 @@ mysql> SELECT * FROM Accounts;
 
 ## 跨库事务行为示例
 
-MatrixOne Cloud 支持跨库事务行为，这里将以一个简单的示例进行说明。
+MatrixOne Intelligence 支持跨库事务行为，这里将以一个简单的示例进行说明。
 
 首先，让我们创建两个数据库（db1 和 db2）以及它们各自的表（table1 和 table2）：
 

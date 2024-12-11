@@ -1,18 +1,18 @@
 # 约束概述
 
-在 MatrixOne Cloud 数据库中，为了确保数据的正确性、完整性、有效性，在建表语句中，会对某些列加入限制条件，确保数据库内存储的信息遵从一定的业务规则，这些限制条件被称为约束。例如，如果 DML 语句的执行结果违反了完整性约束（Integrity Constraint），将回滚语句并返回错误消息。
+在 MatrixOne Intelligence 数据库中，为了确保数据的正确性、完整性、有效性，在建表语句中，会对某些列加入限制条件，确保数据库内存储的信息遵从一定的业务规则，这些限制条件被称为约束。例如，如果 DML 语句的执行结果违反了完整性约束（Integrity Constraint），将回滚语句并返回错误消息。
 
 ## 完整性约束类型
 
-MatrixOne Cloud 存在多种约束，不同的约束对于数据库行为有着不同的限制。目前支持的约束都是表级别的约束：
+MatrixOne Intelligence 存在多种约束，不同的约束对于数据库行为有着不同的限制。目前支持的约束都是表级别的约束：
 
 - [NOT NULL 完整性约束](not-null-constraints.md)：
 
-   非空约束是指，某一列的数据不能出现空值（NULL），违反了该限制条件的数据不能被插入或更新在对应列中。在 MatrixOne Cloud 中，一张表允许有零个、一个或多个非空约束。
+   非空约束是指，某一列的数据不能出现空值（NULL），违反了该限制条件的数据不能被插入或更新在对应列中。在 MatrixOne Intelligence 中，一张表允许有零个、一个或多个非空约束。
 
 - [UNIQUE KEY 完整性约束](unique-key-constraints.md)
 
-   唯一键约束是指，在一张表中存的某一列或多列组合中，被插入或更新的数据行在此列（或列集）的值是唯一的。在 MatrixOne Cloud 中，一张表中允许存在零个、一个或多个唯一键约束，但与其他关系型数据库不同的是，MatrixOne Cloud 的唯一键约束也必须非空。
+   唯一键约束是指，在一张表中存的某一列或多列组合中，被插入或更新的数据行在此列（或列集）的值是唯一的。在 MatrixOne Intelligence 中，一张表中允许存在零个、一个或多个唯一键约束，但与其他关系型数据库不同的是，MatrixOne Intelligence 的唯一键约束也必须非空。
 
 - [PRIMARY KEY 完整性约束](primary-key-constraints.md)
 

@@ -1,6 +1,6 @@
 # 子查询
 
-本篇文档向你介绍 MO Cloud 的子查询功能。
+本篇文档向你介绍 MO Intelligence 的子查询功能。
 
 ## 概述
 
@@ -165,13 +165,13 @@
 
 #### 无关联子查询
 
-对于将子查询作为比较运算符 (`>`/ `>=`/ `<` / `<=` / `=` / `!=`) 操作数的这类无关联子查询而言，内层子查询只需要进行一次查询，MO Cloud 在生成执行计划阶段会将内层子查询改写为常量。
+对于将子查询作为比较运算符 (`>`/ `>=`/ `<` / `<=` / `=` / `!=`) 操作数的这类无关联子查询而言，内层子查询只需要进行一次查询，MO Intelligence 在生成执行计划阶段会将内层子查询改写为常量。
 
 ```sql
 mysql> select p.p_name from (select * from part where p_brand='Brand#21' and p_retailprice between 1100 and 1200)  p, partsupp ps where p.p_partkey=ps.ps_partkey and p.p_name like '%pink%' limit 10;
 ```
 
-在 MO Cloud 执行上述查询的时候会先执行一次内层子查询：
+在 MO Intelligence 执行上述查询的时候会先执行一次内层子查询：
 
 ```sql
 mysql> select * from part where p_brand='Brand#21' and p_retailprice between 1100 and 1200;
@@ -197,19 +197,19 @@ mysql> select * from part where p_brand='Brand#21' and p_retailprice between 110
 10 rows in set (0.06 sec)
 ```
 
-对于存在性测试和集合比较两种情况下的无关联列子查询，MO Cloud 会将其进行改写和等价替换以获得更好的执行性能。
+对于存在性测试和集合比较两种情况下的无关联列子查询，MO Intelligence 会将其进行改写和等价替换以获得更好的执行性能。
 
 #### 关联子查询
 
 对于关联子查询而言，由于内层的子查询引用外层查询的列，子查询需要对外层查询得到的每一行都执行一遍，也就是说假设外层查询得到一千万的结果，那么子查询也会被执行一千万次，这会导致查询需要消耗更多的时间和资源。
 
-因此在处理过程中，MO Cloud 会尝试对关联子查询去关联，以从执行计划层面上提高查询效率。
+因此在处理过程中，MO Intelligence 会尝试对关联子查询去关联，以从执行计划层面上提高查询效率。
 
 ```sql
 mysql> select p_name from part where P_PARTKEY in (select PS_PARTKEY from PARTSUPP where PS_SUPPLYCOST>=500) and p_name like '%pink%' limit 10;
 ```
 
-MO Cloud 在处理该 SQL 语句是会将其改写为等价的 `JOIN` 查询：
+MO Intelligence 在处理该 SQL 语句是会将其改写为等价的 `JOIN` 查询：
 
 ```
 select p_name from part join partsupp on P_PARTKEY=PS_PARTKEY where PS_SUPPLYCOST>=500 and p_name like '%pink%' limit 10;

@@ -107,9 +107,9 @@
 
 ### 显式事务和隐式事务
 
-- **显式事务**：一般来说，可以通过执行 BEGIN 语句显式启动事务。可以通过执行 COMMIT 或 ROLLBACK 显式结束事务。MatrixOne 的显示事务启动和执行方式略有不同，可以参见 [MatrixOne Cloud 的显式事务](matrixone-transaction-overview/explicit-transaction.md)。
+- **显式事务**：一般来说，可以通过执行 BEGIN 语句显式启动事务。可以通过执行 COMMIT 或 ROLLBACK 显式结束事务。MatrixOne 的显示事务启动和执行方式略有不同，可以参见 [MatrixOne Intelligence 的显式事务](matrixone-transaction-overview/explicit-transaction.md)。
 
-- **隐式事务**：即事务可以隐式开始和结束，无需使用 BEGIN TRANSACTION、COMMIT 或者 ROLLBACK 语句就可以开始和结束。隐式事务的行为方式与显式事务相同。但是，确定隐式事务何时开始的规则不同于确定显式事务何时开始的规则。MatrixOne 的隐式事务启动和执行方式略有不同，可以参见 [MatrixOne Cloud 的隐式事务](matrixone-transaction-overview/implicit-transaction.md)。
+- **隐式事务**：即事务可以隐式开始和结束，无需使用 BEGIN TRANSACTION、COMMIT 或者 ROLLBACK 语句就可以开始和结束。隐式事务的行为方式与显式事务相同。但是，确定隐式事务何时开始的规则不同于确定显式事务何时开始的规则。MatrixOne 的隐式事务启动和执行方式略有不同，可以参见 [MatrixOne Intelligence 的隐式事务](matrixone-transaction-overview/implicit-transaction.md)。
 
 ### 乐观事务和悲观事务
 
@@ -128,9 +128,9 @@
 - 悲观事务对于写操作较多的系统更加友好，从数据库层面避免了写写冲突。
 - 悲观事务在并发较大的场景下，如果出现一个执行时间较长的事务，可能会导致系统阻塞并影响吞吐量。
 
-MatrixOne Cloud 的乐观事务详情可以参见 [MatrixOne Cloud 的乐观事务](matrixone-transaction-overview/optimistic-transaction.md)。
+MatrixOne Intelligence 的乐观事务详情可以参见 [MatrixOne Intelligence 的乐观事务](matrixone-transaction-overview/optimistic-transaction.md)。
 
-MatrixOne Cloud 的悲观事务详情可以参见 [MatrixOne Cloud 的悲观事务](matrixone-transaction-overview/pessimistic-transaction.md)。
+MatrixOne Intelligence 的悲观事务详情可以参见 [MatrixOne Intelligence 的悲观事务](matrixone-transaction-overview/pessimistic-transaction.md)。
 
 ## 事务隔离
 
@@ -155,11 +155,11 @@ ANSI/ISO SQL 定义的标准隔离级别共有四个：
 
 - **读已提交**：读已提交（READ COMMITTED）级别中，基于锁机制并发控制的 DBMS 需要对选定对象的写锁一直保持到事务结束，但是读锁在 SELECT 操作完成后马上释放。和前一种隔离级别一样，也不要求“范围锁”。
 
-- **可重复读**：在可重复读（REPEATABLE READS）隔离级别中，基于锁机制并发控制的 DBMS 需要对选定对象的读锁（read locks）和写锁（write locks）一直保持到事务结束，但不要求“范围锁”，因此可能会发生“幻读”。MatrixOne Cloud 实现了快照隔离（即 Snapshot Isolation），为了与 MySQL 隔离级别保持一致，MatrixOne Cloud 快照隔离又叫做可重复读（REPEATABLE READS）。
+- **可重复读**：在可重复读（REPEATABLE READS）隔离级别中，基于锁机制并发控制的 DBMS 需要对选定对象的读锁（read locks）和写锁（write locks）一直保持到事务结束，但不要求“范围锁”，因此可能会发生“幻读”。MatrixOne Intelligence 实现了快照隔离（即 Snapshot Isolation），为了与 MySQL 隔离级别保持一致，MatrixOne Intelligence 快照隔离又叫做可重复读（REPEATABLE READS）。
 
 - **可串行化**：可串行化（SERIALIZABLE）是最高的隔离级别。在基于锁机制并发控制的 DBMS 上，可串行化要求在选定对象上的读锁和写锁直到事务结束后才能释放。在 SELECT 的查询中使用一个“WHERE”子句来描述一个范围时应该获得一个“范围锁”（range-locks）。
 
 通过比低一级的隔离级别要求更多的限制，高一级的级别提供更强的隔离性。标准允许事务运行在更强的事务隔离级别上。
 
 !!! note
-    MatrixOne Cloud 的事务隔离与通用的隔离定义的隔离级别的划分略有不同，可以参见 [MatrixOne Cloud 的隔离级别](matrixone-transaction-overview/isolation-level.md)。
+    MatrixOne Intelligence 的事务隔离与通用的隔离定义的隔离级别的划分略有不同，可以参见 [MatrixOne Intelligence 的隔离级别](matrixone-transaction-overview/isolation-level.md)。
