@@ -134,6 +134,7 @@ nav:
       - 监控数据: MatrixOne-Cloud/Monitor/Data-Monitoring.md
     - 告警: MatrixOne-Cloud/Alarm/alarm-overview.md
     - 事件: MatrixOne-Cloud/Events/event.md
+    - AI 搜索: MatrixOne-Cloud/MatrixSearch/search.md
     - 计费:
       - 充值: MatrixOne-Cloud/Charging/recharge.md
       - 账户概览: MatrixOne-Cloud/Charging/account-overview.md
