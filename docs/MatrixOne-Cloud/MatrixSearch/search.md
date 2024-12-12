@@ -22,7 +22,7 @@
 
 #### 百度网盘
 
-在添加连接器的界面，点击 **百度网盘** 图标，输入连接名称然后获取百度授权，授权完毕后返回连接界面测试连接是否成功。或删除操作。
+在添加连接器的界面，点击 **百度网盘** 图标，输入连接名称然后获取百度授权，授权完毕后返回连接界面测试连接是否成功。若在授权过程中遇到无法打开授权页面的问题，请检查是否开启代理，如果代理服务处于开启状态，请将其关闭再重新操作。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/search/connector-2.png width=80% heigth=80%/>
