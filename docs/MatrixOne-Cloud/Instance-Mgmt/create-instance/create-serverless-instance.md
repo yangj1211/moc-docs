@@ -12,7 +12,7 @@
 
 ## 步骤二：选择实例
 
-MO Intelligence 提供了两种实例类型：可自动扩缩容的 Serverless 实例和拥有独立稳定的计算资源的标准实例。在此选择**Serverless**。
+MO Intelligence 提供了两种实例类型：可自动扩缩容的 Serverless 实例和拥有独立稳定的计算资源的标准实例。在此选择 **Serverless**。
 
 ## 步骤三：选择公有云服务商及地区
 

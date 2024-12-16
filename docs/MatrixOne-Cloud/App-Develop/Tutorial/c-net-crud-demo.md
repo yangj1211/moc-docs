@@ -30,9 +30,9 @@ dotnet new console -o myapp
 dotnet add package MySql.Data
 ```
 
-### 步骤三：连接 MOC 实例 进行操作
+### 步骤三：连接 MOC 实例进行操作
 
-编写代码连接  MOC 实例，建立一个学生表并进行增删改查操作。在 Program.cs 文件中写入以下代码：
+编写代码连接 MOC 实例，建立一个学生表并进行增删改查操作。在 Program.cs 文件中写入以下代码：
 
 ```
 using System;
@@ -118,7 +118,7 @@ class Program
 
 ### 步骤五：检查数据
 
-使用 Mysql 客户端连接 Moc 实例 对 Student 表进行查询：
+使用 Mysql 客户端连接 Moc 实例对 Student 表进行查询：
 
 ```
 mysql> select * from student;

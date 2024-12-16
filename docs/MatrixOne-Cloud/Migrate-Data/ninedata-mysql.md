@@ -4,9 +4,9 @@
 
 ## 开始前准备
 
-- 完成[MatrixOne Intelligence 实例创建](../Get-Started/quickstart.md)。
+- 完成 [MatrixOne Intelligence 实例创建](../Get-Started/quickstart.md)。
   
-- 完成[NineData 在线平台的注册](https://console.ninedata.cloud/user/register)。
+- 完成 [NineData 在线平台的注册](https://console.ninedata.cloud/user/register)。
 
 ## 操作步骤
 
@@ -26,7 +26,7 @@
     mysql> \. 路径/dss.ri
     ```
 
-3. 使用`dbgen`生成 100MB 数据
+3. 使用 `dbgen` 生成 100MB 数据
 
     ```sql
     ./dbgen -s 0.1
@@ -58,9 +58,9 @@
 
 ### 设置 NineData 数据源
 
-1. 在[NineData 工作台](https://console.ninedata.cloud/home/main)界面选择数据源
+1. 在 [NineData 工作台](https://console.ninedata.cloud/home/main)界面选择数据源
 
-2. 点击创建数据源，并选择在`自建数据库`的`关系型数据库`一栏中选择 MySQL
+2. 点击创建数据源，并选择在 `自建数据库` 的 `关系型数据库` 一栏中选择 MySQL
 
 3. 依次设置好阿里云 MySQL RDS 的数据源信息和 MatrixOne Intelligence 的数据源信息，设置如图所示：
 
@@ -68,7 +68,7 @@
 
 4. 新建数据迁移任务
 
-      点击左侧边栏`数据复制`大类，选择`数据复制`进入数据复制页面，点击`创建复制`。
+      点击左侧边栏 `数据复制` 大类，选择 `数据复制` 进入数据复制页面，点击 `创建复制`。
 
       填入任务名称、源数据源（本例中采用阿里云 RDS 数据源），目标数据源（本例中采用 MOC 数据源），选择复制方式、复制类型、复制规格以及目标库存在同名对象的处理方式，点击下一步。
 

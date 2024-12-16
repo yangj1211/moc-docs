@@ -14,7 +14,7 @@ jobs:
       uses: tj-actions/changed-files@v40
       with:
         files: |
-           ./docs/**.md
+          ./docs/**.md
 
     - name: Check out code
       if: steps.changed-markdown-files.outputs.any_changed == 'true'
@@ -29,7 +29,7 @@ jobs:
       if: steps.changed-markdown-files.outputs.any_changed == 'true'
       uses: actions/setup-node@v3
       with:
-        node-version: 20
+        node-version: lts/*
 
     - name: Install node deps
       if: steps.changed-markdown-files.outputs.any_changed == 'true'

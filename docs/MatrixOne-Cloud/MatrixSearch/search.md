@@ -22,7 +22,7 @@
 
 #### 百度网盘
 
-在添加连接器的界面，点击 **百度网盘** 图标，输入连接名称然后获取百度授权，授权完毕后返回连接界面测试连接是否成功。若在授权过程中遇到无法打开授权页面的问题，请检查是否开启代理，如果代理服务处于开启状态，请将其关闭再重新操作。
+在添加连接器的界面，点击**百度网盘**图标，输入连接名称然后获取百度授权，授权完毕后返回连接界面测试连接是否成功。若在授权过程中遇到无法打开授权页面的问题，请检查是否开启代理，如果代理服务处于开启状态，请将其关闭再重新操作。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/search/connector-2.png width=80% heigth=80%/>
@@ -53,13 +53,13 @@
 
 #### 本地文件
 
-点击右侧的 **上传文件** 按钮，选择并上传文件。目前支持的文件格式包括 'md', 'txt', 'pdf', 'jpg', 'png', 'jpeg',  'docx', 'pptx'，且每个文件的大小限制为 20 MB。
+点击右侧的**上传文件**按钮，选择并上传文件。目前支持的文件格式包括 'md', 'txt', 'pdf', 'jpg', 'png', 'jpeg', 'docx', 'pptx'，且每个文件的大小限制为 20 MB。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/search/datasource-2.png width=80% heigth=80%/>
 </div>
 
-文件上传完成后，将需要一定时间进行解析，请您耐心等待。解析完成后，文件才可用于搜索功能。您可以前往 **已上传文件** 页面查看文件解析进度。对于解析失败的文件，您可以重新进行解析；对于不需要的文件，亦可进行删除操作。
+文件上传完成后，将需要一定时间进行解析，请您耐心等待。解析完成后，文件才可用于搜索功能。您可以前往**已上传文件**页面查看文件解析进度。对于解析失败的文件，您可以重新进行解析；对于不需要的文件，亦可进行删除操作。
 
 #### MatrixOne Intelligence
 
@@ -87,7 +87,7 @@
 
 #### 普通搜索
 
-在普通搜索功能中，用户可以输入详细的文本描述，**MatrixSearch**将基于该描述进行智能化的查询，从海量数据中提取并返回最相关的答案。
+在普通搜索功能中，用户可以输入详细的文本描述，**MatrixSearch** 将基于该描述进行智能化的查询，从海量数据中提取并返回最相关的答案。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/search/search-4.png

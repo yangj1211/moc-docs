@@ -26,14 +26,14 @@
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/get-started/vecter-vs-scale.png width=80% heigth=80%/>
     </div>
 
-    - 在标量数据库中存储的是原始数据。例如，用户数据可能以表格形式保存，包括字段如姓名、年龄等。中执行查询返回的是精确匹配的结果。例如，查询 name = 'tom'的年龄时得到精确返回。
-    - 在向量数据库中存储的是经过处理后的向量数据（通常是 Embedding 向量）。这些向量代表了数据在高维空间中的位置，用于进行相似度检索。这种查询会返回与给定向量最相似的记录，通常以 Top K 的形式返回最相似的几个结果。返回的是相似的结果，而不是精确匹配。例如，将表中的向量与 "[1,2,1]" 这个向量对比，返回与给定向量最相似的一内容，即[content=pears]。
+    - 在标量数据库中存储的是原始数据。例如，用户数据可能以表格形式保存，包括字段如姓名、年龄等。中执行查询返回的是精确匹配的结果。例如，查询 name = 'tom' 的年龄时得到精确返回。
+    - 在向量数据库中存储的是经过处理后的向量数据（通常是 Embedding 向量）。这些向量代表了数据在高维空间中的位置，用于进行相似度检索。这种查询会返回与给定向量最相似的记录，通常以 Top K 的形式返回最相似的几个结果。返回的是相似的结果，而不是精确匹配。例如，将表中的向量与 "[1,2,1]" 这个向量对比，返回与给定向量最相似的一内容，即 [content=pears]。
 
 - 向量索引：向量索引是一种专门用于处理向量数据的索引技术，旨在提高高维向量数据的检索效率，它允许数据库在大规模数据集中快速找到与查询向量最相似的向量。
 
 ### 向量类型
 
-在 MatrixOne Intelligence 中，向量被定义为一种特殊的一维数据类型，类似于编程中的数组，但目前仅支持 float32 和 float64 两种数值类型，分别表示为 vecf32 和 vecf64。创建向量列时，可以指定其维度，例如 vecf32(3) ，这表示向量的长度为 3，最大支持达到 65,535 维，而不支持字符串或整型。
+在 MatrixOne Intelligence 中，向量被定义为一种特殊的一维数据类型，类似于编程中的数组，但目前仅支持 float32 和 float64 两种数值类型，分别表示为 vecf32 和 vecf64。创建向量列时，可以指定其维度，例如 vecf32(3)，这表示向量的长度为 3，最大支持达到 65,535 维，而不支持字符串或整型。
 
 ```sql
 create table t1(a int, b vecf32(3), c vecf64(3))
@@ -123,11 +123,11 @@ Matrxione 作为超融合数据库，自带向量能力，这在 RAG 应用中�
 pip install pymysql
 ```
 
-- 已在 [Neolink.ai](https://Neolink.AI)上获取 api key，Neolink.AI 是一款全面链接算力、数据、知识、模型与企业应用的平台。
+- 已在 [Neolink.ai](https://Neolink.AI) 上获取 api key，Neolink.AI 是一款全面链接算力、数据、知识、模型与企业应用的平台。
 
 ### 操作步骤
 
-**步骤一：** 建表并开启向量索引
+**步骤一：**建表并开启向量索引
 
 连接 MatrixOne Intelligence，建立一个名为 rag_tab 的表来存储文本信息和对应的向量信息，然后开启向量索引。
 
@@ -137,7 +137,7 @@ create table rag_tab(content text,embedding vecf32(1024));
 SET GLOBAL experimental_ivf_index = 1;
 ```
 
-**步骤二：** 构建应用
+**步骤二：**构建应用
 
 创建 python 文件 rag_example.py，写入以下内容。该脚本主要作用是利用 mxbai-embed-large 嵌入模型将文本进行向量化，然后存到 MatrixOne Intelligence 表中。然后把问题也进行向量化，利用 MatrixOne Intelligence 的向量检索找出最相似的文本块，最后结合大语言模型 llama2 得出答案。
 

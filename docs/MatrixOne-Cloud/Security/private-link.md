@@ -48,7 +48,7 @@ MatrixOne Intelligence 的架构如下：
 
 7. 可用区交换机如果存在要选择在端点服务所在可用区，不存在请创建一个；这里默认要填两个，这些交换机会用于不同的可用区，以实现高可用性和容错能力。
 
-8. 单击创建端点。等待创建成功，在终端节点详情页面您即可得到 **终端节点服务域名**。
+8. 单击创建端点。等待创建成功，在终端节点详情页面您即可得到**终端节点服务域名**。
     <div align="center">
         <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/connect/privatelink-1.png width=80% heigth=80%/>
     </div>
@@ -56,7 +56,7 @@ MatrixOne Intelligence 的架构如下：
 ### 步骤三：在您的 ECS 主机连接 MatrixOne Intelligence 服务
 
 1. 确保您的 ECS 主机已经安装 Mysql Client 客户端。
-2. 使用 MySQL 客户端连接 MatrixOne Intelligence 服务时，需将 **host** 设置为 **终端节点服务的域名**。
+2. 使用 MySQL 客户端连接 MatrixOne Intelligence 服务时，需将 **host** 设置为**终端节点服务的域名**。
 
 ```mysql
 mysql -h <privatelink_endpoint_domain> -P 6001 -u xxx:admin:accountadmin  -p
