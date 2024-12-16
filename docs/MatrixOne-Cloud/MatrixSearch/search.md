@@ -53,7 +53,7 @@
 
 #### 本地文件
 
-点击右侧的 **上传文件** 按钮，选择并上传文件。目前支持的文件格式包括 PDF、TXT、Markdown、PNG、JPG 和 JPEG，且每个文件的大小限制为 20 MB。
+点击右侧的 **上传文件** 按钮，选择并上传文件。目前支持的文件格式包括 'md', 'txt', 'pdf', 'jpg', 'png', 'jpeg',  'docx', 'pptx'，且每个文件的大小限制为 20 MB。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/search/datasource-2.png width=80% heigth=80%/>
