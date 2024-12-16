@@ -5,11 +5,11 @@ import { fileURLToPath } from 'node:url'
 import autocorrect from 'autocorrect-node'
 import chalk from 'chalk'
 import * as Diff from 'diff'
-import fg from 'fast-glob'
 import parseArgs from 'minimist'
+import { glob } from 'tinyglobby'
 import YAML from 'yaml'
 
-import { resolveAbsPath } from './utils/path.js'
+import { resolveAbsPath } from './utils/path.ts'
 
 /** autocorrect severity enum */
 const SEVERITY = {
@@ -30,15 +30,15 @@ const { _: paths, fix = false } = argv
 const DEFAULT_PATHS = ['./docs/MatrixOne-Cloud/**/*.md']
 
 // get paths
-const pathStream = fg.stream(paths.length ? paths : DEFAULT_PATHS)
+const matchedPaths = await glob(paths.length ? paths : DEFAULT_PATHS)
 
-const autocorrectTasks = []
+const autocorrectTasks: Promise<void>[] = []
 let fileCount = 0
 let warningCount = 0
 let errorCount = 0
 
 // lint files
-for await (const entry of pathStream) {
+for (const entry of matchedPaths) {
   const absPath = resolveAbsPath(entry)
 
   autocorrectTasks.push(

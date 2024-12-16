@@ -45,4 +45,4 @@ MatrixOne 查询优化器对输入的 SQL 查询语句通过**执行计划**而�
 
 ## 理解 MatrixOne 的执行计划
 
-对于更详细的 MatrixOne 的执行计划的细节和节点类型，请参考 [Explain](../../Reference/SQL-Reference/Other/Explain/explain.md)和[Explain 输出格式](../../Reference/SQL-Reference/Other/Explain/explain-workflow.md)相关章节说明。
+对于更详细的 MatrixOne 的执行计划的细节和节点类型，请参考 [Explain](../../Reference/SQL-Reference/Other/Explain/explain.md) 和 [Explain 输出格式](../../Reference/SQL-Reference/Other/Explain/explain-workflow.md)相关章节说明。

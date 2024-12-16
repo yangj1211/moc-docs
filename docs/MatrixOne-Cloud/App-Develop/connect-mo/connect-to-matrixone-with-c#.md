@@ -2,7 +2,7 @@
 
 MatrixOne Intelligence 支持 C# 连接，并且支持 MySQL Connector/NET 驱动。
 
-本篇文档将指导你了解如何使用 C# 连接 MatrixOne  Cloud。
+本篇文档将指导你了解如何使用 C# 连接 MatrixOne Cloud。
 
 ## 开始前准备
 
@@ -32,7 +32,7 @@ dotnet new console -o myapp
 dotnet add package MySql.Data
 ```
 
-### 步骤三：连接  MOC 实例
+### 步骤三：连接 MOC 实例
 
 在 Program.cs 文件中写入以下代码：
 

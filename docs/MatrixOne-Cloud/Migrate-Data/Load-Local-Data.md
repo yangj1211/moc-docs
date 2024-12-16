@@ -56,8 +56,8 @@ LOAD DATA LOCAL INFILE '/ssb-dbgen-path/lineorder_flat.tbl ' INTO TABLE lineorde
 
 加载 csv 格式支持 JSON 类型，但需确保 JSON 内不包含字段终止符号，否则 JSON 需要用双引号括起来，例如：
 
-- 正确示例："{"a": 1, "b": 2}", 2
-- 错误示例：{"a": 1, "b": 2}, 2
+- 正确示例：`"{"a": 1, "b": 2}", 2`
+- 错误示例：`{"a": 1, "b": 2}, 2`
 
 ### 导入 jsonlines 文件
 
