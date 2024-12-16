@@ -45,7 +45,7 @@ MatrixOne Intelligence 为用户提供了集群内跨实例的数据分享功能
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-sharing/pub-04.png width=100% heigth=100%/>
     </div>
 
-2. **订阅**: 实例 _2 登录到数据库管理平台，依次点击**数据库** > **订阅** > **+**，输入订阅名 sub_mall (订阅自实例 _1 的 pub_mall)
+2. **订阅**: `实例_2` 登录到数据库管理平台，依次点击**数据库** > **订阅** > **+**，输入订阅名 sub_mall (订阅自 `实例_1` 的 pub_mall)
 
     <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-sharing/pub-02.png width=90% heigth=90%/>
@@ -57,7 +57,7 @@ MatrixOne Intelligence 为用户提供了集群内跨实例的数据分享功能
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-sharing/pub-10.png width=90% heigth=90%/>
     </div>
 
-    查看订阅库，可以发现实例 _1 数据库 mall 中的所有数据现在皆可被读取：
+    查看订阅库，可以发现 `实例_1` 数据库 mall 中的所有数据现在皆可被读取：
 
     <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-sharing/pub-09.png width=90% heigth=90%/>
@@ -65,7 +65,7 @@ MatrixOne Intelligence 为用户提供了集群内跨实例的数据分享功能
 
 ### 修改发布内容
 
-1. **修改发布**: 实例 _1 创建数据库 mall2 和表 mall2.customer2，修改发布内容：
+1. **修改发布**: `实例_1` 创建数据库 mall2 和表 mall2.customer2，修改发布内容：
 
     ```sql
     -- 实例_1
@@ -80,7 +80,7 @@ MatrixOne Intelligence 为用户提供了集群内跨实例的数据分享功能
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-sharing/pub-05.png width=60% heigth=60%/>
     </div>
 
-2. **查看订阅**: 实例 _2 查看订阅，能看到发布数据库修改后的内容：
+2. **查看订阅**: `实例_2` 查看订阅，能看到发布数据库修改后的内容：
 
     <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-sharing/pub-06.png width=100% heigth=100%/>
