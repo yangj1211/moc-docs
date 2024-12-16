@@ -14,7 +14,7 @@ jobs:
       uses: tj-actions/changed-files@v40
       with:
         files: |
-          ./docs/**.md
+          docs/**/*.md
 
     - name: Check out code
       if: steps.changed-markdown-files.outputs.any_changed == 'true'
