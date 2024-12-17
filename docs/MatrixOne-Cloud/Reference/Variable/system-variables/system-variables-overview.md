@@ -24,7 +24,7 @@ SHOW VARIABLES LIKE '%theme%';
 
 这将列出所有名称中包含 `theme` 的系统变量及其当前值。
 
-**Note:** `LIKE` 运算符是用来模糊匹配查询字符串的，% 表示零个或多个任意字符。所以，上述命令将匹配名称中包含 `theme` 的任何系统变量。
+__Note:__ `LIKE` 运算符是用来模糊匹配查询字符串的，% 表示零个或多个任意字符。所以，上述命令将匹配名称中包含 `theme` 的任何系统变量。
 
 ### 如何查询全局变量？
 
@@ -42,7 +42,7 @@ SHOW GLOBAL VARIABLES LIKE '%theme%';
 
 这将列出所有名称中包含 `theme` 的全局系统变量及其当前值。
 
-**Note:** `LIKE` 运算符是用来模糊匹配查询字符串的，% 表示零个或多个任意字符。所以，上述命令将匹配名称中包含 `theme` 的任何全局系统变量。
+__Note:__ `LIKE` 运算符是用来模糊匹配查询字符串的，% 表示零个或多个任意字符。所以，上述命令将匹配名称中包含 `theme` 的任何全局系统变量。
 
 ### 如何查询会话变量？
 
@@ -60,9 +60,15 @@ SHOW SESSION VARIABLES LIKE '%theme%';
 
 这将列出所有名称中包含 `theme` 的会话变量及其当前值。
 
-**Note:** `LIKE` 运算符是用来模糊匹配查询字符串的，% 表示零个或多个任意字符。所以，上述命令将匹配名称中包含 `theme` 的任何会话系统变量。
+__Note:__ `LIKE` 运算符是用来模糊匹配查询字符串的，% 表示零个或多个任意字符。所以，上述命令将匹配名称中包含 `theme` 的任何会话系统变量。
 
 ## 变量参照表
+
+<style>
+table th:first-of-type {
+	width: 100px;
+}
+</style>
 
 | Variable_name | Cmd-Line(Y/N) | Option File(Y/N) | Variable Type | System Var(Y/N) | Var Scope(Global、Both/ Session) | Dynamic(Y/N) | Default Value | Optional value |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |

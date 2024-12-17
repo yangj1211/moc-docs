@@ -65,11 +65,12 @@
 | [ABS()](./Mathematical/abs.md)    | 用于求参数的绝对值|
 | [ACOS()](./Mathematical/acos.md)  | 用于求给定数值的余弦（用弧度表示）  |
 | [ATAN()](./Mathematical/atan.md)  | 用于求给定数值的反正切（用弧度表示）|
-| [CEIL()](./Mathematical/ceil.md)  | 用于求不小于参数的最小整数。|
-| [COS()](./Mathematical/cos.md)    | 用于求输入参数（用弧度表示）的余弦值。|
-| [COT()](./Mathematical/cot.md)    | 用于求输入参数（用弧度表示）的余切值。 |
-| [EXP()](./Mathematical/exp.md)    | 用于求以自然常数 e 为底的 number 的指数。|
-| [FLOOR()](./Mathematical/floor.md)| 用于求不大于某个数字的相应数位的数。 |
+| [CEIL()](./Mathematical/ceil.md)  | 用于求不小于参数的最小整数|
+| [CEILING()](./Mathematical/ceiling.md)  | 用于求不小于参数的最小整数|
+| [COS()](./Mathematical/cos.md)    | 用于求输入参数（用弧度表示）的余弦值|
+| [COT()](./Mathematical/cot.md)    | 用于求输入参数（用弧度表示）的余切值 |
+| [EXP()](./Mathematical/exp.md)    | 用于求以自然常数 e 为底的 number 的指数|
+| [FLOOR()](./Mathematical/floor.md)| 用于求不大于某个数字的相应数位的数 |
 | [LN()](./Mathematical/ln.md)      | 用于求参数的自然对数|
 | [LOG()](./Mathematical/log.md)    | 用于求参数的自然对数|
 | [LOG2()](./Mathematical/log2.md)  | 用于求以 2 为底参数的对数|
@@ -159,6 +160,7 @@
 
 | 函数名称                          | 作用                                     |
 | -------------------------------- | --------------------------------------- |
+| [GENERATE_SERIES()](./Table/generate_series.md)    | 用于成一个从起始值到结束值的序列|
 | [UNNEST()](./Table/unnest.md)    | 用于将 JSON 类型数据内的数组类型的列或参数展开为一个表|
 
 ## 窗口函数
@@ -173,9 +175,14 @@
 
 | 函数名称                                       | 作用                                     |
 | --------------------------------------------- | --------------------------------------- |
-| [JSON_EXTRACT()](./Json/json-functions.md)    | 从 JSON 文档返回数据|
-| [JSON_QUOTE()](./Json/json-functions.md)      | 引用 JSON 文档|
-| [JSON_UNQUOTE()](./Json/json-functions.md)    | 取消引用 JSON 文档|
+| [JQ()](./Json/jq.md)    | 用于根据 jq 表达式解析和转换 JSON 数据|
+| [JSON_EXTRACT()](./Json/json_extract.md)    | 从 JSON 文档返回数据|
+| [JSON_EXTRACT_FLOAT64()](./Json/json_extract_float64.md)    | 从 JSON 数据中提取指定路径的数值的值|
+| [JSON_EXTRACT_STRING()](./Json/json_extract_string.md)      | 从 JSON 数据中提取指定路径的字符串的值|
+| [JSON_QUOTE()](./Json/json_quote.md)      | 引用 JSON 文档|
+| [JSON_ROW()](./Json/json_row.md)      | 用于将每一行转化为 json 数组|
+| [JSON_UNQUOTE()](./Json/json_unquote.md)    | 取消引用 JSON 文档|
+| [TRY_JQ()](./Json/try_jq.md)    | 用于根据 jq 表达式解析和转换 JSON 数据，并提供容错机制|
 
 ## 系统运维函数
 
@@ -191,7 +198,10 @@
 
 | 函数名称                        | 作用                                     |
 | ------------------------------ | --------------------------------------- |
+| [LOAD_FILE()](./Other/load_file.md)    | 用于读取 datalink 类型指向文件的内容|
+| [SAVE_FILE()](./Other/save_file.md)    | 用于保存 datalink 类型指向文件的内容|
 | [SAMPLE()](./Other/sample.md)  | 主要用于快速缩减查询范围|
 | [SERIAL_EXTRACT()](./Other/serial_extract.md)    | 用于提取序列/元组值中的各个元素|
 | [SLEEP()](./Other/sleep.md)    | 将当前查询暂停（睡眠）指定的秒数|
+| [STAGE_LIST()](./Other/stage_list.md)    | 用于查看 stage 中的目录和文件|
 | [UUID()](./Other/uuid.md)      | 返回根据 RFC 4122 生成国际通用唯一标识符|
