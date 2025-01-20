@@ -41,6 +41,8 @@ nav:
     - 快速开始:
       - 快速创建 MatrixOne Intelligence 实例: MatrixOne-Cloud/Get-Started/quickstart.md
       - 快速上手向量能力: MatrixOne-Cloud/Get-Started/vector.md
+    - AI 应用市场: 
+      - 通用搜索: MatrixOne-Cloud/AI-Application/universal_search.md  
     - 应用开发:
       - 连接到 MatrixOne Intelligence:
         - 客户端工具连接: MatrixOne-Cloud/App-Develop/connect-mo/database-client-tools.md
@@ -134,7 +136,6 @@ nav:
       - 监控数据: MatrixOne-Cloud/Monitor/Data-Monitoring.md
     - 告警: MatrixOne-Cloud/Alarm/alarm-overview.md
     - 事件: MatrixOne-Cloud/Events/event.md
-    - AI 搜索: MatrixOne-Cloud/MatrixSearch/search.md
     - 计费:
       - 充值: MatrixOne-Cloud/Charging/recharge.md
       - 账户概览: MatrixOne-Cloud/Charging/account-overview.md
