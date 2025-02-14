@@ -37,3 +37,10 @@ GenAI 工作区是 MO Intelligence 提供的一个专门用于多模态数据的
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/workspace/workspace-2.png
  width=60% heigth=60%/>
 </div>
+
+进入 GenAI 工作区后，您可以轻松实现多模态数据的管理和分析。首先，通过简便的步骤将数据从阿里云 OSS 和标准 S3 中的数据导入平台。接着，利用可视化工作流进行数据处理，完成清洗、转换和解析。最后，您可以通过 Catalog 功能整合和分析数据，确保数据安全并支持进一步探索。
+
+ <div align="center">
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/release-notes/genai.png
+ width=100% heigth=100%/>
+</div>
