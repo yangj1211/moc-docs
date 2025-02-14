@@ -125,7 +125,14 @@ nav:
       - 导入本地数据: MatrixOne-Cloud/Migrate-Data/Load-Local-Data.md
       - MySQL数据迁移: MatrixOne-Cloud/Migrate-Data/ninedata-mysql.md
     - 导出数据: MatrixOne-Cloud/App-Develop/export-data/modump.md
+    - 数据接入:
+      - 连接器: MatrixOne-Cloud/Data-Connect/connector.md
+      - 数据载入: MatrixOne-Cloud/Data-Connect/loading.md
+    - 数据处理:
+      - 工作流: MatrixOne-Cloud/Data-Processing/workflow.md
+      - 作业: MatrixOne-Cloud/Data-Processing/operation.md
     - 探索数据:
+      - Catalog: MatrixOne-Cloud/Data-Explore/catalog.md
       - SQL 编辑器: MatrixOne-Cloud/Data-Explore/sql-editor.md
       - SQL 工作簿: MatrixOne-Cloud/Data-Explore/sql-workbook.md
       - 查询分析:
@@ -551,6 +558,12 @@ nav:
         - MatrixOne 的 JDBC 功能支持列表: MatrixOne-Cloud/Reference/Limitations/mo-jdbc-feature-list.md
         - MatrixOne DDL 语句分区支持的说明: MatrixOne-Cloud/Reference/Limitations/mo-partition-support.md
         - MatrixOne 的 Load Data 支持的说明: MatrixOne-Cloud/Reference/Limitations/load-data-support.md
+    - API 说明: 
+        - 鉴权: MatrixOne-Cloud/API/token_api.md
+        - 数据接入: MatrixOne-Cloud/API/data_connect_api.md
+        - 数据处理: MatrixOne-Cloud/API/data_processing_api.md
+        - 数据探索: MatrixOne-Cloud/API/data_explore_api.md
+        - 指标: MatrixOne-Cloud/API/indicator_api.md
     - 常见问题:
         - SQL 常见问题: MatrixOne-Cloud/FAQs/sql-faqs.md
         - MatrixOne Intelligence 常见问题: MatrixOne-Cloud/FAQs/FAQ-Product.md
