@@ -41,6 +41,7 @@ nav:
     - 快速开始:
       - 快速创建 MatrixOne Intelligence 实例: MatrixOne-Cloud/Get-Started/quickstart.md
       - 快速上手向量能力: MatrixOne-Cloud/Get-Started/vector.md
+    - GenAI 工作区: MatrixOne-Cloud/Workspace-Mgmt/workspace.md
     - AI 应用市场: 
       - 通用搜索: MatrixOne-Cloud/AI-Application/universal_search.md  
     - 应用开发:
