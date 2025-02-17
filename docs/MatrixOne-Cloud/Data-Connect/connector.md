@@ -1,6 +1,6 @@
 # 连接器
 
-MatrixOne Intellogence 平台提供了一个强大的数据连接器，允许用户轻松地将存储在阿里云 OSS 或 AWS S3 上的数据导入到 MatrixOne Intellogence 平台中。只需提供必要的连接信息，即可实现数据的无缝导入，为后续的数据分析和处理提供便利。
+MatrixOne Intellogence 平台提供了一个强大的数据连接器，允许用户轻松地将存储在阿里云 OSS 或标准 S3 上的数据导入到 MatrixOne Intellogence 平台中。只需提供必要的连接信息，即可实现数据的无缝导入，为后续的数据分析和处理提供便利。
 
 ## 如何使用连接器
 
