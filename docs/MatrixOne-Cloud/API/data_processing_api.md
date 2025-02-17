@@ -2084,7 +2084,7 @@ Response Body: {
 }
 ```
 
-#### 查看作业详情
+### 查看作业详情
 
 ```
 GET /byoa/api/v1/index_workflow_job/{job_id}
@@ -2571,7 +2571,7 @@ Response Body: {
 }
 ```
 
-#### 查看作业关联的文件列表
+### 查看作业关联的文件列表
 
 ```
 GET /byoa/api/v1/index_workflow_job/{job_id}/files
@@ -2629,7 +2629,7 @@ Response Body: {
 }
 ```
 
-#### 重新处理失败文件
+### 重新处理失败文件
 
 ```
 POST /byoa/api/v1/index_workflow_job/{job_id}/files
