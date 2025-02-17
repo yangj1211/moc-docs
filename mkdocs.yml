@@ -39,98 +39,518 @@ nav:
       - MySQL 兼容性: MatrixOne-Cloud/Overview/mysql-compatibility.md
       - MOne 助手: MatrixOne-Cloud/Overview/mone-introduction.md
     - 快速开始:
-      - 快速创建 MatrixOne Intelligence 实例: MatrixOne-Cloud/Get-Started/quickstart.md
+      - 快速创建 GenAI 工作区: MatrixOne-Cloud/Get-Started/workspace.md
+      - 快速创建数据库实例: MatrixOne-Cloud/Get-Started/quickstart.md
       - 快速上手向量能力: MatrixOne-Cloud/Get-Started/vector.md
+    - GenAI 工作区: 
+      - 创建工作区: MatrixOne-Cloud/Workspace-Mgmt/workspace.md
+      - 数据接入:
+        - 连接器: MatrixOne-Cloud/Data-Connect/connector.md
+        - 数据载入: MatrixOne-Cloud/Data-Connect/loading.md
+      - 数据处理:
+        - 工作流: MatrixOne-Cloud/Data-Processing/workflow.md
+        - 作业: MatrixOne-Cloud/Data-Processing/operation.md
+      - 探索数据:
+        - Catalog: MatrixOne-Cloud/Data-Explore/catalog.md
+      - API 说明: 
+        - 鉴权: MatrixOne-Cloud/API/token_api.md
+        - 数据接入: MatrixOne-Cloud/API/data_connect_api.md
+        - 数据处理: MatrixOne-Cloud/API/data_processing_api.md
+        - 数据探索: MatrixOne-Cloud/API/data_explore_api.md
+        - 指标: MatrixOne-Cloud/API/indicator_api.md
+    - 数据库实例: 
+      - 管理实例:
+        - 创建实例:
+          - 创建 Serverless 实例: MatrixOne-Cloud/Instance-Mgmt/create-instance/create-serverless-instance.md
+          - 创建标准实例: MatrixOne-Cloud/Instance-Mgmt/create-instance/create-standard-instance.md
+        - 连接实例: MatrixOne-Cloud/Instance-Mgmt/connect-instance.md
+        - 登录实例: MatrixOne-Cloud/Instance-Mgmt/login-instance.md
+        - 终止和恢复实例: MatrixOne-Cloud/Instance-Mgmt/terminate-recovery-instance.md
+      - 数据分享: MatrixOne-Cloud/Data-Sharing/pub-sub-overview.md
+      - 备份恢复:
+        - 快照: MatrixOne-Cloud/Backup-Restore/snapshot.md
+      - 迁移和导入数据:
+        - 导入 TPCH 样例数据: MatrixOne-Cloud/Migrate-Data/import-tpch.md
+        - 导入对象存储数据: MatrixOne-Cloud/Migrate-Data/Load-S3.md
+        - 导入本地数据: MatrixOne-Cloud/Migrate-Data/Load-Local-Data.md
+        - MySQL数据迁移: MatrixOne-Cloud/Migrate-Data/ninedata-mysql.md
+      - 导出数据: MatrixOne-Cloud/App-Develop/export-data/modump.md
+      - 探索数据:
+        - SQL 编辑器: MatrixOne-Cloud/Data-Explore/sql-editor.md
+        - SQL 工作簿: MatrixOne-Cloud/Data-Explore/sql-workbook.md
+        - 查询分析:
+          - 查询历史: MatrixOne-Cloud/Data-Explore/query-anlysis/queries-history.md
+        - 查询分析: MatrixOne-Cloud/Data-Explore/query-anlysis/query_profile.md
+      - 应用开发:
+        - 连接到数据库实例:
+          - 客户端工具连接: MatrixOne-Cloud/App-Develop/connect-mo/database-client-tools.md
+          - 使用 Web 页面连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-mo-with-web.md
+          - Java 连接:
+            - JDBC 连接: MatrixOne-Cloud/App-Develop/connect-mo/java-connect-to-matrixone/connect-mo-with-jdbc.md
+            - Java ORMs 连接: MatrixOne-Cloud/App-Develop/connect-mo/java-connect-to-matrixone/connect-mo-with-orm.md
+          - Python 连接: MatrixOne-Cloud/App-Develop/connect-mo/python-connect-to-matrixone.md
+          - Golang 连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-to-matrixone-with-go.md
+          - C# 连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-to-matrixone-with-c#.md
+        - 数据库模式设计:
+          - 概述: MatrixOne-Cloud/App-Develop/schema-design/overview.md
+          - 创建数据库: MatrixOne-Cloud/App-Develop/schema-design/create-database.md
+          - 创建表: MatrixOne-Cloud/App-Develop/schema-design/create-table.md
+          - 创建视图: MatrixOne-Cloud/App-Develop/schema-design/create-view.md
+          - 创建临时表: MatrixOne-Cloud/App-Develop/schema-design/create-temporary-table.md
+          - 创建次级索引: MatrixOne-Cloud/App-Develop/schema-design/create-secondary-index.md
+          - 创建约束:
+            - 约束概述: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/overview-of-integrity-constraint-types.md
+            - NOT NULL 非空约束: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/not-null-constraints.md
+            - UNIQUE KEY 唯一约束: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/unique-key-constraints.md
+            - PRIMARY KEY 主键约束: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/primary-key-constraints.md
+            - FOREIGN KEY 外键约束: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/foreign-key-constraints.md
+            - AUTO INCREMENT 自增约束: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/auto-increment-integrity.md
+        - 数据写入:
+          - 插入数据:
+            - INSERT 插入: MatrixOne-Cloud/App-Develop/import-data/insert-data.md
+            - 流式导入: MatrixOne-Cloud/App-Develop/import-data/stream-load.md
+            - 批量插入:
+              - 批量插入概述: MatrixOne-Cloud/App-Develop/import-data/bulk-load/bulk-load-overview.md
+              - 插入 csv 文件: MatrixOne-Cloud/App-Develop/import-data/bulk-load/load-csv.md
+              - 插入 jsonlines 文件: MatrixOne-Cloud/App-Develop/import-data/bulk-load/load-jsonline.md
+              - 从对象存储导入文件: MatrixOne-Cloud/App-Develop/import-data/bulk-load/load-s3.md
+              - Source 插入: MatrixOne-Cloud/App-Develop/import-data/bulk-load/using-source.md
+          - 更新数据: MatrixOne-Cloud/App-Develop/import-data/update-data.md
+          - 删除数据: MatrixOne-Cloud/App-Develop/import-data/delete-data.md
+          - 预处理: MatrixOne-Cloud/App-Develop/import-data/prepared.md
+        - 数据读取:
+          - 单表读取: MatrixOne-Cloud/App-Develop/read-data/query-data-single-table.md
+          - 多表连接查询: MatrixOne-Cloud/App-Develop/read-data/multitable-join-query.md
+          - 子查询: MatrixOne-Cloud/App-Develop/read-data/subquery.md
+          - 视图: MatrixOne-Cloud/App-Develop/read-data/views.md
+          - 公共表表达式: MatrixOne-Cloud/App-Develop/read-data/cte.md
+        - 应用开发示例:
+          - Java 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/develop-java-crud-demo.md
+          - Python 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/develop-python-crud-demo.md
+          - SpringBoot 和 JPA 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/springboot-hibernate-crud-demo.md
+          - SpringBoot 和 MyBatis 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/springboot-mybatis-crud-demo.md
+          - SQLAlchemy 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/sqlalchemy-python-crud-demo.md
+          - Django 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/django-python-crud-demo.md
+          - Golang 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/develop-golang-crud-demo.md
+          - Gorm 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/gorm-golang-crud-demo.md
+          - C# 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/c-net-crud-demo.md
+        - 事务:
+          - 事务通用概念: MatrixOne-Cloud/App-Develop/Transactions/common-transaction-overview.md
+          - MatrixOne Intelligence 的事务:
+            - 概述: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/overview.md
+            - 显式事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/explicit-transaction.md
+            - 隐式事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/implicit-transaction.md
+            - 悲观事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/pessimistic-transaction.md
+            - 乐观事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/optimistic-transaction.md
+            - 隔离级别: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/isolation-level.md
+            - MVCC: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/mvcc.md
+            - 如何使用 MatrixOne Intelligence 事务:
+              - 使用指南: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/how-to-use.md
+              - 应用场景: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/scenario.md
+      - 安全:
+        - 身份访问控制: MatrixOne-Cloud/Security/Security-Permission-Overview.md
+        - 网络访问控制:
+          - 设置 IP 白名单: MatrixOne-Cloud/Security/IP-Access.md
+          - TLS 连接 MatrixOne: MatrixOne-Cloud/Security/TLS-introduction.md
+          - 私网连接: MatrixOne-Cloud/Security/private-link.md
+        - 数据访问控制:
+          - 基于角色的访问控制（RBAC）: MatrixOne-Cloud/Security/about-privilege-management.md
+      - 参考手册:
+        - 系统变量:
+          - 系统变量概述: MatrixOne-Cloud/Reference/Variable/system-variables/system-variables-overview.md
+          - 系统变量参数:
+            - SQL 模式: MatrixOne-Cloud/Reference/Variable/system-variables/sql-mode.md
+            - 保存查询结果支持: MatrixOne-Cloud/Reference/Variable/system-variables/save_query_result.md
+            - 时区支持: MatrixOne-Cloud/Reference/Variable/system-variables/timezone.md
+            - 大小写敏感支持: MatrixOne-Cloud/Reference/Variable/system-variables/lower_case_tables_name.md
+            - 外键检查支持: MatrixOne-Cloud/Reference/Variable/system-variables/foreign_key_checks.md
+            - 查询结果集列名与用户指定大小写一致支持: MatrixOne-Cloud/Reference/Variable/system-variables/keep_user_target_list_in_result.md
+            - 非法登录限制: MatrixOne-Cloud/Reference/Variable/system-variables/illegal_login_restrictions.md
+            - 密码复杂度校验: MatrixOne-Cloud/Reference/Variable/system-variables/password_complex.md
+            - 连接白名单: MatrixOne-Cloud/Reference/Variable/system-variables/whitelist.md
+          - 自定义变量: MatrixOne-Cloud/Reference/Variable/custom-variable.md
+        - SQL 结构与语法:
+          - 关键字: MatrixOne-Cloud/Reference/Language-Structure/keywords.md
+          - 注释: MatrixOne-Cloud/Reference/Language-Structure/comment.md
+        - 数据类型:
+          - 数据类型概览: MatrixOne-Cloud/Reference/Data-Types/data-types.md
+          - 数据类型转换: MatrixOne-Cloud/Reference/Data-Types/data-type-conversion.md
+          - 日期和时间类型:
+            - TIMESTAMP 和 DATETIME 的自动初始化和更新: MatrixOne-Cloud/Reference/Data-Types/date-time-data-types/timestamp-initialization.md
+            - YEAR 类型: MatrixOne-Cloud/Reference/Data-Types/date-time-data-types/year-type.md
+          - JSON 数据类型: MatrixOne-Cloud/Reference/Data-Types/json-type.md
+          - BLOB 和 TEXT 数据类型: MatrixOne-Cloud/Reference/Data-Types/blob-text-type.md
+          - DATALINK 数据类型: MatrixOne-Cloud/Reference/Data-Types/datalink-type.md
+          - ENUM 类型: MatrixOne-Cloud/Reference/Data-Types/enum-type.md
+          - UUID 数据类型: MatrixOne-Cloud/Reference/Data-Types/uuid-type.md
+          - 精确数值类型-DECIMAL: MatrixOne-Cloud/Reference/Data-Types/fixed-point-types.md
+          - 向量数据类型: MatrixOne-Cloud/Reference/Data-Types/vector-type.md
+        - SQL 目录:
+          - SQL 语句的分类: MatrixOne-Cloud/Reference/SQL-Reference/SQL-Type.md
+          - 数据定义语言（DDL）:
+            - CREATE DATABASE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-database.md
+            - CREATE INDEX: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-index.md
+            - CREATE INDEX...USING IVFFLAT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-index-ivfflat.md
+            - CREATE TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-table.md
+            - CREATE TABLE AS SELECT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-table-as-select.md
+            - CREATE EXTERNAL TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-external-table.md
+            - CREATE PITR: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-pitr.md
+            - CREATE PUBLICATION: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-publication.md
+            - CREATE SEQUENCE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-sequence.md
+            - CREATE STAGE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-stage.md
+            - CREATE...FROM...PUBLICATION...: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-subscription.md
+            - CREATE VIEW: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-view.md
+            - CREATE FUNCTION...LANGUAGE SQL AS: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-function-sql.md
+            - CREATE FUNCTION...LANGUAGE PYTHON AS: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-function-python.md
+            - CREATE OR REPLACE VIEW: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-replace-view.md
+            - CREATE SOURCE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-source.md
+            - CREATE DYNAMIC TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-dynamic-table.md
+            - CREATE SNAPSHOT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-snapshot.md
+            - ALTER TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-table.md
+            - ALTER TABLE ... ALTER REINDEX: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-reindex.md
+            - ALTER PITR: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-pitr.md
+            - ALTER PUBLICATION: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-publication.md
+            - ALTER SEQUENCE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-sequence.md
+            - ALTER STAGE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-stage.md
+            - ALTER VIEW: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-view.md
+            - DROP DATABASE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-database.md
+            - DROP INDEX: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-index.md
+            - DROP TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-table.md
+            - DROP PITR: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-pitr.md
+            - DROP PUBLICATION: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-publication.md
+            - DROP SEQUENCE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-sequence.md
+            - DROP STAGE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-stage.md
+            - DROP SNAPSHOT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-snapshot.md
+            - DROP VIEW: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-view.md
+            - DROP FUNCTION: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-function.md
+            - TRUNCATE TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/truncate-table.md
+            - RENAME TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/rename-table.md
+            - RESTORE PITR: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/restore-pitr.md
+            - RESTORE SNAPSHOT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/restore-snapshot.md
+            - PARTITION分区表支持说明: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/mo-partition-support.md
+          - 数据修改语言（DML）:
+            - INSERT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/insert.md
+            - INSERT INTO SELECT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/insert-into-select.md
+            - DELETE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/delete.md
+            - UPDATE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/update.md
+            - LOAD DATA INFILE : MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/load-data-infile.md
+            - LOAD DATA INLINE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/load-data-inline.md
+            - UPSERT: 
+              - UPSERT 概述: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/upsert/upsert.md
+              - INSERT ON DUPLICATE KEY UPDATE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/upsert/insert-on-duplicate.md
+              - INSERT IGNORE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/upsert/insert-ignore.md
+              - REPLACE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/upsert/replace.md
+            - Information Functions:
+              - LAST_QUERY_ID(): MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/information-functions/last-query-id.md
+              - LAST_INSERT_ID(): MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/information-functions/last-insert-id.md
+          - 数据查询语言（DQL）:
+            - SELECT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/select.md
+            - SUBQUERY:
+              - SUBQUERY 概述: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/subquery.md
+              - Derived Tables: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/derived-tables.md
+              - 子查询与比较操作符的使用: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/comparisons-using-subqueries.md
+              - SUBQUERY with ANY or SOME: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/subquery-with-any-some.md
+              - SUBQUERY with ALL: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/subquery-with-all.md
+              - SUBQUERY with EXISTS: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/subquery-with-exists.md
+              - SUBQUERY with IN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/subquery-with-in.md
+            - JOIN:
+              - JOIN 概述: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/join.md
+              - INNER JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/inner-join.md
+              - LEFT JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/left-join.md
+              - RIGHT JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/right-join.md
+              - FULL JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/full-join.md
+              - OUTER JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/outer-join.md
+              - NATURAL JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/natural-join.md
+            - With CTE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/with-cte.md
+            - 联合查询:
+              - 联合查询概述: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/union-intersect-minus-overview.md
+              - UNION: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/union.md
+              - INTERSECT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/intersect.md
+              - MINUS: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/minus.md
+          - 数据控制语言（DCL）:
+            - CREATE ACCOUNT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/create-account.md
+            - CREATE ROLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/create-role.md
+            - CREATE USER: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/create-user.md
+            - ALTER ACCOUNT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/alter-account.md
+            - ALTER USER: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/alter-user.md
+            - DROP ACCOUNT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/drop-account.md
+            - DROP USER: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/drop-user.md
+            - DROP ROLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/drop-role.md
+            - GRANT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/grant.md
+            - REVOKE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/revoke.md
+          - 其他:
+            - SHOW:
+              - SHOW ACCOUNTS: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-account.md
+              - SHOW DATABASES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-databases.md
+              - SHOW CREATE TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-create-table.md
+              - SHOW CREATE VIEW: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-create-view.md
+              - SHOW CREATE PUBLICATION: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-create-publication.md
+              - SHOW TABLES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-tables.md
+              - SHOW INDEX: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-index.md
+              - SHOW COLLATION: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-collation.md
+              - SHOW COLUMNS: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-columns.md
+              - SHOW FUNCTION STATUS: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-function-status.md
+              - SHOW GRANT: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-grants.md
+              - SHOW PROCESSLIST: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-processlist.md
+              - SHOW PUBLICATIONS: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-publications.md
+              - SHOW PITR: MatrixOne/Reference/SQL-Reference/Other/SHOW-Statements/show-pitr.md
+              - SHOW ROLES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-roles.md
+              - SHOW SEQUENCES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-sequences.md
+              - SHOW SNAPSHOTS: MatrixOne/Reference/SQL-Reference/Other/SHOW-Statements/show-snapshots.md
+              - SHOW STAGES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-stage.md
+              - SHOW SUBSCRIPTIONS: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-subscriptions.md
+              - SHOW VARIABLES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-variables.md
+            - SET:
+              - SET ROLE: MatrixOne-Cloud/Reference/SQL-Reference/Other/Set/set-role.md
+            - USE:
+              - USE DATABASE: MatrixOne-Cloud/Reference/SQL-Reference/Other/use-database.md
+            - KILL: MatrixOne-Cloud/Reference/SQL-Reference/Other/kill.md
+            - Prepared:
+              - PREPARE: MatrixOne-Cloud/Reference/SQL-Reference/Other/Prepared-Statements/prepare.md
+              - EXECUTE: MatrixOne-Cloud/Reference/SQL-Reference/Other/Prepared-Statements/execute.md
+              - DEALLOCATE: MatrixOne-Cloud/Reference/SQL-Reference/Other/Prepared-Statements/deallocate.md
+            - Explain:
+              - Explain: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain.md
+              - Explain 输出格式: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain-workflow.md
+              - Explain Analyze: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain-analyze.md
+        - 函数与操作符:
+          - 运算符:
+            - INTERVAL: MatrixOne-Cloud/Reference/Operators/interval.md
+            - Operators:
+              - 运算符概述: MatrixOne-Cloud/Reference/Operators/operators/operators.md
+              - 运算符的优先级: MatrixOne-Cloud/Reference/Operators/operators/operator-precedence.md
+              - 算数运算符:
+                - 算数运算符概述: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/arithmetic-operators-overview.md
+                - '%,MOD': MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/mod.md
+                - '*': MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/multiplication.md
+                - +: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/addition.md
+                - -: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/minus.md
+                - -: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/unary-minus.md
+                - /: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/division.md
+                - DIV: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/div.md
+              - 赋值运算符:
+                - 赋值运算符概述: MatrixOne-Cloud/Reference/Operators/operators/assignment-operators/assignment-operators-overview.md
+                - =: MatrixOne-Cloud/Reference/Operators/operators/assignment-operators/equal.md
+              - 二进制运算符:
+                - 二进制运算符概述: MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/bit-functions-and-operators-overview.md
+                - '&': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/bitwise-and.md
+                - '>>': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/right-shift.md
+                - '<<': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/left-shift.md
+                - '^': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/bitwise-xor.md
+                - '|': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/bitwise-or.md
+                - '~': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/bitwise-inversion.md
+              - 强制转换函数和运算符:
+                - 强制转换函数和运算符概述: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/cast-functions-and-operators-overview.md
+                - BINARY: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/binary.md
+                - CAST: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/cast.md
+                - CONVERT: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/convert.md
+                - DECODE: MatrixOne/Reference/Operators/operators/cast-functions-and-operators/decode.md
+                - ENCODE: MatrixOne/Reference/Operators/operators/cast-functions-and-operators/encode.md
+                - SERIAL: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/serial.md
+                - SERIAL_FULL: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/serial_full.md
+              - 比较函数和运算符:
+                - 比较函数和运算符概述: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/comparison-functions-and-operators-overview.md
+                - '>': MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/greater-than.md
+                - '>=': MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/greater-than-or-equal.md
+                - <: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/less-than.md
+                - <>,!=: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/not-equal.md
+                - <=: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/less-than-or-equal.md
+                - =: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/assign-equal.md
+                - BETWEEN ... AND ...: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/between.md
+                - IN: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/in.md
+                - IS: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/is.md
+                - IS NOT: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/is-not.md
+                - IS NOT NULL: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/is-not-null.md
+                - IS NULL: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/is-null.md
+                - ISNULL: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/function_isnull.md
+                - ILIKE: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/ilike.md
+                - LIKE: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/like.md
+                - NOT BETWEEN ... AND ...: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/not-between.md
+                - NOT IN: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/not-in.md
+                - NOT LIKE: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/not-like.md
+                - COALESCE: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/coalesce.md
+              - 控制流函数:
+                - 控制流函数概述: MatrixOne-Cloud/Reference/Operators/operators/flow-control-functions/flow-control-functions-overview.md
+                - CASE WHEN: MatrixOne-Cloud/Reference/Operators/operators/flow-control-functions/case-when.md
+                - IF: MatrixOne-Cloud/Reference/Operators/operators/flow-control-functions/function_if.md
+                - IFNULL: MatrixOne-Cloud/Reference/Operators/operators/flow-control-functions/function_ifnull.md
+                - NULLIF: MatrixOne-Cloud/Reference/Operators/operators/flow-control-functions/function_nullif.md
+              - 逻辑运算符:
+                - 逻辑运算符概述: MatrixOne-Cloud/Reference/Operators/operators/logical-operators/logical-operators-overview.md
+                - AND,&&: MatrixOne-Cloud/Reference/Operators/operators/logical-operators/and.md
+                - NOT,!: MatrixOne-Cloud/Reference/Operators/operators/logical-operators/not.md
+                - OR: MatrixOne-Cloud/Reference/Operators/operators/logical-operators/or.md
+                - XOR: MatrixOne-Cloud/Reference/Operators/operators/logical-operators/xor.md
+          - 函数:
+            - 函数总表: MatrixOne-Cloud/Reference/Functions-and-Operators/matrixone-function-list.md
+            - 聚合函数:
+              - ANY_VALUE: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/any-value.md
+              - AVG: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/avg.md
+              - BITMAP: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/bitmap.md
+              - BIT_AND: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/bit_and.md
+              - BIT_OR: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/bit_or.md
+              - BIT_XOR: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/bit_xor.md
+              - COUNT: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/count.md
+              - GROUP_CONCAT: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/group-concat.md
+              - MAX: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/max.md
+              - MEDIAN: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/median.md
+              - MIN: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/min.md
+              - STDDEV_POP: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/stddev_pop.md
+              - SUM: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/sum.md
+              - VARIANCE: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/variance.md
+              - VAR_POP: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/var_pop.md
+            - 日期时间类:
+              - CONVERT_TZ(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/convert-tz.md
+              - CURDATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/curdate.md
+              - CURRENT_TIMESTAMP(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/current-timestamp.md
+              - DATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/date.md
+              - DATE_ADD(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/date-add.md
+              - DATE_FORMAT(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/date-format.md
+              - DATE_SUB(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/date-sub.md
+              - DATEDIFF(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/datediff.md
+              - DAY(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/day.md
+              - DAYOFYEAR(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/dayofyear.md
+              - EXTRACT(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/extract.md
+              - HOUR(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/hour.md
+              - FROM_UNIXTIME: MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/from-unixtime.md
+              - MINUTE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/minute.md
+              - MONTH(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/month.md
+              - NOW(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/now.md
+              - SECOND(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/second.md
+              - STR_TO_DATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/str-to-date.md
+              - SYSDATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/sysdate.md
+              - TIME(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/time.md
+              - TIMEDIFF(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/timediff.md
+              - TIMESTAMP(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/timestamp.md
+              - TIMESTAMPDIFF(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/timestampdiff.md
+              - TO_DATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-date.md
+              - TO_DAYS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-days.md
+              - TO_SECONDS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-seconds.md
+              - UNIX_TIMESTAMP: MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/unix-timestamp.md
+              - UTC_TIMESTAMP(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/utc-timestamp.md
+              - WEEK(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/week.md
+              - WEEKDAY(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/weekday.md
+              - YEAR(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/year.md
+            - 数学类:
+              - ABS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/abs.md
+              - ACOS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/acos.md
+              - ATAN(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/atan.md
+              - CEIL(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/ceil.md
+              - CEILING(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/ceiling.md
+              - COS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/cos.md
+              - COT(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/cot.md
+              - EXP(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/exp.md
+              - FLOOR(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/floor.md
+              - LN(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/ln.md
+              - LOG(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/log.md
+              - LOG2(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/log2.md
+              - LOG10(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/log10.md
+              - PI(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/pi.md
+              - POWER(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/power.md
+              - ROUND(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/round.md
+              - RAND(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/rand.md
+              - SIN(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/sin.md
+              - SINH(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/sinh.md
+              - TAN(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/tan.md
+            - 字符串类:
+              - BIN(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/bin.md
+              - BIT_LENGTH(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/bit-length.md
+              - CHAR_LENGTH(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/char-length.md
+              - CONCAT(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/concat.md
+              - CONCAT_WS(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/concat-ws.md
+              - EMPTY(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/empty.md
+              - ENDSWITH(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/endswith.md
+              - FIELD(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/field.md
+              - FIND_IN_SET(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/find-in-set.md
+              - FORMAT(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/format.md
+              - FROM_BASE64(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/from_base64.md
+              - HEX(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/hex.md
+              - INSTR(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/instr.md
+              - LCASE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/lcase.md
+              - LEFT(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/left.md
+              - LENGTH(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/length.md
+              - LOCATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/locate.md
+              - LOWER(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/lower.md
+              - LPAD(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/lpad.md
+              - LTRIM(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/ltrim.md
+              - MD5(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/md5.md
+              - OCT(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/oct.md
+              - REPEAT(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/repeat.md
+              - REVERSE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/reverse.md
+              - RPAD(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/rpad.md
+              - RTRIM(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/rtrim.md
+              - SHA1()/SHA(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/sha1.md
+              - SHA2(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/sha2.md
+              - SPACE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/space.md
+              - SPLIT_PART(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/split_part.md
+              - STARTSWITH(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/startswith.md
+              - SUBSTRING(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/substring.md
+              - SUBSTRING_INDEX(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/substring-index.md
+              - TO_BASE64(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/to_base64.md
+              - TRIM(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/trim.md
+              - LPAD(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/lpad.md
+              - UCASE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/ucase.md
+              - UNHEX(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/unhex.md
+              - UPPER(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/upper.md
+              - 正则表达式:
+                - 正则表达式概述: MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/Regular-Expression-Functions-Overview.md
+                - NOT REGEXP: MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/not-regexp.md
+                - REGEXP_INSTR(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/regexp-instr.md
+                - REGEXP_LIKE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/regexp-like.md
+                - REGEXP_REPLACE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/regexp-replace.md
+                - REGEXP_SUBSTR(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/regexp-substr.md
+              - 向量类:
+                - 基本操作符: MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/arithmetic.md
+                - 数学计算: MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/misc.md
+                - CLUSTER_CENTERS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/cluster_centers.md
+                - COSINE_SIMILARITY(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/cosine_similarity.md
+                - COSINE_DISTANCE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/cosine_distance.md
+                - INNER_PRODUCT(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/inner_product.md
+                - L1_NORM(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/l1_norm.md
+                - L2_NORM(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/l2_norm.md
+                - L2_DISTANCE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/l2_distance.md
+                - NORMALIZE_L2(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/normalize_l2.md
+                - SUBVECTOR(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/subvector.md
+                - VECTOR_DIMS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/vector_dims.md
+            - 表函数:
+              - GENERATE_SERIES(): MatrixOne-Cloud/Reference/Functions-and-Operators/Table/generate_series.md
+              - UNNEST(): MatrixOne-Cloud/Reference/Functions-and-Operators/Table/unnest.md
+            - 窗口函数:
+              - DENSE_RANK(): MatrixOne-Cloud/Reference/Functions-and-Operators/Window-Functions/dense_rank.md
+              - RANK(): MatrixOne-Cloud/Reference/Functions-and-Operators/Window-Functions/rank.md
+              - ROW_NUMBER(): MatrixOne-Cloud/Reference/Functions-and-Operators/Window-Functions/row_number.md
+            - JSON 函数: 
+              - JQ(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/jq.md
+              - JSON_EXTRACT(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_extract.md
+              - JSON_EXTRACT_FLOAT64(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_extract_float64.md
+              - JSON_EXTRACT_STRING(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_extract_string.md
+              - JSON_QUOTE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_quote.md
+              - JSON_ROW(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_row.md
+              - JSON_UNQUOTE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_unquote.md
+              - TRY_JQ(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/try_jq.md
+            - 其他函数:
+              - LOAD_FILE: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/load_file.md
+              - SAVE_FILE: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/save_file.md
+              - SAMPLE: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/sample.md
+              - SERIAL_EXTRACT: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/serial_extract.md
+              - SLEEP: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/sleep.md
+              - STAGE_LIST: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/stage_list.md
+              - UUID(): MatrixOne-Cloud/Reference/Functions-and-Operators/Other/uuid.md
+            - 系统运维函数:
+              - CURRENT_ROLE_NAME(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/current_role_name.md
+              - CURRENT_ROLE(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/current_role.md
+              - CURRENT_USER_NAME(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/current_user_name.md
+              - CURRENT_USER(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/current_user.md
+              - VERSION(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/version.md
+              - PURGE_LOG(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/purge_log.md
+        - 系统表目录: MatrixOne-Cloud/Reference/System-tables.md
+        - 权限分类列表: MatrixOne-Cloud/Reference/access-control-type.md
+        - 使用限制:
+          - MatrixOne 的 JDBC 功能支持列表: MatrixOne-Cloud/Reference/Limitations/mo-jdbc-feature-list.md
+          - MatrixOne DDL 语句分区支持的说明: MatrixOne-Cloud/Reference/Limitations/mo-partition-support.md
+          - MatrixOne 的 Load Data 支持的说明: MatrixOne-Cloud/Reference/Limitations/load-data-support.md
     - AI 应用市场: 
       - 通用搜索: MatrixOne-Cloud/AI-Application/universal_search.md  
-    - 应用开发:
-      - 连接到 MatrixOne Intelligence:
-        - 客户端工具连接: MatrixOne-Cloud/App-Develop/connect-mo/database-client-tools.md
-        - 使用 Web 页面连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-mo-with-web.md
-        - Java 连接:
-          - JDBC 连接: MatrixOne-Cloud/App-Develop/connect-mo/java-connect-to-matrixone/connect-mo-with-jdbc.md
-          - Java ORMs 连接: MatrixOne-Cloud/App-Develop/connect-mo/java-connect-to-matrixone/connect-mo-with-orm.md
-        - Python 连接: MatrixOne-Cloud/App-Develop/connect-mo/python-connect-to-matrixone.md
-        - Golang 连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-to-matrixone-with-go.md
-        - C# 连接: MatrixOne-Cloud/App-Develop/connect-mo/connect-to-matrixone-with-c#.md
-      - 数据库模式设计:
-        - 概述: MatrixOne-Cloud/App-Develop/schema-design/overview.md
-        - 创建数据库: MatrixOne-Cloud/App-Develop/schema-design/create-database.md
-        - 创建表: MatrixOne-Cloud/App-Develop/schema-design/create-table.md
-        - 创建视图: MatrixOne-Cloud/App-Develop/schema-design/create-view.md
-        - 创建临时表: MatrixOne-Cloud/App-Develop/schema-design/create-temporary-table.md
-        - 创建次级索引: MatrixOne-Cloud/App-Develop/schema-design/create-secondary-index.md
-        - 创建约束:
-          - 约束概述: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/overview-of-integrity-constraint-types.md
-          - NOT NULL 非空约束: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/not-null-constraints.md
-          - UNIQUE KEY 唯一约束: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/unique-key-constraints.md
-          - PRIMARY KEY 主键约束: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/primary-key-constraints.md
-          - FOREIGN KEY 外键约束: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/foreign-key-constraints.md
-          - AUTO INCREMENT 自增约束: MatrixOne-Cloud/App-Develop/schema-design/data-integrity/auto-increment-integrity.md
-      - 数据写入:
-        - 插入数据:
-          - INSERT 插入: MatrixOne-Cloud/App-Develop/import-data/insert-data.md
-          - 流式导入: MatrixOne-Cloud/App-Develop/import-data/stream-load.md
-          - 批量插入:
-            - 批量插入概述: MatrixOne-Cloud/App-Develop/import-data/bulk-load/bulk-load-overview.md
-            - 插入 csv 文件: MatrixOne-Cloud/App-Develop/import-data/bulk-load/load-csv.md
-            - 插入 jsonlines 文件: MatrixOne-Cloud/App-Develop/import-data/bulk-load/load-jsonline.md
-            - 从对象存储导入文件: MatrixOne-Cloud/App-Develop/import-data/bulk-load/load-s3.md
-            - Source 插入: MatrixOne-Cloud/App-Develop/import-data/bulk-load/using-source.md
-        - 更新数据: MatrixOne-Cloud/App-Develop/import-data/update-data.md
-        - 删除数据: MatrixOne-Cloud/App-Develop/import-data/delete-data.md
-        - 预处理: MatrixOne-Cloud/App-Develop/import-data/prepared.md
-      - 数据读取:
-        - 单表读取: MatrixOne-Cloud/App-Develop/read-data/query-data-single-table.md
-        - 多表连接查询: MatrixOne-Cloud/App-Develop/read-data/multitable-join-query.md
-        - 子查询: MatrixOne-Cloud/App-Develop/read-data/subquery.md
-        - 视图: MatrixOne-Cloud/App-Develop/read-data/views.md
-        - 公共表表达式: MatrixOne-Cloud/App-Develop/read-data/cte.md
-      - 应用开发示例:
-        - Java 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/develop-java-crud-demo.md
-        - Python 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/develop-python-crud-demo.md
-        - SpringBoot 和 JPA 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/springboot-hibernate-crud-demo.md
-        - SpringBoot 和 MyBatis 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/springboot-mybatis-crud-demo.md
-        - SQLAlchemy 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/sqlalchemy-python-crud-demo.md
-        - Django 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/django-python-crud-demo.md
-        - Golang 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/develop-golang-crud-demo.md
-        - Gorm 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/gorm-golang-crud-demo.md
-        - C# 基础示例: MatrixOne-Cloud/App-Develop/Tutorial/c-net-crud-demo.md
-      - 事务:
-        - 事务通用概念: MatrixOne-Cloud/App-Develop/Transactions/common-transaction-overview.md
-        - MatrixOne Intelligence 的事务:
-          - 概述: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/overview.md
-          - 显式事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/explicit-transaction.md
-          - 隐式事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/implicit-transaction.md
-          - 悲观事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/pessimistic-transaction.md
-          - 乐观事务: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/optimistic-transaction.md
-          - 隔离级别: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/isolation-level.md
-          - MVCC: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/mvcc.md
-          - 如何使用 MatrixOne Intelligence 事务:
-            - 使用指南: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/how-to-use.md
-            - 应用场景: MatrixOne-Cloud/App-Develop/Transactions/matrixone-transaction-overview/scenario.md
-    - 管理实例:
-      - 创建实例:
-        - 创建 Serverless 实例: MatrixOne-Cloud/Instance-Mgmt/create-instance/create-serverless-instance.md
-        - 创建标准实例: MatrixOne-Cloud/Instance-Mgmt/create-instance/create-standard-instance.md
-      - 连接实例: MatrixOne-Cloud/Instance-Mgmt/connect-instance.md
-      - 登录实例: MatrixOne-Cloud/Instance-Mgmt/login-instance.md
-      - 终止和恢复实例: MatrixOne-Cloud/Instance-Mgmt/terminate-recovery-instance.md
-    - 数据分享: MatrixOne-Cloud/Data-Sharing/pub-sub-overview.md
-    - 备份恢复:
-      - 快照: MatrixOne-Cloud/Backup-Restore/snapshot.md
-    - 迁移和导入数据:
-      - 导入 TPCH 样例数据: MatrixOne-Cloud/Migrate-Data/import-tpch.md
-      - 导入对象存储数据: MatrixOne-Cloud/Migrate-Data/Load-S3.md
-      - 导入本地数据: MatrixOne-Cloud/Migrate-Data/Load-Local-Data.md
-      - MySQL数据迁移: MatrixOne-Cloud/Migrate-Data/ninedata-mysql.md
-    - 导出数据: MatrixOne-Cloud/App-Develop/export-data/modump.md
-    - 探索数据:
-      - SQL 编辑器: MatrixOne-Cloud/Data-Explore/sql-editor.md
-      - SQL 工作簿: MatrixOne-Cloud/Data-Explore/sql-workbook.md
-      - 查询分析:
-        - 查询历史: MatrixOne-Cloud/Data-Explore/query-anlysis/queries-history.md
-        - 查询分析: MatrixOne-Cloud/Data-Explore/query-anlysis/query_profile.md
     - 监控:
       - 监控指标: MatrixOne-Cloud/Monitor/Monitoring.md
       - 监控数据: MatrixOne-Cloud/Monitor/Data-Monitoring.md
@@ -149,412 +569,11 @@ nav:
       - 现金透支: MatrixOne-Cloud/Charging/overdraft.md
       - 变更配置: MatrixOne-Cloud/Charging/adjust-policy.md
       - 退订说明: MatrixOne-Cloud/Charging/cancellation-policy.md    
-    - 安全:
-      - 身份访问控制: MatrixOne-Cloud/Security/Security-Permission-Overview.md
-      - 网络访问控制:
-        - 设置 IP 白名单: MatrixOne-Cloud/Security/IP-Access.md
-        - TLS 连接 MatrixOne: MatrixOne-Cloud/Security/TLS-introduction.md
-        - 私网连接: MatrixOne-Cloud/Security/private-link.md
-      - 数据访问控制:
-        - 基于角色的访问控制（RBAC）: MatrixOne-Cloud/Security/about-privilege-management.md
-    - 参考手册:
-      - 系统变量:
-        - 系统变量概述: MatrixOne-Cloud/Reference/Variable/system-variables/system-variables-overview.md
-        - 系统变量参数:
-          - SQL 模式: MatrixOne-Cloud/Reference/Variable/system-variables/sql-mode.md
-          - 保存查询结果支持: MatrixOne-Cloud/Reference/Variable/system-variables/save_query_result.md
-          - 时区支持: MatrixOne-Cloud/Reference/Variable/system-variables/timezone.md
-          - 大小写敏感支持: MatrixOne-Cloud/Reference/Variable/system-variables/lower_case_tables_name.md
-          - 外键检查支持: MatrixOne-Cloud/Reference/Variable/system-variables/foreign_key_checks.md
-          - 查询结果集列名与用户指定大小写一致支持: MatrixOne-Cloud/Reference/Variable/system-variables/keep_user_target_list_in_result.md
-          - 非法登录限制: MatrixOne-Cloud/Reference/Variable/system-variables/illegal_login_restrictions.md
-          - 密码复杂度校验: MatrixOne-Cloud/Reference/Variable/system-variables/password_complex.md
-          - 连接白名单: MatrixOne-Cloud/Reference/Variable/system-variables/whitelist.md
-        - 自定义变量: MatrixOne-Cloud/Reference/Variable/custom-variable.md
-      - SQL 结构与语法:
-        - 关键字: MatrixOne-Cloud/Reference/Language-Structure/keywords.md
-        - 注释: MatrixOne-Cloud/Reference/Language-Structure/comment.md
-      - 数据类型:
-        - 数据类型概览: MatrixOne-Cloud/Reference/Data-Types/data-types.md
-        - 数据类型转换: MatrixOne-Cloud/Reference/Data-Types/data-type-conversion.md
-        - 日期和时间类型:
-          - TIMESTAMP 和 DATETIME 的自动初始化和更新: MatrixOne-Cloud/Reference/Data-Types/date-time-data-types/timestamp-initialization.md
-          - YEAR 类型: MatrixOne-Cloud/Reference/Data-Types/date-time-data-types/year-type.md
-        - JSON 数据类型: MatrixOne-Cloud/Reference/Data-Types/json-type.md
-        - BLOB 和 TEXT 数据类型: MatrixOne-Cloud/Reference/Data-Types/blob-text-type.md
-        - DATALINK 数据类型: MatrixOne-Cloud/Reference/Data-Types/datalink-type.md
-        - ENUM 类型: MatrixOne-Cloud/Reference/Data-Types/enum-type.md
-        - UUID 数据类型: MatrixOne-Cloud/Reference/Data-Types/uuid-type.md
-        - 精确数值类型-DECIMAL: MatrixOne-Cloud/Reference/Data-Types/fixed-point-types.md
-        - 向量数据类型: MatrixOne-Cloud/Reference/Data-Types/vector-type.md
-      - SQL 目录:
-        - SQL 语句的分类: MatrixOne-Cloud/Reference/SQL-Reference/SQL-Type.md
-        - 数据定义语言（DDL）:
-          - CREATE DATABASE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-database.md
-          - CREATE INDEX: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-index.md
-          - CREATE INDEX...USING IVFFLAT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-index-ivfflat.md
-          - CREATE TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-table.md
-          - CREATE TABLE AS SELECT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-table-as-select.md
-          - CREATE EXTERNAL TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-external-table.md
-          - CREATE PITR: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-pitr.md
-          - CREATE PUBLICATION: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-publication.md
-          - CREATE SEQUENCE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-sequence.md
-          - CREATE STAGE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-stage.md
-          - CREATE...FROM...PUBLICATION...: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-subscription.md
-          - CREATE VIEW: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-view.md
-          - CREATE FUNCTION...LANGUAGE SQL AS: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-function-sql.md
-          - CREATE FUNCTION...LANGUAGE PYTHON AS: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-function-python.md
-          - CREATE OR REPLACE VIEW: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-replace-view.md
-          - CREATE SOURCE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-source.md
-          - CREATE DYNAMIC TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-dynamic-table.md
-          - CREATE SNAPSHOT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/create-snapshot.md
-          - ALTER TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-table.md
-          - ALTER TABLE ... ALTER REINDEX: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-reindex.md
-          - ALTER PITR: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-pitr.md
-          - ALTER PUBLICATION: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-publication.md
-          - ALTER SEQUENCE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-sequence.md
-          - ALTER STAGE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-stage.md
-          - ALTER VIEW: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/alter-view.md
-          - DROP DATABASE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-database.md
-          - DROP INDEX: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-index.md
-          - DROP TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-table.md
-          - DROP PITR: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-pitr.md
-          - DROP PUBLICATION: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-publication.md
-          - DROP SEQUENCE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-sequence.md
-          - DROP STAGE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-stage.md
-          - DROP SNAPSHOT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-snapshot.md
-          - DROP VIEW: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-view.md
-          - DROP FUNCTION: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/drop-function.md
-          - TRUNCATE TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/truncate-table.md
-          - RENAME TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/rename-table.md
-          - RESTORE PITR: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/restore-pitr.md
-          - RESTORE SNAPSHOT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/restore-snapshot.md
-          - PARTITION分区表支持说明: MatrixOne-Cloud/Reference/SQL-Reference/Data-Definition-Language/mo-partition-support.md
-        - 数据修改语言（DML）:
-          - INSERT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/insert.md
-          - INSERT INTO SELECT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/insert-into-select.md
-          - DELETE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/delete.md
-          - UPDATE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/update.md
-          - LOAD DATA INFILE : MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/load-data-infile.md
-          - LOAD DATA INLINE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/load-data-inline.md
-          - UPSERT: 
-            - UPSERT 概述: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/upsert/upsert.md
-            - INSERT ON DUPLICATE KEY UPDATE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/upsert/insert-on-duplicate.md
-            - INSERT IGNORE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/upsert/insert-ignore.md
-            - REPLACE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/upsert/replace.md
-          - Information Functions:
-            - LAST_QUERY_ID(): MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/information-functions/last-query-id.md
-            - LAST_INSERT_ID(): MatrixOne-Cloud/Reference/SQL-Reference/Data-Manipulation-Language/information-functions/last-insert-id.md
-        - 数据查询语言（DQL）:
-          - SELECT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/select.md
-          - SUBQUERY:
-            - SUBQUERY 概述: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/subquery.md
-            - Derived Tables: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/derived-tables.md
-            - 子查询与比较操作符的使用: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/comparisons-using-subqueries.md
-            - SUBQUERY with ANY or SOME: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/subquery-with-any-some.md
-            - SUBQUERY with ALL: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/subquery-with-all.md
-            - SUBQUERY with EXISTS: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/subquery-with-exists.md
-            - SUBQUERY with IN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/subqueries/subquery-with-in.md
-          - JOIN:
-            - JOIN 概述: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/join.md
-            - INNER JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/inner-join.md
-            - LEFT JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/left-join.md
-            - RIGHT JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/right-join.md
-            - FULL JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/full-join.md
-            - OUTER JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/outer-join.md
-            - NATURAL JOIN: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/join/natural-join.md
-          - With CTE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/with-cte.md
-          - 联合查询:
-            - 联合查询概述: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/union-intersect-minus-overview.md
-            - UNION: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/union.md
-            - INTERSECT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/intersect.md
-            - MINUS: MatrixOne-Cloud/Reference/SQL-Reference/Data-Query-Language/minus.md
-        - 数据控制语言（DCL）:
-          - CREATE ACCOUNT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/create-account.md
-          - CREATE ROLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/create-role.md
-          - CREATE USER: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/create-user.md
-          - ALTER ACCOUNT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/alter-account.md
-          - ALTER USER: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/alter-user.md
-          - DROP ACCOUNT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/drop-account.md
-          - DROP USER: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/drop-user.md
-          - DROP ROLE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/drop-role.md
-          - GRANT: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/grant.md
-          - REVOKE: MatrixOne-Cloud/Reference/SQL-Reference/Data-Control-Language/revoke.md
-        - 其他:
-          - SHOW:
-            - SHOW ACCOUNTS: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-account.md
-            - SHOW DATABASES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-databases.md
-            - SHOW CREATE TABLE: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-create-table.md
-            - SHOW CREATE VIEW: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-create-view.md
-            - SHOW CREATE PUBLICATION: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-create-publication.md
-            - SHOW TABLES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-tables.md
-            - SHOW INDEX: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-index.md
-            - SHOW COLLATION: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-collation.md
-            - SHOW COLUMNS: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-columns.md
-            - SHOW FUNCTION STATUS: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-function-status.md
-            - SHOW GRANT: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-grants.md
-            - SHOW PROCESSLIST: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-processlist.md
-            - SHOW PUBLICATIONS: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-publications.md
-            - SHOW PITR: MatrixOne/Reference/SQL-Reference/Other/SHOW-Statements/show-pitr.md
-            - SHOW ROLES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-roles.md
-            - SHOW SEQUENCES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-sequences.md
-            - SHOW SNAPSHOTS: MatrixOne/Reference/SQL-Reference/Other/SHOW-Statements/show-snapshots.md
-            - SHOW STAGES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-stage.md
-            - SHOW SUBSCRIPTIONS: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-subscriptions.md
-            - SHOW VARIABLES: MatrixOne-Cloud/Reference/SQL-Reference/Other/SHOW-Statements/show-variables.md
-          - SET:
-            - SET ROLE: MatrixOne-Cloud/Reference/SQL-Reference/Other/Set/set-role.md
-          - USE:
-            - USE DATABASE: MatrixOne-Cloud/Reference/SQL-Reference/Other/use-database.md
-          - KILL: MatrixOne-Cloud/Reference/SQL-Reference/Other/kill.md
-          - Prepared:
-            - PREPARE: MatrixOne-Cloud/Reference/SQL-Reference/Other/Prepared-Statements/prepare.md
-            - EXECUTE: MatrixOne-Cloud/Reference/SQL-Reference/Other/Prepared-Statements/execute.md
-            - DEALLOCATE: MatrixOne-Cloud/Reference/SQL-Reference/Other/Prepared-Statements/deallocate.md
-          - Explain:
-            - Explain: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain.md
-            - Explain 输出格式: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain-workflow.md
-            - Explain Analyze: MatrixOne-Cloud/Reference/SQL-Reference/Other/Explain/explain-analyze.md
-      - 函数与操作符:
-        - 运算符:
-          - INTERVAL: MatrixOne-Cloud/Reference/Operators/interval.md
-          - Operators:
-            - 运算符概述: MatrixOne-Cloud/Reference/Operators/operators/operators.md
-            - 运算符的优先级: MatrixOne-Cloud/Reference/Operators/operators/operator-precedence.md
-            - 算数运算符:
-              - 算数运算符概述: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/arithmetic-operators-overview.md
-              - '%,MOD': MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/mod.md
-              - '*': MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/multiplication.md
-              - +: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/addition.md
-              - -: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/minus.md
-              - -: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/unary-minus.md
-              - /: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/division.md
-              - DIV: MatrixOne-Cloud/Reference/Operators/operators/arithmetic-operators/div.md
-            - 赋值运算符:
-              - 赋值运算符概述: MatrixOne-Cloud/Reference/Operators/operators/assignment-operators/assignment-operators-overview.md
-              - =: MatrixOne-Cloud/Reference/Operators/operators/assignment-operators/equal.md
-            - 二进制运算符:
-              - 二进制运算符概述: MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/bit-functions-and-operators-overview.md
-              - '&': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/bitwise-and.md
-              - '>>': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/right-shift.md
-              - '<<': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/left-shift.md
-              - '^': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/bitwise-xor.md
-              - '|': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/bitwise-or.md
-              - '~': MatrixOne-Cloud/Reference/Operators/operators/bit-functions-and-operators/bitwise-inversion.md
-            - 强制转换函数和运算符:
-              - 强制转换函数和运算符概述: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/cast-functions-and-operators-overview.md
-              - BINARY: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/binary.md
-              - CAST: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/cast.md
-              - CONVERT: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/convert.md
-              - DECODE: MatrixOne/Reference/Operators/operators/cast-functions-and-operators/decode.md
-              - ENCODE: MatrixOne/Reference/Operators/operators/cast-functions-and-operators/encode.md
-              - SERIAL: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/serial.md
-              - SERIAL_FULL: MatrixOne-Cloud/Reference/Operators/operators/cast-functions-and-operators/serial_full.md
-            - 比较函数和运算符:
-              - 比较函数和运算符概述: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/comparison-functions-and-operators-overview.md
-              - '>': MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/greater-than.md
-              - '>=': MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/greater-than-or-equal.md
-              - <: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/less-than.md
-              - <>,!=: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/not-equal.md
-              - <=: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/less-than-or-equal.md
-              - =: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/assign-equal.md
-              - BETWEEN ... AND ...: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/between.md
-              - IN: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/in.md
-              - IS: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/is.md
-              - IS NOT: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/is-not.md
-              - IS NOT NULL: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/is-not-null.md
-              - IS NULL: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/is-null.md
-              - ISNULL: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/function_isnull.md
-              - ILIKE: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/ilike.md
-              - LIKE: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/like.md
-              - NOT BETWEEN ... AND ...: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/not-between.md
-              - NOT IN: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/not-in.md
-              - NOT LIKE: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/not-like.md
-              - COALESCE: MatrixOne-Cloud/Reference/Operators/operators/comparison-functions-and-operators/coalesce.md
-            - 控制流函数:
-              - 控制流函数概述: MatrixOne-Cloud/Reference/Operators/operators/flow-control-functions/flow-control-functions-overview.md
-              - CASE WHEN: MatrixOne-Cloud/Reference/Operators/operators/flow-control-functions/case-when.md
-              - IF: MatrixOne-Cloud/Reference/Operators/operators/flow-control-functions/function_if.md
-              - IFNULL: MatrixOne-Cloud/Reference/Operators/operators/flow-control-functions/function_ifnull.md
-              - NULLIF: MatrixOne-Cloud/Reference/Operators/operators/flow-control-functions/function_nullif.md
-            - 逻辑运算符:
-              - 逻辑运算符概述: MatrixOne-Cloud/Reference/Operators/operators/logical-operators/logical-operators-overview.md
-              - AND,&&: MatrixOne-Cloud/Reference/Operators/operators/logical-operators/and.md
-              - NOT,!: MatrixOne-Cloud/Reference/Operators/operators/logical-operators/not.md
-              - OR: MatrixOne-Cloud/Reference/Operators/operators/logical-operators/or.md
-              - XOR: MatrixOne-Cloud/Reference/Operators/operators/logical-operators/xor.md
-        - 函数:
-          - 函数总表: MatrixOne-Cloud/Reference/Functions-and-Operators/matrixone-function-list.md
-          - 聚合函数:
-            - ANY_VALUE: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/any-value.md
-            - AVG: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/avg.md
-            - BITMAP: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/bitmap.md
-            - BIT_AND: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/bit_and.md
-            - BIT_OR: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/bit_or.md
-            - BIT_XOR: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/bit_xor.md
-            - COUNT: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/count.md
-            - GROUP_CONCAT: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/group-concat.md
-            - MAX: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/max.md
-            - MEDIAN: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/median.md
-            - MIN: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/min.md
-            - STDDEV_POP: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/stddev_pop.md
-            - SUM: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/sum.md
-            - VARIANCE: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/variance.md
-            - VAR_POP: MatrixOne-Cloud/Reference/Functions-and-Operators/Aggregate-Functions/var_pop.md
-          - 日期时间类:
-            - CONVERT_TZ(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/convert-tz.md
-            - CURDATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/curdate.md
-            - CURRENT_TIMESTAMP(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/current-timestamp.md
-            - DATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/date.md
-            - DATE_ADD(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/date-add.md
-            - DATE_FORMAT(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/date-format.md
-            - DATE_SUB(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/date-sub.md
-            - DATEDIFF(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/datediff.md
-            - DAY(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/day.md
-            - DAYOFYEAR(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/dayofyear.md
-            - EXTRACT(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/extract.md
-            - HOUR(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/hour.md
-            - FROM_UNIXTIME: MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/from-unixtime.md
-            - MINUTE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/minute.md
-            - MONTH(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/month.md
-            - NOW(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/now.md
-            - SECOND(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/second.md
-            - STR_TO_DATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/str-to-date.md
-            - SYSDATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/sysdate.md
-            - TIME(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/time.md
-            - TIMEDIFF(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/timediff.md
-            - TIMESTAMP(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/timestamp.md
-            - TIMESTAMPDIFF(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/timestampdiff.md
-            - TO_DATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-date.md
-            - TO_DAYS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-days.md
-            - TO_SECONDS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/to-seconds.md
-            - UNIX_TIMESTAMP: MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/unix-timestamp.md
-            - UTC_TIMESTAMP(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/utc-timestamp.md
-            - WEEK(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/week.md
-            - WEEKDAY(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/weekday.md
-            - YEAR(): MatrixOne-Cloud/Reference/Functions-and-Operators/Datetime/year.md
-          - 数学类:
-            - ABS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/abs.md
-            - ACOS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/acos.md
-            - ATAN(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/atan.md
-            - CEIL(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/ceil.md
-            - CEILING(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/ceiling.md
-            - COS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/cos.md
-            - COT(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/cot.md
-            - EXP(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/exp.md
-            - FLOOR(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/floor.md
-            - LN(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/ln.md
-            - LOG(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/log.md
-            - LOG2(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/log2.md
-            - LOG10(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/log10.md
-            - PI(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/pi.md
-            - POWER(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/power.md
-            - ROUND(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/round.md
-            - RAND(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/rand.md
-            - SIN(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/sin.md
-            - SINH(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/sinh.md
-            - TAN(): MatrixOne-Cloud/Reference/Functions-and-Operators/Mathematical/tan.md
-          - 字符串类:
-            - BIN(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/bin.md
-            - BIT_LENGTH(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/bit-length.md
-            - CHAR_LENGTH(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/char-length.md
-            - CONCAT(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/concat.md
-            - CONCAT_WS(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/concat-ws.md
-            - EMPTY(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/empty.md
-            - ENDSWITH(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/endswith.md
-            - FIELD(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/field.md
-            - FIND_IN_SET(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/find-in-set.md
-            - FORMAT(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/format.md
-            - FROM_BASE64(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/from_base64.md
-            - HEX(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/hex.md
-            - INSTR(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/instr.md
-            - LCASE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/lcase.md
-            - LEFT(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/left.md
-            - LENGTH(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/length.md
-            - LOCATE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/locate.md
-            - LOWER(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/lower.md
-            - LPAD(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/lpad.md
-            - LTRIM(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/ltrim.md
-            - MD5(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/md5.md
-            - OCT(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/oct.md
-            - REPEAT(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/repeat.md
-            - REVERSE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/reverse.md
-            - RPAD(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/rpad.md
-            - RTRIM(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/rtrim.md
-            - SHA1()/SHA(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/sha1.md
-            - SHA2(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/sha2.md
-            - SPACE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/space.md
-            - SPLIT_PART(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/split_part.md
-            - STARTSWITH(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/startswith.md
-            - SUBSTRING(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/substring.md
-            - SUBSTRING_INDEX(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/substring-index.md
-            - TO_BASE64(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/to_base64.md
-            - TRIM(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/trim.md
-            - LPAD(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/lpad.md
-            - UCASE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/ucase.md
-            - UNHEX(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/unhex.md
-            - UPPER(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/upper.md
-            - 正则表达式:
-              - 正则表达式概述: MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/Regular-Expression-Functions-Overview.md
-              - NOT REGEXP: MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/not-regexp.md
-              - REGEXP_INSTR(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/regexp-instr.md
-              - REGEXP_LIKE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/regexp-like.md
-              - REGEXP_REPLACE(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/regexp-replace.md
-              - REGEXP_SUBSTR(): MatrixOne-Cloud/Reference/Functions-and-Operators/String/Regular-Expressions/regexp-substr.md
-            - 向量类:
-              - 基本操作符: MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/arithmetic.md
-              - 数学计算: MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/misc.md
-              - CLUSTER_CENTERS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/cluster_centers.md
-              - COSINE_SIMILARITY(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/cosine_similarity.md
-              - COSINE_DISTANCE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/cosine_distance.md
-              - INNER_PRODUCT(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/inner_product.md
-              - L1_NORM(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/l1_norm.md
-              - L2_NORM(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/l2_norm.md
-              - L2_DISTANCE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/l2_distance.md
-              - NORMALIZE_L2(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/normalize_l2.md
-              - SUBVECTOR(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/subvector.md
-              - VECTOR_DIMS(): MatrixOne-Cloud/Reference/Functions-and-Operators/Vector/vector_dims.md
-          - 表函数:
-            - GENERATE_SERIES(): MatrixOne-Cloud/Reference/Functions-and-Operators/Table/generate_series.md
-            - UNNEST(): MatrixOne-Cloud/Reference/Functions-and-Operators/Table/unnest.md
-          - 窗口函数:
-            - DENSE_RANK(): MatrixOne-Cloud/Reference/Functions-and-Operators/Window-Functions/dense_rank.md
-            - RANK(): MatrixOne-Cloud/Reference/Functions-and-Operators/Window-Functions/rank.md
-            - ROW_NUMBER(): MatrixOne-Cloud/Reference/Functions-and-Operators/Window-Functions/row_number.md
-          - JSON 函数: 
-            - JQ(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/jq.md
-            - JSON_EXTRACT(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_extract.md
-            - JSON_EXTRACT_FLOAT64(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_extract_float64.md
-            - JSON_EXTRACT_STRING(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_extract_string.md
-            - JSON_QUOTE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_quote.md
-            - JSON_ROW(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_row.md
-            - JSON_UNQUOTE(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/json_unquote.md
-            - TRY_JQ(): MatrixOne-Cloud/Reference/Functions-and-Operators/Json/try_jq.md
-          - 其他函数:
-            - LOAD_FILE: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/load_file.md
-            - SAVE_FILE: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/save_file.md
-            - SAMPLE: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/sample.md
-            - SERIAL_EXTRACT: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/serial_extract.md
-            - SLEEP: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/sleep.md
-            - STAGE_LIST: MatrixOne-Cloud/Reference/Functions-and-Operators/Other/stage_list.md
-            - UUID(): MatrixOne-Cloud/Reference/Functions-and-Operators/Other/uuid.md
-          - 系统运维函数:
-            - CURRENT_ROLE_NAME(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/current_role_name.md
-            - CURRENT_ROLE(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/current_role.md
-            - CURRENT_USER_NAME(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/current_user_name.md
-            - CURRENT_USER(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/current_user.md
-            - VERSION(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/version.md
-            - PURGE_LOG(): MatrixOne-Cloud/Reference/Functions-and-Operators/system-ops/purge_log.md
-      - 系统表目录: MatrixOne-Cloud/Reference/System-tables.md
-      - 权限分类列表: MatrixOne-Cloud/Reference/access-control-type.md
-      - 使用限制:
-        - MatrixOne 的 JDBC 功能支持列表: MatrixOne-Cloud/Reference/Limitations/mo-jdbc-feature-list.md
-        - MatrixOne DDL 语句分区支持的说明: MatrixOne-Cloud/Reference/Limitations/mo-partition-support.md
-        - MatrixOne 的 Load Data 支持的说明: MatrixOne-Cloud/Reference/Limitations/load-data-support.md
     - 常见问题:
         - SQL 常见问题: MatrixOne-Cloud/FAQs/sql-faqs.md
         - MatrixOne Intelligence 常见问题: MatrixOne-Cloud/FAQs/FAQ-Product.md
     - 版本发布纪要:
+        - '2025': MatrixOne-Cloud/Release-Notes/2025.md
         - '2024': MatrixOne-Cloud/Release-Notes/2024.md
         - '2023': MatrixOne-Cloud/Release-Notes/2023.md
     - 相关协议: 

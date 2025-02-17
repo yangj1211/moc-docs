@@ -1,6 +1,6 @@
 # 快速创建 MatrixOne Intelligence 实例
 
-在本篇文档中，我们将指导您快速创建和使用 MatrixOne Intelligence 实例。
+在本篇文档中，我们将指导您快速创建和使用数据库实例。
 
 ## 第一步：创建 MatrixOne Intelligence 账户
 
@@ -17,13 +17,13 @@
 
 ### 3. 登录 MatrixOne Intelligence 账户
 
-激活成功后，会跳转到登录界面，输入账户密码即可登录至 MatrixOne Intelligence 实例管理平台。
+激活成功后，会跳转到登录界面，输入账户密码即可登录至 MatrixOne Intelligence 管理平台。
 
 ## 第二步：创建一个 Serverless 实例
 
 ### 1. 打开实例创建页面
 
-在**实例**页面，点击 **+创建实例**按钮。
+在**数据库实例**页面，点击 **+创建实例**按钮。
 
 ### 2. 配置实例信息
 
