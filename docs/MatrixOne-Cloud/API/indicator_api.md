@@ -28,11 +28,11 @@ POST /metric/observice
   
 |  参数             | 是否必填 |含义|
 |  --------------- | ------- |----  |
-| acconut          | 是      | 工作区 id｜
+| acconut          | 是      | 工作区 id |
 | metrics          | 是      | 指标名，可以填写多个 |
 | start             | 是      | 统计开始时间 |
 | end               | 是      | 统计结束时间 |
-| interval          | 是      | 时间间隔 |
+| interval          | 是      | 时间间隔，秒 |
 
 **示例：**
 
