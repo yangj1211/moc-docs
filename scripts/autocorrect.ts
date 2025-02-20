@@ -27,7 +27,7 @@ autocorrect.loadConfig(JSON.stringify(config))
 // parse args
 const argv = parseArgs(process.argv.slice(2))
 const { _: paths, fix = false } = argv
-const DEFAULT_PATHS = ['./docs/MatrixOne-Cloud/**/*.md']
+const DEFAULT_PATHS = ['./docs/MatrixOne-Intelligence/**/*.md']
 
 // get paths
 const matchedPaths = await glob(paths.length ? paths : DEFAULT_PATHS)
