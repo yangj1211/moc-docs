@@ -41,6 +41,7 @@ nav:
     - 快速开始:
       - 快速创建 GenAI 工作区: MatrixOne-Intelligence/Get-Started/workspace.md
       - 快速创建数据库实例: MatrixOne-Intelligence/Get-Started/quickstart.md
+      - 快速上手 AI 搜索: MatrixOne-Intelligence/Get-Started/ai_search.md
       - 快速上手向量能力: MatrixOne-Intelligence/Get-Started/vector.md
     - GenAI 工作区: 
       - 创建工作区: MatrixOne-Intelligence/Workspace-Mgmt/workspace.md
@@ -550,7 +551,7 @@ nav:
           - MatrixOne DDL 语句分区支持的说明: MatrixOne-Intelligence/Reference/Limitations/mo-partition-support.md
           - MatrixOne 的 Load Data 支持的说明: MatrixOne-Intelligence/Reference/Limitations/load-data-support.md
     - AI 应用市场: 
-      - 通用搜索: MatrixOne-Intelligence/AI-Application/universal_search.md  
+      - AI 搜索: MatrixOne-Intelligence/AI-Application/universal_search.md  
     - 监控:
       - 监控指标: MatrixOne-Intelligence/Monitor/Monitoring.md
       - 监控数据: MatrixOne-Intelligence/Monitor/Data-Monitoring.md
