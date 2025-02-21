@@ -6,7 +6,7 @@
 
 1. 登录您的 MO Intelligence 账号，进入实例管理平台。
 
-    如果您还没有 MO Intelligence 账号，您可以点击[注册登录](https://www.matrixorigin.cn/moc-trial)开始注册，或者参照[快速体验 MatrixOne Intelligence](../../Get-Started/quickstart.md) 的注册指南。
+    如果您还没有 MO Intelligence 账号，您可以点击[注册登录](https://www.matrixorigin.cn/moi-signup)开始注册，或者参照[快速体验 MatrixOne Intelligence](../../Get-Started/quickstart.md) 的注册指南。
 
 2. 在菜单栏中点击**实例**进入实例列表页面，然后点击 **+创建实例**。
 
