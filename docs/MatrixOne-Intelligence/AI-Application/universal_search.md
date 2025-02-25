@@ -60,20 +60,20 @@
 
 #### 图文搜索
 
-在图文搜索功能中，用户可以输入详细的文本描述或者上传图片，系统将利用智能化算法，从海量数据中精准提取并返回最匹配的答案，帮助用户快速找到所需信息。
+用户可以通过输入详细的文本描述或上传图片，在图文搜索功能中获得精准的匹配结果。系统利用智能算法，从海量数据中快速提取并返回最相关的信息，帮助用户高效找到所需内容。点击引用图标，用户可以查看并下载相关的原文资料。
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_5.png
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_13.png
  width=60% heigth=60%/>
 </div>
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_9.png
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_15.png
  width=60% heigth=60%/>
 </div>
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_10.png
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_14.png
  width=60% heigth=60%/>
 </div>
 
