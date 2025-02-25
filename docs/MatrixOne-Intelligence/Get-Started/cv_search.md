@@ -33,14 +33,14 @@
 依次点击**数据源->上传文件**，点击需要的简历文件进行上传。
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_3.png
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_16.png
  width=100% heigth=100%/>
 </div>
 
 文件上传完成后，将需要一定时间进行解析，请您耐心等待。解析完成后，文件才可用于搜索功能。您可以前往**已上传文件**页面查看文件解析进度。对于解析失败的文件，您可以点击**重试**按钮重新进行解析。
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_4.png
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_17.png
  width=100% heigth=100%/>
 </div>
 
@@ -49,6 +49,6 @@
 在搜索界面，用户可以通过输入详细的文本描述，快速查找符合要求的候选人。
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_5.png
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_18.png
  width=80% heigth=80%/>
 </div>

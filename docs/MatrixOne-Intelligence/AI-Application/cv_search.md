@@ -8,7 +8,7 @@
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_2.png
- width=70% heigth=70%/>
+ width=100% heigth=100%/>
 </div>
 
 ### 数据源
@@ -16,7 +16,8 @@
 点击右侧的**上传文件**按钮，选择并上传简历文件。每个文件的大小限制为 20 MB。
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/search/datasource-2.png width=80% heigth=80%/>
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_16.png
+ width=100% heigth=100%/>
 </div>
 
 文件上传完成后，将需要一定时间进行解析，请您耐心等待。解析完成后，文件才可用于搜索功能。您可以前往**已上传文件**页面查看文件解析进度。对于解析失败的文件，您可以重新进行解析；对于不需要的文件，亦可进行删除操作。
@@ -26,6 +27,6 @@
 在搜索界面，您可以根据特定标准检索候选人资料，以精准筛选符合目标要求的候选人。
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/search/search-4.png
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_18.png
  width=80% heigth=80%/>
 </div>
