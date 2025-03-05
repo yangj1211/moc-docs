@@ -46,7 +46,7 @@ AI 搜索结合先进的大型语言模型与混合检索算法，能够精准�
 
 ## 第四步搜索
 
-在搜素界面，用户可通过输入详细的文本描述快速查找所需内容。
+在搜索界面，用户可通过输入详细的文本描述快速查找所需内容。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_5.png
