@@ -19,16 +19,16 @@ AI 搜索结合先进的大型语言模型与混合检索算法，能够精准�
 
 激活成功后，会跳转到登录界面，输入账户密码即可登录至 MatrixOne Intelligence 管理平台。
 
-## 第二步：进入简历智搜
+## 第二步：进入 AI 搜索
 
-首先，登录到 MatrixOne Intelligence 管理平台，点击左侧菜单栏的 **AI 应用市场**，然后在**简历智搜**卡片处点击**使用**按钮即可进入 AI 搜索平台，开始使用。
+首先，登录到 MatrixOne Intelligence 管理平台，点击左侧菜单栏的 **AI 应用市场**，然后在 **AI 搜索**卡片处点击**使用**按钮即可进入 AI 搜索平台，开始使用。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_1.png
  width=100% heigth=100%/>
 </div>
 
-## 第三步上传文件至数据源
+## 第三步：上传文件至数据源
 
 本地文件支持的文件格式包括：md、txt、pdf、jpg、png、jpeg、docx 和 pptx，每个文件的大小上限为 20 MB。依次点击**数据源->上传文件**，点击需要的文件进行上传。
 
@@ -44,11 +44,11 @@ AI 搜索结合先进的大型语言模型与混合检索算法，能够精准�
  width=100% heigth=100%/>
 </div>
 
-## 第四步搜索
+## 第四步：搜索
 
 在搜索界面，用户可通过输入详细的文本描述快速查找所需内容。
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_5.png
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_19.png
  width=80% heigth=80%/>
 </div>
