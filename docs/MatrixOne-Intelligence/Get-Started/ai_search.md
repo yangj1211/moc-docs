@@ -24,7 +24,7 @@ AI 搜索结合先进的大型语言模型与混合检索算法，能够精准�
 首先，登录到 MatrixOne Intelligence 管理平台，点击左侧菜单栏的 **AI 应用市场**，然后在 **AI 搜索**卡片处点击**使用**按钮即可进入 AI 搜索平台，开始使用。
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_1.png
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/app/app_20.png
  width=100% heigth=100%/>
 </div>
 
