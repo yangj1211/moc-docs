@@ -1,10 +1,4 @@
-
-GenAI 工作区是 MO Intelligence 提供的一个专门用于多模态数据的入口，支持数据的接入、处理、探索，帮助用户高效管理和分析多模态数据。通过 GenAI 工作区，用户可以轻松完成数据清洗、转换，从而更好地利用数据，提升业务价值。
-
-<div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/workspace/workspace-1.png
- width=100% heigth=100%/>
-</div>
+本章节将向您详细说明如何创建和管理工作区。
 
 ## 创建工作区
 
