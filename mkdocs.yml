@@ -45,7 +45,8 @@ nav:
       - 快速上手简历智搜: MatrixOne-Intelligence/Get-Started/cv_search.md
       - 快速上手向量能力: MatrixOne-Intelligence/Get-Started/vector.md
     - GenAI 工作区: 
-      - 创建工作区: MatrixOne-Intelligence/Workspace-Mgmt/workspace.md
+      - 概述: MatrixOne-Intelligence/Workspace-Mgmt/overview.md
+      - 工作区管理: MatrixOne-Intelligence/Workspace-Mgmt/workspace.md
       - 数据接入:
         - 连接器: MatrixOne-Intelligence/Data-Connect/connector.md
         - 数据载入: MatrixOne-Intelligence/Data-Connect/loading.md
