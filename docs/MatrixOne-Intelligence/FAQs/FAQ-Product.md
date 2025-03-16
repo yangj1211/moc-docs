@@ -2,7 +2,7 @@
 
 ## Q：**MatrixOne Intelligence 是什么？**
 
-A：MatrixOne Intelligence 是一个全托管的云原生数据平台，旨在为 HSTAP 数据库 MatrixOne 提供云上服务。这一云上服务显著降低了 MatrixOne 部署和运维的成本。如果您更喜欢纯私有化部署，也可以参考 [MatrixOne 产品介绍](https://docs.matrixorigin.cn/2.0.1/MatrixOne/FAQs/product-faqs/)以获取更多信息。
+A：MatrixOne Intelligence 是一个全托管的云原生数据平台，旨在为 HSTAP 数据库 MatrixOne 提供云上服务。这一云上服务显著降低了 MatrixOne 部署和运维的成本。如果您更喜欢纯私有化部署，也可以参考 [MatrixOne 产品介绍](https://docs.matrixorigin.cn/2.0.3/MatrixOne/FAQs/product-faqs/)以获取更多信息。
 
 ## Q：**MatrixOne Intelligence 有免费版本吗？**
 
@@ -10,7 +10,7 @@ A：是的，MatrixOne Intelligence 目前为每位用户提供最多 5 个免�
 
 ## Q：**MatrixOne Intelligence 是否兼容 MySQL？**
 
-A：是的，MatrixOne Intelligence 几乎完全兼容 MySQL，因此您可以轻松将 MySQL 数据迁移到 MatrixOne Intelligence 以进行试用或开发。有关更多具体信息，请参考 [MySQL 兼容性](https://docs.matrixorigin.cn/2.0.1/MatrixOne/FAQs/mysql-compatibility/)。
+A：是的，MatrixOne Intelligence 几乎完全兼容 MySQL，因此您可以轻松将 MySQL 数据迁移到 MatrixOne Intelligence 以进行试用或开发。有关更多具体信息，请参考 [MySQL 兼容性](https://docs.matrixorigin.cn/2.0.3/MatrixOne/FAQs/mysql-compatibility/)。
 
 ## Q：**MatrixOne Intelligence 上的实例指的是什么？**
 
@@ -18,7 +18,7 @@ A：在 MatrixOne Intelligence 中，您可以创建多个 MatrixOne(MO) 实例�
 
 ## Q：**有哪些方式可以连接到 MatrixOne Intelligence 上的实例？**
 
-A：MatrixOne(MO) 实例虽然部署在云上，但支持公网和公有云之间的私网两种访问方式。初期的调研和试用阶段，您可以使用公网直接连接 MO 实例。但在测试或进入生产环境时，建议使用私网访问 MO 实例。从工具访问角度来看，MO 支持多种工具和编程语言，包括 MySQL、JDBC、Python、Go 等。此外，MatrixOne Intelligence 还提供了一个直观的数据库管理平台，用于查看数据库的运行状态并执行 SQL 语句。获取更多详情，请参考[连接 MatrixOne 实例](https://docs.matrixorigin.cn/2.0.1/MatrixOne/FAQs/connect-to-mo/)。
+A：MatrixOne(MO) 实例虽然部署在云上，但支持公网和公有云之间的私网两种访问方式。初期的调研和试用阶段，您可以使用公网直接连接 MO 实例。但在测试或进入生产环境时，建议使用私网访问 MO 实例。从工具访问角度来看，MO 支持多种工具和编程语言，包括 MySQL、JDBC、Python、Go 等。此外，MatrixOne Intelligence 还提供了一个直观的数据库管理平台，用于查看数据库的运行状态并执行 SQL 语句。获取更多详情，请参考[连接 MatrixOne 实例](https://docs.matrixorigin.cn/2.0.3/MatrixOne/FAQs/connect-to-mo/)。
 
 ## Q：**什么是 Serverless 实例？它有哪些特点？**
 

@@ -72,7 +72,7 @@ MatrixOne Intelligence 在线数据导入支持两种导入方式：导入样例
 - 你可以在 SQL 执行过程中，手动停止或关闭 Query Tab, Query 都将终止。
   
 !!! note
-    在线 SQL 编辑器目前不支持以下语句：[`explain`](../Reference/SQL-Reference/Other/Explain/explain.md)，[`Load data local`]( ../Migrate-Data/Load-Local-Data.md), [`source`](../App-Develop/import-data/bulk-load/using-source.md)，[`SELECT INTO...OUTFILE`](https://docs.matrixorigin.cn/v24.2.0.1/MatrixOne/Develop/export-data/select-into-outfile/), [事务]( ../App-Develop/Transactions/matrixone-transaction-overview/how-to-use.md)以及[临时表](../App-Develop/schema-design/create-temporary-table.md)相关语句
+    在线 SQL 编辑器目前不支持以下语句：[`explain`](../Reference/SQL-Reference/Other/Explain/explain.md)，[`Load data local`]( ../Migrate-Data/Load-Local-Data.md), [`source`](../App-Develop/import-data/bulk-load/using-source.md)，[`SELECT INTO...OUTFILE`](https://docs.matrixorigin.cn/v25.2.0.3/MatrixOne/Develop/export-data/select-into-outfile/), [事务]( ../App-Develop/Transactions/matrixone-transaction-overview/how-to-use.md)以及[临时表](../App-Develop/schema-design/create-temporary-table.md)相关语句
 
 ### 查询结果
 

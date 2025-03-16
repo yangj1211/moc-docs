@@ -36,7 +36,7 @@ MatrixOne Intelligence 采用默认的加密传输，支持 TLS 协议的加密�
     Current pager:  less
     Using outfile:  ''
     Using delimiter: ;
-    Server version:  8.0.30-MatrixOne-v2.0.1 MatrixOne
+    Server version:  8.0.30-MatrixOne-v2.0.3 MatrixOne
     Protocol version: 10
     Connection:  freetier-01.cn-hangzhou.cluster.matrixonecloud.cn via TCP/IP
     Server characterset: utf8mb4
