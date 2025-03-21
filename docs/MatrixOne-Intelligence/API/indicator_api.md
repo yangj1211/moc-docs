@@ -10,10 +10,13 @@ POST /metric/observice
 | ------------ | ---------------------------- |------------------- |
 | 文件完成数量   | PipelineLoadFileCount        |一段时间内成功载入的文件数 |
 | 文件载入大小   | PipelineLoadFileSize         |一段时间内成功载入的文件总大小|
+| 任务完成数    | PipelineLoadTaskCount         |一段时间内成功完成的任务数|
 | 文件载入延迟   | PipelineLoadFileLatency      |一段时间内每个文件从开始载入到载入成功的平均时间 |
 | 文件载入吞吐量 | PipelineLoadFileThroughput   |单位时间内成功载入的数据量（字节/s） |
 | 每秒载入文件数 | PipelineLoadFilePerSecond    |单位时间内成功处理的文件数（文件数/s）|
+| 任务平均延迟 | PipelineLoadTaskLatency        |一段时间内每个任务平均完成时间|
 | 文件成功率    | PipelineLoadFileSuccessRate   |一段时间内文件载入的成功率|
+| 任务超时率    | PipelineLoadTaskTimeoutRate   |一段时间内载入任务的超时率|
 
 **数据处理：**
 
