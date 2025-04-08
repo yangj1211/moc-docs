@@ -5,7 +5,7 @@
 ### 创建原始数据卷
 
 ```
-POST /DescribeOriginVolumes
+POST /CreateOriginVolume
 ```
 
 **输入参数：**
@@ -288,7 +288,7 @@ else:
 ### 创建处理数据卷
 
 ```
-POST /explore/volumes
+POST /byoa/api/v1/explore/volumes
 ```
 
 **输入参数：**
