@@ -12,7 +12,7 @@
 
 ### 创建测试数据
 
-本章节使用的是 TPC-H 标准测试数据，具体测试数据生成及注入请参考[完成 TPCH 测试](https://docs.matrixorigin.cn/v24.2.0.0/MatrixOne/Test/performance-testing/TPCH-test-with-matrixone/)
+本章节使用的是 TPC-H 标准测试数据，具体测试数据生成及注入请参考[完成 TPCH 测试](https://docs.matrixorigin.cn/v25.2.1.0/MatrixOne/Test/performance-testing/TPCH-test-with-matrixone/)
 
 1. 创建名为 `tpch` 的 MySQL 数据库，并在其中按照 TPCH benchmark 要求生成 lineitem, partsupp, part, supplier, nation, region, orders, customers 这八张表。
 
