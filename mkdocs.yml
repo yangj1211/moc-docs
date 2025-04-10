@@ -55,6 +55,8 @@ nav:
         - 作业: MatrixOne-Intelligence/Data-Processing/operation.md
       - 探索数据:
         - Catalog: MatrixOne-Intelligence/Data-Explore/catalog.md
+      - 用户权限:
+        - 用户管理: MatrixOne-Intelligence/Workspace-Mgmt/user-privilge/user_mgmt.md
       - API 说明: 
         - 鉴权: MatrixOne-Intelligence/API/token_api.md
         - 数据接入: MatrixOne-Intelligence/API/data_connect_api.md
