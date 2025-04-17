@@ -96,7 +96,7 @@ headers = {
     "Accept": "application/json, text/plain, */*",
     "Content-Type": "application/json",
     "Access-Token": "xxxx",
-    "Refresh-Toke": "xxxx",
+    "Refresh-Token": "xxxx",
     "uid": "fa6467a6-bfcb-4df0-ac36-0e8dc56a124a-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
 }
 
