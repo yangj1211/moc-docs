@@ -92,7 +92,7 @@
 - 查看工作流列表，等待状态变成**完成**
 
 <div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-connect/oss_3.png
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-processing/workflow_1.png
  width=60% heigth=60%/>
 </div>
 
@@ -104,6 +104,18 @@
   
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/catalog/vol_4.png
+ width=100% heigth=100%/>
+</div>
+
+### 5. 下载解析数据
+
+点击右侧下载按钮，即可获得一个包含文字解析信息和图片资源的文件夹，文件夹内包括：
+
+- JSON 文件：记录完整的文字解析内容，包括文件基础信息、分段类型、分段所在页码以及对应图片的原始元数据。
+- 图片文件夹：存放文档中解析生成的图片资源，便于后续查看与使用。
+
+<div align="center">
+    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/catalog/vol_5.png
  width=100% heigth=100%/>
 </div>
 
