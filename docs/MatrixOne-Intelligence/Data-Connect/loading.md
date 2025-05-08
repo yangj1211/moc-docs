@@ -4,7 +4,7 @@
 
 ## 如何进行数据载入
 
-进入到 MatrixOne Intelligence 工作区，依次点击**数据接入**>**数据载入**>**载入数据**，选择连接器进行载入，支持载入doc/docx/，ppt/pptx/，txt/md/，pdf，jpg/jpeg/bmp/png格式文件，单个文件大小不超过200MB。
+进入到 MatrixOne Intelligence 工作区，依次点击**数据接入**>**数据载入**>**载入数据**，选择连接器进行载入，支持载入 doc/docx/，ppt/pptx/，txt/md/，pdf，jpg/jpeg/bmp/png 格式文件，单个文件大小不超过 200MB。
 
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-connect/conn-3.png
