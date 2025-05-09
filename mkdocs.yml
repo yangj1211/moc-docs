@@ -55,6 +55,7 @@ nav:
         - 作业: MatrixOne-Intelligence/Data-Processing/operation.md
       - 探索数据:
         - Catalog: MatrixOne-Intelligence/Data-Explore/catalog.md
+      - 告警: MatrixOne-Intelligence/Workspace-Mgmt/alarm.md
       - 用户权限:
         - 用户管理: MatrixOne-Intelligence/Workspace-Mgmt/user-privilge/user_mgmt.md
       - API 说明: 
