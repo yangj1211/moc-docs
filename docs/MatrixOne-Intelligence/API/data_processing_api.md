@@ -36,7 +36,7 @@ headers = {
     "uid": "dea010be-1a50-413a-aa7e-e0611a491cab-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin",
 }
 
-#由于部分组件包含动态生成的时间戳，请直接从浏览器开发者工具（F12）的Network选项卡中复制当前响应体的实际内容，而非使用示例数据。
+#由于部分组件包含动态生成的时间戳，请直接从浏览器开发者工具（F12）的 Network 选项卡中复制当前响应体的实际内容，而非使用示例数据。
 body = { 
     "name":"wf-3",
     "source_volume_names":[
