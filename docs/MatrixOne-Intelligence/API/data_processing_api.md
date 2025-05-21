@@ -28,7 +28,7 @@ POST /byoa/api/v1/index_workflow
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/index_workflow" 
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow" 
 
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -591,7 +591,7 @@ print(response.json())
 ```python
 import requests
 import json
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/index_workflow"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -673,7 +673,7 @@ GET /byoa/api/v1/index_workflow/{workflow_id}
 ```python
 import requests
 import json
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/index_workflow/ff5d119a-4e94-4968-ac0c-6ef64fcabb6c"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow/ff5d119a-4e94-4968-ac0c-6ef64fcabb6c"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -1165,7 +1165,7 @@ POST /byoa/api/v1/index_workflow/{workflow_id}
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/index_workflow/fef28ca2-175e-4de9-9ac3-f4aa0da5a745"  
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow/fef28ca2-175e-4de9-9ac3-f4aa0da5a745"  
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -1727,7 +1727,7 @@ DELETE /byoa/api/v1/index_workflow/{workflow_id}?[delete_data=true]
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/index_workflow/729e7a03-652d-46e0-bdad-b05ec5b80cea?delete_data=true"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow/729e7a03-652d-46e0-bdad-b05ec5b80cea?delete_data=true"
 
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -1778,7 +1778,7 @@ GET /byoa/api/v1/index_workflow_job
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/index_workflow_job"  
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow_job"  
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -2096,7 +2096,7 @@ GET /byoa/api/v1/index_workflow_job/{job_id}
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/index_workflow_job/0194fb2c-f5c5-7d42-8d09-fdc3d8414777"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow_job/0194fb2c-f5c5-7d42-8d09-fdc3d8414777"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -2591,7 +2591,7 @@ GET /byoa/api/v1/index_workflow_job/{job_id}/files
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/index_workflow_job/0194f423-c2a7-7cc5-87ce-97fa942ac6ce/files"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow_job/0194f423-c2a7-7cc5-87ce-97fa942ac6ce/files"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -2647,7 +2647,7 @@ POST /byoa/api/v1/index_workflow_job/{job_id}/files
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/index_workflow_job/0194f423-c2a7-7cc5-87ce-97fa942ac6ce/files"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow_job/0194f423-c2a7-7cc5-87ce-97fa942ac6ce/files"
 
 headers = {
     "user-id":"xxxx",

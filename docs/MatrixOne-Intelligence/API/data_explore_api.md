@@ -17,7 +17,7 @@ POST /CreateOriginVolume
 **示例：**
 
 ```python
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/CreateOriginVolume"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/CreateOriginVolume"
 
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
@@ -61,7 +61,7 @@ POST /DescribeOriginVolumes
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/DescribeOriginVolumes"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DescribeOriginVolumes"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
     "Access-Token": "xxxx",
@@ -144,7 +144,7 @@ POST /DescribeOriginVolume
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/DescribeOriginVolume"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DescribeOriginVolume"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
     "Access-Token": "xxxx",
@@ -206,7 +206,7 @@ POST /GetOriginVolumeFileLink
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/GetOriginVolumeFileLink"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/GetOriginVolumeFileLink"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
     "Access-Token": "xxxx",
@@ -254,7 +254,7 @@ POST /DeleteOriginVolumeFiles
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/DeleteOriginVolumeFiles"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DeleteOriginVolumeFiles"
 
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
@@ -303,7 +303,7 @@ POST /byoa/api/v1/explore/volumes
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes"
 
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
@@ -344,7 +344,7 @@ GET /byoa/api/v1/explore/volumes
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
     "Access-Token": "xxxx",
@@ -394,7 +394,7 @@ POST /byoa/api/v1/explore/volumes/{volume_id}/files
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/dbcc0d71-31f9-4799-b404-096f9e8e57f9/files"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/dbcc0d71-31f9-4799-b404-096f9e8e57f9/files"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -489,7 +489,7 @@ GET /byoa/api/v1/explore/volumes/{volume_id}/files/{file_id}/raws
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/eb42f0a1-ab18-4010-b95c-cd1716dd5e95/files/0194f41d-59d3-78ae-953d-7db134c83cab/raws"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/eb42f0a1-ab18-4010-b95c-cd1716dd5e95/files/0194f41d-59d3-78ae-953d-7db134c83cab/raws"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -521,7 +521,7 @@ POST /byoa/api/v1/explore/volumes/{volume_id}/files/{filed_id}/blocks
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/7399732a-3e43-4469-8abb-7a53b99efc22/files/0194fd65-e671-7e67-ba34-66967ba0fbf0/blocks"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/7399732a-3e43-4469-8abb-7a53b99efc22/files/0194fd65-e671-7e67-ba34-66967ba0fbf0/blocks"
 headers = {
     "user-id":"0194e0c2-7e81-7040-ba44-f1d4f51axxxx",
     "Access-Token": "xxxx",
@@ -586,7 +586,7 @@ DELETE /explore/volumes/{volume_id}/files/{filed_id}/blocks
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/7399732a-3e43-4469-8abb-7a53b99efc22/files/0194fd65-e671-7e67-ba34-66967ba0fbf0/blocks"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/7399732a-3e43-4469-8abb-7a53b99efc22/files/0194fd65-e671-7e67-ba34-66967ba0fbf0/blocks"
 headers = {
     "user-id": "0194e0c2-7e81-7040-ba44-f1d4f51axxxx",
     "Access-Token": "xxxx",
