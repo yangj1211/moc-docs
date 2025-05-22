@@ -5,7 +5,7 @@
 ### 创建连接器
 
 ```
-POST /conectors
+POST /connectors
 ```
   
 **输入参数：**
@@ -46,7 +46,7 @@ body：
 ```python
 import requests
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors"  # 请替换为实际 API 地址
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/connectors"  # 请替换为实际 API 地址
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -99,7 +99,7 @@ POST /connectors/validate
 ```python
 import requests
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/validate"  
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/connectors/validate"  
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -161,7 +161,7 @@ GET /connectors/list
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/list" 
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/connectors/list" 
 headers = {
     "user-id":"xxxx",
     "uid": "f42d1006-b48f-4b1d-bd44-3a18dd7bb8ec-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
@@ -245,7 +245,7 @@ PUT /connectors/{id}
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/100005"
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/connectors/100005"
 
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -303,7 +303,7 @@ GET /connectors/files/list
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/files/list"
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/connectors/files/list"
 
 headers = {
     "user-id": "<your_workspace_id>",
@@ -376,7 +376,7 @@ POST /task
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task" 
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/task" 
 headers = {
     "user-id":"xxxx",
     "Access-Token": "xxxx",
@@ -451,7 +451,7 @@ GET /task/list
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/list" 
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/task/list" 
 
 headers = {
     "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -523,7 +523,7 @@ POST /task/update
 import requests
 import json
 # API URL
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/update"  
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/task/update"  
 
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -567,7 +567,7 @@ POST /task/delete
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/delete/" 
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/task/delete/" 
 
 headers = {
     "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -611,7 +611,7 @@ POST /task/pause
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/pause" 
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/task/pause" 
 
 headers = {
     "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -655,7 +655,7 @@ POST /task/resume
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/resume"  
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/task/resume"  
 
 headers = {
     "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -700,7 +700,7 @@ POST /task/retry
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/retry"
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/task/retry"
 headers = {
     "user-id":"0194e0c2-7e81-7040-ba44-f1d4f51axxxx",
     "Access-Token": "",
@@ -761,7 +761,7 @@ GET /task/get
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/get?task_id=1889613340219121664"
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/task/get?task_id=1889613340219121664"
 
 headers = {
     "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -844,7 +844,7 @@ GET /task/files
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/files?task_id=1889613340219121664"
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/task/files?task_id=1889613340219121664"
 
 headers = {
     "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
