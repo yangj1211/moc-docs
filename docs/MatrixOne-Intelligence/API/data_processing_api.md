@@ -48,10 +48,10 @@ POST /byoa/api/v1/workflow_meta
 
 * **`WorkflowConfig` 结构:** (参考 `workflow.openapi.json` -> `components.schemas.WorkflowConfig`)
 
-  *   `components`: array[object] - 组件配置列表。每个组件对象包含 `name`, `type`, `component_id`, `intro`, `position`, `input_keys`, `output_keys`, `init_parameters`。
-  *   `connections`: array[object] - 连接配置列表。每个连接对象包含 `sender` 和 `receiver`。
-  *   `edges`: array[object] - 边配置列表 (通常为空数组 `[]`)。
-  *   `extra_components`: array[object] - 额外组件配置列表 (通常为空数组 `[]`)。
+  * `components`: array[object] - 组件配置列表。每个组件对象包含 `name`, `type`, `component_id`, `intro`, `position`, `input_keys`, `output_keys`, `init_parameters`。
+  * `connections`: array[object] - 连接配置列表。每个连接对象包含 `sender` 和 `receiver`。
+  * `edges`: array[object] - 边配置列表 (通常为空数组 `[]`)。
+  * `extra_components`: array[object] - 额外组件配置列表 (通常为空数组 `[]`)。
 
 **示例 (Python)：**
 
@@ -254,28 +254,27 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 | `total`     | integer                                 | 符合条件的工作流总数                           |
 | `workflows` | array[object] (`WorkflowListItem` 结构) | 工作流列表，每个对象包含工作流及其主要分支信息 |
 
-*   **`WorkflowListItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.WorkflowListItem)
-    *   `id` (string): 工作流 ID
-    *   `name` (string): 工作流名称
-    *   `created_at` (integer): 创建时间戳 (毫秒)
-    *   `creator` (string): 创建者
-    *   `updated_at` (integer): 更新时间戳 (毫秒)
-    *   `modifier` (string, nullable): 更新者
-    *   `source_volume_ids` (array[string]): 源数据卷 ID 列表
-    *   `source_volume_names` (array[string]): 源数据卷名称列表
-    *   `file_types` (array[integer]): 文件类型列表
-    *   `target_volume_id` (string): 目标数据卷 ID
-    *   `target_volume_name` (string): 目标数据卷名称
-    *   `process_mode` (object `ProcessModeConfig`): 处理模式配置
-    *   `priority` (integer): 优先级
-    *   `status` (integer): 状态
-    *   `version` (string, nullable): 版本号
-    *   `branch_total` (integer, nullable): 该工作流下的分支总数
-    *   `branch_id` (string, nullable): (通常是) 主分支或最新活动分支的 ID
-    *   `branch_name` (string, nullable): (通常是) 主分支或最新活动分支的名称
-    *   `branch_status` (integer, nullable): (通常是) 主分支或最新活动分支的状态
-    *   `branch_volume_id` (string, nullable): (通常是) 主分支或最新活动分支的目标数据卷 ID
-
+* **`WorkflowListItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.WorkflowListItem)
+    * `id` (string): 工作流 ID
+    * `name` (string): 工作流名称
+    * `created_at` (integer): 创建时间戳 (毫秒)
+    * `creator` (string): 创建者
+    * `updated_at` (integer): 更新时间戳 (毫秒)
+    * `modifier` (string, nullable): 更新者
+    * `source_volume_ids` (array[string]): 源数据卷 ID 列表
+    * `source_volume_names` (array[string]): 源数据卷名称列表
+    * `file_types` (array[integer]): 文件类型列表
+    * `target_volume_id` (string): 目标数据卷 ID
+    * `target_volume_name` (string): 目标数据卷名称
+    * `process_mode` (object `ProcessModeConfig`): 处理模式配置
+    * `priority` (integer): 优先级
+    * `status` (integer): 状态
+    * `version` (string, nullable): 版本号
+    * `branch_total` (integer, nullable): 该工作流下的分支总数
+    * `branch_id` (string, nullable): (通常是) 主分支或最新活动分支的 ID
+    * `branch_name` (string, nullable): (通常是) 主分支或最新活动分支的名称
+    * `branch_status` (integer, nullable): (通常是) 主分支或最新活动分支的状态
+    * `branch_volume_id` (string, nullable): (通常是) 主分支或最新活动分支的目标数据卷 ID
 
 ### 查看工作流详情
 
@@ -382,17 +381,17 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 (参考 `workflow.openapi.json` components.schemas.WorkflowDetailResponse)
 主要包含工作流的基础信息、主工作流的 Haystack 配置 (`workflow`)、主/默认分支的相关信息 (`branch_id`, `branch_name`, `branch_status`, `branch_volume_id`)，以及一个 `branches` 数组，其中每一项是 `WorkflowBranchItem`。
 
-*   **`WorkflowBranchItem` 结构:** (参考 `workflow.openapi.json` components.schemas.WorkflowBranchItem)
-    *   `branch_id` (string): 分支 ID
-    *   `created_at` (integer): 创建时间戳
-    *   `creator` (string): 创建者
-    *   `updated_at` (integer): 更新时间戳
-    *   `modifier` (string): 更新者
-    *   `status` (integer): 此分支应用的工作流部分的状态
-    *   `workflow` (object `WorkflowConfig`): 此分支特定的 Haystack 配置
-    *   `branch_name` (string): 分支名
-    *   `branch_status` (integer): 分支自身的状态
-    *   `branch_volume_id` (string): 分支的目标数据卷 ID
+* **`WorkflowBranchItem` 结构:** (参考 `workflow.openapi.json` components.schemas.WorkflowBranchItem)
+    * `branch_id` (string): 分支 ID
+    * `created_at` (integer): 创建时间戳
+    * `creator` (string): 创建者
+    * `updated_at` (integer): 更新时间戳
+    * `modifier` (string): 更新者
+    * `status` (integer): 此分支应用的工作流部分的状态
+    * `workflow` (object `WorkflowConfig`): 此分支特定的 Haystack 配置
+    * `branch_name` (string): 分支名
+    * `branch_status` (integer): 分支自身的状态
+    * `branch_volume_id` (string): 分支的目标数据卷 ID
 
 ### 修改工作流
 
@@ -400,7 +399,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 PUT /byoa/api/v1/workflow_meta/{workflow_id}
 ```
 
-**描述：** 更新指定工作流的配置。这通常会更新工作流的 "main" 或默认分支。
+**描述：**更新指定工作流的配置。这通常会更新工作流的 "main" 或默认分支。
 
 **路径参数：**
 
@@ -418,7 +417,7 @@ PUT /byoa/api/v1/workflow_meta/{workflow_id}
 | `uid`          | string | 是       | 用户登录 UID |
 
 **Body 输入参数 (`WorkflowRequest`)：**
-与"创建工作流"的 Body (`WorkflowRequest`) 结构相同。所有字段都可以更新。
+与 "创建工作流" 的 Body (`WorkflowRequest`) 结构相同。所有字段都可以更新。
 
 **示例 (Python)：**
 
@@ -492,7 +491,7 @@ print(response.json())
 DELETE /byoa/api/v1/workflow_meta/{workflow_id}
 ```
 
-**描述：** 删除指定的工作流及其所有分支和关联的作业元数据。
+**描述：**删除指定的工作流及其所有分支和关联的作业元数据。
 
 **路径参数：**
 
@@ -562,7 +561,7 @@ else:
 PUT /byoa/api/v1/workflow_meta/{workflow_id}/stop
 ```
 
-**描述：** 停止指定工作流的运行。这通常会将工作流的状态更改为"已停止"或类似状态，并可能停止所有关联的正在进行的作业。
+**描述：**停止指定工作流的运行。这通常会将工作流的状态更改为 "已停止" 或类似状态，并可能停止所有关联的正在进行的作业。
 
 **路径参数：**
 
@@ -626,7 +625,7 @@ else:
 POST /byoa/api/v1/workflow_meta/{workflow_id}/branch
 ```
 
-**描述：** 为指定的工作流创建一个新的分支。
+**描述：**为指定的工作流创建一个新的分支。
 
 **路径参数：**
 
@@ -650,7 +649,7 @@ POST /byoa/api/v1/workflow_meta/{workflow_id}/branch
 | `branch_name` | 否       | string, nullable          | 分支名     | ""     |
 | `workflow`    | 是       | object (`WorkflowConfig`) | 工作流配置 |        |
 
-*   **`WorkflowConfig` 结构:** (同主工作流创建/更新时的 `WorkflowConfig` 定义)
+* **`WorkflowConfig` 结构:** (同主工作流创建/更新时的 `WorkflowConfig` 定义)
 
 **示例 (Python)：**
 
@@ -704,7 +703,7 @@ if response.content:
 GET /byoa/api/v1/workflow_meta/{workflow_id}/branch
 ```
 
-**描述：** 获取指定工作流下的所有分支列表。
+**描述：**获取指定工作流下的所有分支列表。
 
 **路径参数：**
 
@@ -791,14 +790,13 @@ if response.content:
 **输出参数 (`MOIResponse_WorkflowListResponse_` 的 `data.workflows` 中的 `WorkflowListItem`):**
 (具体字段参考 `GET /byoa/api/v1/workflow_meta` 的 `WorkflowListItem` 定义，此处 `id` 是父工作流 ID, `branch_id`, `branch_name`, `branch_status` 等描述分支特有属性)
 
-
 #### 获取工作流分支详情
 
 ```
 GET /byoa/api/v1/workflow_meta/branch/{branch_id}
 ```
 
-**描述：** 获取特定工作流分支的详细信息。
+**描述：**获取特定工作流分支的详细信息。
 
 **路径参数：**
 
@@ -860,14 +858,13 @@ if response.content:
 **输出参数 (`MOIResponse_WorkflowDetailResponse_` 的 `data` 部分 - `WorkflowDetailResponse`)：**
 (参考 `GET /byoa/api/v1/workflow_meta/{workflow_id}` 的 `WorkflowDetailResponse` 定义，其中 `id` 为父工作流 ID，`workflow` 为此分支的配置，`branch_id`, `branch_name` 等为当前分支信息)
 
-
 #### 更新工作流分支
 
 ```
 PUT /byoa/api/v1/workflow_meta/branch/{branch_id}
 ```
 
-**描述：** 更新指定工作流分支的配置。
+**描述：**更新指定工作流分支的配置。
 
 **路径参数：**
 
@@ -891,7 +888,7 @@ PUT /byoa/api/v1/workflow_meta/branch/{branch_id}
 | `branch_name` | 否       | string, nullable          | 新的分支名     | ""     |
 | `workflow`    | 是       | object (`WorkflowConfig`) | 新的工作流配置 |        |
 
-*   **`WorkflowConfig` 结构:** (同主工作流创建/更新时的 `WorkflowConfig` 定义)
+* **`WorkflowConfig` 结构:** (同主工作流创建/更新时的 `WorkflowConfig` 定义)
 
 **示例 (Python)：**
 
@@ -940,7 +937,7 @@ if response.content:
 DELETE /byoa/api/v1/workflow_meta/branch/{branch_id}
 ```
 
-**描述：** 删除指定的工作流分支。
+**描述：**删除指定的工作流分支。
 
 **路径参数：**
 
@@ -1005,7 +1002,7 @@ else:
 PUT /byoa/api/v1/workflow_meta/branch/{branch_id}/enable
 ```
 
-**描述：** 启用指定的工作流分支。这通常意味着该分支成为工作流新的活动分支，后续的作业将基于此分支的配置运行。
+**描述：**启用指定的工作流分支。这通常意味着该分支成为工作流新的活动分支，后续的作业将基于此分支的配置运行。
 
 **路径参数：**
 
@@ -1078,7 +1075,7 @@ if response.content:
 PUT /byoa/api/v1/workflow_meta/branch/{branch_id}/disable
 ```
 
-**描述：** 禁用指定的工作流分支。被禁用的分支通常不能再用于新的作业。如果该分支是当前活动分支，可能需要先启用另一个分支。
+**描述：**禁用指定的工作流分支。被禁用的分支通常不能再用于新的作业。如果该分支是当前活动分支，可能需要先启用另一个分支。
 
 **路径参数：**
 
@@ -1165,7 +1162,6 @@ POST /byoa/api/v1/workflow_job
 | `uid`          | string | 是       | 用户登录 UID (隐式要求) |        |
 | `Content-Type` | string | 是       | `application/json`      |        |
 
-
 **Body 输入参数 (`JobCreateRequest`)：**
 
 | 参数               | 是否必填 | 类型                       | 含义                                                         | 默认值 |
@@ -1232,7 +1228,7 @@ POST /byoa/api/v1/workflow_job
 GET /byoa/api/v1/workflow_job
 ```
 
-**描述：** 获取符合条件的工作流作业列表。
+**描述：**获取符合条件的工作流作业列表。
 
 **路径参数：**
 (无)
@@ -1318,18 +1314,17 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 | `total` | integer                            | 符合条件的工作流作业总数                   |
 | `jobs`  | array[object] (`JobListItem` 结构) | 作业列表，每个对象包含作业及其主要分支信息 |
 
-*   **`JobListItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobListItem)
-    *   `id` (string): 作业 ID
-    *   `name` (string): 作业名称
-    *   `created_at` (integer): 创建时间戳 (毫秒)
-    *   `creator` (string): 创建者
-    *   `updated_at` (integer): 更新时间戳 (毫秒)
-    *   `modifier` (string, nullable): 更新者
-    *   `status` (integer): 状态
-    *   `version` (string, nullable): 版本号
-    *   `workflow_meta_id` (string): 工作流元数据 ID
-    *   `workflow_branch_id` (string): 工作流分支 ID
-
+* **`JobListItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobListItem)
+    * `id` (string): 作业 ID
+    * `name` (string): 作业名称
+    * `created_at` (integer): 创建时间戳 (毫秒)
+    * `creator` (string): 创建者
+    * `updated_at` (integer): 更新时间戳 (毫秒)
+    * `modifier` (string, nullable): 更新者
+    * `status` (integer): 状态
+    * `version` (string, nullable): 版本号
+    * `workflow_meta_id` (string): 工作流元数据 ID
+    * `workflow_branch_id` (string): 工作流分支 ID
 
 ### 查看作业详情
 
@@ -1337,7 +1332,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 GET /byoa/api/v1/workflow_job/{job_id}
 ```
 
-**描述：** 获取指定作业的详细信息。
+**描述：**获取指定作业的详细信息。
 
 **路径参数：**
 
@@ -1405,27 +1400,26 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **输出参数 (`MOIResponse_JobDetailResponse_` 的 `data` 部分 - `JobDetailResponse`)：**
 
-*   **`JobDetailResponse` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobDetailResponse)
-    *   `id` (string): 作业 ID
-    *   `name` (string): 作业名称
-    *   `created_at` (integer): 创建时间戳 (毫秒)
-    *   `creator` (string): 创建者
-    *   `updated_at` (integer): 更新时间戳 (毫秒)
-    *   `modifier` (string): 更新者
-    *   `status` (integer): 状态
-    *   `version` (string): 版本号
-    *   `workflow_meta_id` (string): 工作流元数据 ID
-    *   `workflow_branch_id` (string): 工作流分支 ID
-    *   `files` (array[object] (`FileItem` 结构)): 作业相关的文件列表
+* **`JobDetailResponse` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobDetailResponse)
+    * `id` (string): 作业 ID
+    * `name` (string): 作业名称
+    * `created_at` (integer): 创建时间戳 (毫秒)
+    * `creator` (string): 创建者
+    * `updated_at` (integer): 更新时间戳 (毫秒)
+    * `modifier` (string): 更新者
+    * `status` (integer): 状态
+    * `version` (string): 版本号
+    * `workflow_meta_id` (string): 工作流元数据 ID
+    * `workflow_branch_id` (string): 工作流分支 ID
+    * `files` (array[object] (`FileItem` 结构)): 作业相关的文件列表
 
-*   **`FileItem` 对象结构:** (参考 `workflow.openapi.json` -> components.schemas.FileItem)
-    *   `file_name` (string): 文件名
-    *   `file_type` (integer): 文件类型
-    *   `file_size` (integer): 文件大小 (bytes)
-    *   `file_path` (string): 文件路径
-    *   `source_volume_id` (integer): 源数据卷 ID
-    *   `source_file_id` (integer): 源文件 ID
-
+* **`FileItem` 对象结构:** (参考 `workflow.openapi.json` -> components.schemas.FileItem)
+    * `file_name` (string): 文件名
+    * `file_type` (integer): 文件类型
+    * `file_size` (integer): 文件大小 (bytes)
+    * `file_path` (string): 文件路径
+    * `source_volume_id` (integer): 源数据卷 ID
+    * `source_file_id` (integer): 源文件 ID
 
 ### 查看作业文件列表
 
@@ -1523,19 +1517,19 @@ if response.content:
 | `total` | integer                            | 符合条件的文件总数 |
 | `files` | array[object] (`JobFileItem` 结构) | 作业相关的文件列表 |
 
-*   **`JobFileItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobFileItem)
-    *   `id` (string): 文件项 ID
-    *   `name` (string): 文件名
-    *   `type` (integer): 文件类型 (`FileType` 枚举)
-    *   `size` (integer): 文件大小 (bytes)
-    *   `status` (integer): 文件处理状态
-    *   `created_at` (integer): 创建时间戳 (毫秒)
-    *   `updated_at` (integer): 更新时间戳 (毫秒)
-    *   `path` (string, nullable): 文件在目标数据卷中的路径
-    *   `volume_id` (string, nullable): 文件所在的目标数据卷 ID
-    *   `job_id` (string): 关联的作业 ID
-    *   `meta_id` (string, nullable): 关联的工作流元数据 ID
-    *   `branch_id` (string, nullable): 关联的工作流分支 ID
+* **`JobFileItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobFileItem)
+    * `id` (string): 文件项 ID
+    * `name` (string): 文件名
+    * `type` (integer): 文件类型 (`FileType` 枚举)
+    * `size` (integer): 文件大小 (bytes)
+    * `status` (integer): 文件处理状态
+    * `created_at` (integer): 创建时间戳 (毫秒)
+    * `updated_at` (integer): 更新时间戳 (毫秒)
+    * `path` (string, nullable): 文件在目标数据卷中的路径
+    * `volume_id` (string, nullable): 文件所在的目标数据卷 ID
+    * `job_id` (string): 关联的作业 ID
+    * `meta_id` (string, nullable): 关联的工作流元数据 ID
+    * `branch_id` (string, nullable): 关联的工作流分支 ID
 
 ### 重试处理作业文件
 
@@ -1543,7 +1537,7 @@ if response.content:
 POST /byoa/api/v1/workflow_job/{job_id}/files
 ```
 
-**描述：** 删除指定作业关联的特定文件记录。
+**描述：**删除指定作业关联的特定文件记录。
 
 **路径参数：**
 
@@ -1617,7 +1611,7 @@ else:
 GET /byoa/api/v1/workflow_job/{job_id}/status
 ```
 
-**描述：** 获取指定作业的当前状态。
+**描述：**获取指定作业的当前状态。
 
 **路径参数：**
 

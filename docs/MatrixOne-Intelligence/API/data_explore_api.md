@@ -173,7 +173,7 @@ GET /byoa/api/v1/explore/volumes/{vid}
 
 **路径参数：**
 
-*   `vid` (string, 必填): 父数据卷 ID
+* `vid` (string, 必填): 父数据卷 ID
 
 **Header 参数：**
 
@@ -201,11 +201,10 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 ```
 
 **返回 (`MOIResponse_ListVolumeResp_`)：**
-返回结构与"查看数据卷列表"相同，但 `volumes` 列表将只包含指定 `{vid}` 的子卷。
+返回结构与 "查看数据卷列表" 相同，但 `volumes` 列表将只包含指定 `{vid}` 的子卷。
 
 **输出参数 (`ListVolumeResp` 的 `data` 部分)：**
-与"查看数据卷列表"的输出参数一致。
-
+与 "查看数据卷列表" 的输出参数一致。
 
 ### 删除数据卷
 
@@ -215,7 +214,7 @@ DELETE /byoa/api/v1/explore/volumes/{vid}
 
 **路径参数：**
 
-*   `vid` (string, 必填): 要删除的数据卷 ID
+* `vid` (string, 必填): 要删除的数据卷 ID
 
 **Header 参数：**
 
@@ -259,7 +258,7 @@ POST /byoa/api/v1/explore/volumes/{vid}/files
 
 **路径参数：**
 
-*   `vid` (string, 必填): 数据卷 ID
+* `vid` (string, 必填): 数据卷 ID
 
 **Header 参数：**
 
@@ -409,8 +408,8 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}
 
 **路径参数：**
 
-*   `vid` (string, 必填): 数据卷 ID
-*   `fid` (string, 必填): 文件 ID
+* `vid` (string, 必填): 数据卷 ID
+* `fid` (string, 必填): 文件 ID
 
 **Header 参数：**
 
@@ -454,8 +453,8 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws
 
 **路径参数：**
 
-*   `vid` (string, 必填): 数据卷 ID
-*   `fid` (string, 必填): 文件 ID
+* `vid` (string, 必填): 数据卷 ID
+* `fid` (string, 必填): 文件 ID
 
 **Header 参数：**
 
@@ -508,8 +507,8 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/jobs
 
 **路径参数：**
 
-*   `vid` (string, 必填): 数据卷 ID
-*   `fid` (string, 必填): 文件 ID
+* `vid` (string, 必填): 数据卷 ID
+* `fid` (string, 必填): 文件 ID
 
 **Header 参数：**
 
@@ -560,7 +559,6 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 | ---- | ------ | ------------------------------------------------------------ |
 | job  | object | 文件关联的作业信息对象。具体结构需要参照实际 API 返回或更详细的定义。 |
 
-
 ### 获取文件解析的数据块
 
 ```
@@ -569,8 +567,8 @@ POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 
 **路径参数：**
 
-*   `vid` (string, 必填): 数据卷 ID
-*   `fid` (string, 必填): 文件 ID
+* `vid` (string, 必填): 数据卷 ID
+* `fid` (string, 必填): 文件 ID
 
 **Header 参数：**
 
@@ -595,7 +593,6 @@ POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
   | types          | array[string] | 类型过滤 (例如，"text", "image_caption") |
   | search_content | string        | 内容搜索关键字                           |
   | block_ids      | array[string] | 指定数据块 ID 列表                         |
-
 
 **Body 示例 (`GetFileBlocksReq`)：**
 
@@ -694,8 +691,8 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 
 **路径参数：**
 
-*   `vid` (string, 必填): 数据卷 ID
-*   `fid` (string, 必填): 文件 ID
+* `vid` (string, 必填): 数据卷 ID
+* `fid` (string, 必填): 文件 ID
 
 **Header 参数：**
 
