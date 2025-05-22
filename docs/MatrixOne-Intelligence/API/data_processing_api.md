@@ -5,267 +5,120 @@
 ### 创建工作流
 
 ```
-POST /byoa/api/v1/index_workflow
+POST /byoa/api/v1/workflow_meta
 ```
 
-**输入参数：**
-  
-|  参数                     | 是否必填 |含义       |
-| ------------------------- | ------- |---------  |
-|  name                    | 是         | 工作流名称  |
-|  source_volume_names      | 是       | 原始卷名称 |
-|  source_volume_ids        | 是       | 原始卷 id  |
-|  target_volume_name        | 是       | 目标卷名称  |
-|  target_volume_ids        | 是       | 目标卷 id  |
-|  create_target_volume_name| 否       | 新建目标卷名称  |
-|  process_mode             | 是       | 处理模式，interval：0:一次处理；1:5 分钟；2:10 分钟；3:30 分钟；4:1 小时；5:2 小时；6:4 小时；7:6 小时；8:8 小时；9：一天；   |
-|  file_types               | 是       | 文件类型，目前仅支持 2，为 pdf 类型 |
-|  workflow                 | 是       | 工作流，split_length：分段最大长度，最小为 100，最大为 2000；文本预处理规则：remove_empty_lines：true 示表示替换掉连续的空格、换行符和制表符，remove_extra_whitespaces：true 时表示删除所有的 URL 和电子邮箱地址。 |
+**路径参数：**
+(无)
 
-**示例：**
+**Query 参数：**
+(无)
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         | 默认值      |
+| -------------- | ------ | -------- | ------------ | ----------- |
+| `user-name`    | string | 否       | 用户名       | "user_name" |
+| `user-id`      | string | 是       | 用户ID       |             |
+| `Access-Token` | string | 是       | 鉴权Token    |             |
+| `uid`          | string | 是       | 用户登录 UID |             |
+
+**Body 输入参数 (`WorkflowRequest`)：**
+
+| 参数名                      | 是否必填 | 类型                         | 含义                           | 默认值 |
+| --------------------------- | -------- | ---------------------------- | ------------------------------ | ------ |
+| `name`                      | 是       | string                       | 工作流名称                     |        |
+| `source_volume_names`       | 是       | array[string]                | 源数据卷名称列表               |        |
+| `source_volume_ids`         | 是       | array[integer]               | 源数据卷ID列表                 |        |
+| `file_types`                | 是       | array[integer]               | 文件类型列表                   |        |
+| `process_mode`              | 是       | object (`ProcessModeConfig`) | 处理模式配置                   |        |
+| `priority`                  | 否       | integer                      | 优先级                         | 300    |
+| `target_volume_id`          | 是       | string                       | 目标数据卷ID                   |        |
+| `target_volume_name`        | 否       | string                       | 目标数据卷名称                 | ""     |
+| `create_target_volume_name` | 是       | string                       | 创建目标数据卷时使用的名称     |        |
+| `workflow`                  | 是       | object (`WorkflowConfig`)    | 工作流配置 (Haystack pipeline) |        |
+| `branch_name`               | 否       | string                       | 分支名 (如果同时创建分支)      | ""     |
+
+* **`ProcessModeConfig` 结构:**
+
+  | 参数       | 是否必填 | 类型    | 含义                   |
+  | ---------- | -------- | ------- | ---------------------- |
+  | `interval` | 是       | integer | 处理间隔（分钟）       |
+  | `offset`   | 是       | integer | 处理时间偏移量（分钟） |
+
+* **`WorkflowConfig` 结构:** (参考 `workflow.openapi.json` -> `components.schemas.WorkflowConfig`)
+
+  *   `components`: array[object] - 组件配置列表。每个组件对象包含 `name`, `type`, `component_id`, `intro`, `position`, `input_keys`, `output_keys`, `init_parameters`。
+  *   `connections`: array[object] - 连接配置列表。每个连接对象包含 `sender` 和 `receiver`。
+  *   `edges`: array[object] - 边配置列表 (通常为空数组 `[]`)。
+  *   `extra_components`: array[object] - 额外组件配置列表 (通常为空数组 `[]`)。
+
+**示例 (Python)：**
 
 ```python
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow" 
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_meta"
 
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "dea010be-1a50-413a-aa7e-e0611a491cab-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin",
+    "user-name": "admin_user",
+    "Access-Token": "xxxx", # 实际的 Access Token
+    "uid": "dea010be-1a50-413a-aa7e-e0611a491cab-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
 }
 
-#由于部分组件包含动态生成的时间戳，请直接从浏览器开发者工具（F12）的 Network 选项卡中复制当前响应体的实际内容，而非使用示例数据。
-body = { 
-    "name":"wf-3",
-    "source_volume_names":[
-        "b-vol1"
-    ],
-    "source_volume_ids":[
-        "1889223879880048640"
-    ],
-    "target_volume_name":"a-vol1",
-    "target_volume_id":"eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
-    "create_target_volume_name":"",
-    "process_mode":{
-        "interval":0,
-        "offset":0
+body = {
+    "name": "wf-from-meta-api",
+    "source_volume_names": ["b-vol1"],
+    "source_volume_ids": [1889223879880048640],
+    "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
+    "create_target_volume_name": "new-target-for-wf-from-meta",
+    "process_mode": {
+        "interval": 0,
+        "offset": 0
     },
-    "file_types":[
-        2
-    ],
-    "workflow":{
-        "components":[
+    "file_types": [2],
+    "priority": 300,
+    "workflow": {
+        "components": [
             {
-                "name":"DocumentCleaner",
-                "type":"haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                "component_id":"DocumentCleaner_1739377283742",
-                "intro":"DocumentCleaner",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "ascii_only":"false",
-                    "keep_id":"false",
-                    "remove_empty_lines":"true",
-                    "remove_extra_whitespaces":"true",
-                    "remove_regex":"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)|https?://[^\\s]+",
-                    "remove_repeated_substrings":"false",
-                    "remove_substrings":"null",
-                    "unicode_normalization":"null"
+                "name": "DocumentCleaner",
+                "type": "haystack.components.preprocessors.document_cleaner.DocumentCleaner",
+                "component_id": "DocumentCleaner_1739377283742",
+                "intro": "DocumentCleaner",
+                "position": {"x": 0, "y": 0},
+                "input_keys": {},
+                "output_keys": {},
+                "init_parameters": {
+                    "ascii_only": False, # boolean
+                    "keep_id": False,    # boolean
+                    "remove_empty_lines": True,
+                    "remove_extra_whitespaces": True,
+                    "remove_regex": "([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)|https?://[^\\s]+",
+                    "remove_repeated_substrings": False
                 }
             },
-            {
-                "name":"DocumentCleaner-ImageCaption",
-                "type":"haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                "component_id":"DocumentCleaner-ImageCaption_1739377283742",
-                "intro":"DocumentCleaner-ImageCaption",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "ascii_only":"false",
-                    "keep_id":"false",
-                    "remove_empty_lines":"true",
-                    "remove_extra_whitespaces":"true",
-                    "remove_regex":"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)|https?://[^\\s]+",
-                    "remove_repeated_substrings":"false",
-                    "remove_substrings":"null",
-                    "unicode_normalization":"null"
-                }
-            },
-            {
-                "name":"DocumentCleaner-ImageOCR",
-                "type":"haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                "component_id":"DocumentCleaner-ImageOCR_1739377283742",
-                "intro":"DocumentCleaner-ImageOCR",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "ascii_only":"false",
-                    "keep_id":"false",
-                    "remove_empty_lines":"true",
-                    "remove_extra_whitespaces":"true",
-                    "remove_regex":"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)|https?://[^\\s]+",
-                    "remove_repeated_substrings":"false",
-                    "remove_substrings":"null",
-                    "unicode_normalization":"null"
-                }
-            },
-            {
-                "name":"DocumentEmbedder",
-                "type":"haystack.components.embedders.openai_document_embedder.OpenAIDocumentEmbedder",
-                "component_id":"DocumentEmbedder_1739377283742",
-                "intro":"DocumentEmbedder",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "api_base_url":"https://api.siliconflow.cn/v1",
-                    "api_key":{
-                        "env_vars":[
-                            "OPENAI_API_KEY"
-                        ],
-                        "strict":"true",
-                        "type":"env_var"
-                    },
-                    "batch_size":32,
-                    "dimensions":"null",
-                    "embedding_separator":"\n",
-                    "meta_fields_to_embed":[
-
-                    ],
-                    "model":"BAAI/bge-m3",
-                    "organization":"null",
-                    "prefix":"",
-                    "progress_bar":"true",
-                    "suffix":""
-                }
-            },
-            {
-                "name":"DocumentJoiner",
-                "type":"haystack.components.joiners.document_joiner.DocumentJoiner",
-                "component_id":"DocumentJoiner_1739377283742",
-                "intro":"DocumentJoiner",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "join_mode":"concatenate",
-                    "sort_by_score":"true",
-                    "top_k":"null",
-                    "weights":"null"
-                }
-            },
-            {
-                "name":"DocumentJoiner-Result",
-                "type":"haystack.components.joiners.document_joiner.DocumentJoiner",
-                "component_id":"DocumentJoiner-Result_1739377283742",
-                "intro":"DocumentJoiner-Result",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "join_mode":"concatenate",
-                    "sort_by_score":"true",
-                    "top_k":"null",
-                    "weights":"null"
-                }
-            },
-            {
-                "name":"DocumentSplitter",
-                "type":"haystack.components.preprocessors.document_splitter.DocumentSplitter",
-                "component_id":"DocumentSplitter_1739377283742",
-                "intro":"DocumentSplitter",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "split_by":"word",
-                    "split_length":800,
-                    "split_overlap":200,
-                    "split_threshold":0
-                }
-            },
+            // ... (其他组件和连接，参考 workflow.openapi.json 的 WorkflowRequest 示例)
             {
                 "name":"DocumentWriter",
                 "type":"haystack.components.writers.document_writer.DocumentWriter",
                 "component_id":"DocumentWriter_1739377283742",
                 "intro":"DocumentWriter",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
+                "position":{"x":0,"y":0},
+                "input_keys":{},
+                "output_keys":{},
                 "init_parameters":{
                     "document_store":{
                         "init_parameters":{
                             "connection_string":{
-                                "env_vars":[
-                                    "DATABASE_SYNC_URI"
-                                ],
-                                "strict":"true",
+                                "env_vars":["DATABASE_SYNC_URI"],
+                                "strict":True,
                                 "type":"env_var"
                             },
                             "embedding_dimension":1024,
                             "keyword_index_name":"haystack_keyword_index",
-                            "recreate_table":"true",
+                            "recreate_table":True,
                             "table_name":"embedding_results",
                             "vector_function":"cosine_similarity"
                         },
@@ -273,408 +126,1241 @@ body = {
                     },
                     "policy":"NONE"
                 }
-            },
-            {
-                "name":"FileRouterComponent",
-                "type":"haystack.components.routers.file_type_router.FileTypeRouter",
-                "component_id":"FileRouterComponent_1739377283742",
-                "intro":"FileRouterComponent",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "additional_mimetypes":"null",
-                    "mime_types":[
-                        "text/plain",
-                        "text/markdown",
-                        "image/.*",
-                        "application/pdf"
-                    ]
-                }
-            },
-            {
-                "name":"ImageCaptionToDocument",
-                "type":"byoa.integrations.components.converters.image_caption_to_document.ImageCaptionToDocument",
-                "component_id":"ImageCaptionToDocument_1739377283742",
-                "intro":"ImageCaptionToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-
-                }
-            },
-            {
-                "name":"ImageOCRToDocument",
-                "type":"byoa.integrations.components.converters.image_ocr_to_document.ImageOCRToDocument",
-                "component_id":"ImageOCRToDocument_1739377283742",
-                "intro":"ImageOCRToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "model":"ucaslcl/GOT-OCR2_0",
-                    "tokenizer":"stepfun-ai/GOT-OCR2_0"
-                }
-            },
-            {
-                "name":"ImageToDocument",
-                "type":"byoa.integrations.components.converters.image_to_document.ImageToDocument",
-                "component_id":"ImageToDocument_1739377283742",
-                "intro":"ImageToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-
-                }
-            },
-            {
-                "name":"MagicPDFToDocument",
-                "type":"byoa.integrations.components.converters.magic_pdf_to_document.MagicPDFToDocument",
-                "component_id":"MagicPDFToDocument_1739377283742",
-                "intro":"MagicPDFToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-
-                }
-            },
-            {
-                "name":"MarkdownToDocument",
-                "type":"haystack.components.converters.markdown.MarkdownToDocument",
-                "component_id":"MarkdownToDocument_1739377283742",
-                "intro":"MarkdownToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "progress_bar":"false",
-                    "table_to_single_line":"false"
-                }
-            },
-            {
-                "name":"MetadataRouter",
-                "type":"haystack.components.routers.metadata_router.MetadataRouter",
-                "component_id":"MetadataRouter_1739377283742",
-                "intro":"MetadataRouter",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "rules":{
-                        "image":{
-                            "conditions":[
-                                {
-                                    "field":"meta.content_type",
-                                    "operator":"==",
-                                    "value":"image"
-                                }
-                            ],
-                            "operator":"AND"
-                        },
-                        "text":{
-                            "conditions":[
-                                {
-                                    "field":"meta.content_type",
-                                    "operator":"==",
-                                    "value":"text"
-                                }
-                            ],
-                            "operator":"AND"
-                        }
-                    }
-                }
-            },
-            {
-                "name":"PythonExecutor",
-                "component_id":"PythonExecutor_1739377283742",
-                "intro":"PythonExecutor",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "python_code":""
-                },
-                "type":"byoa.integrations.components.python_executor.PythonExecutor"
-            },
-            {
-                "name":"TextFileToDocument",
-                "type":"haystack.components.converters.txt.TextFileToDocument",
-                "component_id":"TextFileToDocument_1739377283742",
-                "intro":"TextFileToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "encoding":"utf8"
-                }
             }
         ],
-        "connections":[
-            {
-                "receiver":"TextFileToDocument.sources",
-                "sender":"FileRouterComponent.text/plain"
-            },
-            {
-                "receiver":"MarkdownToDocument.sources",
-                "sender":"FileRouterComponent.text/markdown"
-            },
-            {
-                "receiver":"ImageToDocument.sources",
-                "sender":"FileRouterComponent.image/.*"
-            },
-            {
-                "receiver":"MagicPDFToDocument.sources",
-                "sender":"FileRouterComponent.application/pdf"
-            },
-            {
-                "receiver":"DocumentJoiner.documents",
-                "sender":"TextFileToDocument.documents"
-            },
-            {
-                "receiver":"DocumentJoiner.documents",
-                "sender":"MarkdownToDocument.documents"
-            },
-            {
-                "receiver":"DocumentJoiner.documents",
-                "sender":"MagicPDFToDocument.documents"
-            },
-            {
-                "receiver":"DocumentJoiner.documents",
-                "sender":"ImageToDocument.documents"
-            },
-            {
-                "receiver":"MetadataRouter.documents",
-                "sender":"DocumentJoiner.documents"
-            },
-            {
-                "receiver":"DocumentCleaner.documents",
-                "sender":"MetadataRouter.text"
-            },
-            {
-                "receiver":"ImageOCRToDocument.documents",
-                "sender":"MetadataRouter.image"
-            },
-            {
-                "receiver":"ImageCaptionToDocument.documents",
-                "sender":"MetadataRouter.image"
-            },
-            {
-                "receiver":"DocumentSplitter.documents",
-                "sender":"DocumentCleaner.documents"
-            },
-            {
-                "receiver":"DocumentJoiner-Result.documents",
-                "sender":"DocumentSplitter.documents"
-            },
-            {
-                "receiver":"DocumentCleaner-ImageOCR.documents",
-                "sender":"ImageOCRToDocument.documents"
-            },
-            {
-                "receiver":"DocumentJoiner-Result.documents",
-                "sender":"DocumentCleaner-ImageOCR.documents"
-            },
-            {
-                "receiver":"DocumentCleaner-ImageCaption.documents",
-                "sender":"ImageCaptionToDocument.documents"
-            },
-            {
-                "receiver":"DocumentJoiner-Result.documents",
-                "sender":"DocumentCleaner-ImageCaption.documents"
-            },
-            {
-                "receiver":"PythonExecutor.documents",
-                "sender":"DocumentJoiner-Result.documents"
-            },
-            {
-                "receiver":"DocumentEmbedder.documents",
-                "sender":"PythonExecutor.documents"
-            },
-            {
-                "receiver":"DocumentWriter.documents",
-                "sender":"DocumentEmbedder.documents"
-            }
+        "connections": [
+            // ... (连接定义)
         ],
-        "edges":[
-
-        ],
-        "extra_components":[
-
-        ]
+        "edges": [],
+        "extra_components": []
     }
 }
 
 response = requests.post(url, json=body, headers=headers)
 
-print(response.json()) 
+print(response.status_code)
+print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-返回：
+**返回 (`NoneDataResp`)：**
 
-```bash
-{'code': 'ok', 'msg': 'ok', 'data': None}
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": null
+}
 ```
 
 ### 查看工作流列表
 
 ```
- GET /byoa/api/v1/index_workflow
+GET /byoa/api/v1/workflow_meta
 ```
 
-**示例：**
+**路径参数：**
+(无)
+
+**Query 参数：**
+
+| 参数名          | 类型                                  | 是否必填 | 描述                          | 默认值       |
+| --------------- | ------------------------------------- | -------- | ----------------------------- | ------------ |
+| `name_search`   | string, nullable                      | 否       | 名称搜索 (工作流名)           |              |
+| `start_time`    | integer, nullable                     | 否       | 开始时间戳 (毫秒)             |              |
+| `end_time`      | integer, nullable                     | 否       | 结束时间戳 (毫秒)             |              |
+| `process_modes` | array[integer], nullable              | 否       | 处理模式 (通常指 interval 值) |              |
+| `status`        | array[integer], nullable              | 否       | 状态 (例如: 1-运行中, 2-完成) |              |
+| `file_types`    | array[integer], nullable              | 否       | 文件类型                      |              |
+| `priority`      | array[integer], nullable              | 否       | 优先级                        |              |
+| `creator`       | string, nullable                      | 否       | 创建者                        |              |
+| `offset`        | integer, >=0                          | 否       | 当页偏移量                    | 0            |
+| `limit`         | integer, >=1                          | 否       | 每页大小                      | 20           |
+| `sort_field`    | string, nullable                      | 否       | 排序字段                      | "created_at" |
+| `sort_order`    | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         |
+| -------------- | ------ | -------- | ------------ |
+| `user-id`      | string | 是       | 用户ID       |
+| `Access-Token` | string | 是       | 鉴权Token    |
+| `uid`          | string | 是       | 用户登录 UID |
+
+**示例 (Python)：**
 
 ```python
 import requests
 import json
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow"
+
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_meta" # 更新的 URL
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "d252447b-7f1d-4fd4-8b70-9bc2dd5cd505-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "Access-Token": "xxxx", # 实际的 Access Token
+    "uid": "d252447b-7f1d-4fd4-8b70-9bc2dd5cd505-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin" # 实际的 UID
+}
+params = {
+    "limit": 5,
+    "sort_field": "name",
+    "sort_order": "ascend"
 }
 
-response = requests.get(url, headers=headers)
+response = requests.get(url, headers=headers, params=params)
 
-print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
+print(response.status_code)
+print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-返回：
+**返回 (`MOIResponse_WorkflowListResponse_`)：**
 
-```bash
-Response Body: {
+```json
+{
     "code": "ok",
     "msg": "ok",
-    "data": {
-        "total": 1,
-        "workflows": [
+    "data": { // WorkflowListResponse 结构
+        "total": 20, // 符合条件的工作流总数
+        "workflows": [ // WorkflowListItem 数组
             {
-                "id": "a029a904-1e1c-41af-b361-b6578c92a437",
-                "job_meta_id": "53d99056-b7b8-4d9e-baf1-3d3bca24d4f3",
-                "name": "wf-1",
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "file_types": [
-                    2
-                ],
-                "created_at": 1739377287000,
-                "creator": "admin",
+                "id": "workflow_uuid_1",
+                "name": "Alpha Workflow",
+                "created_at": 1739377287000, // timestamp in ms
+                "creator": "admin_user",
                 "updated_at": 1739377755000,
-                "modifier": "admin",
+                "modifier": "admin_user",
+                "source_volume_ids": ["1889223879880048640"],
+                "source_volume_names": ["b-vol1"],
+                "file_types": [2],
                 "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
                 "target_volume_name": "a-vol1",
-                "process_mode": {
-                    "interval": 0,
-                    "offset": 0
-                },
-                "status": 2
+                "process_mode": {"interval": 0, "offset": 0},
+                "priority": 300,
+                "status": 2, // 示例：2-完成
+                "version": "1.0",
+                "branch_total": 1, // 该工作流下的分支数量
+                "branch_id": "main_branch_uuid_for_workflow1", // 最新或主分支ID (需要确认此逻辑)
+                "branch_name": "main",
+                "branch_status": 0, // 最新或主分支状态
+                "branch_volume_id": "target_vol_for_main_branch1"
+            }
+            // ... 其他工作流项
+        ]
+    }
+}
+```
+
+**输出参数 (`MOIResponse_WorkflowListResponse_` 的 `data` 部分 - `WorkflowListResponse`)：**
+
+| 参数        | 类型                                    | 描述                                           |
+| ----------- | --------------------------------------- | ---------------------------------------------- |
+| `total`     | integer                                 | 符合条件的工作流总数                           |
+| `workflows` | array[object] (`WorkflowListItem` 结构) | 工作流列表，每个对象包含工作流及其主要分支信息 |
+
+*   **`WorkflowListItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.WorkflowListItem)
+    *   `id` (string): 工作流ID
+    *   `name` (string): 工作流名称
+    *   `created_at` (integer): 创建时间戳 (毫秒)
+    *   `creator` (string): 创建者
+    *   `updated_at` (integer): 更新时间戳 (毫秒)
+    *   `modifier` (string, nullable): 更新者
+    *   `source_volume_ids` (array[string]): 源数据卷ID列表
+    *   `source_volume_names` (array[string]): 源数据卷名称列表
+    *   `file_types` (array[integer]): 文件类型列表
+    *   `target_volume_id` (string): 目标数据卷ID
+    *   `target_volume_name` (string): 目标数据卷名称
+    *   `process_mode` (object `ProcessModeConfig`): 处理模式配置
+    *   `priority` (integer): 优先级
+    *   `status` (integer): 状态
+    *   `version` (string, nullable): 版本号
+    *   `branch_total` (integer, nullable): 该工作流下的分支总数
+    *   `branch_id` (string, nullable): (通常是)主分支或最新活动分支的ID
+    *   `branch_name` (string, nullable): (通常是)主分支或最新活动分支的名称
+    *   `branch_status` (integer, nullable): (通常是)主分支或最新活动分支的状态
+    *   `branch_volume_id` (string, nullable): (通常是)主分支或最新活动分支的目标数据卷ID
+
+
+### 查看工作流详情
+
+```
+GET /byoa/api/v1/workflow_meta/{workflow_id}
+```
+
+**路径参数：**
+
+| 参数名        | 类型   | 是否必填 | 描述     |
+| ------------- | ------ | -------- | -------- |
+| `workflow_id` | string | 是       | 工作流ID |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         |
+| -------------- | ------ | -------- | ------------ |
+| `user-id`      | string | 是       | 用户ID       |
+| `Access-Token` | string | 是       | 鉴权Token    |
+| `uid`          | string | 是       | 用户登录 UID |
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+workflow_to_get = "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c" # 替换为实际的 workflow_id
+url = f"https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_meta/{workflow_to_get}" # 更新的 URL
+headers = {
+    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
+    "Access-Token": "xxxx", # 实际的 Access Token
+    "uid": "181c0bfb-486f-4e55-a4ea-7fa2a5dae4fa-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin" # 实际的 UID
+}
+response = requests.get(url, headers=headers)
+
+print(response.status_code)
+print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+```
+
+**返回 (`MOIResponse_WorkflowDetailResponse_`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": { // WorkflowDetailResponse 结构
+        "id": "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c",
+        "name": "Detailed Workflow Test",
+        "source_volume_ids": ["1889223879880048640"],
+        "source_volume_names": ["b-vol1"],
+        "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9", // 主工作流的目标卷
+        "target_volume_name": "a-vol2",
+        "file_types": [2],
+        "process_mode": {"interval": 5, "offset": 0},
+        "priority": 300,
+        "created_at": 1739435482000,
+        "creator": "admin",
+        "updated_at": 1739436347000,
+        "modifier": "admin",
+        "status": 1, // 主工作流状态
+        "workflow": { // 主工作流的 Haystack 配置
+            "components": [ /* ... */ ],
+            "connections": [ /* ... */ ],
+            "edges": [],
+            "extra_components": []
+        },
+        "branch_id": "main_branch_uuid_for_ff5d", // 主/默认分支 ID
+        "branch_name": "main",                    // 主/默认分支名称
+        "branch_status": 0,                       // 主/默认分支状态
+        "branch_volume_id": "target_vol_for_main_branch_ff5d", // 主/默认分支目标卷
+        "version": "1.2",
+        "branches": [ // 此工作流下的所有分支列表
+            {
+                "branch_id": "main_branch_uuid_for_ff5d",
+                "created_at": 1739435482000,
+                "creator": "admin",
+                "updated_at": 1739436347000,
+                "modifier": "admin",
+                "status": 1, // 此分支对应的工作流部分的状态 (通常与父工作流状态一致)
+                "workflow": { /* main_branch_uuid_for_ff5d 分支的特定 Haystack 配置 */ },
+                "branch_name": "main",
+                "branch_status": 0, // 该分支自身的状态
+                "branch_volume_id": "target_vol_for_main_branch_ff5d"
+            },
+            {
+                "branch_id": "dev_branch_uuid_for_ff5d",
+                "created_at": 1739500000000,
+                "creator": "developer_x",
+                "updated_at": 1739501000000,
+                "modifier": "developer_x",
+                "status": 1,
+                "workflow": { /* dev_branch_uuid_for_ff5d 分支的特定 Haystack 配置 */ },
+                "branch_name": "dev-feature-x",
+                "branch_status": 0,
+                "branch_volume_id": "target_vol_for_dev_branch_ff5d"
             }
         ]
     }
 }
 ```
 
-### 查看工作流详情
+**输出参数 (`MOIResponse_WorkflowDetailResponse_` 的 `data` 部分 - `WorkflowDetailResponse`)：**
+(参考 `workflow.openapi.json` components.schemas.WorkflowDetailResponse)
+主要包含工作流的基础信息、主工作流的 Haystack 配置 (`workflow`)、主/默认分支的相关信息 (`branch_id`, `branch_name`, `branch_status`, `branch_volume_id`)，以及一个 `branches` 数组，其中每一项是 `WorkflowBranchItem`。
+
+*   **`WorkflowBranchItem` 结构:** (参考 `workflow.openapi.json` components.schemas.WorkflowBranchItem)
+    *   `branch_id` (string): 分支ID
+    *   `created_at` (integer): 创建时间戳
+    *   `creator` (string): 创建者
+    *   `updated_at` (integer): 更新时间戳
+    *   `modifier` (string): 更新者
+    *   `status` (integer): 此分支应用的工作流部分的状态
+    *   `workflow` (object `WorkflowConfig`): 此分支特定的Haystack配置
+    *   `branch_name` (string): 分支名
+    *   `branch_status` (integer): 分支自身的状态
+    *   `branch_volume_id` (string): 分支的目标数据卷ID
+
+### 修改工作流
 
 ```
-GET /byoa/api/v1/index_workflow/{workflow_id}
+PUT /byoa/api/v1/workflow_meta/{workflow_id}
 ```
 
-**输出参数：**
-  
-|  参数             | 含义 |
-|  --------------- | ----  |
-| id               |工作流 id      |
-| name             | 工作流名称    |
-| job_meta_id      | 作业元数据 id   |
-| source_volume_ids       | 源数据卷列表    |
-| source_volume_names       | 源数据卷列表    |
-| file_types         | 文件类型列表    |
-| created_at       | 创建时间    |
-| creator         | 创建人    |
-| updated_at         | 更新时间    |
-| modifier         | 更新者    |
-| target_volume_id         | 目标数据卷 id   |
-| target_volume_name | 目标数据卷名   |
-| process_mode           | 处理模式   |
-| status            | 状态  1：运行中；2：完成；3：停止 |
-| workflow           | 工作流    |
+**描述：** 更新指定工作流的配置。这通常会更新工作流的 "main" 或默认分支。
 
-**示例：**
+**路径参数：**
+
+| 参数名        | 类型   | 是否必填 | 描述     |
+| ------------- | ------ | -------- | -------- |
+| `workflow_id` | string | 是       | 工作流ID |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         |
+| -------------- | ------ | -------- | ------------ |
+| `user-name`    | string | 否       | 用户名       |
+| `user-id`      | string | 是       | 用户ID       |
+| `Access-Token` | string | 是       | 鉴权Token    |
+| `uid`          | string | 是       | 用户登录 UID |
+
+**Body 输入参数 (`WorkflowRequest`)：**
+与"创建工作流"的 Body (`WorkflowRequest`) 结构相同。所有字段都可以更新。
+
+**示例 (Python)：**
 
 ```python
 import requests
 import json
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow/ff5d119a-4e94-4968-ac0c-6ef64fcabb6c"
+
+workflow_to_update = "fef28ca2-175e-4de9-9ac3-f4aa0da5a745" # 替换为实际的 workflow_id
+url = f"https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_meta/{workflow_to_update}" # 更新的 URL
+headers = {
+    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
+    "user-name": "updater_admin", # 可选
+    "Access-Token": "xxxx", # 实际的 Access Token
+    "uid": "fa9f114e-77e0-4c23-aa0f-e982a5ec80e2-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin" # 实际的 UID
+}
+
+body = { # WorkflowRequest 结构
+    "name": "wf-3-updated-name",
+    "source_volume_names": ["b-vol1-updated"],
+    "source_volume_ids": [1889223879880048640], # OpenAPI 指定为 integer
+    "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95", // 通常不改变，除非业务需要
+    "create_target_volume_name": "", // 通常在更新时为空或不提供
+        "process_mode": {
+        "interval": 10, // 更新处理间隔为10分钟
+            "offset": 0
+        },
+    "file_types": [2, 6], // 增加 markdown 支持
+    "priority": 350,      // 更新优先级
+        "workflow": {
+        // 更新后的 Haystack 配置
+            "components": [
+                {
+                    "name": "DocumentCleaner",
+                    "type": "haystack.components.preprocessors.document_cleaner.DocumentCleaner",
+                "component_id": "DocumentCleaner_Updated_ID",
+                "intro": "Updated DocumentCleaner",
+                "position": {"x": 0, "y": 0},
+                "input_keys": {}, "output_keys": {},
+                    "init_parameters": {
+                    "remove_empty_lines": False, // 修改参数
+                    "remove_extra_whitespaces": True
+                }
+            }
+            // ... 其他组件和连接
+        ],
+        "connections": [ /* ... */ ],
+        "edges": [],
+        "extra_components": []
+    }
+    // "branch_name": "main" // 通常更新主工作流时，此字段不需特别指定，或与 workflow_id 的主分支名一致
+}
+
+response = requests.put(url, json=body, headers=headers)
+print(response.status_code)
+print(response.json())
+```
+
+**返回 (`NoneDataResp`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": null
+}
+```
+
+### 删除工作流
+
+```
+DELETE /byoa/api/v1/workflow_meta/{workflow_id}
+```
+
+**描述：** 删除指定的工作流及其所有分支和关联的作业元数据。
+
+**路径参数：**
+
+| 参数名        | 类型   | 是否必填 | 描述     |
+| ------------- | ------ | -------- | -------- |
+| `workflow_id` | string | 是       | 工作流ID |
+
+**Query 参数：**
+
+| 参数名        | 类型    | 是否必填 | 描述                           | 默认值 |
+| ------------- | ------- | -------- | ------------------------------ | ------ |
+| `delete_data` | boolean | 否       | 是否删除该工作流产生的所有数据 | false  |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         |
+| -------------- | ------ | -------- | ------------ |
+| `user-id`      | string | 是       | 用户ID       |
+| `Access-Token` | string | 是       | 鉴权Token    |
+| `uid`          | string | 是       | 用户登录 UID |
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+workflow_to_delete = "729e7a03-652d-46e0-bdad-b05ec5b80cea" # 替换为实际的 workflow_id
+url = f"https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_meta/{workflow_to_delete}" # 更新的 URL
+
+headers = {
+    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
+    "Access-Token": "xxxx", # 实际的 Access Token
+    "uid": "011d4b66-ace5-4d58-88a4-bc76719acda5-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin" # 实际的 UID
+}
+params = {
+    "delete_data": True # 或 False
+}
+
+response = requests.delete(url, headers=headers, params=params)
+
+print(response.status_code)
+if response.content: # 检查是否有内容，因为成功可能返回空响应体
+    try:
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print("Response text:", response.text) # 如果不是JSON，打印文本
+else:
+    print("Request successful, no content returned.")
+
+```
+
+**返回 (`NoneDataResp`)：**
+成功时通常返回此结构，或 HTTP 204 No Content。
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": null
+}
+```
+
+### 停止工作流
+
+```
+PUT /byoa/api/v1/workflow_meta/{workflow_id}/stop
+```
+
+**描述：** 停止指定工作流的运行。这通常会将工作流的状态更改为"已停止"或类似状态，并可能停止所有关联的正在进行的作业。
+
+**路径参数：**
+
+| 参数名        | 类型   | 是否必填 | 描述     |
+| ------------- | ------ | -------- | -------- |
+| `workflow_id` | string | 是       | 工作流ID |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         |
+| -------------- | ------ | -------- | ------------ |
+| `user-id`      | string | 是       | 用户ID       |
+| `Access-Token` | string | 是       | 鉴权Token    |
+| `uid`          | string | 是       | 用户登录 UID |
+
+**(无 Body 输入参数)**
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+workflow_to_stop = "your_workflow_id_to_stop"
+url = f"https://your_base_url/byoa/api/v1/workflow_meta/{workflow_to_stop}/stop"
+
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+
+response = requests.put(url, headers=headers)
+
+print(response.status_code)
+if response.content:
+    try:
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print("Response text:", response.text)
+else:
+    print("Request to stop workflow successful, no content returned.")
+```
+
+**返回 (`NoneDataResp`)：**
+成功时通常返回此结构，表示操作已接受。
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": null
+}
+```
+
+### 工作流分支
+
+#### 创建工作流分支
+
+```
+POST /byoa/api/v1/workflow_meta/{workflow_id}/branch
+```
+
+**描述：** 为指定的工作流创建一个新的分支。
+
+**路径参数：**
+
+| 参数名        | 类型   | 是否必填 | 描述     |
+| ------------- | ------ | -------- | -------- |
+| `workflow_id` | string | 是       | 工作流ID |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述                | 默认值      |
+| -------------- | ------ | -------- | ------------------- | ----------- |
+| `user-name`    | string | 否       | 用户名              | "user_name" |
+| `user-id`      | string | 是       | 用户ID              |             |
+| `Access-Token` | string | 是       | 鉴权Token (隐式)    |             |
+| `uid`          | string | 是       | 用户登录 UID (隐式) |             |
+
+**Body 输入参数 (`WorkflowBranchRequest`)：**
+
+| 参数名        | 是否必填 | 类型                      | 含义       | 默认值 |
+| ------------- | -------- | ------------------------- | ---------- | ------ |
+| `branch_name` | 否       | string, nullable          | 分支名     | ""     |
+| `workflow`    | 是       | object (`WorkflowConfig`) | 工作流配置 |        |
+
+*   **`WorkflowConfig` 结构:** (同主工作流创建/更新时的 `WorkflowConfig` 定义)
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+workflow_id_for_branch = "your_workflow_id"
+url = f"https://your_base_url/byoa/api/v1/workflow_meta/{workflow_id_for_branch}/branch"
+
+headers = {
+    "user-id": "your_user_id",
+    "user-name": "branch_creator",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+
+body = {
+    "branch_name": "feature-branch-alpha",
+    "workflow": {
+        // ... (与主工作流类似的 Haystack Pipeline 配置, 但可能针对分支有所调整)
+        "components": [],
+        "connections": [],
+        "edges": [],
+        "extra_components": []
+    }
+}
+
+response = requests.post(url, json=body, headers=headers)
+print(response.status_code)
+if response.content:
+    try:
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print(response.text)
+```
+
+**返回 (`NoneDataResp`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": null
+}
+```
+
+#### 查看工作流分支列表
+
+```
+GET /byoa/api/v1/workflow_meta/{workflow_id}/branch
+```
+
+**描述：** 获取指定工作流下的所有分支列表。
+
+**路径参数：**
+
+| 参数名        | 类型   | 是否必填 | 描述     |
+| ------------- | ------ | -------- | -------- |
+| `workflow_id` | string | 是       | 工作流ID |
+
+**Query 参数：**
+
+| 参数名          | 类型                     | 是否必填 | 描述                                    |
+| --------------- | ------------------------ | -------- | --------------------------------------- |
+| `status_in`     | array[integer], nullable | 否       | 工作流状态 (分支应用的工作流部分的状态) |
+| `branch_status` | array[integer], nullable | 否       | 分支自身的状态                          |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述                |
+| -------------- | ------ | -------- | ------------------- |
+| `user-id`      | string | 是       | 用户ID              |
+| `Access-Token` | string | 是       | 鉴权Token (隐式)    |
+| `uid`          | string | 是       | 用户登录 UID (隐式) |
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+workflow_id_for_branches = "your_workflow_id"
+url = f"https://your_base_url/byoa/api/v1/workflow_meta/{workflow_id_for_branches}/branch"
+
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+params = {
+    # "branch_status": [0, 1] // 示例：查询状态为 0 或 1 的分支
+}
+
+response = requests.get(url, headers=headers, params=params)
+print(response.status_code)
+if response.content:
+    try:
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print(response.text)
+```
+
+**返回 (`MOIResponse_WorkflowListResponse_`)：**
+返回结构与 "查看工作流列表" (`GET /byoa/api/v1/workflow_meta`) 类似，其中 `data.workflows` 数组的每一项是 `WorkflowListItem`，但此处代表的是该工作流下的各个分支的信息。请参考 `WorkflowListItem` 结构。
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": { // WorkflowListResponse 结构
+        "total": 2, // 该工作流下的分支总数
+        "workflows": [ // WorkflowListItem 数组, 代表分支
+            {
+                "id": "workflow_id_for_branch_1", // 父工作流ID
+                "name": "Parent Workflow Name - Branch Alpha", // 分支可能会有特定命名展示
+                // ... 其他 WorkflowListItem 字段 ...
+                "branch_id": "branch_uuid_alpha",
+                "branch_name": "alpha-feature",
+                "branch_status": 0, // 分支状态
+                "branch_volume_id": "target_vol_for_alpha_branch"
+                // status 字段此时代表此分支应用的工作流部分的状态
+            },
+            {
+                "id": "workflow_id_for_branch_1", // 父工作流ID
+                "name": "Parent Workflow Name - Branch Beta",
+                // ... 其他 WorkflowListItem 字段 ...
+                "branch_id": "branch_uuid_beta",
+                "branch_name": "beta-experiment",
+                "branch_status": 1,
+                "branch_volume_id": "target_vol_for_beta_branch"
+            }
+        ]
+    }
+}
+```
+
+**输出参数 (`MOIResponse_WorkflowListResponse_` 的 `data.workflows` 中的 `WorkflowListItem`):**
+(具体字段参考 `GET /byoa/api/v1/workflow_meta` 的 `WorkflowListItem` 定义，此处 `id` 是父工作流 ID, `branch_id`, `branch_name`, `branch_status` 等描述分支特有属性)
+
+
+#### 获取工作流分支详情
+
+```
+GET /byoa/api/v1/workflow_meta/branch/{branch_id}
+```
+
+**描述：** 获取特定工作流分支的详细信息。
+
+**路径参数：**
+
+| 参数名      | 类型   | 是否必填 | 描述         |
+| ----------- | ------ | -------- | ------------ |
+| `branch_id` | string | 是       | 工作流分支ID |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述                |
+| -------------- | ------ | -------- | ------------------- |
+| `user-id`      | string | 是       | 用户ID              |
+| `Access-Token` | string | 是       | 鉴权Token (隐式)    |
+| `uid`          | string | 是       | 用户登录 UID (隐式) |
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+branch_to_get = "your_branch_id"
+url = f"https://your_base_url/byoa/api/v1/workflow_meta/branch/{branch_to_get}"
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+response = requests.get(url, headers=headers)
+print(response.status_code)
+if response.content:
+    try:
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print(response.text)
+```
+
+**返回 (`MOIResponse_WorkflowDetailResponse_`)：**
+返回结构与 "查看工作流详情" (`GET /byoa/api/v1/workflow_meta/{workflow_id}`) 类似，但 `data` 部分描述的是该分支的详情。
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": { // WorkflowDetailResponse 结构, 但聚焦于分支
+        "id": "parent_workflow_uuid", // 父工作流ID
+        "name": "Parent Workflow Name (Branch: feature-x)", // 可能包含分支信息
+        // ... (父工作流的详细信息) ...
+        "workflow": { /* 该分支应用的 Haystack 配置 */ },
+        "branch_id": "your_branch_id",       // 当前分支ID
+        "branch_name": "feature-x",          // 当前分支名称
+        "branch_status": 0,                  // 当前分支状态
+        "branch_volume_id": "target_vol_for_feature_x_branch", // 当前分支目标卷
+        "branches": null // 通常获取单个分支详情时，此字段可能为null或不包含其他分支
+    }
+}
+```
+
+**输出参数 (`MOIResponse_WorkflowDetailResponse_` 的 `data` 部分 - `WorkflowDetailResponse`)：**
+(参考 `GET /byoa/api/v1/workflow_meta/{workflow_id}` 的 `WorkflowDetailResponse` 定义，其中 `id` 为父工作流 ID，`workflow` 为此分支的配置，`branch_id`, `branch_name` 等为当前分支信息)
+
+
+#### 更新工作流分支
+
+```
+PUT /byoa/api/v1/workflow_meta/branch/{branch_id}
+```
+
+**描述：** 更新指定工作流分支的配置。
+
+**路径参数：**
+
+| 参数名      | 类型   | 是否必填 | 描述         |
+| ----------- | ------ | -------- | ------------ |
+| `branch_id` | string | 是       | 工作流分支ID |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述                | 默认值      |
+| -------------- | ------ | -------- | ------------------- | ----------- |
+| `user-name`    | string | 否       | 用户名              | "user_name" |
+| `user-id`      | string | 是       | 用户ID              |             |
+| `Access-Token` | string | 是       | 鉴权Token (隐式)    |             |
+| `uid`          | string | 是       | 用户登录 UID (隐式) |             |
+
+**Body 输入参数 (`UpdateWorkflowBranchRequest`)：**
+
+| 参数名        | 是否必填 | 类型                      | 含义           | 默认值 |
+| ------------- | -------- | ------------------------- | -------------- | ------ |
+| `branch_name` | 否       | string, nullable          | 新的分支名     | ""     |
+| `workflow`    | 是       | object (`WorkflowConfig`) | 新的工作流配置 |        |
+
+*   **`WorkflowConfig` 结构:** (同主工作流创建/更新时的 `WorkflowConfig` 定义)
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+branch_to_update = "your_branch_id_to_update"
+url = f"https://your_base_url/byoa/api/v1/workflow_meta/branch/{branch_to_update}"
+headers = {
+    "user-id": "your_user_id",
+    "user-name": "branch_updater",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+body = {
+    "branch_name": "feature-branch-alpha-v2",
+    "workflow": {
+        // ... (更新后的 Haystack Pipeline 配置)
+        "components": [],
+        "connections": []
+    }
+}
+response = requests.put(url, json=body, headers=headers)
+print(response.status_code)
+if response.content:
+    try:
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print(response.text)
+```
+
+**返回 (`NoneDataResp`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": null
+}
+```
+
+#### 删除工作流分支
+
+```
+DELETE /byoa/api/v1/workflow_meta/branch/{branch_id}
+```
+
+**描述：** 删除指定的工作流分支。
+
+**路径参数：**
+
+| 参数名      | 类型   | 是否必填 | 描述         |
+| ----------- | ------ | -------- | ------------ |
+| `branch_id` | string | 是       | 工作流分支ID |
+
+**Query 参数：**
+
+| 参数名        | 类型    | 是否必填 | 描述                         | 默认值 |
+| ------------- | ------- | -------- | ---------------------------- | ------ |
+| `delete_data` | boolean | 否       | 是否删除该分支产生的所有数据 | false  |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述                |
+| -------------- | ------ | -------- | ------------------- |
+| `user-id`      | string | 是       | 用户ID              |
+| `Access-Token` | string | 是       | 鉴权Token (隐式)    |
+| `uid`          | string | 是       | 用户登录 UID (隐式) |
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+branch_to_delete = "your_branch_id_to_delete"
+url = f"https://your_base_url/byoa/api/v1/workflow_meta/branch/{branch_to_delete}"
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+params = {
+    "delete_data": False # 或 True
+}
+response = requests.delete(url, headers=headers, params=params)
+print(response.status_code)
+if response.content and response.text.strip():
+    try:
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print(f"Response Text: {response.text}")
+else:
+    print("Request successful, no content returned or empty response.")
+```
+
+**返回 (`NoneDataResp`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": null
+}
+```
+
+#### 启用工作流分支
+
+```
+PUT /byoa/api/v1/workflow_meta/branch/{branch_id}/enable
+```
+
+**描述：** 启用指定的工作流分支。这通常意味着该分支成为工作流新的活动分支，后续的作业将基于此分支的配置运行。
+
+**路径参数：**
+
+| 参数名      | 类型   | 是否必填 | 描述         |
+| ----------- | ------ | -------- | ------------ |
+| `branch_id` | string | 是       | 工作流分支ID |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述                |
+| -------------- | ------ | -------- | ------------------- |
+| `user-id`      | string | 是       | 用户ID              |
+| `Access-Token` | string | 是       | 鉴权Token (隐式)    |
+| `uid`          | string | 是       | 用户登录 UID (隐式) |
+
+**(无 Body 输入参数)**
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+branch_to_enable = "your_branch_id_to_enable"
+url = f"https://your_base_url/byoa/api/v1/workflow_meta/branch/{branch_to_enable}/enable"
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+response = requests.put(url, headers=headers)
+print(response.status_code)
+if response.content:
+    try:
+        # Enable通常返回更新后的分支详情或父工作流详情
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print(response.text)
+```
+
+**返回 (`MOIResponse_WorkflowDetailResponse_`)：**
+成功启用后，通常返回该分支所属的父工作流的详细信息 (`WorkflowDetailResponse`)，其中该分支的状态会更新，并可能成为主分支。
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": { // WorkflowDetailResponse 结构
+        "id": "parent_workflow_uuid",
+        // ... (父工作流的详细信息) ...
+        "branch_id": "your_branch_id_to_enable", // 现在启用的分支成为主分支
+        "branch_name": "enabled-branch-name",
+        "branch_status": 0, // 状态变为启用/活跃
+        "branches": [
+            {
+                "branch_id": "your_branch_id_to_enable",
+                "branch_name": "enabled-branch-name",
+                "branch_status": 0, // 更新后的状态
+                // ...other分支详情...
+            }
+            // ...other分支列表...
+        ]
+    }
+}
+```
+
+#### 禁用工作流分支
+
+```
+PUT /byoa/api/v1/workflow_meta/branch/{branch_id}/disable
+```
+
+**描述：** 禁用指定的工作流分支。被禁用的分支通常不能再用于新的作业。如果该分支是当前活动分支，可能需要先启用另一个分支。
+
+**路径参数：**
+
+| 参数名      | 类型   | 是否必填 | 描述         |
+| ----------- | ------ | -------- | ------------ |
+| `branch_id` | string | 是       | 工作流分支ID |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述                |
+| -------------- | ------ | -------- | ------------------- |
+| `user-id`      | string | 是       | 用户ID              |
+| `Access-Token` | string | 是       | 鉴权Token (隐式)    |
+| `uid`          | string | 是       | 用户登录 UID (隐式) |
+
+**(无 Body 输入参数)**
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+branch_to_disable = "your_branch_id_to_disable"
+url = f"https://your_base_url/byoa/api/v1/workflow_meta/branch/{branch_to_disable}/disable"
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+response = requests.put(url, headers=headers)
+print(response.status_code)
+if response.content:
+    try:
+        # Disable通常返回更新后的分支详情或父工作流详情
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print(response.text)
+```
+
+**返回 (`MOIResponse_WorkflowDetailResponse_`)：**
+成功禁用后，通常返回该分支所属的父工作流的详细信息 (`WorkflowDetailResponse`)，其中该分支的状态会更新。
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": { // WorkflowDetailResponse 结构
+        "id": "parent_workflow_uuid",
+        // ... (父工作流的详细信息) ...
+        "branches": [
+            {
+                "branch_id": "your_branch_id_to_disable",
+                "branch_name": "disabled-branch-name",
+                "branch_status": 1, // 示例：状态变为禁用/非活跃
+                // ...other分支详情...
+            }
+            // ...other分支列表...
+        ]
+    }
+}
+```
+
+## 作业
+
+### 创建作业
+
+```
+POST /byoa/api/v1/workflow_job
+```
+
+**路径参数：**
+(无)
+
+**Query 参数：**
+(无)
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述                    | 默认值 |
+| -------------- | ------ | -------- | ----------------------- | ------ |
+| `user-id`      | string | 是       | 用户ID                  |        |
+| `Access-Token` | string | 是       | 鉴权Token (隐式要求)    |        |
+| `uid`          | string | 是       | 用户登录 UID (隐式要求) |        |
+| `Content-Type` | string | 是       | `application/json`      |        |
+
+
+**Body 输入参数 (`JobCreateRequest`)：**
+
+| 参数               | 是否必填 | 类型                       | 含义                                                         | 默认值 |
+| ------------------ | -------- | -------------------------- | ------------------------------------------------------------ | ------ |
+| name               | 是       | string                     | 作业名称                                                     |        |
+| workflow_meta_id   | 是       | string                     | 工作流元数据ID (父工作流的ID)                                |        |
+| workflow_branch_id | 是       | string                     | 工作流分支ID (如果基于主工作流，可能与meta_id相同或特定分支ID) |        |
+| target_volume_id   | 是       | string                     | 目标数据卷ID (作业产生的数据将写入此卷)                      |        |
+| files              | 否       | array[object (`FileItem`)] | 要处理的文件列表。如果为空，则按工作流配置处理               | []     |
+
+* **`FileItem` 对象结构:** (参考 `workflow.openapi.json` -> components.schemas.FileItem)
+
+  | 参数             | 是否必填 | 类型                      | 含义            |
+  | ---------------- | -------- | ------------------------- | --------------- |
+  | file_name        | 是       | string                    | 文件名          |
+  | file_type        | 是       | integer (`FileType` enum) | 文件类型        |
+  | file_size        | 是       | integer                   | 文件大小(bytes) |
+  | file_path        | 是       | string                    | 文件路径        |
+  | source_volume_id | 是       | integer                   | 源数据卷ID      |
+  | source_file_id   | 是       | integer                   | 源文件ID        |
+
+**Body 示例 (`JobCreateRequest`)：**
+
+```json
+{
+    "name": "Sample Job",
+    "workflow_meta_id": "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c",
+    "workflow_branch_id": "main",
+    "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
+    "files": [
+        {
+            "file_name": "sample_file1.pdf",
+            "file_type": 2,
+            "file_size": 123456,
+            "file_path": "/path/to/sample_file1.pdf",
+            "source_volume_id": 1889223879880048640,
+            "source_file_id": 1
+        },
+        {
+            "file_name": "sample_file2.pdf",
+            "file_type": 2,
+            "file_size": 123456,
+            "file_path": "/path/to/sample_file2.pdf",
+            "source_volume_id": 1889223879880048640,
+            "source_file_id": 2
+        }
+    ]
+}
+```
+
+**返回 (`NoneDataResp`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": null
+}
+```
+
+### 查看作业列表
+
+```
+GET /byoa/api/v1/workflow_job
+```
+
+**描述：** 获取符合条件的工作流作业列表。
+
+**路径参数：**
+(无)
+
+**Query 参数：**
+
+| 参数名        | 类型                                  | 是否必填 | 描述                          | 默认值       |
+| ------------- | ------------------------------------- | -------- | ----------------------------- | ------------ |
+| `name_search` | string, nullable                      | 否       | 名称搜索 (作业名)             |              |
+| `start_time`  | integer, nullable                     | 否       | 开始时间戳 (毫秒)             |              |
+| `end_time`    | integer, nullable                     | 否       | 结束时间戳 (毫秒)             |              |
+| `status`      | array[integer], nullable              | 否       | 状态 (例如: 1-运行中, 2-完成) |              |
+| `file_types`  | array[integer], nullable              | 否       | 文件类型                      |              |
+| `priority`    | array[integer], nullable              | 否       | 优先级                        |              |
+| `creator`     | string, nullable                      | 否       | 创建者                        |              |
+| `offset`      | integer, >=0                          | 否       | 当页偏移量                    | 0            |
+| `limit`       | integer, >=1                          | 否       | 每页大小                      | 20           |
+| `sort_field`  | string, nullable                      | 否       | 排序字段                      | "created_at" |
+| `sort_order`  | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         |
+| -------------- | ------ | -------- | ------------ |
+| `user-id`      | string | 是       | 用户ID       |
+| `Access-Token` | string | 是       | 鉴权Token    |
+| `uid`          | string | 是       | 用户登录 UID |
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_job"
+headers = {
+    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
+    "Access-Token": "xxxx",
+    "uid": "d252447b-7f1d-4fd4-8b70-9bc2dd5cd505-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+}
+params = {
+    "limit": 5,
+    "sort_field": "name",
+    "sort_order": "ascend"
+}
+
+response = requests.get(url, headers=headers, params=params)
+
+print(response.status_code)
+print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+```
+
+**返回 (`MOIResponse_JobListResponse_`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": {
+        "total": 20,
+        "jobs": [
+            {
+                "id": "job_uuid_1",
+                "name": "Alpha Job",
+                "created_at": 1739377287000,
+                "creator": "admin_user",
+                "updated_at": 1739377755000,
+                "modifier": "admin_user",
+                "status": 2,
+                "version": "1.0",
+                "workflow_meta_id": "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c",
+                "workflow_branch_id": "main"
+            }
+        ]
+    }
+}
+```
+
+**输出参数 (`MOIResponse_JobListResponse_` 的 `data` 部分 - `JobListResponse`)：**
+
+| 参数    | 类型                               | 描述                                       |
+| ------- | ---------------------------------- | ------------------------------------------ |
+| `total` | integer                            | 符合条件的工作流作业总数                   |
+| `jobs`  | array[object] (`JobListItem` 结构) | 作业列表，每个对象包含作业及其主要分支信息 |
+
+*   **`JobListItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobListItem)
+    *   `id` (string): 作业ID
+    *   `name` (string): 作业名称
+    *   `created_at` (integer): 创建时间戳 (毫秒)
+    *   `creator` (string): 创建者
+    *   `updated_at` (integer): 更新时间戳 (毫秒)
+    *   `modifier` (string, nullable): 更新者
+    *   `status` (integer): 状态
+    *   `version` (string, nullable): 版本号
+    *   `workflow_meta_id` (string): 工作流元数据ID
+    *   `workflow_branch_id` (string): 工作流分支ID
+
+
+### 查看作业详情
+
+```
+GET /byoa/api/v1/workflow_job/{job_id}
+```
+
+**描述：** 获取指定作业的详细信息。
+
+**路径参数：**
+
+| 参数名   | 类型   | 是否必填 | 描述   |
+| -------- | ------ | -------- | ------ |
+| `job_id` | string | 是       | 作业ID |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         |
+| -------------- | ------ | -------- | ------------ |
+| `user-id`      | string | 是       | 用户ID       |
+| `Access-Token` | string | 是       | 鉴权Token    |
+| `uid`          | string | 是       | 用户登录 UID |
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+job_to_get = "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c"
+url = f"https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_job/{job_to_get}"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -682,1994 +1368,324 @@ headers = {
 }
 response = requests.get(url, headers=headers)
 
-print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
+print(response.status_code)
+print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-返回：
+**返回 (`MOIResponse_JobDetailResponse_`)：**
 
-```bash
-Response Body: {
+```json
+{
     "code": "ok",
     "msg": "ok",
     "data": {
         "id": "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c",
-        "name": "test-2",
-        "job_meta_id": "edd6ffc3-5c96-4a1b-a6ef-01d21fdbb6d0",
-        "source_volume_ids": [
-            "1889223879880048640"
-        ],
-        "source_volume_names": [
-            "b-vol1"
-        ],
-        "file_types": [
-            2
-        ],
+        "name": "Detailed Job Test",
         "created_at": 1739435482000,
         "creator": "admin",
         "updated_at": 1739436347000,
         "modifier": "admin",
-        "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9",
-        "target_volume_name": "a-vol2",
-        "process_mode": {
-            "interval": 5,
-            "offset": 0
-        },
         "status": 1,
-        "workflow": {
-            "components": [
-                {
-                    "name": "DocumentCleaner",
-                    "type": "haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                    "component_id": "DocumentCleaner_1739435478121",
-                    "intro": "DocumentCleaner",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "ascii_only": false,
-                        "keep_id": false,
-                        "remove_empty_lines": false,
-                        "remove_extra_whitespaces": false,
-                        "remove_regex": null,
-                        "remove_repeated_substrings": false,
-                        "remove_substrings": null,
-                        "unicode_normalization": null
-                    }
-                },
-                {
-                    "name": "DocumentCleaner-ImageCaption",
-                    "type": "haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                    "component_id": "DocumentCleaner-ImageCaption_1739435478121",
-                    "intro": "DocumentCleaner-ImageCaption",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "ascii_only": false,
-                        "keep_id": false,
-                        "remove_empty_lines": false,
-                        "remove_extra_whitespaces": false,
-                        "remove_regex": null,
-                        "remove_repeated_substrings": false,
-                        "remove_substrings": null,
-                        "unicode_normalization": null
-                    }
-                },
-                {
-                    "name": "DocumentCleaner-ImageOCR",
-                    "type": "haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                    "component_id": "DocumentCleaner-ImageOCR_1739435478121",
-                    "intro": "DocumentCleaner-ImageOCR",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "ascii_only": false,
-                        "keep_id": false,
-                        "remove_empty_lines": false,
-                        "remove_extra_whitespaces": false,
-                        "remove_regex": null,
-                        "remove_repeated_substrings": false,
-                        "remove_substrings": null,
-                        "unicode_normalization": null
-                    }
-                },
-                {
-                    "name": "DocumentEmbedder",
-                    "type": "haystack.components.embedders.openai_document_embedder.OpenAIDocumentEmbedder",
-                    "component_id": "DocumentEmbedder_1739435478121",
-                    "intro": "DocumentEmbedder",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "api_base_url": "https://api.siliconflow.cn/v1",
-                        "api_key": {
-                            "env_vars": [
-                                "OPENAI_API_KEY"
-                            ],
-                            "strict": true,
-                            "type": "env_var"
-                        },
-                        "batch_size": 32,
-                        "dimensions": null,
-                        "embedding_separator": "\n",
-                        "meta_fields_to_embed": [],
-                        "model": "BAAI/bge-m3",
-                        "organization": null,
-                        "prefix": "",
-                        "progress_bar": true,
-                        "suffix": ""
-                    }
-                },
-                {
-                    "name": "DocumentJoiner",
-                    "type": "haystack.components.joiners.document_joiner.DocumentJoiner",
-                    "component_id": "DocumentJoiner_1739435478121",
-                    "intro": "DocumentJoiner",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "join_mode": "concatenate",
-                        "sort_by_score": true,
-                        "top_k": null,
-                        "weights": null
-                    }
-                },
-                {
-                    "name": "DocumentJoiner-Result",
-                    "type": "haystack.components.joiners.document_joiner.DocumentJoiner",
-                    "component_id": "DocumentJoiner-Result_1739435478121",
-                    "intro": "DocumentJoiner-Result",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "join_mode": "concatenate",
-                        "sort_by_score": true,
-                        "top_k": null,
-                        "weights": null
-                    }
-                },
-                {
-                    "name": "DocumentSplitter",
-                    "type": "haystack.components.preprocessors.document_splitter.DocumentSplitter",
-                    "component_id": "DocumentSplitter_1739435478121",
-                    "intro": "DocumentSplitter",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "split_by": "word",
-                        "split_length": 800,
-                        "split_overlap": 200,
-                        "split_threshold": 0
-                    }
-                },
-                {
-                    "name": "DocumentWriter",
-                    "type": "haystack.components.writers.document_writer.DocumentWriter",
-                    "component_id": "DocumentWriter_1739435478121",
-                    "intro": "DocumentWriter",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "document_store": {
-                            "init_parameters": {
-                                "connection_string": {
-                                    "env_vars": [
-                                        "DATABASE_SYNC_URI"
-                                    ],
-                                    "strict": true,
-                                    "type": "env_var"
-                                },
-                                "embedding_dimension": 1024,
-                                "keyword_index_name": "haystack_keyword_index",
-                                "recreate_table": true,
-                                "table_name": "embedding_results",
-                                "vector_function": "cosine_similarity"
-                            },
-                            "type": "byoa.integrations.document_stores.mo_document_store.MOIDocumentStore"
-                        },
-                        "policy": "NONE"
-                    }
-                },
-                {
-                    "name": "FileRouterComponent",
-                    "type": "haystack.components.routers.file_type_router.FileTypeRouter",
-                    "component_id": "FileRouterComponent_1739435478121",
-                    "intro": "FileRouterComponent",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "additional_mimetypes": null,
-                        "mime_types": [
-                            "text/plain",
-                            "text/markdown",
-                            "image/.*",
-                            "application/pdf"
-                        ]
-                    }
-                },
-                {
-                    "name": "ImageCaptionToDocument",
-                    "type": "byoa.integrations.components.converters.image_caption_to_document.ImageCaptionToDocument",
-                    "component_id": "ImageCaptionToDocument_1739435478121",
-                    "intro": "ImageCaptionToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {}
-                },
-                {
-                    "name": "ImageOCRToDocument",
-                    "type": "byoa.integrations.components.converters.image_ocr_to_document.ImageOCRToDocument",
-                    "component_id": "ImageOCRToDocument_1739435478121",
-                    "intro": "ImageOCRToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "model": "ucaslcl/GOT-OCR2_0",
-                        "tokenizer": "stepfun-ai/GOT-OCR2_0"
-                    }
-                },
-                {
-                    "name": "ImageToDocument",
-                    "type": "byoa.integrations.components.converters.image_to_document.ImageToDocument",
-                    "component_id": "ImageToDocument_1739435478121",
-                    "intro": "ImageToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {}
-                },
-                {
-                    "name": "MagicPDFToDocument",
-                    "type": "byoa.integrations.components.converters.magic_pdf_to_document.MagicPDFToDocument",
-                    "component_id": "MagicPDFToDocument_1739435478121",
-                    "intro": "MagicPDFToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {}
-                },
-                {
-                    "name": "MarkdownToDocument",
-                    "type": "haystack.components.converters.markdown.MarkdownToDocument",
-                    "component_id": "MarkdownToDocument_1739435478121",
-                    "intro": "MarkdownToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "progress_bar": false,
-                        "table_to_single_line": false
-                    }
-                },
-                {
-                    "name": "MetadataRouter",
-                    "type": "haystack.components.routers.metadata_router.MetadataRouter",
-                    "component_id": "MetadataRouter_1739435478121",
-                    "intro": "MetadataRouter",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "rules": {
-                            "image": {
-                                "conditions": [
-                                    {
-                                        "field": "meta.content_type",
-                                        "operator": "==",
-                                        "value": "image"
-                                    }
-                                ],
-                                "operator": "AND"
-                            },
-                            "text": {
-                                "conditions": [
-                                    {
-                                        "field": "meta.content_type",
-                                        "operator": "==",
-                                        "value": "text"
-                                    }
-                                ],
-                                "operator": "AND"
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "PythonExecutor",
-                    "component_id": "PythonExecutor_1739435478121",
-                    "intro": "PythonExecutor",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "python_code": ""
-                    },
-                    "type": "byoa.integrations.components.python_executor.PythonExecutor"
-                },
-                {
-                    "name": "TextFileToDocument",
-                    "type": "haystack.components.converters.txt.TextFileToDocument",
-                    "component_id": "TextFileToDocument_1739435478121",
-                    "intro": "TextFileToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "encoding": "utf8"
-                    }
-                }
-            ],
-            "connections": [
-                {
-                    "receiver": "TextFileToDocument.sources",
-                    "sender": "FileRouterComponent.text/plain"
-                },
-                {
-                    "receiver": "MarkdownToDocument.sources",
-                    "sender": "FileRouterComponent.text/markdown"
-                },
-                {
-                    "receiver": "ImageToDocument.sources",
-                    "sender": "FileRouterComponent.image/.*"
-                },
-                {
-                    "receiver": "MagicPDFToDocument.sources",
-                    "sender": "FileRouterComponent.application/pdf"
-                },
-                {
-                    "receiver": "DocumentJoiner.documents",
-                    "sender": "TextFileToDocument.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner.documents",
-                    "sender": "MarkdownToDocument.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner.documents",
-                    "sender": "MagicPDFToDocument.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner.documents",
-                    "sender": "ImageToDocument.documents"
-                },
-                {
-                    "receiver": "MetadataRouter.documents",
-                    "sender": "DocumentJoiner.documents"
-                },
-                {
-                    "receiver": "DocumentCleaner.documents",
-                    "sender": "MetadataRouter.text"
-                },
-                {
-                    "receiver": "ImageOCRToDocument.documents",
-                    "sender": "MetadataRouter.image"
-                },
-                {
-                    "receiver": "ImageCaptionToDocument.documents",
-                    "sender": "MetadataRouter.image"
-                },
-                {
-                    "receiver": "DocumentSplitter.documents",
-                    "sender": "DocumentCleaner.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner-Result.documents",
-                    "sender": "DocumentSplitter.documents"
-                },
-                {
-                    "receiver": "DocumentCleaner-ImageOCR.documents",
-                    "sender": "ImageOCRToDocument.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner-Result.documents",
-                    "sender": "DocumentCleaner-ImageOCR.documents"
-                },
-                {
-                    "receiver": "DocumentCleaner-ImageCaption.documents",
-                    "sender": "ImageCaptionToDocument.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner-Result.documents",
-                    "sender": "DocumentCleaner-ImageCaption.documents"
-                },
-                {
-                    "receiver": "PythonExecutor.documents",
-                    "sender": "DocumentJoiner-Result.documents"
-                },
-                {
-                    "receiver": "DocumentEmbedder.documents",
-                    "sender": "PythonExecutor.documents"
-                },
-                {
-                    "receiver": "DocumentWriter.documents",
-                    "sender": "DocumentEmbedder.documents"
-                }
-            ],
-            "edges": [],
-            "extra_components": []
-        }
-    }
-}
-```
-
-### 修改工作流
-
-```
-POST /byoa/api/v1/index_workflow/{workflow_id}
-```
-
-输入参数参考上面的**创建工作流步**。
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow/fef28ca2-175e-4de9-9ac3-f4aa0da5a745"  
-headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "fa9f114e-77e0-4c23-aa0f-e982a5ec80e2-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
-}
-
-body = {
-    "name":"wf-3",
-    "source_volume_names":[
-        "b-vol1"
-    ],
-    "source_volume_ids":[
-        "1889223879880048640"
-    ],
-    "target_volume_name":"a-vol1",
-    "target_volume_id":"eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
-    "create_target_volume_name":"",
-    "process_mode":{
-        "interval":0,
-        "offset":0
-    },
-    "file_types":[
-        2
-    ],
-    "workflow":{
-        "components":[
-            {
-                "name":"DocumentCleaner",
-                "type":"haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                "component_id":"DocumentCleaner_1739377283742",
-                "intro":"DocumentCleaner",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "ascii_only":"false",
-                    "keep_id":"false",
-                    "remove_empty_lines":"true",
-                    "remove_extra_whitespaces":"true",
-                    "remove_regex":"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)|https?://[^\\s]+",
-                    "remove_repeated_substrings":"false",
-                    "remove_substrings":"null",
-                    "unicode_normalization":"null"
-                }
-            },
-            {
-                "name":"DocumentCleaner-ImageCaption",
-                "type":"haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                "component_id":"DocumentCleaner-ImageCaption_1739377283742",
-                "intro":"DocumentCleaner-ImageCaption",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "ascii_only":"false",
-                    "keep_id":"false",
-                    "remove_empty_lines":"true",
-                    "remove_extra_whitespaces":"true",
-                    "remove_regex":"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)|https?://[^\\s]+",
-                    "remove_repeated_substrings":"false",
-                    "remove_substrings":"null",
-                    "unicode_normalization":"null"
-                }
-            },
-            {
-                "name":"DocumentCleaner-ImageOCR",
-                "type":"haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                "component_id":"DocumentCleaner-ImageOCR_1739377283742",
-                "intro":"DocumentCleaner-ImageOCR",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "ascii_only":"false",
-                    "keep_id":"false",
-                    "remove_empty_lines":"true",
-                    "remove_extra_whitespaces":"true",
-                    "remove_regex":"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)|https?://[^\\s]+",
-                    "remove_repeated_substrings":"false",
-                    "remove_substrings":"null",
-                    "unicode_normalization":"null"
-                }
-            },
-            {
-                "name":"DocumentEmbedder",
-                "type":"haystack.components.embedders.openai_document_embedder.OpenAIDocumentEmbedder",
-                "component_id":"DocumentEmbedder_1739377283742",
-                "intro":"DocumentEmbedder",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "api_base_url":"https://api.siliconflow.cn/v1",
-                    "api_key":{
-                        "env_vars":[
-                            "OPENAI_API_KEY"
-                        ],
-                        "strict":"true",
-                        "type":"env_var"
-                    },
-                    "batch_size":32,
-                    "dimensions":"null",
-                    "embedding_separator":"\n",
-                    "meta_fields_to_embed":[
-
-                    ],
-                    "model":"BAAI/bge-m3",
-                    "organization":"null",
-                    "prefix":"",
-                    "progress_bar":"true",
-                    "suffix":""
-                }
-            },
-            {
-                "name":"DocumentJoiner",
-                "type":"haystack.components.joiners.document_joiner.DocumentJoiner",
-                "component_id":"DocumentJoiner_1739377283742",
-                "intro":"DocumentJoiner",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "join_mode":"concatenate",
-                    "sort_by_score":"true",
-                    "top_k":"null",
-                    "weights":"null"
-                }
-            },
-            {
-                "name":"DocumentJoiner-Result",
-                "type":"haystack.components.joiners.document_joiner.DocumentJoiner",
-                "component_id":"DocumentJoiner-Result_1739377283742",
-                "intro":"DocumentJoiner-Result",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "join_mode":"concatenate",
-                    "sort_by_score":"true",
-                    "top_k":"null",
-                    "weights":"null"
-                }
-            },
-            {
-                "name":"DocumentSplitter",
-                "type":"haystack.components.preprocessors.document_splitter.DocumentSplitter",
-                "component_id":"DocumentSplitter_1739377283742",
-                "intro":"DocumentSplitter",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "split_by":"word",
-                    "split_length":800,
-                    "split_overlap":200,
-                    "split_threshold":0
-                }
-            },
-            {
-                "name":"DocumentWriter",
-                "type":"haystack.components.writers.document_writer.DocumentWriter",
-                "component_id":"DocumentWriter_1739377283742",
-                "intro":"DocumentWriter",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "document_store":{
-                        "init_parameters":{
-                            "connection_string":{
-                                "env_vars":[
-                                    "DATABASE_SYNC_URI"
-                                ],
-                                "strict":"true",
-                                "type":"env_var"
-                            },
-                            "embedding_dimension":1024,
-                            "keyword_index_name":"haystack_keyword_index",
-                            "recreate_table":"true",
-                            "table_name":"embedding_results",
-                            "vector_function":"cosine_similarity"
-                        },
-                        "type":"byoa.integrations.document_stores.mo_document_store.MOIDocumentStore"
-                    },
-                    "policy":"NONE"
-                }
-            },
-            {
-                "name":"FileRouterComponent",
-                "type":"haystack.components.routers.file_type_router.FileTypeRouter",
-                "component_id":"FileRouterComponent_1739377283742",
-                "intro":"FileRouterComponent",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "additional_mimetypes":"null",
-                    "mime_types":[
-                        "text/plain",
-                        "text/markdown",
-                        "image/.*",
-                        "application/pdf"
-                    ]
-                }
-            },
-            {
-                "name":"ImageCaptionToDocument",
-                "type":"byoa.integrations.components.converters.image_caption_to_document.ImageCaptionToDocument",
-                "component_id":"ImageCaptionToDocument_1739377283742",
-                "intro":"ImageCaptionToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-
-                }
-            },
-            {
-                "name":"ImageOCRToDocument",
-                "type":"byoa.integrations.components.converters.image_ocr_to_document.ImageOCRToDocument",
-                "component_id":"ImageOCRToDocument_1739377283742",
-                "intro":"ImageOCRToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "model":"ucaslcl/GOT-OCR2_0",
-                    "tokenizer":"stepfun-ai/GOT-OCR2_0"
-                }
-            },
-            {
-                "name":"ImageToDocument",
-                "type":"byoa.integrations.components.converters.image_to_document.ImageToDocument",
-                "component_id":"ImageToDocument_1739377283742",
-                "intro":"ImageToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-
-                }
-            },
-            {
-                "name":"MagicPDFToDocument",
-                "type":"byoa.integrations.components.converters.magic_pdf_to_document.MagicPDFToDocument",
-                "component_id":"MagicPDFToDocument_1739377283742",
-                "intro":"MagicPDFToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-
-                }
-            },
-            {
-                "name":"MarkdownToDocument",
-                "type":"haystack.components.converters.markdown.MarkdownToDocument",
-                "component_id":"MarkdownToDocument_1739377283742",
-                "intro":"MarkdownToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "progress_bar":"false",
-                    "table_to_single_line":"false"
-                }
-            },
-            {
-                "name":"MetadataRouter",
-                "type":"haystack.components.routers.metadata_router.MetadataRouter",
-                "component_id":"MetadataRouter_1739377283742",
-                "intro":"MetadataRouter",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "rules":{
-                        "image":{
-                            "conditions":[
-                                {
-                                    "field":"meta.content_type",
-                                    "operator":"==",
-                                    "value":"image"
-                                }
-                            ],
-                            "operator":"AND"
-                        },
-                        "text":{
-                            "conditions":[
-                                {
-                                    "field":"meta.content_type",
-                                    "operator":"==",
-                                    "value":"text"
-                                }
-                            ],
-                            "operator":"AND"
-                        }
-                    }
-                }
-            },
-            {
-                "name":"PythonExecutor",
-                "component_id":"PythonExecutor_1739377283742",
-                "intro":"PythonExecutor",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "python_code":""
-                },
-                "type":"byoa.integrations.components.python_executor.PythonExecutor"
-            },
-            {
-                "name":"TextFileToDocument",
-                "type":"haystack.components.converters.txt.TextFileToDocument",
-                "component_id":"TextFileToDocument_1739377283742",
-                "intro":"TextFileToDocument",
-                "position":{
-                    "x":0,
-                    "y":0
-                },
-                "input_keys":{
-
-                },
-                "output_keys":{
-
-                },
-                "init_parameters":{
-                    "encoding":"utf8"
-                }
-            }
-        ],
-        "connections":[
-            {
-                "receiver":"TextFileToDocument.sources",
-                "sender":"FileRouterComponent.text/plain"
-            },
-            {
-                "receiver":"MarkdownToDocument.sources",
-                "sender":"FileRouterComponent.text/markdown"
-            },
-            {
-                "receiver":"ImageToDocument.sources",
-                "sender":"FileRouterComponent.image/.*"
-            },
-            {
-                "receiver":"MagicPDFToDocument.sources",
-                "sender":"FileRouterComponent.application/pdf"
-            },
-            {
-                "receiver":"DocumentJoiner.documents",
-                "sender":"TextFileToDocument.documents"
-            },
-            {
-                "receiver":"DocumentJoiner.documents",
-                "sender":"MarkdownToDocument.documents"
-            },
-            {
-                "receiver":"DocumentJoiner.documents",
-                "sender":"MagicPDFToDocument.documents"
-            },
-            {
-                "receiver":"DocumentJoiner.documents",
-                "sender":"ImageToDocument.documents"
-            },
-            {
-                "receiver":"MetadataRouter.documents",
-                "sender":"DocumentJoiner.documents"
-            },
-            {
-                "receiver":"DocumentCleaner.documents",
-                "sender":"MetadataRouter.text"
-            },
-            {
-                "receiver":"ImageOCRToDocument.documents",
-                "sender":"MetadataRouter.image"
-            },
-            {
-                "receiver":"ImageCaptionToDocument.documents",
-                "sender":"MetadataRouter.image"
-            },
-            {
-                "receiver":"DocumentSplitter.documents",
-                "sender":"DocumentCleaner.documents"
-            },
-            {
-                "receiver":"DocumentJoiner-Result.documents",
-                "sender":"DocumentSplitter.documents"
-            },
-            {
-                "receiver":"DocumentCleaner-ImageOCR.documents",
-                "sender":"ImageOCRToDocument.documents"
-            },
-            {
-                "receiver":"DocumentJoiner-Result.documents",
-                "sender":"DocumentCleaner-ImageOCR.documents"
-            },
-            {
-                "receiver":"DocumentCleaner-ImageCaption.documents",
-                "sender":"ImageCaptionToDocument.documents"
-            },
-            {
-                "receiver":"DocumentJoiner-Result.documents",
-                "sender":"DocumentCleaner-ImageCaption.documents"
-            },
-            {
-                "receiver":"PythonExecutor.documents",
-                "sender":"DocumentJoiner-Result.documents"
-            },
-            {
-                "receiver":"DocumentEmbedder.documents",
-                "sender":"PythonExecutor.documents"
-            },
-            {
-                "receiver":"DocumentWriter.documents",
-                "sender":"DocumentEmbedder.documents"
-            }
-        ],
-        "edges":[
-
-        ],
-        "extra_components":[
-
-        ]
-    }
-}
-
-response = requests.put(url, json=body, headers=headers)
-print(response.json()) 
-```
-
-返回：
-
-```
-{'code': 'ok', 'msg': 'ok', 'data': None}
-```
-
-### 删除工作流
-
-```
-DELETE /byoa/api/v1/index_workflow/{workflow_id}?[delete_data=true]
-```
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow/729e7a03-652d-46e0-bdad-b05ec5b80cea?delete_data=true"
-
-headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "011d4b66-ace5-4d58-88a4-bc76719acda5-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
-}
-
-response = requests.delete(url, headers=headers)
-
-if response.status_code == 200:
-    print(response.json())  
-else:
-    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
-```
-
-返回：
-
-```bash
-{'code': 'ok', 'msg': 'ok', 'data': None}
-```
-
-## 作业
-
-### 查看作业列表
-
-```
-GET /byoa/api/v1/index_workflow_job
-```
-
-**输出参数：**
-  
-|  参数             | 含义 |
-|  --------------- | ----  |
-| id               |作业 id       |
-| workflow_name      | 工作流名称     |
-| name             | 连接器名称    |
-| source_volume_names           | 原始卷名称    |
-| source_volume_ids       | 原始卷 id   |
-| target_volume_name       | 目标卷名称    |
-| target_volume_id         | 目标卷 id    |
-| file_types       | 文件类型，2 为 pdf 格式    |
-| status         | 工作流状态    |
-| workflow_id | 工作流 id  |
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow_job"  
-headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "011d4b66-ace5-4d58-88a4-bc76719acda5-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
-}
-response = requests.get(url, headers=headers)
-
-print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
-
-```
-
-返回
-
-```bash
-Response Body: {
-    "code": "ok",
-    "msg": "ok",
-    "data": {
-        "total": 10,
-        "jobs": [
-            {
-                "id": "0194fb2c-f5c5-7d42-8d09-fdc3d8414777",
-                "workflow_name": "wf-2",
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "target_volume_name": "a-vol2",
-                "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9",
-                "file_types": [
-                    2
-                ],
-                "start_time": "2025-02-12T17:20:15.000000+0000",
-                "end_time": "2025-02-12T17:20:15.000000+0000",
-                "duration": 0,
-                "processed_count": 0,
-                "total_count": 0,
-                "status": 2,
-                "workflow_id": "729e7a03-652d-46e0-bdad-b05ec5b80cea",
-                "workflow": {
-                    "components": null,
-                    "connections": null,
-                    "edges": null,
-                    "extra_components": null
-                }
-            },
-            {
-                "id": "0194fb28-61ae-7aac-8500-a4c924a68211",
-                "workflow_name": "wf-4",
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "target_volume_name": "a-vol2",
-                "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9",
-                "file_types": [
-                    2
-                ],
-                "start_time": "2025-02-12T17:15:15.000000+0000",
-                "end_time": "2025-02-12T17:21:17.000000+0000",
-                "duration": 362,
-                "processed_count": 1,
-                "total_count": 1,
-                "status": 2,
-                "workflow_id": "c6dcbad5-f85d-42b7-942c-2e8d3445a4e6",
-                "workflow": {
-                    "components": null,
-                    "connections": null,
-                    "edges": null,
-                    "extra_components": null
-                }
-            },
-            {
-                "id": "0194fb28-61af-708a-915e-6f140a2424fe",
-                "workflow_name": "wf-2",
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "target_volume_name": "a-vol2",
-                "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9",
-                "file_types": [
-                    2
-                ],
-                "start_time": "2025-02-12T17:15:15.000000+0000",
-                "end_time": "2025-02-12T17:15:15.000000+0000",
-                "duration": 0,
-                "processed_count": 0,
-                "total_count": 0,
-                "status": 2,
-                "workflow_id": "729e7a03-652d-46e0-bdad-b05ec5b80cea",
-                "workflow": {
-                    "components": null,
-                    "connections": null,
-                    "edges": null,
-                    "extra_components": null
-                }
-            },
-            {
-                "id": "0194fb23-cd65-767c-b58f-db7c4456b896",
-                "workflow_name": "wf-2",
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "target_volume_name": "a-vol2",
-                "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9",
-                "file_types": [
-                    2
-                ],
-                "start_time": "2025-02-12T17:10:15.000000+0000",
-                "end_time": "2025-02-12T17:16:17.000000+0000",
-                "duration": 362,
-                "processed_count": 1,
-                "total_count": 1,
-                "status": 2,
-                "workflow_id": "729e7a03-652d-46e0-bdad-b05ec5b80cea",
-                "workflow": {
-                    "components": null,
-                    "connections": null,
-                    "edges": null,
-                    "extra_components": null
-                }
-            },
-            {
-                "id": "0194fb06-8044-70e4-8a54-16f5a0e3c720",
-                "workflow_name": "wf-3",
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "target_volume_name": "a-vol1",
-                "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
-                "file_types": [
-                    2
-                ],
-                "start_time": "2025-02-12T16:38:15.000000+0000",
-                "end_time": "2025-02-12T16:39:16.000000+0000",
-                "duration": 61,
-                "processed_count": 1,
-                "total_count": 1,
-                "status": 3,
-                "workflow_id": "2c0be55b-af55-4787-baac-3d8e7d987fe7",
-                "workflow": {
-                    "components": null,
-                    "connections": null,
-                    "edges": null,
-                    "extra_components": null
-                }
-            },
-            {
-                "id": "0194faf7-d9a0-7347-8726-a86f52cf67c7",
-                "workflow_name": "wf-1",
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "target_volume_name": "a-vol1",
-                "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
-                "file_types": [
-                    2
-                ],
-                "start_time": "2025-02-12T16:22:15.000000+0000",
-                "end_time": "2025-02-12T16:28:16.000000+0000",
-                "duration": 361,
-                "processed_count": 1,
-                "total_count": 1,
-                "status": 2,
-                "workflow_id": "a029a904-1e1c-41af-b361-b6578c92a437",
-                "workflow": {
-                    "components": null,
-                    "connections": null,
-                    "edges": null,
-                    "extra_components": null
-                }
-            },
-            {
-                "id": "0194f423-c2a7-7cc5-87ce-97fa942ac6ce",
-                "workflow_name": "wk-3",
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "target_volume_name": "a-vol1",
-                "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
-                "file_types": [
-                    2
-                ],
-                "start_time": "2025-02-11T08:32:52.000000+0000",
-                "end_time": "2025-02-11T08:38:52.000000+0000",
-                "duration": 360,
-                "processed_count": 1,
-                "total_count": 1,
-                "status": 2,
-                "workflow_id": "4f209aa9-186c-442a-b324-d7eebaca4cd0",
-                "workflow": {
-                    "components": null,
-                    "connections": null,
-                    "edges": null,
-                    "extra_components": null
-                }
-            },
-            {
-                "id": "0194f41d-59d3-7899-9fa8-24343214df7f",
-                "workflow_name": "wf-3",
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "target_volume_name": "a-vol1",
-                "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
-                "file_types": [
-                    2
-                ],
-                "start_time": "2025-02-11T08:25:52.000000+0000",
-                "end_time": "2025-02-11T08:31:52.000000+0000",
-                "duration": 360,
-                "processed_count": 1,
-                "total_count": 1,
-                "status": 2,
-                "workflow_id": "ea64f8ba-b984-46a3-acb0-628849538244",
-                "workflow": {
-                    "components": null,
-                    "connections": null,
-                    "edges": null,
-                    "extra_components": null
-                }
-            },
-            {
-                "id": "0194f40f-9da9-7927-890c-4bea252e0235",
-                "workflow_name": "wf-2",
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "target_volume_name": "a-vol1",
-                "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
-                "file_types": [
-                    2
-                ],
-                "start_time": "2025-02-11T08:10:52.000000+0000",
-                "end_time": "2025-02-11T08:10:52.000000+0000",
-                "duration": 0,
-                "processed_count": 0,
-                "total_count": 0,
-                "status": 2,
-                "workflow_id": "d2842368-37dc-4b49-930a-25f16a8fc0c8",
-                "workflow": {
-                    "components": null,
-                    "connections": null,
-                    "edges": null,
-                    "extra_components": null
-                }
-            },
-            {
-                "id": "0194f40c-deb5-7466-bd7f-7c930a034bcd",
-                "workflow_name": "wf-1",
-                "source_volume_names": [
-                    "b-vol1"
-                ],
-                "source_volume_ids": [
-                    "1889223879880048640"
-                ],
-                "target_volume_name": "a-vol1",
-                "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
-                "file_types": [
-                    2
-                ],
-                "start_time": "2025-02-11T08:07:52.000000+0000",
-                "end_time": "2025-02-11T08:07:52.000000+0000",
-                "duration": 0,
-                "processed_count": 0,
-                "total_count": 0,
-                "status": 2,
-                "workflow_id": "f6c0b040-5403-42b9-a914-bbf2935d69f0",
-                "workflow": {
-                    "components": null,
-                    "connections": null,
-                    "edges": null,
-                    "extra_components": null
-                }
-            }
-        ]
-    }
-}
-```
-
-### 查看作业详情
-
-```
-GET /byoa/api/v1/index_workflow_job/{job_id}
-```
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow_job/0194fb2c-f5c5-7d42-8d09-fdc3d8414777"
-headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "a6e11303-f4fd-46c0-b5ff-c774e96f64a3-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
-}
-response = requests.get(url, headers=headers)
-
-print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
-```
-
-返回
-
-```bash
-Response Body: {
-    "code": "ok",
-    "msg": "ok",
-    "data": {
-        "id": "0194fb2c-f5c5-7d42-8d09-fdc3d8414777",
-        "workflow_name": "wf-2",
-        "source_volume_names": [
-            "b-vol1"
-        ],
-        "source_volume_ids": [
-            "1889223879880048640"
-        ],
-        "target_volume_name": "a-vol2",
-        "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9",
-        "file_types": [
-            2
-        ],
-        "start_time": "2025-02-12T17:20:15.000000+0000",
-        "end_time": "2025-02-12T17:20:15.000000+0000",
-        "duration": 0,
-        "processed_count": 0,
-        "total_count": 0,
-        "status": 2,
-        "workflow_id": "729e7a03-652d-46e0-bdad-b05ec5b80cea",
-        "workflow": {
-            "components": [
-                {
-                    "name": "DocumentCleaner",
-                    "type": "haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                    "component_id": "DocumentCleaner_1739380168023",
-                    "intro": "DocumentCleaner",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "ascii_only": false,
-                        "keep_id": false,
-                        "remove_empty_lines": true,
-                        "remove_extra_whitespaces": true,
-                        "remove_regex": null,
-                        "remove_repeated_substrings": false,
-                        "remove_substrings": null,
-                        "unicode_normalization": null
-                    }
-                },
-                {
-                    "name": "DocumentCleaner-ImageCaption",
-                    "type": "haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                    "component_id": "DocumentCleaner-ImageCaption_1739380168023",
-                    "intro": "DocumentCleaner-ImageCaption",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "ascii_only": false,
-                        "keep_id": false,
-                        "remove_empty_lines": true,
-                        "remove_extra_whitespaces": true,
-                        "remove_regex": null,
-                        "remove_repeated_substrings": false,
-                        "remove_substrings": null,
-                        "unicode_normalization": null
-                    }
-                },
-                {
-                    "name": "DocumentCleaner-ImageOCR",
-                    "type": "haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                    "component_id": "DocumentCleaner-ImageOCR_1739380168023",
-                    "intro": "DocumentCleaner-ImageOCR",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "ascii_only": false,
-                        "keep_id": false,
-                        "remove_empty_lines": true,
-                        "remove_extra_whitespaces": true,
-                        "remove_regex": null,
-                        "remove_repeated_substrings": false,
-                        "remove_substrings": null,
-                        "unicode_normalization": null
-                    }
-                },
-                {
-                    "name": "DocumentEmbedder",
-                    "type": "haystack.components.embedders.openai_document_embedder.OpenAIDocumentEmbedder",
-                    "component_id": "DocumentEmbedder_1739380168023",
-                    "intro": "DocumentEmbedder",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "api_base_url": "https://api.siliconflow.cn/v1",
-                        "api_key": {
-                            "env_vars": [
-                                "OPENAI_API_KEY"
-                            ],
-                            "strict": true,
-                            "type": "env_var"
-                        },
-                        "batch_size": 32,
-                        "dimensions": null,
-                        "embedding_separator": "\n",
-                        "meta_fields_to_embed": [],
-                        "model": "BAAI/bge-m3",
-                        "organization": null,
-                        "prefix": "",
-                        "progress_bar": true,
-                        "suffix": ""
-                    }
-                },
-                {
-                    "name": "DocumentJoiner",
-                    "type": "haystack.components.joiners.document_joiner.DocumentJoiner",
-                    "component_id": "DocumentJoiner_1739380168023",
-                    "intro": "DocumentJoiner",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "join_mode": "concatenate",
-                        "sort_by_score": true,
-                        "top_k": null,
-                        "weights": null
-                    }
-                },
-                {
-                    "name": "DocumentJoiner-Result",
-                    "type": "haystack.components.joiners.document_joiner.DocumentJoiner",
-                    "component_id": "DocumentJoiner-Result_1739380168023",
-                    "intro": "DocumentJoiner-Result",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "join_mode": "concatenate",
-                        "sort_by_score": true,
-                        "top_k": null,
-                        "weights": null
-                    }
-                },
-                {
-                    "name": "DocumentSplitter",
-                    "type": "haystack.components.preprocessors.document_splitter.DocumentSplitter",
-                    "component_id": "DocumentSplitter_1739380168023",
-                    "intro": "DocumentSplitter",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "split_by": "word",
-                        "split_length": 200,
-                        "split_overlap": 200,
-                        "split_threshold": 0
-                    }
-                },
-                {
-                    "name": "DocumentWriter",
-                    "type": "haystack.components.writers.document_writer.DocumentWriter",
-                    "component_id": "DocumentWriter_1739380168023",
-                    "intro": "DocumentWriter",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "document_store": {
-                            "init_parameters": {
-                                "connection_string": {
-                                    "env_vars": [
-                                        "DATABASE_SYNC_URI"
-                                    ],
-                                    "strict": true,
-                                    "type": "env_var"
-                                },
-                                "embedding_dimension": 1024,
-                                "keyword_index_name": "haystack_keyword_index",
-                                "recreate_table": true,
-                                "table_name": "embedding_results",
-                                "vector_function": "cosine_similarity"
-                            },
-                            "type": "byoa.integrations.document_stores.mo_document_store.MOIDocumentStore"
-                        },
-                        "policy": "NONE"
-                    }
-                },
-                {
-                    "name": "FileRouterComponent",
-                    "type": "haystack.components.routers.file_type_router.FileTypeRouter",
-                    "component_id": "FileRouterComponent_1739380168023",
-                    "intro": "FileRouterComponent",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "additional_mimetypes": null,
-                        "mime_types": [
-                            "text/plain",
-                            "text/markdown",
-                            "image/.*",
-                            "application/pdf"
-                        ]
-                    }
-                },
-                {
-                    "name": "ImageCaptionToDocument",
-                    "type": "byoa.integrations.components.converters.image_caption_to_document.ImageCaptionToDocument",
-                    "component_id": "ImageCaptionToDocument_1739380168023",
-                    "intro": "ImageCaptionToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {}
-                },
-                {
-                    "name": "ImageOCRToDocument",
-                    "type": "byoa.integrations.components.converters.image_ocr_to_document.ImageOCRToDocument",
-                    "component_id": "ImageOCRToDocument_1739380168023",
-                    "intro": "ImageOCRToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "model": "ucaslcl/GOT-OCR2_0",
-                        "tokenizer": "stepfun-ai/GOT-OCR2_0"
-                    }
-                },
-                {
-                    "name": "ImageToDocument",
-                    "type": "byoa.integrations.components.converters.image_to_document.ImageToDocument",
-                    "component_id": "ImageToDocument_1739380168023",
-                    "intro": "ImageToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {}
-                },
-                {
-                    "name": "MagicPDFToDocument",
-                    "type": "byoa.integrations.components.converters.magic_pdf_to_document.MagicPDFToDocument",
-                    "component_id": "MagicPDFToDocument_1739380168023",
-                    "intro": "MagicPDFToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {}
-                },
-                {
-                    "name": "MarkdownToDocument",
-                    "type": "haystack.components.converters.markdown.MarkdownToDocument",
-                    "component_id": "MarkdownToDocument_1739380168023",
-                    "intro": "MarkdownToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "progress_bar": false,
-                        "table_to_single_line": false
-                    }
-                },
-                {
-                    "name": "MetadataRouter",
-                    "type": "haystack.components.routers.metadata_router.MetadataRouter",
-                    "component_id": "MetadataRouter_1739380168023",
-                    "intro": "MetadataRouter",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "rules": {
-                            "image": {
-                                "conditions": [
-                                    {
-                                        "field": "meta.content_type",
-                                        "operator": "==",
-                                        "value": "image"
-                                    }
-                                ],
-                                "operator": "AND"
-                            },
-                            "text": {
-                                "conditions": [
-                                    {
-                                        "field": "meta.content_type",
-                                        "operator": "==",
-                                        "value": "text"
-                                    }
-                                ],
-                                "operator": "AND"
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "PythonExecutor",
-                    "component_id": "PythonExecutor_1739380168023",
-                    "intro": "PythonExecutor",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "python_code": ""
-                    },
-                    "type": "byoa.integrations.components.python_executor.PythonExecutor"
-                },
-                {
-                    "name": "TextFileToDocument",
-                    "type": "haystack.components.converters.txt.TextFileToDocument",
-                    "component_id": "TextFileToDocument_1739380168023",
-                    "intro": "TextFileToDocument",
-                    "position": {
-                        "x": 0,
-                        "y": 0
-                    },
-                    "input_keys": {},
-                    "output_keys": {},
-                    "init_parameters": {
-                        "encoding": "utf8"
-                    }
-                }
-            ],
-            "connections": [
-                {
-                    "receiver": "TextFileToDocument.sources",
-                    "sender": "FileRouterComponent.text/plain"
-                },
-                {
-                    "receiver": "MarkdownToDocument.sources",
-                    "sender": "FileRouterComponent.text/markdown"
-                },
-                {
-                    "receiver": "ImageToDocument.sources",
-                    "sender": "FileRouterComponent.image/.*"
-                },
-                {
-                    "receiver": "MagicPDFToDocument.sources",
-                    "sender": "FileRouterComponent.application/pdf"
-                },
-                {
-                    "receiver": "DocumentJoiner.documents",
-                    "sender": "TextFileToDocument.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner.documents",
-                    "sender": "MarkdownToDocument.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner.documents",
-                    "sender": "MagicPDFToDocument.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner.documents",
-                    "sender": "ImageToDocument.documents"
-                },
-                {
-                    "receiver": "MetadataRouter.documents",
-                    "sender": "DocumentJoiner.documents"
-                },
-                {
-                    "receiver": "DocumentCleaner.documents",
-                    "sender": "MetadataRouter.text"
-                },
-                {
-                    "receiver": "ImageOCRToDocument.documents",
-                    "sender": "MetadataRouter.image"
-                },
-                {
-                    "receiver": "ImageCaptionToDocument.documents",
-                    "sender": "MetadataRouter.image"
-                },
-                {
-                    "receiver": "DocumentSplitter.documents",
-                    "sender": "DocumentCleaner.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner-Result.documents",
-                    "sender": "DocumentSplitter.documents"
-                },
-                {
-                    "receiver": "DocumentCleaner-ImageOCR.documents",
-                    "sender": "ImageOCRToDocument.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner-Result.documents",
-                    "sender": "DocumentCleaner-ImageOCR.documents"
-                },
-                {
-                    "receiver": "DocumentCleaner-ImageCaption.documents",
-                    "sender": "ImageCaptionToDocument.documents"
-                },
-                {
-                    "receiver": "DocumentJoiner-Result.documents",
-                    "sender": "DocumentCleaner-ImageCaption.documents"
-                },
-                {
-                    "receiver": "PythonExecutor.documents",
-                    "sender": "DocumentJoiner-Result.documents"
-                },
-                {
-                    "receiver": "DocumentEmbedder.documents",
-                    "sender": "PythonExecutor.documents"
-                },
-                {
-                    "receiver": "DocumentWriter.documents",
-                    "sender": "DocumentEmbedder.documents"
-                }
-            ],
-            "edges": [],
-            "extra_components": []
-        }
-    }
-}
-```
-
-### 查看作业关联的文件列表
-
-```
-GET /byoa/api/v1/index_workflow_job/{job_id}/files
-```
-
-**输出参数：**
-  
-|  参数             | 含义 |
-|  --------------- | ----  |
-| id               |文件 id      |
-| file_type        |文件类型，2 为 pdf。    |
-|file_status       |文件状态 |
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow_job/0194f423-c2a7-7cc5-87ce-97fa942ac6ce/files"
-headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "a6e11303-f4fd-46c0-b5ff-c774e96f64a3-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
-}
-response = requests.get(url, headers=headers)
-
-print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
-```
-
-返回
-
-```bash
-Response Body: {
-    "code": "ok",
-    "msg": "ok",
-    "data": {
+        "version": "1.2",
+        "workflow_meta_id": "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c",
+        "workflow_branch_id": "main",
         "files": [
             {
-                "id": "0194f423-c2a7-7ccc-a3da-732bafda96a3",
-                "file_name": "红楼梦(通行本)简体横排.pdf",
+                "file_name": "sample_file1.pdf",
                 "file_type": 2,
-                "file_status": 2,
-                "error_message": "",
-                "start_time": "2025-02-11T08:32:52.000000+0000",
-                "end_time": "2025-02-11T08:37:53.000000+0000"
+                "file_size": 123456,
+                "file_path": "/path/to/sample_file1.pdf",
+                "source_volume_id": 1889223879880048640,
+                "source_file_id": 1
             }
-        ],
-        "total": 1,
-        "completed": 1,
-        "failed": 0,
-        "processing": 0,
-        "pending": 0
+        ]
     }
 }
 ```
 
-### 重新处理失败文件
+**输出参数 (`MOIResponse_JobDetailResponse_` 的 `data` 部分 - `JobDetailResponse`)：**
+
+*   **`JobDetailResponse` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobDetailResponse)
+    *   `id` (string): 作业ID
+    *   `name` (string): 作业名称
+    *   `created_at` (integer): 创建时间戳 (毫秒)
+    *   `creator` (string): 创建者
+    *   `updated_at` (integer): 更新时间戳 (毫秒)
+    *   `modifier` (string): 更新者
+    *   `status` (integer): 状态
+    *   `version` (string): 版本号
+    *   `workflow_meta_id` (string): 工作流元数据ID
+    *   `workflow_branch_id` (string): 工作流分支ID
+    *   `files` (array[object] (`FileItem` 结构)): 作业相关的文件列表
+
+*   **`FileItem` 对象结构:** (参考 `workflow.openapi.json` -> components.schemas.FileItem)
+    *   `file_name` (string): 文件名
+    *   `file_type` (integer): 文件类型
+    *   `file_size` (integer): 文件大小(bytes)
+    *   `file_path` (string): 文件路径
+    *   `source_volume_id` (integer): 源数据卷ID
+    *   `source_file_id` (integer): 源文件ID
+
+
+### 查看作业文件列表
 
 ```
-POST /byoa/api/v1/index_workflow_job/{job_id}/files
+GET /byoa/api/v1/workflow_job/{job_id}/files
 ```
 
-**输入参数：**
-  
-|  参数             | 是否必填 |含义|
-|  --------------- | ----   | ----  |
-| files            |是       | 文件 id|
+**路径参数：**
 
-**示例：**
+| 参数名   | 类型   | 是否必填 | 描述   |
+| -------- | ------ | -------- | ------ |
+| `job_id` | string | 是       | 作业ID |
+
+**Query 参数：**
+
+| 参数名             | 类型                                  | 是否必填 | 描述                          | 默认值       |
+| ------------------ | ------------------------------------- | -------- | ----------------------------- | ------------ |
+| `file_name_search` | string, nullable                      | 否       | 文件名搜索                    |              |
+| `file_types`       | array[integer], nullable              | 否       | 文件类型 (见 `FileType` 枚举) |              |
+| `status`           | array[integer], nullable              | 否       | 文件处理状态                  |              |
+| `sort_field`       | string, nullable                      | 否       | 排序字段                      | "created_at" |
+| `sort_order`       | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
+| `offset`           | integer, >=0                          | 否       | 当页偏移量                    | 0            |
+| `limit`            | integer, >=1                          | 否       | 每页大小                      | 20           |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         |
+| -------------- | ------ | -------- | ------------ |
+| `user-id`      | string | 是       | 用户ID       |
+| `Access-Token` | string | 是       | 鉴权Token    |
+| `uid`          | string | 是       | 用户登录 UID |
+
+**示例 (Python)：**
 
 ```python
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/index_workflow_job/0194f423-c2a7-7cc5-87ce-97fa942ac6ce/files"
+job_id_for_files = "your_job_id"
+url = f"https://your_base_url/byoa/api/v1/workflow_job/{job_id_for_files}/files"
 
 headers = {
-    "user-id":"xxxx",
-    "Access-Token": "xxxx",
-    "uid": "011d4b66-ace5-4d58-88a4-bc76719acda5-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+params = {
+    "limit": 10,
+    "file_name_search": ".pdf"
 }
 
-body = {
-    "files": ["0194f423-c2a7-7ccc-a3da-732bafda96a3"]
+response = requests.get(url, headers=headers, params=params)
+
+print(response.status_code)
+if response.content:
+    try:
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print(response.text)
+```
+
+**返回 (`MOIResponse_JobListFileResponse_`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": {
+        "total": 5,
+        "files": [
+            {
+                "id": "file_item_uuid_1",
+                "name": "document_part_1.pdf",
+                "type": 2,
+                "size": 102400,
+                "status": 3,
+                "created_at": 1739380000000,
+                "updated_at": 1739380050000,
+                "path": "/target_volume/processed_files/document_part_1.pdf",
+                "volume_id": "target_volume_uuid",
+                "job_id": "your_job_id",
+                "meta_id": "parent_workflow_meta_id",
+                "branch_id": "workflow_branch_id"
+            }
+        ]
+    }
+}
+```
+
+**输出参数 (`MOIResponse_JobListFileResponse_` 的 `data` 部分 - `JobListFileResponse`)：**
+
+| 参数    | 类型                               | 描述               |
+| ------- | ---------------------------------- | ------------------ |
+| `total` | integer                            | 符合条件的文件总数 |
+| `files` | array[object] (`JobFileItem` 结构) | 作业相关的文件列表 |
+
+*   **`JobFileItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobFileItem)
+    *   `id` (string): 文件项ID
+    *   `name` (string): 文件名
+    *   `type` (integer): 文件类型 (`FileType` 枚举)
+    *   `size` (integer): 文件大小 (bytes)
+    *   `status` (integer): 文件处理状态
+    *   `created_at` (integer): 创建时间戳 (毫秒)
+    *   `updated_at` (integer): 更新时间戳 (毫秒)
+    *   `path` (string, nullable): 文件在目标数据卷中的路径
+    *   `volume_id` (string, nullable): 文件所在的目标数据卷ID
+    *   `job_id` (string): 关联的作业ID
+    *   `meta_id` (string, nullable): 关联的工作流元数据ID
+    *   `branch_id` (string, nullable): 关联的工作流分支ID
+
+### 重试处理作业文件
+
+```
+POST /byoa/api/v1/workflow_job/{job_id}/files
+```
+
+**描述：** 删除指定作业关联的特定文件记录。
+
+**路径参数：**
+
+| 参数名   | 类型   | 是否必填 | 描述   |
+| -------- | ------ | -------- | ------ |
+| `job_id` | string | 是       | 作业ID |
+
+**Query 参数：**
+
+| 参数名     | 类型          | 是否必填 | 描述                                     | 默认值 |
+| ---------- | ------------- | -------- | ---------------------------------------- | ------ |
+| `file_ids` | array[string] | 是       | 要重试的文件ID列表 (指 `JobFileItem.id`) |        |
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         |
+| -------------- | ------ | -------- | ------------ |
+| `user-id`      | string | 是       | 用户ID       |
+| `Access-Token` | string | 是       | 鉴权Token    |
+| `uid`          | string | 是       | 用户登录 UID |
+
+**(无 Body 输入参数)**
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+job_id_for_file_retry = "your_job_id"
+file_ids_to_retry = ["file_item_uuid_1", "file_item_uuid_2"]
+
+url = f"https://your_base_url/byoa/api/v1/workflow_job/{job_id_for_file_retry}/files"
+
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
 }
 
-response = requests.post(url, headers=headers)
+params = {
+    "file_ids": file_ids_to_retry, 
+    "delete_data": True
+}
 
-if response.status_code == 200:
-    print(response.json()) 
+response = requests.post(url, headers=headers, params=params)
+
+print(response.status_code)
+if response.content and response.text.strip():
+    try:
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print(f"Response Text: {response.text}")
 else:
-    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+    print("Request successful, no content returned or empty response.")
 ```
 
-返回：
+**返回 (`NoneDataResp`)：**
 
-```bash
-{'code': 'ok', 'msg': 'ok', 'data': None}
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": "string"
+}
 ```
+
+### 获取作业状态
+
+```
+GET /byoa/api/v1/workflow_job/{job_id}/status
+```
+
+**描述：** 获取指定作业的当前状态。
+
+**路径参数：**
+
+| 参数名   | 类型   | 是否必填 | 描述   |
+| -------- | ------ | -------- | ------ |
+| `job_id` | string | 是       | 作业ID |
+
+**(无 Query 参数)**
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述         |
+| -------------- | ------ | -------- | ------------ |
+| `user-id`      | string | 是       | 用户ID       |
+| `Access-Token` | string | 是       | 鉴权Token    |
+| `uid`          | string | 是       | 用户登录 UID |
+
+**(无 Body 输入参数)**
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+job_id_for_status = "your_job_id"
+url = f"https://your_base_url/byoa/api/v1/workflow_job/{job_id_for_status}/status"
+
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+
+response = requests.get(url, headers=headers)
+
+print(response.status_code)
+if response.content:
+    try:
+        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+    except json.JSONDecodeError:
+        print(response.text)
+```
+
+**返回 (`MOIResponse_JobStatusResponse_`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": {
+        "job_id": "your_job_id",
+        "status": 2,
+        "message": "Job completed successfully.",
+        "progress": 100,
+        "start_time": 1739377287000,
+        "end_time": 1739377755000
+    }
+}
+```
+
+**输出参数 (`MOIResponse_JobStatusResponse_` 的 `data` 部分 - `JobStatusResponse`)：**
+
+| 参数         | 类型              | 描述                                                         |
+| ------------ | ----------------- | ------------------------------------------------------------ |
+| `job_id`     | string            | 作业ID                                                       |
+| `status`     | integer           | 作业的当前状态 (参考 `workflow.openapi.json` JobStatus enum) |
+| `message`    | string, nullable  | 状态相关的附加信息                                           |
+| `progress`   | integer, nullable | 作业进度 (0-100)                                             |
+| `start_time` | integer, nullable | 作业开始时间戳 (毫秒)                                        |
+| `end_time`   | integer, nullable | 作业结束时间戳 (毫秒)                                        |

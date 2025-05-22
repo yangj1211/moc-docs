@@ -43,7 +43,7 @@ POST /metric/observice
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/metric/observice"
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/metric/observice"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",

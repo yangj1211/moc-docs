@@ -5,24 +5,45 @@
 ### 创建原始数据卷
 
 ```
-POST /CreateOriginVolume
+POST /byoa/api/v1/explore/volumes
 ```
 
-**输入参数：**
-  
-|  参数             | 是否必填 |含义|
-|  --------------- | ----   | ----  |
-| name             |是       | 原始数据卷名 |
+**Header 参数：**
 
-**示例：**
+| 参数           | 类型   | 是否必填 | 描述             |
+| -------------- | ------ | -------- | ---------------- |
+| `user-id`      | string | 是       | 用户ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权Token        |
+| `uid`          | string | 是       | 用户登录 UID     |
+
+**Body 输入参数 (`CreateVolumeReq`)：**
+
+| 参数             | 是否必填 | 类型   | 含义        | 默认值 |
+| ---------------- | -------- | ------ | ----------- | ------ |
+| name             | 是       | string | 数据卷名称  |        |
+| parent_volume_id | 否       | string | 父数据卷 ID | ""     |
+
+**Body 示例 (`CreateVolumeReq`)：**
+
+```json
+{
+    "name": "my-new-volume",
+    "parent_volume_id": "optional_parent_id_here" 
+}
+```
+
+**示例 (Python)：**
 
 ```python
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/CreateOriginVolume"
+import requests
+import json
+
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes"
 
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "",
-    "uid": "2de56399-0fda-4982-a26e-580fd666914d-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin"
+    "user-id":"your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
 }
 
 body = {
@@ -30,583 +51,700 @@ body = {
 
 }
 response = requests.post(url, json=body, headers=headers)
-# 检查响应状态
-print(response.json())  # 打印返回的 JSON 数据
+print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-返回：
+**返回 (`MOIResponse_CreateVolumeResp_`)：**
 
-```bash
-{'code': 'OK', 'msg': 'OK'}
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": {
+        "id": "fb93a6c1-6d1e-4d68-bb7c-4d84facda670", 
+        "name": "b_vol3", 
+        "created_at": "2025-02-13T11:44:36", 
+        "updated_at": "2025-02-13T11:44:36"
+    }
+}
 ```
+
+**输出参数 (`CreateVolumeResp`)：**
+
+| 参数       | 类型   | 含义       |
+| ---------- | ------ | ---------- |
+| id         | string | 数据卷 ID  |
+| name       | string | 数据卷名称 |
+| created_at | string | 创建时间   |
+| updated_at | string | 更新时间   |
 
 ### 查看原始数据卷列表
-
-```
-POST /DescribeOriginVolumes
-```
-
-**输出参数：**
-  
-|  参数             | 含义 |
-|  --------------- | ----  |
-| id               | 卷 id      |
-| name             | 卷名    |
-| size             | 卷大小  |
-| file_num         | 文件数量    |
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DescribeOriginVolumes"
-headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "xxxx",
-    "uid": "ac8fd715-b39c-4edb-837b-e1ea1dae5f80-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin"
-}
-
-response = requests.post(url, headers=headers)
-print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
-```
-
-返回：
-
-```bash
-Response Body: {
-    "code": "OK",
-    "msg": "OK",
-    "data": {
-        "total": 5,
-        "volumes": [
-            {
-                "id": "1889223879880048640",
-                "name": "b-vol1",
-                "size": 6787457,
-                "file_num": 1,
-                "owner": "admin",
-                "created_at": 1739261047,
-                "updated_at": 1739261047
-            },
-            {
-                "id": "1889578498228068352",
-                "name": "b-vol2",
-                "size": 40724742,
-                "file_num": 6,
-                "owner": "admin",
-                "created_at": 1739345595,
-                "updated_at": 1739345595
-            },
-            {
-                "id": "1889868565396619264",
-                "name": "b_vol3",
-                "size": 0,
-                "file_num": 0,
-                "owner": "admin",
-                "created_at": 1739414752,
-                "updated_at": 1739414752
-            },
-            {
-                "id": "1889881472272465920",
-                "name": "b_vol6",
-                "size": 0,
-                "file_num": 0,
-                "owner": "admin",
-                "created_at": 1739417829,
-                "updated_at": 1739417829
-            }
-        ]
-    }
-}
-```
-
-### 查看某个原始数据卷（文件列表）
-
-```
-POST /DescribeOriginVolume
-```
-
-**输出参数：**
-  
-|  参数             | 含义 |
-|  --------------- | ----  |
-| id               | 文件 id      |
-| name             | 文件名    |
-| type             |文件类型  |
-| status           | 文件解析状态  |
-| path             | 文件路径  |
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DescribeOriginVolume"
-headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "xxxx",
-    "uid": "badb5c26-e335-453d-85ad-7e996bcebff4-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin",
-}
-
-body={
-        "id": "1889223879880048640"
-}
-
-response = requests.post(url, headers=headers,json=body)
-print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
-```
-
-返回：
-
-```bash
-Response Body: {
-    "code": "OK",
-    "msg": "OK",
-    "data": {
-        "total": 1,
-        "items": [
-            {
-                "id": "1889223944229060608",
-                "name": "红楼梦(通行本)简体横排.pdf",
-                "type": 2,
-                "status": 5,
-                "size": 6787457,
-                "update_time": 1739261640,
-                "other_metadata": "",
-                "reason": "",
-                "user": "admin",
-                "start_time": 1739261063,
-                "end_time": 1739261640,
-                "path": "/b-vol1/红楼梦(通行本)简体横排.pdf"
-            }
-        ]
-    }
-}
-```
-
-### 下载某个原始数据卷中的文件
-
-```
-POST /GetOriginVolumeFileLink
-```
-
-**输入参数：**
-  
-|  参数             | 是否必填 |含义|
-|  --------------- | ----   | ----  |
-| volume_id        |是       | 原始数据卷 id|
-| file_id          |是       | 文件 id|
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/GetOriginVolumeFileLink"
-headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "xxxx",
-    "uid": "ac8fd715-b39c-4edb-837b-e1ea1dae5f80-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin"
-}
-
-body = {
-    "volume_id": 1889223879880048640,
-    "file_id": "1889578498228068352"
-
-}
-
-response = requests.post(url, headers=headers,json=body)
-print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
-```
-
-返回：
-
-```bash
-Response Body: {
-    "code": "OK",
-    "msg": "OK",
-    "data": {
-        "link": "https://moi-dev-test.oss-cn-hangzhou.aliyuncs.com/connector_path%2F0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx%2Fb-vol2?Expires=173944xxxx&OSSAccessKeyId=LTAI5t6RX4TpSC8Z2v4nGG4Y&Signature=bCy60Or%2B%2Fr8Na1OcfMn%2Fy2jso6Y%3D"
-    }
-}
-```
-
-### 删除某个原始数据卷中的某个文件
-
-```
-POST /DeleteOriginVolumeFiles
-```
-
-**输入参数：**
-  
-|  参数             | 是否必填 |含义|
-|  --------------- | ----   | ----  |
-| volume_id        |是       | 原始数据卷 id|
-| file_ids          |是       | 文件 id|
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DeleteOriginVolumeFiles"
-
-headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "xxxx",
-    "uid": "badb5c26-e335-453d-85ad-7e996bcebff4-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin",
-}
-
-
-body={
-    "volume_id": "1889578498228068352",
-    "file_ids": ["1889698920437940224"]
-}
-
-
-response = requests.post(url, headers=headers,json=body)
-
-if response.status_code == 200:
-    print(response.json())  
-else:
-    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
-```
-
-返回：
-
-```
-{'code': 'OK', 'msg': 'OK', 'data': {}}
-```
-
-## 处理数据卷
-
-### 创建处理数据卷
-
-```
-POST /byoa/api/v1/explore/volumes
-```
-
-**输入参数：**
-  
-|  参数             | 是否必填 |含义|
-|  --------------- | ----   | ----  |
-| name            |是       | 处理数据卷名称 |
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes"
-
-headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "xxxx",
-    "uid": "ac8fd715-b39c-4edb-837b-e1ea1dae5f80-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin"
-}
-
-body = {
-    "name": "a_vol4"
-
-}
-response = requests.post(url, json=body, headers=headers)
-print(response.json())
-```
-
-返回：
-
-```bash
-{'code': 'ok', 'msg': 'ok', 'data': {'id': 'fb93a6c1-6d1e-4d68-bb7c-4d84facda670', 'name': 'a_vol4', 'created_at': '2025-02-13T11:44:36', 'updated_at': '2025-02-13T11:44:36'}}
-```
-
-### 查看处理数据卷列表
 
 ```
 GET /byoa/api/v1/explore/volumes
 ```
 
-**输出参数：**
-  
-|  参数             | 含义 |
-|  --------------- | ----  |
-| name             | 卷名    |
-| id               | 卷 id  |
+**Header 参数：**
 
-**示例：**
+| 参数           | 类型   | 是否必填 | 描述             |
+| -------------- | ------ | -------- | ---------------- |
+| `user-id`      | string | 是       | 用户ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权Token        |
+| `uid`          | string | 是       | 用户登录 UID     |
+
+**Query 参数：**
+
+| 参数           | 是否必填 | 类型    | 含义                             |
+| -------------- | -------- | ------- | -------------------------------- |
+| workflow_using | 否       | boolean | 是否仅列出工作流正在使用的数据卷 |
+
+**示例 (Python)：**
 
 ```python
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes"
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes"
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "xxxx",
-    "uid": "badb5c26-e335-453d-85ad-7e996bcebff4-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin",
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
 }
-
-response = requests.get(url, headers=headers)
+params = {
+    "workflow_using": False # 可选参数, True 或 False
+}
+response = requests.get(url, headers=headers, params=params)
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
-
 ```
 
-返回：
+**返回 (`MOIResponse_ListVolumeResp_`)：**
 
-```bash
-Response Body: {
+```json
+{
     "code": "ok",
     "msg": "ok",
     "data": {
-        "total": 4,
+        "total": 2,
         "volumes": [
             {
-                "name": "a-vol1",
-                "created_at": "2025-02-11T16:06:55",
-                "updated_at": "2025-02-11T16:06:55",
-                "user_id": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-                "id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95"
+                "name": "example-volume-1",
+                "created_at": "2025-02-11T16:06:55Z",
+                "updated_at": "2025-02-11T16:06:55Z",
+                "user_id": "your_user_id_workspace_id",
+                "id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
+                "parent_volume_id": ""
             },
             {
-                "name": "a_vol4",
-                "created_at": "2025-02-13T11:44:36",
-                "updated_at": "2025-02-13T11:44:36",
-                "user_id": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-                "id": "fb93a6c1-6d1e-4d68-bb7c-4d84facda670"
+                "name": "example-volume-2",
+                "created_at": "2025-02-13T11:44:36Z",
+                "updated_at": "2025-02-13T11:44:36Z",
+                "user_id": "your_user_id_workspace_id",
+                "id": "fb93a6c1-6d1e-4d68-bb7c-4d84facda670",
+                "parent_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95"
             }
         ]
     }
 }
 ```
 
-### 查看某个处理数据卷（文件列表）
+**输出参数 (`ListVolumeResp` 的 `data` 部分)：**
+
+| 参数    | 类型                | 含义       |
+| ------- | ------------------- | ---------- |
+| total   | integer             | 数据卷总数 |
+| volumes | array[TargetVolume] | 数据卷列表 |
+
+* **`TargetVolume` 对象结构:**
+
+  | 参数             | 类型   | 含义                   |
+  | ---------------- | ------ | ---------------------- |
+  | id               | string | 数据卷 ID              |
+  | name             | string | 数据卷名称             |
+  | created_at       | string | 创建时间 (ISO 8601)    |
+  | updated_at       | string | 更新时间 (ISO 8601)    |
+  | user_id          | string | 用户 ID                |
+  | parent_volume_id | string | 父数据卷 ID (可能为空) |
+
+### 查看子数据卷列表
 
 ```
-POST /byoa/api/v1/explore/volumes/{volume_id}/files
+GET /byoa/api/v1/explore/volumes/{vid}
 ```
+
+**路径参数：**
+
+*   `vid` (string, 必填): 父数据卷 ID
+
+**Header 参数：**
+
+| 参数           | 类型   | 是否必填 | 描述             |
+| -------------- | ------ | -------- | ---------------- |
+| `user-id`      | string | 是       | 用户ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权Token        |
+| `uid`          | string | 是       | 用户登录 UID     |
+
+**示例 (Python)：**
 
 ```python
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/dbcc0d71-31f9-4799-b404-096f9e8e57f9/files"
+# 将 {vid} 替换为实际的父数据卷 ID
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}" 
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "2868847d-660d-4ace-a7ca-b75c3be575ce-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin",
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
 }
-
-response = requests.post(url, headers=headers)
+response = requests.get(url.replace("{vid}", "actual_parent_volume_id"), headers=headers)
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-返回：
+**返回 (`MOIResponse_ListVolumeResp_`)：**
+返回结构与"查看数据卷列表"相同，但 `volumes` 列表将只包含指定 `{vid}` 的子卷。
+
+**输出参数 (`ListVolumeResp` 的 `data` 部分)：**
+与"查看数据卷列表"的输出参数一致。
+
+
+### 删除数据卷
 
 ```
-Response Body: {
+DELETE /byoa/api/v1/explore/volumes/{vid}
+```
+
+**路径参数：**
+
+*   `vid` (string, 必填): 要删除的数据卷 ID
+
+**Header 参数：**
+
+| 参数           | 类型   | 是否必填 | 描述             |
+| -------------- | ------ | -------- | ---------------- |
+| `user-id`      | string | 是       | 用户ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权Token        |
+| `uid`          | string | 是       | 用户登录 UID     |
+
+**示例 (Python)：**
+
+```python
+import requests
+
+# 将 {vid} 替换为实际的数据卷 ID
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}"
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+response = requests.delete(url.replace("{vid}", "volume_id_to_delete"), headers=headers)
+
+if response.status_code == 200: # OpenAPI 定义成功响应为 200，内容为 {}
+    try:
+        print("Response Body:", response.json())
+    except requests.exceptions.JSONDecodeError:
+        print("Success with empty response body.") # 实际可能返回空体
+else:
+    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+```
+
+**返回：**
+成功时 HTTP 状态码为 200，响应体为 `{}` (空JSON对象) 或无内容。
+
+### 查看卷内文件列表
+
+```
+POST /byoa/api/v1/explore/volumes/{vid}/files
+```
+
+**路径参数：**
+
+*   `vid` (string, 必填): 数据卷 ID
+
+**Header 参数：**
+
+| 参数           | 类型   | 是否必填 | 描述             |
+| -------------- | ------ | -------- | ---------------- |
+| `user-id`      | string | 是       | 用户ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权Token        |
+| `uid`          | string | 是       | 用户登录 UID     |
+
+**Body 输入参数 (`GetVolumeFilesReq`, 可选)：**
+
+| 参数    | 类型              | 含义     | 默认值 |
+| ------- | ----------------- | -------- | ------ |
+| filters | object (`Filter`) | 过滤器   |        |
+| sorter  | object (`Sorter`) | 排序器   |        |
+| offset  | integer           | 偏移量   | 0      |
+| limit   | integer           | 每页数量 | 30     |
+
+* **`Filter` 对象结构:**
+
+  | 参数           | 类型           | 含义           |
+  | -------------- | -------------- | -------------- |
+  | types          | array[integer] | 文件类型过滤   |
+  | status         | array[integer] | 文件状态过滤   |
+  | exclude_status | array[integer] | 排除的文件状态 |
+
+* **`Sorter` 对象结构:**
+
+  | 参数    | 类型    | 含义     | 默认值 |
+  | ------- | ------- | -------- | ------ |
+  | sort_by | string  | 排序字段 |        |
+  | is_desc | boolean | 是否降序 | true   |
+
+**Body 示例 (`GetVolumeFilesReq`)：**
+
+```json
+{
+    "filters": {
+        "types": [2, 3],
+        "status": [2]
+    },
+    "sorter": {
+        "sort_by": "updated_at",
+        "is_desc": true
+    },
+    "offset": 0,
+    "limit": 10
+}
+```
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+# 将 {vid} 替换为实际的数据卷 ID
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files"
+headers = {
+    "user-id":"your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+body = { # 可选
+    "limit": 5 
+}
+
+response = requests.post(url.replace("{vid}", "actual_volume_id"), json=body, headers=headers) # 使用 json=body
+print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
+```
+
+**返回 (`MOIResponse_GetVolumeFilesResp_`)：**
+
+```json
+{
     "code": "ok",
     "msg": "ok",
     "data": {
-        "total": 3,
+        "total": 1,
         "items": [
             {
                 "id": "0194fb44-c44b-7713-b064-bff178ba30c3",
                 "created_at": "2025-02-12T17:46:16.000000+0000",
                 "updated_at": "2025-02-12T17:51:21.000000+0000",
-                "user_id": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
+                "user_id": "your_user_id_workspace_id",
+                "priority": 300,
                 "source_volume_id": "1889223879880048640",
                 "source_file_id": "1889223944229060608",
-                "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9",
+                "target_volume_id": "actual_volume_id",
                 "file_name": "红楼梦(通行本)简体横排.pdf",
                 "file_type": 2,
                 "file_size": 6787457,
                 "file_path": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97/b-vol1/1889223922712281088/红楼梦(通行本)简体横排.pdf",
                 "file_status": 2,
-                "workflow_id": "5775ecd6-5918-42a1-a92f-7245fe96b2bf",
+                "workflow_meta_id": "5775ecd6-5918-42a1-a92f-7245fe96b2bf",
+                "workflow_branch_id": null,
                 "job_id": "0194fb44-c44b-7708-aab6-c67e094d0352",
                 "error_message": "",
                 "duration": 300,
                 "start_time": "2025-02-12T17:46:20.000000+0000",
-                "end_time": "2025-02-12T17:51:21.000000+0000"
-            },
-            {
-                "id": "0194fb23-cd65-7688-9f0e-b24de1947f9c",
-                "created_at": "2025-02-12T17:10:15.000000+0000",
-                "updated_at": "2025-02-12T17:15:21.000000+0000",
-                "user_id": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-                "source_volume_id": "1889223879880048640",
-                "source_file_id": "1889223944229060608",
-                "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9",
-                "file_name": "红楼梦(通行本)简体横排.pdf",
-                "file_type": 2,
-                "file_size": 6787457,
-                "file_path": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97/b-vol1/1889223922712281088/红楼梦(通行本)简体横排.pdf",
-                "file_status": 2,
-                "workflow_id": "729e7a03-652d-46e0-bdad-b05ec5b80cea",
-                "job_id": "0194fb23-cd65-767c-b58f-db7c4456b896",
-                "error_message": "",
-                "duration": 300,
-                "start_time": "2025-02-12T17:10:20.000000+0000",
-                "end_time": "2025-02-12T17:15:21.000000+0000"
-            },
-            {
-                "id": "0194fb28-61ae-7ab3-8446-a50669b8df87",
-                "created_at": "2025-02-12T17:15:15.000000+0000",
-                "updated_at": "2025-02-12T17:20:21.000000+0000",
-                "user_id": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-                "source_volume_id": "1889223879880048640",
-                "source_file_id": "1889223944229060608",
-                "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9",
-                "file_name": "红楼梦(通行本)简体横排.pdf",
-                "file_type": 2,
-                "file_size": 6787457,
-                "file_path": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97/b-vol1/1889223922712281088/红楼梦(通行本)简体横排.pdf",
-                "file_status": 2,
-                "workflow_id": "c6dcbad5-f85d-42b7-942c-2e8d3445a4e6",
-                "job_id": "0194fb28-61ae-7aac-8500-a4c924a68211",
-                "error_message": "",
-                "duration": 300,
-                "start_time": "2025-02-12T17:15:20.000000+0000",
-                "end_time": "2025-02-12T17:20:21.000000+0000"
+                "end_time": "2025-02-12T17:51:21.000000+0000",
+                "delete_status": 0
             }
         ]
     }
 }
 ```
 
-### 下载某个处理数据卷中的某个文件
+**输出参数 (`GetVolumeFilesResp` 的 `data` 部分)：**
+
+| 参数  | 类型          | 含义     |
+| ----- | ------------- | -------- |
+| total | integer       | 文件总数 |
+| items | array[`File`] | 文件列表 |
+
+* **`File` 对象结构:**
+
+  | 参数               | 类型    | 含义                   | 默认值       |
+  | ------------------ | ------- | ---------------------- | ------------ |
+  | id                 | string  | 文件 ID                |              |
+  | created_at         | string  | 创建时间 (ISO格式)     |              |
+  | updated_at         | string  | 更新时间 (ISO格式)     |              |
+  | user_id            | string  | 用户 ID (DC用户)       | "dc_user_id" |
+  | priority           | integer | 优先级                 | 300          |
+  | source_volume_id   | string  | 源数据卷 ID            |              |
+  | source_file_id     | string  | 源文件 ID              |              |
+  | target_volume_id   | string  | 目标数据卷 ID          |              |
+  | file_name          | string  | 文件名                 |              |
+  | file_type          | integer | 文件类型               |              |
+  | file_size          | integer | 文件大小 (bytes)       |              |
+  | file_path          | string  | 文件路径               |              |
+  | file_status        | integer | 文件状态               |              |
+  | workflow_meta_id   | string  | 工作流元数据 ID (可选) | null         |
+  | workflow_branch_id | string  | 工作流分支 ID (可选)   | null         |
+  | job_id             | string  | 作业 ID (可选)         | null         |
+  | error_message      | string  | 错误信息 (可选)        | null         |
+  | duration           | integer | 处理时长 (秒, 可选)    | 0            |
+  | start_time         | string  | 开始处理时间 (可选)    | null         |
+  | end_time           | string  | 结束处理时间 (可选)    | null         |
+  | delete_status      | integer | 删除状态 (0-未删除)    | 0            |
+
+### 删除卷内文件
 
 ```
-GET /byoa/api/v1/explore/volumes/{volume_id}/files/{file_id}/raws
+DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}
 ```
+
+**路径参数：**
+
+*   `vid` (string, 必填): 数据卷 ID
+*   `fid` (string, 必填): 文件 ID
+
+**Header 参数：**
+
+| 参数           | 类型   | 是否必填 | 描述             |
+| -------------- | ------ | -------- | ---------------- |
+| `user-id`      | string | 是       | 用户ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权Token        |
+| `uid`          | string | 是       | 用户登录 UID     |
+
+**示例 (Python)：**
 
 ```python
 import requests
-import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/eb42f0a1-ab18-4010-b95c-cd1716dd5e95/files/0194f41d-59d3-78ae-953d-7db134c83cab/raws"
+# 将 {vid} 和 {fid} 替换为实际的 ID
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files/{fid}"
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "a8b83860-da1a-46cb-96a7-dd668fadc163-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
 }
+response = requests.delete(url.replace("{vid}", "actual_volume_id").replace("{fid}", "file_id_to_delete"), headers=headers)
 
-response = requests.get(url, headers=headers)
-print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
-```
-
-返回：
-
-```
-Response Body: {
-    "total": 0,
-    "items": []
-}
-```
-
-### 查看某个处理数据卷中文件的解析内容
-
-```
-POST /byoa/api/v1/explore/volumes/{volume_id}/files/{filed_id}/blocks
-```
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/7399732a-3e43-4469-8abb-7a53b99efc22/files/0194fd65-e671-7e67-ba34-66967ba0fbf0/blocks"
-headers = {
-    "user-id":"0194e0c2-7e81-7040-ba44-f1d4f51axxxx",
-    "Access-Token": "xxxx",
-    "uid": "0401ffeb-592c-4472-bed4-fb4631c72688-0194e0c2-7e81-7040-ba44-f1d4f51axxxx:admin:accountadmin"
-}
-
-body = {
-    "limit": 2
-}
-
-response = requests.post(url, headers=headers,json=body)
-print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
-```
-
-返回：
-
-```
-Response Body: {
-    "code": "ok",
-    "msg": "ok",
-    "data": {
-        "total": 318,
-        "items": [
-            {
-                "id": "000a9605-733f-4335-bc72-ac9aa8351e66",
-                "content": "1. 数据接入与整合 a. Matrix Search 从后台管理系统接入产品图片和库存数据，并通过自动更新和API 接口实现数据的同步和实时更新。 b. 图片数据统一按单面类型进行管理，无型号字样，确保搜索结果的清晰准确性。 2. 搜索索引构建与优化 a. Matrix Search 利用Efficient Net 模型对上传的图片进行特征提取，生成高精度图像嵌入向量，构建图像检索索引。 b. 支持混合检索，通过结合语义检索（以文搜图）和向量检索（以图搜图），提升搜索准确性和结果的相关性。 3. 智能搜索功能实现 a. 用户通过小程序入口上传图片或输入文字进行产品搜索。 b. 系统调用Matrix Search 的搜索API 快速返回匹配的产品结果，同时支持按分类筛选和系列查询，帮助用户快速找到目标产品。 4. 库存查询与展示 a. 对搜索结果进行后台过滤分类后，小程序展示匹配的产品信息，包括名称、规格、图片、库存等。 b. 用户可直接查询产品库存情况，并进一步查看同系列其他产品，优化搜索体验。 # 客户收益  通过基于Matrix Search 的智能搜索平台，金意陶在产品检索和客户体验方面实现了显著提升：搜索效率提升 $90\\%$ ，销售能够快速找到符合需求的瓷砖产品。 $\\bullet$ 系统化的库存查询功能帮助销售团队优化库存管理，减少人工操作时间。 $\\bullet$ 基于图片特征的智能搜索功能显著提升了用户对产品选择的满意度，增强了品牌黏性。 $\\bullet$ 灵活的小程序入口简化了用户交互流程，为客户提供了随时随地的高效服务。 # 素问 TechAgent # 客户背景",
-                "content_type": "text",
-                "file_id": "0194fd65-e671-7e67-ba34-66967ba0fbf0",
-                "created_at": "2025-02-13T03:45:02",
-                "updated_at": "2025-02-13T03:45:02"
-            },
-            {
-                "id": "08aaf135-f8ad-446c-9951-03e94777f608",
-                "content": "![](/aaf889600825973f8e7e118d8b5e0c805d774aac8e2d96c2f005e0b9ee77bbad.jpg) 接下来我们会逐个分析其中每个关键环节的场景，数据加工的技术要求，以及MatrixOne Intelligence 解决方案中的产品能力如何匹配该环节的需求。 # 数据接入与整合 # 环节概述 前文已经详细描述过企业客户在面向GenAI 应用场景时，企业客户普遍面临新一轮的数据孤岛问题。各类数据源可能分布于不同的数据库（如关系型数据库、NoSQL 数据库）、文件系统（本地或云存储）、第三方SaaS 应用（如网盘、IM 工具）以及边缘设备等环境中。这些数据不仅物理位置分散，格式上也高度异构，涵盖结构化数据（如数据库表）、半结构化数据（如JSON、XML）以及非结构化数据（如PDF 文档、图像、视频、音频等）。 这种分散和多样化的数据形态带来了以下关键问题和需求： 1. 数据获取与整合复杂：数据分布在多个系统和位置，缺乏统一的接入和管理方式，导致数据整合工作量大且效率低下。 2. 非结构化数据处理压力：非结构化数据体量巨大（如视频和音频文件），完全采用中心化的接入方式会带来带宽瓶颈、高延迟和高成本问题。 3. 多模态数据标准化：数据格式不一致，解析和标准化过程繁琐，难以直接为AI 建模和应用提供支持。 4. 安全性与权限管理：跨部门或跨系统的数据访问需要精细化的权限控制，确保数据在接入和管理过程中的安全性和合规性。 因此，本环节的核心目标是解决数据的分散和异构性问题，构建一个支持多数据源统一接入、云边协同处理和分布式管理的架构。通过高效整合结构化、半结构化和非结构化数据，并提供灵活的权限控制和标准化处理能力，为后续的AI 建模和智能化应用奠定坚实的数据基础。",
-                "content_type": "text",
-                "file_id": "0194fd65-e671-7e67-ba34-66967ba0fbf0",
-                "created_at": "2025-02-13T03:45:02",
-                "updated_at": "2025-02-13T03:45:02"
-            }
-        ]
-    }
-}
-```
-
-### 删除某个处理数据卷中的某个文件的分段
-
-```
-DELETE /explore/volumes/{volume_id}/files/{filed_id}/blocks
-```
-
-**NOTE:** 此接口请求成功的状态码为 204。
-
-**输出参数：**
-  
-|  参数             | 含义 |
-| --------------- | ----  |
-| ids             | block 的 id    |
-
-**示例：**
-
-```python
-import requests
-import json
-
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/7399732a-3e43-4469-8abb-7a53b99efc22/files/0194fd65-e671-7e67-ba34-66967ba0fbf0/blocks"
-headers = {
-    "user-id": "0194e0c2-7e81-7040-ba44-f1d4f51axxxx",
-    "Access-Token": "xxxx",
-    "uid": "8fe335b4-2883-41b4-82eb-a17362504243-0194e0c2-7e81-7040-ba44-f1d4f51axxxx:admin:accountadmin",
-}
-
-body = {
-    "ids": ["03e927d3-edbe-426c-835a-0f1e4fcc39b6"]
-}
-
-response = requests.delete(url, headers=headers, json=body)
-
-if response.status_code == 204:
-    print("请求成功，资源已删除")
+if response.status_code == 200:
+    try:
+        print("Response Body:", response.json()) 
+    except requests.exceptions.JSONDecodeError:
+        print("Success with empty response body.")
 else:
     print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
 ```
 
-返回：
+**返回：**
+成功时 HTTP 状态码为 200，响应体为 `{}` (空JSON对象) 或无内容。
+
+### 获取文件原始内容
 
 ```
-请求成功，资源已删除
+GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws
 ```
+
+**路径参数：**
+
+*   `vid` (string, 必填): 数据卷 ID
+*   `fid` (string, 必填): 文件 ID
+
+**Header 参数：**
+
+| 参数           | 类型   | 是否必填 | 描述             |
+| -------------- | ------ | -------- | ---------------- |
+| `user-id`      | string | 是       | 用户ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权Token        |
+| `uid`          | string | 是       | 用户登录 UID     |
+
+**Query 参数：**
+
+| 参数            | 是否必填 | 类型    | 含义               | 默认值 |
+| --------------- | -------- | ------- | ------------------ | ------ |
+| need_embeddings | 否       | boolean | 是否需要 embedding | false  |
+
+**示例 (Python)：**
+
+```python
+import requests
+
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws"
+headers = {
+    "user-id":"your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+params = {
+    "need_embeddings": False # 或者 True
+}
+
+response = requests.get(url.replace("{vid}", "actual_volume_id").replace("{fid}", "actual_file_id"), headers=headers, params=params)
+
+if response.status_code == 200:
+    try:
+        print("Response Body (if JSON):", response.json())
+    except requests.exceptions.JSONDecodeError:
+        print("Response is likely raw file content or an empty body for success.")
+else:
+    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+```
+
+**返回：**
+OpenAPI 定义成功响应为 200，响应体为 `{}` (空JSON对象)。然而，这类接口通常直接返回文件流 (raw bytes)。如果 `need_embeddings` 为 true 且有 embedding，返回内容可能包含 embedding 信息，具体格式需进一步确认。
+
+### 获取文件关联的作业信息
+
+```
+GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/jobs
+```
+
+**路径参数：**
+
+*   `vid` (string, 必填): 数据卷 ID
+*   `fid` (string, 必填): 文件 ID
+
+**Header 参数：**
+
+| 参数           | 类型   | 是否必填 | 描述             |
+| -------------- | ------ | -------- | ---------------- |
+| `user-id`      | string | 是       | 用户ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权Token        |
+| `uid`          | string | 是       | 用户登录 UID     |
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+# 将 {vid} 和 {fid} 替换为实际的 ID
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files/{fid}/jobs"
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+response = requests.get(url.replace("{vid}", "actual_volume_id").replace("{fid}", "actual_file_id"), headers=headers)
+print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
+```
+
+**返回 (`MOIResponse_GetFileJobResp_`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": {
+        "job": {
+            "id": "job_id_associated_with_file",
+            "workflow_name": "Associated Workflow",
+            "status": 2,
+            "start_time": "2025-02-13T12:00:00Z",
+            "end_time": "2025-02-13T12:05:00Z"
+        }
+    }
+}
+```
+
+**输出参数 (`GetFileJobResp` 的 `data` 部分)：**
+
+| 参数 | 类型   | 含义                                                         |
+| ---- | ------ | ------------------------------------------------------------ |
+| job  | object | 文件关联的作业信息对象。具体结构需要参照实际API返回或更详细的定义。 |
+
+
+### 获取文件解析的数据块
+
+```
+POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
+```
+
+**路径参数：**
+
+*   `vid` (string, 必填): 数据卷 ID
+*   `fid` (string, 必填): 文件 ID
+
+**Header 参数：**
+
+| 参数           | 类型   | 是否必填 | 描述             |
+| -------------- | ------ | -------- | ---------------- |
+| `user-id`      | string | 是       | 用户ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权Token        |
+| `uid`          | string | 是       | 用户登录 UID     |
+
+**Body 输入参数 (`GetFileBlocksReq`, 可选)：**
+
+| 参数    | 类型                    | 含义     | 默认值 |
+| ------- | ----------------------- | -------- | ------ |
+| filters | object (`BlocksFilter`) | 过滤器   |        |
+| offset  | integer                 | 偏移量   | 0      |
+| limit   | integer                 | 每页数量 | 30     |
+
+* **`BlocksFilter` 对象结构:**
+
+  | 参数           | 类型          | 含义                                     |
+  | -------------- | ------------- | ---------------------------------------- |
+  | types          | array[string] | 类型过滤 (例如, "text", "image_caption") |
+  | search_content | string        | 内容搜索关键字                           |
+  | block_ids      | array[string] | 指定数据块ID列表                         |
+
+
+**Body 示例 (`GetFileBlocksReq`)：**
+
+```json
+{
+    "filters": {
+        "types": ["text"],
+        "search_content": "MatrixOne"
+    },
+    "limit": 5
+}
+```
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+# 将 {vid} 和 {fid} 替换为实际的 ID
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks"
+headers = {
+    "user-id":"your_user_id_workspace_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+body = {
+    "limit": 2
+}
+response = requests.post(url.replace("{vid}", "actual_volume_id").replace("{fid}", "actual_file_id"), json=body, headers=headers)
+print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
+```
+
+**返回 (`MOIResponse_GetFileBlocksResp_`)：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": {
+        "total": 10,
+        "items": [
+            {
+                "id": "000a9605-733f-4335-bc72-ac9aa8351e66",
+                "content": "Matrix Search 利用Efficient Net 模型对上传的图片进行特征提取...",
+                "type": "text", 
+                "content_type": "text", 
+                "file_id": "actual_file_id",
+                "description": null,
+                "created_at": "2025-02-13T03:45:02",
+                "updated_at": "2025-02-13T03:45:02",
+                "text_and_image_id": null
+            },
+            {
+                "id": "08aaf135-f8ad-446c-9951-03e94777f608",
+                "content": "![](/image.jpg) 接下来我们会逐个分析...",
+                "type": "markdown",
+                "content_type": "text",
+                "file_id": "actual_file_id",
+                "description": "An image with text",
+                "created_at": "2025-02-13T03:45:03",
+                "updated_at": "2025-02-13T03:45:03",
+                "text_and_image_id": 123
+            }
+        ]
+    }
+}
+```
+
+**输出参数 (`GetFileBlocksResp` 的 `data` 部分)：**
+
+| 参数  | 类型                           | 含义       |
+| ----- | ------------------------------ | ---------- |
+| total | integer                        | 数据块总数 |
+| items | array[`SampleEmbeddingResult`] | 数据块列表 |
+
+* **`SampleEmbeddingResult` 对象结构:**
+
+  | 参数              | 类型    | 含义                                             |
+  | ----------------- | ------- | ------------------------------------------------ |
+  | id                | string  | 数据块 ID                                        |
+  | content           | string  | 内容                                             |
+  | type              | string  | 数据块类型 (如 "text", "table", "image_caption") |
+  | content_type      | string  | 内容MIME类型 (实际可能与 block type 更相关)      |
+  | file_id           | string  | 文件 ID                                          |
+  | description       | string  | 描述 (可选)                                      |
+  | created_at        | string  | 创建时间 (ISO格式)                               |
+  | updated_at        | string  | 更新时间 (ISO格式)                               |
+  | text_and_image_id | integer | 图文关联ID (可选)                                |
+
+### 删除文件解析的数据块
+
+```
+DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
+```
+
+**路径参数：**
+
+*   `vid` (string, 必填): 数据卷 ID
+*   `fid` (string, 必填): 文件 ID
+
+**Header 参数：**
+
+| 参数           | 类型   | 是否必填 | 描述             |
+| -------------- | ------ | -------- | ---------------- |
+| `user-id`      | string | 是       | 用户ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权Token        |
+| `uid`          | string | 是       | 用户登录 UID     |
+
+**Body 输入参数 (`DeleteFileBlocksReq`)：**
+
+| 参数 | 是否必填 | 类型          | 含义                 |
+| ---- | -------- | ------------- | -------------------- |
+| ids  | 是       | array[string] | 要删除的数据块ID列表 |
+
+**Body 示例 (`DeleteFileBlocksReq`)：**
+
+```json
+{
+    "ids": ["block_id_1_to_delete", "block_id_2_to_delete"]
+}
+```
+
+**示例 (Python)：**
+
+```python
+import requests
+import json
+
+# 将 {vid} 和 {fid} 替换为实际的 ID
+url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks"
+headers = {
+    "user-id": "your_user_id",
+    "Access-Token": "your_access_token",
+    "uid": "your_uid"
+}
+body = {
+    "ids": ["03e927d3-edbe-426c-835a-0f1e4fcc39b6"]
+}
+response = requests.delete(url.replace("{vid}", "actual_volume_id").replace("{fid}", "actual_file_id"), json=body, headers=headers)
+
+if response.status_code == 200:
+    try:
+        print("Response Body:", response.json())
+    except requests.exceptions.JSONDecodeError:
+        print("Success, typically with an empty response body.")
+else:
+    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+```
+
+**返回：**
+成功时 HTTP 状态码为 200，响应体为 `{}` (空JSON对象) 或无内容。原文档中提到204，但OpenAPI spec中是200。
