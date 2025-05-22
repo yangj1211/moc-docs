@@ -19,8 +19,8 @@ POST /byoa/api/v1/workflow_meta
 | 参数名         | 类型   | 是否必填 | 描述         | 默认值      |
 | -------------- | ------ | -------- | ------------ | ----------- |
 | `user-name`    | string | 否       | 用户名       | "user_name" |
-| `user-id`      | string | 是       | 用户ID       |             |
-| `Access-Token` | string | 是       | 鉴权Token    |             |
+| `user-id`      | string | 是       | 用户 ID       |             |
+| `Access-Token` | string | 是       | 鉴权 Token    |             |
 | `uid`          | string | 是       | 用户登录 UID |             |
 
 **Body 输入参数 (`WorkflowRequest`)：**
@@ -29,11 +29,11 @@ POST /byoa/api/v1/workflow_meta
 | --------------------------- | -------- | ---------------------------- | ------------------------------ | ------ |
 | `name`                      | 是       | string                       | 工作流名称                     |        |
 | `source_volume_names`       | 是       | array[string]                | 源数据卷名称列表               |        |
-| `source_volume_ids`         | 是       | array[integer]               | 源数据卷ID列表                 |        |
+| `source_volume_ids`         | 是       | array[integer]               | 源数据卷 ID 列表                 |        |
 | `file_types`                | 是       | array[integer]               | 文件类型列表                   |        |
 | `process_mode`              | 是       | object (`ProcessModeConfig`) | 处理模式配置                   |        |
 | `priority`                  | 否       | integer                      | 优先级                         | 300    |
-| `target_volume_id`          | 是       | string                       | 目标数据卷ID                   |        |
+| `target_volume_id`          | 是       | string                       | 目标数据卷 ID                   |        |
 | `target_volume_name`        | 否       | string                       | 目标数据卷名称                 | ""     |
 | `create_target_volume_name` | 是       | string                       | 创建目标数据卷时使用的名称     |        |
 | `workflow`                  | 是       | object (`WorkflowConfig`)    | 工作流配置 (Haystack pipeline) |        |
@@ -169,7 +169,7 @@ GET /byoa/api/v1/workflow_meta
 | `start_time`    | integer, nullable                     | 否       | 开始时间戳 (毫秒)             |              |
 | `end_time`      | integer, nullable                     | 否       | 结束时间戳 (毫秒)             |              |
 | `process_modes` | array[integer], nullable              | 否       | 处理模式 (通常指 interval 值) |              |
-| `status`        | array[integer], nullable              | 否       | 状态 (例如: 1-运行中, 2-完成) |              |
+| `status`        | array[integer], nullable              | 否       | 状态 (例如：1-运行中，2-完成) |              |
 | `file_types`    | array[integer], nullable              | 否       | 文件类型                      |              |
 | `priority`      | array[integer], nullable              | 否       | 优先级                        |              |
 | `creator`       | string, nullable                      | 否       | 创建者                        |              |
@@ -182,8 +182,8 @@ GET /byoa/api/v1/workflow_meta
 
 | 参数名         | 类型   | 是否必填 | 描述         |
 | -------------- | ------ | -------- | ------------ |
-| `user-id`      | string | 是       | 用户ID       |
-| `Access-Token` | string | 是       | 鉴权Token    |
+| `user-id`      | string | 是       | 用户 ID       |
+| `Access-Token` | string | 是       | 鉴权 Token    |
 | `uid`          | string | 是       | 用户登录 UID |
 
 **示例 (Python)：**
@@ -236,7 +236,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
                 "status": 2, // 示例：2-完成
                 "version": "1.0",
                 "branch_total": 1, // 该工作流下的分支数量
-                "branch_id": "main_branch_uuid_for_workflow1", // 最新或主分支ID (需要确认此逻辑)
+                "branch_id": "main_branch_uuid_for_workflow1", // 最新或主分支 ID (需要确认此逻辑)
                 "branch_name": "main",
                 "branch_status": 0, // 最新或主分支状态
                 "branch_volume_id": "target_vol_for_main_branch1"
@@ -255,26 +255,26 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 | `workflows` | array[object] (`WorkflowListItem` 结构) | 工作流列表，每个对象包含工作流及其主要分支信息 |
 
 *   **`WorkflowListItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.WorkflowListItem)
-    *   `id` (string): 工作流ID
+    *   `id` (string): 工作流 ID
     *   `name` (string): 工作流名称
     *   `created_at` (integer): 创建时间戳 (毫秒)
     *   `creator` (string): 创建者
     *   `updated_at` (integer): 更新时间戳 (毫秒)
     *   `modifier` (string, nullable): 更新者
-    *   `source_volume_ids` (array[string]): 源数据卷ID列表
+    *   `source_volume_ids` (array[string]): 源数据卷 ID 列表
     *   `source_volume_names` (array[string]): 源数据卷名称列表
     *   `file_types` (array[integer]): 文件类型列表
-    *   `target_volume_id` (string): 目标数据卷ID
+    *   `target_volume_id` (string): 目标数据卷 ID
     *   `target_volume_name` (string): 目标数据卷名称
     *   `process_mode` (object `ProcessModeConfig`): 处理模式配置
     *   `priority` (integer): 优先级
     *   `status` (integer): 状态
     *   `version` (string, nullable): 版本号
     *   `branch_total` (integer, nullable): 该工作流下的分支总数
-    *   `branch_id` (string, nullable): (通常是)主分支或最新活动分支的ID
-    *   `branch_name` (string, nullable): (通常是)主分支或最新活动分支的名称
-    *   `branch_status` (integer, nullable): (通常是)主分支或最新活动分支的状态
-    *   `branch_volume_id` (string, nullable): (通常是)主分支或最新活动分支的目标数据卷ID
+    *   `branch_id` (string, nullable): (通常是) 主分支或最新活动分支的 ID
+    *   `branch_name` (string, nullable): (通常是) 主分支或最新活动分支的名称
+    *   `branch_status` (integer, nullable): (通常是) 主分支或最新活动分支的状态
+    *   `branch_volume_id` (string, nullable): (通常是) 主分支或最新活动分支的目标数据卷 ID
 
 
 ### 查看工作流详情
@@ -287,14 +287,14 @@ GET /byoa/api/v1/workflow_meta/{workflow_id}
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流ID |
+| `workflow_id` | string | 是       | 工作流 ID |
 
 **Header 参数：**
 
 | 参数名         | 类型   | 是否必填 | 描述         |
 | -------------- | ------ | -------- | ------------ |
-| `user-id`      | string | 是       | 用户ID       |
-| `Access-Token` | string | 是       | 鉴权Token    |
+| `user-id`      | string | 是       | 用户 ID       |
+| `Access-Token` | string | 是       | 鉴权 Token    |
 | `uid`          | string | 是       | 用户登录 UID |
 
 **示例 (Python)：**
@@ -383,16 +383,16 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 主要包含工作流的基础信息、主工作流的 Haystack 配置 (`workflow`)、主/默认分支的相关信息 (`branch_id`, `branch_name`, `branch_status`, `branch_volume_id`)，以及一个 `branches` 数组，其中每一项是 `WorkflowBranchItem`。
 
 *   **`WorkflowBranchItem` 结构:** (参考 `workflow.openapi.json` components.schemas.WorkflowBranchItem)
-    *   `branch_id` (string): 分支ID
+    *   `branch_id` (string): 分支 ID
     *   `created_at` (integer): 创建时间戳
     *   `creator` (string): 创建者
     *   `updated_at` (integer): 更新时间戳
     *   `modifier` (string): 更新者
     *   `status` (integer): 此分支应用的工作流部分的状态
-    *   `workflow` (object `WorkflowConfig`): 此分支特定的Haystack配置
+    *   `workflow` (object `WorkflowConfig`): 此分支特定的 Haystack 配置
     *   `branch_name` (string): 分支名
     *   `branch_status` (integer): 分支自身的状态
-    *   `branch_volume_id` (string): 分支的目标数据卷ID
+    *   `branch_volume_id` (string): 分支的目标数据卷 ID
 
 ### 修改工作流
 
@@ -406,15 +406,15 @@ PUT /byoa/api/v1/workflow_meta/{workflow_id}
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流ID |
+| `workflow_id` | string | 是       | 工作流 ID |
 
 **Header 参数：**
 
 | 参数名         | 类型   | 是否必填 | 描述         |
 | -------------- | ------ | -------- | ------------ |
 | `user-name`    | string | 否       | 用户名       |
-| `user-id`      | string | 是       | 用户ID       |
-| `Access-Token` | string | 是       | 鉴权Token    |
+| `user-id`      | string | 是       | 用户 ID       |
+| `Access-Token` | string | 是       | 鉴权 Token    |
 | `uid`          | string | 是       | 用户登录 UID |
 
 **Body 输入参数 (`WorkflowRequest`)：**
@@ -498,7 +498,7 @@ DELETE /byoa/api/v1/workflow_meta/{workflow_id}
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流ID |
+| `workflow_id` | string | 是       | 工作流 ID |
 
 **Query 参数：**
 
@@ -510,8 +510,8 @@ DELETE /byoa/api/v1/workflow_meta/{workflow_id}
 
 | 参数名         | 类型   | 是否必填 | 描述         |
 | -------------- | ------ | -------- | ------------ |
-| `user-id`      | string | 是       | 用户ID       |
-| `Access-Token` | string | 是       | 鉴权Token    |
+| `user-id`      | string | 是       | 用户 ID       |
+| `Access-Token` | string | 是       | 鉴权 Token    |
 | `uid`          | string | 是       | 用户登录 UID |
 
 **示例 (Python)：**
@@ -539,7 +539,7 @@ if response.content: # 检查是否有内容，因为成功可能返回空响应
     try:
         print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     except json.JSONDecodeError:
-        print("Response text:", response.text) # 如果不是JSON，打印文本
+        print("Response text:", response.text) # 如果不是 JSON，打印文本
 else:
     print("Request successful, no content returned.")
 
@@ -568,14 +568,14 @@ PUT /byoa/api/v1/workflow_meta/{workflow_id}/stop
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流ID |
+| `workflow_id` | string | 是       | 工作流 ID |
 
 **Header 参数：**
 
 | 参数名         | 类型   | 是否必填 | 描述         |
 | -------------- | ------ | -------- | ------------ |
-| `user-id`      | string | 是       | 用户ID       |
-| `Access-Token` | string | 是       | 鉴权Token    |
+| `user-id`      | string | 是       | 用户 ID       |
+| `Access-Token` | string | 是       | 鉴权 Token    |
 | `uid`          | string | 是       | 用户登录 UID |
 
 **(无 Body 输入参数)**
@@ -632,15 +632,15 @@ POST /byoa/api/v1/workflow_meta/{workflow_id}/branch
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流ID |
+| `workflow_id` | string | 是       | 工作流 ID |
 
 **Header 参数：**
 
 | 参数名         | 类型   | 是否必填 | 描述                | 默认值      |
 | -------------- | ------ | -------- | ------------------- | ----------- |
 | `user-name`    | string | 否       | 用户名              | "user_name" |
-| `user-id`      | string | 是       | 用户ID              |             |
-| `Access-Token` | string | 是       | 鉴权Token (隐式)    |             |
+| `user-id`      | string | 是       | 用户 ID              |             |
+| `Access-Token` | string | 是       | 鉴权 Token (隐式)    |             |
 | `uid`          | string | 是       | 用户登录 UID (隐式) |             |
 
 **Body 输入参数 (`WorkflowBranchRequest`)：**
@@ -710,7 +710,7 @@ GET /byoa/api/v1/workflow_meta/{workflow_id}/branch
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流ID |
+| `workflow_id` | string | 是       | 工作流 ID |
 
 **Query 参数：**
 
@@ -723,8 +723,8 @@ GET /byoa/api/v1/workflow_meta/{workflow_id}/branch
 
 | 参数名         | 类型   | 是否必填 | 描述                |
 | -------------- | ------ | -------- | ------------------- |
-| `user-id`      | string | 是       | 用户ID              |
-| `Access-Token` | string | 是       | 鉴权Token (隐式)    |
+| `user-id`      | string | 是       | 用户 ID              |
+| `Access-Token` | string | 是       | 鉴权 Token (隐式)    |
 | `uid`          | string | 是       | 用户登录 UID (隐式) |
 
 **示例 (Python)：**
@@ -763,9 +763,9 @@ if response.content:
     "msg": "ok",
     "data": { // WorkflowListResponse 结构
         "total": 2, // 该工作流下的分支总数
-        "workflows": [ // WorkflowListItem 数组, 代表分支
+        "workflows": [ // WorkflowListItem 数组，代表分支
             {
-                "id": "workflow_id_for_branch_1", // 父工作流ID
+                "id": "workflow_id_for_branch_1", // 父工作流 ID
                 "name": "Parent Workflow Name - Branch Alpha", // 分支可能会有特定命名展示
                 // ... 其他 WorkflowListItem 字段 ...
                 "branch_id": "branch_uuid_alpha",
@@ -775,7 +775,7 @@ if response.content:
                 // status 字段此时代表此分支应用的工作流部分的状态
             },
             {
-                "id": "workflow_id_for_branch_1", // 父工作流ID
+                "id": "workflow_id_for_branch_1", // 父工作流 ID
                 "name": "Parent Workflow Name - Branch Beta",
                 // ... 其他 WorkflowListItem 字段 ...
                 "branch_id": "branch_uuid_beta",
@@ -804,14 +804,14 @@ GET /byoa/api/v1/workflow_meta/branch/{branch_id}
 
 | 参数名      | 类型   | 是否必填 | 描述         |
 | ----------- | ------ | -------- | ------------ |
-| `branch_id` | string | 是       | 工作流分支ID |
+| `branch_id` | string | 是       | 工作流分支 ID |
 
 **Header 参数：**
 
 | 参数名         | 类型   | 是否必填 | 描述                |
 | -------------- | ------ | -------- | ------------------- |
-| `user-id`      | string | 是       | 用户ID              |
-| `Access-Token` | string | 是       | 鉴权Token (隐式)    |
+| `user-id`      | string | 是       | 用户 ID              |
+| `Access-Token` | string | 是       | 鉴权 Token (隐式)    |
 | `uid`          | string | 是       | 用户登录 UID (隐式) |
 
 **示例 (Python)：**
@@ -843,16 +843,16 @@ if response.content:
 {
     "code": "ok",
     "msg": "ok",
-    "data": { // WorkflowDetailResponse 结构, 但聚焦于分支
-        "id": "parent_workflow_uuid", // 父工作流ID
+    "data": { // WorkflowDetailResponse 结构，但聚焦于分支
+        "id": "parent_workflow_uuid", // 父工作流 ID
         "name": "Parent Workflow Name (Branch: feature-x)", // 可能包含分支信息
         // ... (父工作流的详细信息) ...
         "workflow": { /* 该分支应用的 Haystack 配置 */ },
-        "branch_id": "your_branch_id",       // 当前分支ID
+        "branch_id": "your_branch_id",       // 当前分支 ID
         "branch_name": "feature-x",          // 当前分支名称
         "branch_status": 0,                  // 当前分支状态
         "branch_volume_id": "target_vol_for_feature_x_branch", // 当前分支目标卷
-        "branches": null // 通常获取单个分支详情时，此字段可能为null或不包含其他分支
+        "branches": null // 通常获取单个分支详情时，此字段可能为 null 或不包含其他分支
     }
 }
 ```
@@ -873,15 +873,15 @@ PUT /byoa/api/v1/workflow_meta/branch/{branch_id}
 
 | 参数名      | 类型   | 是否必填 | 描述         |
 | ----------- | ------ | -------- | ------------ |
-| `branch_id` | string | 是       | 工作流分支ID |
+| `branch_id` | string | 是       | 工作流分支 ID |
 
 **Header 参数：**
 
 | 参数名         | 类型   | 是否必填 | 描述                | 默认值      |
 | -------------- | ------ | -------- | ------------------- | ----------- |
 | `user-name`    | string | 否       | 用户名              | "user_name" |
-| `user-id`      | string | 是       | 用户ID              |             |
-| `Access-Token` | string | 是       | 鉴权Token (隐式)    |             |
+| `user-id`      | string | 是       | 用户 ID              |             |
+| `Access-Token` | string | 是       | 鉴权 Token (隐式)    |             |
 | `uid`          | string | 是       | 用户登录 UID (隐式) |             |
 
 **Body 输入参数 (`UpdateWorkflowBranchRequest`)：**
@@ -946,7 +946,7 @@ DELETE /byoa/api/v1/workflow_meta/branch/{branch_id}
 
 | 参数名      | 类型   | 是否必填 | 描述         |
 | ----------- | ------ | -------- | ------------ |
-| `branch_id` | string | 是       | 工作流分支ID |
+| `branch_id` | string | 是       | 工作流分支 ID |
 
 **Query 参数：**
 
@@ -958,8 +958,8 @@ DELETE /byoa/api/v1/workflow_meta/branch/{branch_id}
 
 | 参数名         | 类型   | 是否必填 | 描述                |
 | -------------- | ------ | -------- | ------------------- |
-| `user-id`      | string | 是       | 用户ID              |
-| `Access-Token` | string | 是       | 鉴权Token (隐式)    |
+| `user-id`      | string | 是       | 用户 ID              |
+| `Access-Token` | string | 是       | 鉴权 Token (隐式)    |
 | `uid`          | string | 是       | 用户登录 UID (隐式) |
 
 **示例 (Python)：**
@@ -1011,14 +1011,14 @@ PUT /byoa/api/v1/workflow_meta/branch/{branch_id}/enable
 
 | 参数名      | 类型   | 是否必填 | 描述         |
 | ----------- | ------ | -------- | ------------ |
-| `branch_id` | string | 是       | 工作流分支ID |
+| `branch_id` | string | 是       | 工作流分支 ID |
 
 **Header 参数：**
 
 | 参数名         | 类型   | 是否必填 | 描述                |
 | -------------- | ------ | -------- | ------------------- |
-| `user-id`      | string | 是       | 用户ID              |
-| `Access-Token` | string | 是       | 鉴权Token (隐式)    |
+| `user-id`      | string | 是       | 用户 ID              |
+| `Access-Token` | string | 是       | 鉴权 Token (隐式)    |
 | `uid`          | string | 是       | 用户登录 UID (隐式) |
 
 **(无 Body 输入参数)**
@@ -1040,7 +1040,7 @@ response = requests.put(url, headers=headers)
 print(response.status_code)
 if response.content:
     try:
-        # Enable通常返回更新后的分支详情或父工作流详情
+        # Enable 通常返回更新后的分支详情或父工作流详情
         print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     except json.JSONDecodeError:
         print(response.text)
@@ -1064,9 +1064,9 @@ if response.content:
                 "branch_id": "your_branch_id_to_enable",
                 "branch_name": "enabled-branch-name",
                 "branch_status": 0, // 更新后的状态
-                // ...other分支详情...
+                // ...other 分支详情...
             }
-            // ...other分支列表...
+            // ...other 分支列表...
         ]
     }
 }
@@ -1084,14 +1084,14 @@ PUT /byoa/api/v1/workflow_meta/branch/{branch_id}/disable
 
 | 参数名      | 类型   | 是否必填 | 描述         |
 | ----------- | ------ | -------- | ------------ |
-| `branch_id` | string | 是       | 工作流分支ID |
+| `branch_id` | string | 是       | 工作流分支 ID |
 
 **Header 参数：**
 
 | 参数名         | 类型   | 是否必填 | 描述                |
 | -------------- | ------ | -------- | ------------------- |
-| `user-id`      | string | 是       | 用户ID              |
-| `Access-Token` | string | 是       | 鉴权Token (隐式)    |
+| `user-id`      | string | 是       | 用户 ID              |
+| `Access-Token` | string | 是       | 鉴权 Token (隐式)    |
 | `uid`          | string | 是       | 用户登录 UID (隐式) |
 
 **(无 Body 输入参数)**
@@ -1113,7 +1113,7 @@ response = requests.put(url, headers=headers)
 print(response.status_code)
 if response.content:
     try:
-        # Disable通常返回更新后的分支详情或父工作流详情
+        # Disable 通常返回更新后的分支详情或父工作流详情
         print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     except json.JSONDecodeError:
         print(response.text)
@@ -1134,9 +1134,9 @@ if response.content:
                 "branch_id": "your_branch_id_to_disable",
                 "branch_name": "disabled-branch-name",
                 "branch_status": 1, // 示例：状态变为禁用/非活跃
-                // ...other分支详情...
+                // ...other 分支详情...
             }
-            // ...other分支列表...
+            // ...other 分支列表...
         ]
     }
 }
@@ -1160,8 +1160,8 @@ POST /byoa/api/v1/workflow_job
 
 | 参数名         | 类型   | 是否必填 | 描述                    | 默认值 |
 | -------------- | ------ | -------- | ----------------------- | ------ |
-| `user-id`      | string | 是       | 用户ID                  |        |
-| `Access-Token` | string | 是       | 鉴权Token (隐式要求)    |        |
+| `user-id`      | string | 是       | 用户 ID                  |        |
+| `Access-Token` | string | 是       | 鉴权 Token (隐式要求)    |        |
 | `uid`          | string | 是       | 用户登录 UID (隐式要求) |        |
 | `Content-Type` | string | 是       | `application/json`      |        |
 
@@ -1171,9 +1171,9 @@ POST /byoa/api/v1/workflow_job
 | 参数               | 是否必填 | 类型                       | 含义                                                         | 默认值 |
 | ------------------ | -------- | -------------------------- | ------------------------------------------------------------ | ------ |
 | name               | 是       | string                     | 作业名称                                                     |        |
-| workflow_meta_id   | 是       | string                     | 工作流元数据ID (父工作流的ID)                                |        |
-| workflow_branch_id | 是       | string                     | 工作流分支ID (如果基于主工作流，可能与meta_id相同或特定分支ID) |        |
-| target_volume_id   | 是       | string                     | 目标数据卷ID (作业产生的数据将写入此卷)                      |        |
+| workflow_meta_id   | 是       | string                     | 工作流元数据 ID (父工作流的 ID)                                |        |
+| workflow_branch_id | 是       | string                     | 工作流分支 ID (如果基于主工作流，可能与 meta_id 相同或特定分支 ID) |        |
+| target_volume_id   | 是       | string                     | 目标数据卷 ID (作业产生的数据将写入此卷)                      |        |
 | files              | 否       | array[object (`FileItem`)] | 要处理的文件列表。如果为空，则按工作流配置处理               | []     |
 
 * **`FileItem` 对象结构:** (参考 `workflow.openapi.json` -> components.schemas.FileItem)
@@ -1182,10 +1182,10 @@ POST /byoa/api/v1/workflow_job
   | ---------------- | -------- | ------------------------- | --------------- |
   | file_name        | 是       | string                    | 文件名          |
   | file_type        | 是       | integer (`FileType` enum) | 文件类型        |
-  | file_size        | 是       | integer                   | 文件大小(bytes) |
+  | file_size        | 是       | integer                   | 文件大小 (bytes) |
   | file_path        | 是       | string                    | 文件路径        |
-  | source_volume_id | 是       | integer                   | 源数据卷ID      |
-  | source_file_id   | 是       | integer                   | 源文件ID        |
+  | source_volume_id | 是       | integer                   | 源数据卷 ID      |
+  | source_file_id   | 是       | integer                   | 源文件 ID        |
 
 **Body 示例 (`JobCreateRequest`)：**
 
@@ -1244,7 +1244,7 @@ GET /byoa/api/v1/workflow_job
 | `name_search` | string, nullable                      | 否       | 名称搜索 (作业名)             |              |
 | `start_time`  | integer, nullable                     | 否       | 开始时间戳 (毫秒)             |              |
 | `end_time`    | integer, nullable                     | 否       | 结束时间戳 (毫秒)             |              |
-| `status`      | array[integer], nullable              | 否       | 状态 (例如: 1-运行中, 2-完成) |              |
+| `status`      | array[integer], nullable              | 否       | 状态 (例如：1-运行中，2-完成) |              |
 | `file_types`  | array[integer], nullable              | 否       | 文件类型                      |              |
 | `priority`    | array[integer], nullable              | 否       | 优先级                        |              |
 | `creator`     | string, nullable                      | 否       | 创建者                        |              |
@@ -1257,8 +1257,8 @@ GET /byoa/api/v1/workflow_job
 
 | 参数名         | 类型   | 是否必填 | 描述         |
 | -------------- | ------ | -------- | ------------ |
-| `user-id`      | string | 是       | 用户ID       |
-| `Access-Token` | string | 是       | 鉴权Token    |
+| `user-id`      | string | 是       | 用户 ID       |
+| `Access-Token` | string | 是       | 鉴权 Token    |
 | `uid`          | string | 是       | 用户登录 UID |
 
 **示例 (Python)：**
@@ -1319,7 +1319,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 | `jobs`  | array[object] (`JobListItem` 结构) | 作业列表，每个对象包含作业及其主要分支信息 |
 
 *   **`JobListItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobListItem)
-    *   `id` (string): 作业ID
+    *   `id` (string): 作业 ID
     *   `name` (string): 作业名称
     *   `created_at` (integer): 创建时间戳 (毫秒)
     *   `creator` (string): 创建者
@@ -1327,8 +1327,8 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     *   `modifier` (string, nullable): 更新者
     *   `status` (integer): 状态
     *   `version` (string, nullable): 版本号
-    *   `workflow_meta_id` (string): 工作流元数据ID
-    *   `workflow_branch_id` (string): 工作流分支ID
+    *   `workflow_meta_id` (string): 工作流元数据 ID
+    *   `workflow_branch_id` (string): 工作流分支 ID
 
 
 ### 查看作业详情
@@ -1343,14 +1343,14 @@ GET /byoa/api/v1/workflow_job/{job_id}
 
 | 参数名   | 类型   | 是否必填 | 描述   |
 | -------- | ------ | -------- | ------ |
-| `job_id` | string | 是       | 作业ID |
+| `job_id` | string | 是       | 作业 ID |
 
 **Header 参数：**
 
 | 参数名         | 类型   | 是否必填 | 描述         |
 | -------------- | ------ | -------- | ------------ |
-| `user-id`      | string | 是       | 用户ID       |
-| `Access-Token` | string | 是       | 鉴权Token    |
+| `user-id`      | string | 是       | 用户 ID       |
+| `Access-Token` | string | 是       | 鉴权 Token    |
 | `uid`          | string | 是       | 用户登录 UID |
 
 **示例 (Python)：**
@@ -1406,7 +1406,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 **输出参数 (`MOIResponse_JobDetailResponse_` 的 `data` 部分 - `JobDetailResponse`)：**
 
 *   **`JobDetailResponse` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobDetailResponse)
-    *   `id` (string): 作业ID
+    *   `id` (string): 作业 ID
     *   `name` (string): 作业名称
     *   `created_at` (integer): 创建时间戳 (毫秒)
     *   `creator` (string): 创建者
@@ -1414,17 +1414,17 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     *   `modifier` (string): 更新者
     *   `status` (integer): 状态
     *   `version` (string): 版本号
-    *   `workflow_meta_id` (string): 工作流元数据ID
-    *   `workflow_branch_id` (string): 工作流分支ID
+    *   `workflow_meta_id` (string): 工作流元数据 ID
+    *   `workflow_branch_id` (string): 工作流分支 ID
     *   `files` (array[object] (`FileItem` 结构)): 作业相关的文件列表
 
 *   **`FileItem` 对象结构:** (参考 `workflow.openapi.json` -> components.schemas.FileItem)
     *   `file_name` (string): 文件名
     *   `file_type` (integer): 文件类型
-    *   `file_size` (integer): 文件大小(bytes)
+    *   `file_size` (integer): 文件大小 (bytes)
     *   `file_path` (string): 文件路径
-    *   `source_volume_id` (integer): 源数据卷ID
-    *   `source_file_id` (integer): 源文件ID
+    *   `source_volume_id` (integer): 源数据卷 ID
+    *   `source_file_id` (integer): 源文件 ID
 
 
 ### 查看作业文件列表
@@ -1437,7 +1437,7 @@ GET /byoa/api/v1/workflow_job/{job_id}/files
 
 | 参数名   | 类型   | 是否必填 | 描述   |
 | -------- | ------ | -------- | ------ |
-| `job_id` | string | 是       | 作业ID |
+| `job_id` | string | 是       | 作业 ID |
 
 **Query 参数：**
 
@@ -1455,8 +1455,8 @@ GET /byoa/api/v1/workflow_job/{job_id}/files
 
 | 参数名         | 类型   | 是否必填 | 描述         |
 | -------------- | ------ | -------- | ------------ |
-| `user-id`      | string | 是       | 用户ID       |
-| `Access-Token` | string | 是       | 鉴权Token    |
+| `user-id`      | string | 是       | 用户 ID       |
+| `Access-Token` | string | 是       | 鉴权 Token    |
 | `uid`          | string | 是       | 用户登录 UID |
 
 **示例 (Python)：**
@@ -1524,7 +1524,7 @@ if response.content:
 | `files` | array[object] (`JobFileItem` 结构) | 作业相关的文件列表 |
 
 *   **`JobFileItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.JobFileItem)
-    *   `id` (string): 文件项ID
+    *   `id` (string): 文件项 ID
     *   `name` (string): 文件名
     *   `type` (integer): 文件类型 (`FileType` 枚举)
     *   `size` (integer): 文件大小 (bytes)
@@ -1532,10 +1532,10 @@ if response.content:
     *   `created_at` (integer): 创建时间戳 (毫秒)
     *   `updated_at` (integer): 更新时间戳 (毫秒)
     *   `path` (string, nullable): 文件在目标数据卷中的路径
-    *   `volume_id` (string, nullable): 文件所在的目标数据卷ID
-    *   `job_id` (string): 关联的作业ID
-    *   `meta_id` (string, nullable): 关联的工作流元数据ID
-    *   `branch_id` (string, nullable): 关联的工作流分支ID
+    *   `volume_id` (string, nullable): 文件所在的目标数据卷 ID
+    *   `job_id` (string): 关联的作业 ID
+    *   `meta_id` (string, nullable): 关联的工作流元数据 ID
+    *   `branch_id` (string, nullable): 关联的工作流分支 ID
 
 ### 重试处理作业文件
 
@@ -1549,20 +1549,20 @@ POST /byoa/api/v1/workflow_job/{job_id}/files
 
 | 参数名   | 类型   | 是否必填 | 描述   |
 | -------- | ------ | -------- | ------ |
-| `job_id` | string | 是       | 作业ID |
+| `job_id` | string | 是       | 作业 ID |
 
 **Query 参数：**
 
 | 参数名     | 类型          | 是否必填 | 描述                                     | 默认值 |
 | ---------- | ------------- | -------- | ---------------------------------------- | ------ |
-| `file_ids` | array[string] | 是       | 要重试的文件ID列表 (指 `JobFileItem.id`) |        |
+| `file_ids` | array[string] | 是       | 要重试的文件 ID 列表 (指 `JobFileItem.id`) |        |
 
 **Header 参数：**
 
 | 参数名         | 类型   | 是否必填 | 描述         |
 | -------------- | ------ | -------- | ------------ |
-| `user-id`      | string | 是       | 用户ID       |
-| `Access-Token` | string | 是       | 鉴权Token    |
+| `user-id`      | string | 是       | 用户 ID       |
+| `Access-Token` | string | 是       | 鉴权 Token    |
 | `uid`          | string | 是       | 用户登录 UID |
 
 **(无 Body 输入参数)**
@@ -1623,7 +1623,7 @@ GET /byoa/api/v1/workflow_job/{job_id}/status
 
 | 参数名   | 类型   | 是否必填 | 描述   |
 | -------- | ------ | -------- | ------ |
-| `job_id` | string | 是       | 作业ID |
+| `job_id` | string | 是       | 作业 ID |
 
 **(无 Query 参数)**
 
@@ -1631,8 +1631,8 @@ GET /byoa/api/v1/workflow_job/{job_id}/status
 
 | 参数名         | 类型   | 是否必填 | 描述         |
 | -------------- | ------ | -------- | ------------ |
-| `user-id`      | string | 是       | 用户ID       |
-| `Access-Token` | string | 是       | 鉴权Token    |
+| `user-id`      | string | 是       | 用户 ID       |
+| `Access-Token` | string | 是       | 鉴权 Token    |
 | `uid`          | string | 是       | 用户登录 UID |
 
 **(无 Body 输入参数)**
@@ -1683,7 +1683,7 @@ if response.content:
 
 | 参数         | 类型              | 描述                                                         |
 | ------------ | ----------------- | ------------------------------------------------------------ |
-| `job_id`     | string            | 作业ID                                                       |
+| `job_id`     | string            | 作业 ID                                                       |
 | `status`     | integer           | 作业的当前状态 (参考 `workflow.openapi.json` JobStatus enum) |
 | `message`    | string, nullable  | 状态相关的附加信息                                           |
 | `progress`   | integer, nullable | 作业进度 (0-100)                                             |

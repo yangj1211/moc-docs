@@ -12,8 +12,8 @@ POST /byoa/api/v1/explore/volumes
 
 | 参数           | 类型   | 是否必填 | 描述             |
 | -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权Token        |
+| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权 Token        |
 | `uid`          | string | 是       | 用户登录 UID     |
 
 **Body 输入参数 (`CreateVolumeReq`)：**
@@ -88,8 +88,8 @@ GET /byoa/api/v1/explore/volumes
 
 | 参数           | 类型   | 是否必填 | 描述             |
 | -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权Token        |
+| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权 Token        |
 | `uid`          | string | 是       | 用户登录 UID     |
 
 **Query 参数：**
@@ -111,7 +111,7 @@ headers = {
     "uid": "your_uid"
 }
 params = {
-    "workflow_using": False # 可选参数, True 或 False
+    "workflow_using": False # 可选参数，True 或 False
 }
 response = requests.get(url, headers=headers, params=params)
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
@@ -179,8 +179,8 @@ GET /byoa/api/v1/explore/volumes/{vid}
 
 | 参数           | 类型   | 是否必填 | 描述             |
 | -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权Token        |
+| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权 Token        |
 | `uid`          | string | 是       | 用户登录 UID     |
 
 **示例 (Python)：**
@@ -221,8 +221,8 @@ DELETE /byoa/api/v1/explore/volumes/{vid}
 
 | 参数           | 类型   | 是否必填 | 描述             |
 | -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权Token        |
+| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权 Token        |
 | `uid`          | string | 是       | 用户登录 UID     |
 
 **示例 (Python)：**
@@ -249,7 +249,7 @@ else:
 ```
 
 **返回：**
-成功时 HTTP 状态码为 200，响应体为 `{}` (空JSON对象) 或无内容。
+成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。
 
 ### 查看卷内文件列表
 
@@ -265,8 +265,8 @@ POST /byoa/api/v1/explore/volumes/{vid}/files
 
 | 参数           | 类型   | 是否必填 | 描述             |
 | -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权Token        |
+| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权 Token        |
 | `uid`          | string | 是       | 用户登录 UID     |
 
 **Body 输入参数 (`GetVolumeFilesReq`, 可选)：**
@@ -286,7 +286,7 @@ POST /byoa/api/v1/explore/volumes/{vid}/files
   | status         | array[integer] | 文件状态过滤   |
   | exclude_status | array[integer] | 排除的文件状态 |
 
-* **`Sorter` 对象结构:**
+* **`Sorter` 对象结构：**
 
   | 参数    | 类型    | 含义     | 默认值 |
   | ------- | ------- | -------- | ------ |
@@ -349,10 +349,10 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
                 "source_volume_id": "1889223879880048640",
                 "source_file_id": "1889223944229060608",
                 "target_volume_id": "actual_volume_id",
-                "file_name": "红楼梦(通行本)简体横排.pdf",
+                "file_name": "红楼梦 (通行本) 简体横排.pdf",
                 "file_type": 2,
                 "file_size": 6787457,
-                "file_path": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97/b-vol1/1889223922712281088/红楼梦(通行本)简体横排.pdf",
+                "file_path": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97/b-vol1/1889223922712281088/红楼梦 (通行本) 简体横排.pdf",
                 "file_status": 2,
                 "workflow_meta_id": "5775ecd6-5918-42a1-a92f-7245fe96b2bf",
                 "workflow_branch_id": null,
@@ -380,9 +380,9 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
   | 参数               | 类型    | 含义                   | 默认值       |
   | ------------------ | ------- | ---------------------- | ------------ |
   | id                 | string  | 文件 ID                |              |
-  | created_at         | string  | 创建时间 (ISO格式)     |              |
-  | updated_at         | string  | 更新时间 (ISO格式)     |              |
-  | user_id            | string  | 用户 ID (DC用户)       | "dc_user_id" |
+  | created_at         | string  | 创建时间 (ISO 格式)     |              |
+  | updated_at         | string  | 更新时间 (ISO 格式)     |              |
+  | user_id            | string  | 用户 ID (DC 用户)       | "dc_user_id" |
   | priority           | integer | 优先级                 | 300          |
   | source_volume_id   | string  | 源数据卷 ID            |              |
   | source_file_id     | string  | 源文件 ID              |              |
@@ -396,7 +396,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
   | workflow_branch_id | string  | 工作流分支 ID (可选)   | null         |
   | job_id             | string  | 作业 ID (可选)         | null         |
   | error_message      | string  | 错误信息 (可选)        | null         |
-  | duration           | integer | 处理时长 (秒, 可选)    | 0            |
+  | duration           | integer | 处理时长 (秒，可选)    | 0            |
   | start_time         | string  | 开始处理时间 (可选)    | null         |
   | end_time           | string  | 结束处理时间 (可选)    | null         |
   | delete_status      | integer | 删除状态 (0-未删除)    | 0            |
@@ -416,8 +416,8 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}
 
 | 参数           | 类型   | 是否必填 | 描述             |
 | -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权Token        |
+| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权 Token        |
 | `uid`          | string | 是       | 用户登录 UID     |
 
 **示例 (Python)：**
@@ -444,7 +444,7 @@ else:
 ```
 
 **返回：**
-成功时 HTTP 状态码为 200，响应体为 `{}` (空JSON对象) 或无内容。
+成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。
 
 ### 获取文件原始内容
 
@@ -461,8 +461,8 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws
 
 | 参数           | 类型   | 是否必填 | 描述             |
 | -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权Token        |
+| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权 Token        |
 | `uid`          | string | 是       | 用户登录 UID     |
 
 **Query 参数：**
@@ -498,7 +498,7 @@ else:
 ```
 
 **返回：**
-OpenAPI 定义成功响应为 200，响应体为 `{}` (空JSON对象)。然而，这类接口通常直接返回文件流 (raw bytes)。如果 `need_embeddings` 为 true 且有 embedding，返回内容可能包含 embedding 信息，具体格式需进一步确认。
+OpenAPI 定义成功响应为 200，响应体为 `{}` (空 JSON 对象)。然而，这类接口通常直接返回文件流 (raw bytes)。如果 `need_embeddings` 为 true 且有 embedding，返回内容可能包含 embedding 信息，具体格式需进一步确认。
 
 ### 获取文件关联的作业信息
 
@@ -515,8 +515,8 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/jobs
 
 | 参数           | 类型   | 是否必填 | 描述             |
 | -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权Token        |
+| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权 Token        |
 | `uid`          | string | 是       | 用户登录 UID     |
 
 **示例 (Python)：**
@@ -558,7 +558,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 
 | 参数 | 类型   | 含义                                                         |
 | ---- | ------ | ------------------------------------------------------------ |
-| job  | object | 文件关联的作业信息对象。具体结构需要参照实际API返回或更详细的定义。 |
+| job  | object | 文件关联的作业信息对象。具体结构需要参照实际 API 返回或更详细的定义。 |
 
 
 ### 获取文件解析的数据块
@@ -576,8 +576,8 @@ POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 
 | 参数           | 类型   | 是否必填 | 描述             |
 | -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权Token        |
+| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权 Token        |
 | `uid`          | string | 是       | 用户登录 UID     |
 
 **Body 输入参数 (`GetFileBlocksReq`, 可选)：**
@@ -592,9 +592,9 @@ POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 
   | 参数           | 类型          | 含义                                     |
   | -------------- | ------------- | ---------------------------------------- |
-  | types          | array[string] | 类型过滤 (例如, "text", "image_caption") |
+  | types          | array[string] | 类型过滤 (例如，"text", "image_caption") |
   | search_content | string        | 内容搜索关键字                           |
-  | block_ids      | array[string] | 指定数据块ID列表                         |
+  | block_ids      | array[string] | 指定数据块 ID 列表                         |
 
 
 **Body 示例 (`GetFileBlocksReq`)：**
@@ -640,7 +640,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
         "items": [
             {
                 "id": "000a9605-733f-4335-bc72-ac9aa8351e66",
-                "content": "Matrix Search 利用Efficient Net 模型对上传的图片进行特征提取...",
+                "content": "Matrix Search 利用 Efficient Net 模型对上传的图片进行特征提取...",
                 "type": "text", 
                 "content_type": "text", 
                 "file_id": "actual_file_id",
@@ -679,12 +679,12 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
   | id                | string  | 数据块 ID                                        |
   | content           | string  | 内容                                             |
   | type              | string  | 数据块类型 (如 "text", "table", "image_caption") |
-  | content_type      | string  | 内容MIME类型 (实际可能与 block type 更相关)      |
+  | content_type      | string  | 内容 MIME 类型 (实际可能与 block type 更相关)      |
   | file_id           | string  | 文件 ID                                          |
   | description       | string  | 描述 (可选)                                      |
-  | created_at        | string  | 创建时间 (ISO格式)                               |
-  | updated_at        | string  | 更新时间 (ISO格式)                               |
-  | text_and_image_id | integer | 图文关联ID (可选)                                |
+  | created_at        | string  | 创建时间 (ISO 格式)                               |
+  | updated_at        | string  | 更新时间 (ISO 格式)                               |
+  | text_and_image_id | integer | 图文关联 ID (可选)                                |
 
 ### 删除文件解析的数据块
 
@@ -701,15 +701,15 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 
 | 参数           | 类型   | 是否必填 | 描述             |
 | -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权Token        |
+| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
+| `Access-Token` | string | 是       | 鉴权 Token        |
 | `uid`          | string | 是       | 用户登录 UID     |
 
 **Body 输入参数 (`DeleteFileBlocksReq`)：**
 
 | 参数 | 是否必填 | 类型          | 含义                 |
 | ---- | -------- | ------------- | -------------------- |
-| ids  | 是       | array[string] | 要删除的数据块ID列表 |
+| ids  | 是       | array[string] | 要删除的数据块 ID 列表 |
 
 **Body 示例 (`DeleteFileBlocksReq`)：**
 
@@ -747,4 +747,4 @@ else:
 ```
 
 **返回：**
-成功时 HTTP 状态码为 200，响应体为 `{}` (空JSON对象) 或无内容。原文档中提到204，但OpenAPI spec中是200。
+成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。原文档中提到 204，但 OpenAPI spec 中是 200。
