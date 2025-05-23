@@ -448,7 +448,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
   | user_id          | string | 用户 ID                |
   | parent_volume_id | string | 处理数据卷 ID (可能为空) |
 
-### 查看子数据卷列表
+### 查看分支数据卷列表
 
 ```
 GET /byoa/api/v1/explore/volumes/{vid}
@@ -484,7 +484,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 ```
 
 **返回 (`MOIResponse_ListVolumeResp_`)：**
-返回结构与 "查看数据卷列表" 相同，但 `volumes` 列表将只包含指定 `{vid}` 的子卷。
+返回结构与 "查看数据卷列表" 相同，但 `volumes` 列表将只包含指定 `{vid}` 的分支卷。
 
 **输出参数 (`ListVolumeResp` 的 `data` 部分)：**
 与 "查看数据卷列表" 的输出参数一致。
