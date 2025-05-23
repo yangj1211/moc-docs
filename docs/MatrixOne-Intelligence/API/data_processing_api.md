@@ -59,7 +59,7 @@ POST /byoa/api/v1/workflow_meta
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_meta"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta"
 
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -192,7 +192,7 @@ GET /byoa/api/v1/workflow_meta
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_meta" # 更新的 URL
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta" # 更新的 URL
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx", # 实际的 Access Token
@@ -303,7 +303,7 @@ import requests
 import json
 
 workflow_to_get = "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c" # 替换为实际的 workflow_id
-url = f"https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_meta/{workflow_to_get}" # 更新的 URL
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_get}" # 更新的 URL
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx", # 实际的 Access Token
@@ -426,7 +426,7 @@ import requests
 import json
 
 workflow_to_update = "fef28ca2-175e-4de9-9ac3-f4aa0da5a745" # 替换为实际的 workflow_id
-url = f"https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_meta/{workflow_to_update}" # 更新的 URL
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_update}" # 更新的 URL
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "user-name": "updater_admin", # 可选
@@ -520,7 +520,7 @@ import requests
 import json
 
 workflow_to_delete = "729e7a03-652d-46e0-bdad-b05ec5b80cea" # 替换为实际的 workflow_id
-url = f"https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_meta/{workflow_to_delete}" # 更新的 URL
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_delete}" # 更新的 URL
 
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
@@ -586,7 +586,7 @@ import requests
 import json
 
 workflow_to_stop = "your_workflow_id_to_stop"
-url = f"https://your_base_url/byoa/api/v1/workflow_meta/{workflow_to_stop}/stop"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_stop}/stop"
 
 headers = {
     "user-id": "your_user_id",
@@ -658,7 +658,7 @@ import requests
 import json
 
 workflow_id_for_branch = "your_workflow_id"
-url = f"https://your_base_url/byoa/api/v1/workflow_meta/{workflow_id_for_branch}/branch"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_id_for_branch}/branch"
 
 headers = {
     "user-id": "your_user_id",
@@ -733,7 +733,7 @@ import requests
 import json
 
 workflow_id_for_branches = "your_workflow_id"
-url = f"https://your_base_url/byoa/api/v1/workflow_meta/{workflow_id_for_branches}/branch"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_id_for_branches}/branch"
 
 headers = {
     "user-id": "your_user_id",
@@ -819,7 +819,7 @@ import requests
 import json
 
 branch_to_get = "your_branch_id"
-url = f"https://your_base_url/byoa/api/v1/workflow_meta/branch/{branch_to_get}"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/branch/{branch_to_get}"
 headers = {
     "user-id": "your_user_id",
     "Access-Token": "your_access_token",
@@ -897,7 +897,7 @@ import requests
 import json
 
 branch_to_update = "your_branch_id_to_update"
-url = f"https://your_base_url/byoa/api/v1/workflow_meta/branch/{branch_to_update}"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/branch/{branch_to_update}"
 headers = {
     "user-id": "your_user_id",
     "user-name": "branch_updater",
@@ -966,7 +966,7 @@ import requests
 import json
 
 branch_to_delete = "your_branch_id_to_delete"
-url = f"https://your_base_url/byoa/api/v1/workflow_meta/branch/{branch_to_delete}"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/branch/{branch_to_delete}"
 headers = {
     "user-id": "your_user_id",
     "Access-Token": "your_access_token",
@@ -1027,7 +1027,7 @@ import requests
 import json
 
 branch_to_enable = "your_branch_id_to_enable"
-url = f"https://your_base_url/byoa/api/v1/workflow_meta/branch/{branch_to_enable}/enable"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/branch/{branch_to_enable}/enable"
 headers = {
     "user-id": "your_user_id",
     "Access-Token": "your_access_token",
@@ -1100,7 +1100,7 @@ import requests
 import json
 
 branch_to_disable = "your_branch_id_to_disable"
-url = f"https://your_base_url/byoa/api/v1/workflow_meta/branch/{branch_to_disable}/disable"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/branch/{branch_to_disable}/disable"
 headers = {
     "user-id": "your_user_id",
     "Access-Token": "your_access_token",
@@ -1263,7 +1263,7 @@ GET /byoa/api/v1/workflow_job
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_job"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -1355,7 +1355,7 @@ import requests
 import json
 
 job_to_get = "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c"
-url = f"https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/workflow_job/{job_to_get}"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job/{job_to_get}"
 headers = {
     "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "Access-Token": "xxxx",
@@ -1460,7 +1460,7 @@ import requests
 import json
 
 job_id_for_files = "your_job_id"
-url = f"https://your_base_url/byoa/api/v1/workflow_job/{job_id_for_files}/files"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job/{job_id_for_files}/files"
 
 headers = {
     "user-id": "your_user_id",
@@ -1570,7 +1570,7 @@ import json
 job_id_for_file_retry = "your_job_id"
 file_ids_to_retry = ["file_item_uuid_1", "file_item_uuid_2"]
 
-url = f"https://your_base_url/byoa/api/v1/workflow_job/{job_id_for_file_retry}/files"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job/{job_id_for_file_retry}/files"
 
 headers = {
     "user-id": "your_user_id",
