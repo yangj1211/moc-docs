@@ -1,8 +1,291 @@
 # 数据探索相关 API
 
-## 原始数据卷
+## 源数据卷
 
-### 创建原始数据卷
+### 创建源数据卷
+
+```
+POST /CreateOriginVolume
+```
+
+**输入参数：**
+  
+|  参数             | 是否必填 |含义|
+|  --------------- | ----   | ----  |
+| name             |是       | 源数据卷名 |
+
+**示例：**
+
+```python
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/CreateOriginVolume"
+
+headers = {
+    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
+    "Access-Token": "",
+    "uid": "2de56399-0fda-4982-a26e-580fd666914d-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin"
+}
+
+body = {
+    "name": "b_vol3"
+
+}
+response = requests.post(url, json=body, headers=headers)
+# 检查响应状态
+print(response.json())  # 打印返回的 JSON 数据
+```
+
+返回：
+
+```bash
+{'code': 'OK', 'msg': 'OK'}
+```
+
+### 查看源数据卷列表
+
+```
+POST /DescribeOriginVolumes
+```
+
+**输出参数：**
+  
+|  参数             | 含义 |
+|  --------------- | ----  |
+| id               | 卷 id      |
+| name             | 卷名    |
+| size             | 卷大小  |
+| file_num         | 文件数量    |
+
+**示例：**
+
+```python
+import requests
+import json
+
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DescribeOriginVolumes"
+headers = {
+    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
+    "Access-Token": "xxxx",
+    "uid": "ac8fd715-b39c-4edb-837b-e1ea1dae5f80-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin"
+}
+
+response = requests.post(url, headers=headers)
+print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
+```
+
+返回：
+
+```bash
+Response Body: {
+    "code": "OK",
+    "msg": "OK",
+    "data": {
+        "total": 5,
+        "volumes": [
+            {
+                "id": "1889223879880048640",
+                "name": "b-vol1",
+                "size": 6787457,
+                "file_num": 1,
+                "owner": "admin",
+                "created_at": 1739261047,
+                "updated_at": 1739261047
+            },
+            {
+                "id": "1889578498228068352",
+                "name": "b-vol2",
+                "size": 40724742,
+                "file_num": 6,
+                "owner": "admin",
+                "created_at": 1739345595,
+                "updated_at": 1739345595
+            },
+            {
+                "id": "1889868565396619264",
+                "name": "b_vol3",
+                "size": 0,
+                "file_num": 0,
+                "owner": "admin",
+                "created_at": 1739414752,
+                "updated_at": 1739414752
+            },
+            {
+                "id": "1889881472272465920",
+                "name": "b_vol6",
+                "size": 0,
+                "file_num": 0,
+                "owner": "admin",
+                "created_at": 1739417829,
+                "updated_at": 1739417829
+            }
+        ]
+    }
+}
+```
+
+### 查看某个源数据卷（文件列表）
+
+```
+POST /DescribeOriginVolume
+```
+
+**输出参数：**
+  
+|  参数             | 含义 |
+|  --------------- | ----  |
+| id               | 文件 id      |
+| name             | 文件名    |
+| type             |文件类型  |
+| status           | 文件解析状态  |
+| path             | 文件路径  |
+
+**示例：**
+
+```python
+import requests
+import json
+
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DescribeOriginVolume"
+headers = {
+    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
+    "Access-Token": "xxxx",
+    "uid": "badb5c26-e335-453d-85ad-7e996bcebff4-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin",
+}
+
+body={
+        "id": "1889223879880048640"
+}
+
+response = requests.post(url, headers=headers,json=body)
+print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
+```
+
+返回：
+
+```bash
+Response Body: {
+    "code": "OK",
+    "msg": "OK",
+    "data": {
+        "total": 1,
+        "items": [
+            {
+                "id": "1889223944229060608",
+                "name": "红楼梦(通行本)简体横排.pdf",
+                "type": 2,
+                "status": 5,
+                "size": 6787457,
+                "update_time": 1739261640,
+                "other_metadata": "",
+                "reason": "",
+                "user": "admin",
+                "start_time": 1739261063,
+                "end_time": 1739261640,
+                "path": "/b-vol1/红楼梦(通行本)简体横排.pdf"
+            }
+        ]
+    }
+}
+```
+
+### 下载某个源数据卷中的文件
+
+```
+POST /GetOriginVolumeFileLink
+```
+
+**输入参数：**
+  
+|  参数             | 是否必填 |含义|
+|  --------------- | ----   | ----  |
+| volume_id        |是       | 源数据卷 id|
+| file_id          |是       | 文件 id|
+
+**示例：**
+
+```python
+import requests
+import json
+
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/GetOriginVolumeFileLink"
+headers = {
+    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
+    "Access-Token": "xxxx",
+    "uid": "ac8fd715-b39c-4edb-837b-e1ea1dae5f80-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin"
+}
+
+body = {
+    "volume_id": 1889223879880048640,
+    "file_id": "1889578498228068352"
+
+}
+
+response = requests.post(url, headers=headers,json=body)
+print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
+```
+
+返回：
+
+```bash
+Response Body: {
+    "code": "OK",
+    "msg": "OK",
+    "data": {
+        "link": "https://moi-dev-test.oss-cn-hangzhou.aliyuncs.com/connector_path%2F0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx%2Fb-vol2?Expires=173944xxxx&OSSAccessKeyId=LTAI5t6RX4TpSC8Z2v4nGG4Y&Signature=bCy60Or%2B%2Fr8Na1OcfMn%2Fy2jso6Y%3D"
+    }
+}
+```
+
+### 删除某个源数据卷中的某个文件
+
+```
+POST /DeleteOriginVolumeFiles
+```
+
+**输入参数：**
+  
+|  参数             | 是否必填 |含义|
+|  --------------- | ----   | ----  |
+| volume_id        |是       | 源数据卷 id|
+| file_ids          |是       | 文件 id|
+
+**示例：**
+
+```python
+import requests
+import json
+
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DeleteOriginVolumeFiles"
+
+headers = {
+    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
+    "Access-Token": "xxxx",
+    "uid": "badb5c26-e335-453d-85ad-7e996bcebff4-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin",
+}
+
+
+body={
+    "volume_id": "1889578498228068352",
+    "file_ids": ["1889698920437940224"]
+}
+
+
+response = requests.post(url, headers=headers,json=body)
+
+if response.status_code == 200:
+    print(response.json())  
+else:
+    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+```
+
+返回：
+
+```
+{'code': 'OK', 'msg': 'OK', 'data': {}}
+```
+
+## 处理数据卷
+
+### 创建处理数据卷
 
 ```
 POST /byoa/api/v1/explore/volumes
@@ -21,7 +304,7 @@ POST /byoa/api/v1/explore/volumes
 | 参数             | 是否必填 | 类型   | 含义        | 默认值 |
 | ---------------- | -------- | ------ | ----------- | ------ |
 | name             | 是       | string | 数据卷名称  |        |
-| parent_volume_id | 否       | string | 父数据卷 ID | ""     |
+| parent_volume_id | 否       | string | 处理数据卷 ID | ""     |
 
 **Body 示例 (`CreateVolumeReq`)：**
 
@@ -78,7 +361,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 | created_at | string | 创建时间   |
 | updated_at | string | 更新时间   |
 
-### 查看原始数据卷列表
+### 查看处理数据卷列表
 
 ```
 GET /byoa/api/v1/explore/volumes
@@ -163,7 +446,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
   | created_at       | string | 创建时间 (ISO 8601)    |
   | updated_at       | string | 更新时间 (ISO 8601)    |
   | user_id          | string | 用户 ID                |
-  | parent_volume_id | string | 父数据卷 ID (可能为空) |
+  | parent_volume_id | string | 处理数据卷 ID (可能为空) |
 
 ### 查看子数据卷列表
 
@@ -173,7 +456,7 @@ GET /byoa/api/v1/explore/volumes/{vid}
 
 **路径参数：**
 
-* `vid` (string, 必填): 父数据卷 ID
+* `vid` (string, 必填): 处理数据卷 ID
 
 **Header 参数：**
 
@@ -189,7 +472,7 @@ GET /byoa/api/v1/explore/volumes/{vid}
 import requests
 import json
 
-# 将 {vid} 替换为实际的父数据卷 ID
+# 将 {vid} 替换为实际的处理数据卷 ID
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}" 
 headers = {
     "user-id": "your_user_id",
