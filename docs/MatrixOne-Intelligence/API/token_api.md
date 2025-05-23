@@ -13,6 +13,7 @@ POST /auth/login
 | account_name     | 是      | 工作区 ID |
 | username         | 是      | 管理员名称 |
 | password         | 是      | 管理员密码 |
+| type             | 否      | 认证类型。如果值为 "workspace"，则视为工作区认证。如果未提供该参数或值不为 "workspace"，则默认为 MOC 认证。 |
 
 **输出参数：**
   
@@ -37,7 +38,8 @@ headers = {
 body = {
     "account_name": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
     "username": "xxxx",
-    "password": "xxxx"
+    "password": "xxxx",
+    "type": "workspace" # 可选。值为 "workspace" 时为工作区认证，不传或其他值则默认为 MOC 认证。
 }
 
 # 发送请求
