@@ -1638,7 +1638,7 @@ import requests
 import json
 
 job_id_for_status = "your_job_id"
-url = f"https://your_base_url/byoa/api/v1/workflow_job/{job_id_for_status}/status"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job/{job_id_for_status}/status"
 
 headers = {
     "user-id": "your_user_id",
