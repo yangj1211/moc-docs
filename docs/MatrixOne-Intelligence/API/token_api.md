@@ -28,7 +28,7 @@ POST /auth/login
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/auth/login"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/auth/login"
 # 设置请求头
 headers = {
     "Accept": "application/json, text/plain, */*",
@@ -89,7 +89,7 @@ POST auth/refresh
 import requests
 import json
 # API URL
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/auth/refresh"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/auth/refresh"
 
 # 请求头
 headers = {

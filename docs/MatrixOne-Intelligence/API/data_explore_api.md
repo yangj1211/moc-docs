@@ -38,7 +38,7 @@ POST /byoa/api/v1/explore/volumes
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes"
 
 headers = {
     "user-id":"your_user_id",
@@ -104,7 +104,7 @@ GET /byoa/api/v1/explore/volumes
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes"
 headers = {
     "user-id": "your_user_id",
     "Access-Token": "your_access_token",
@@ -190,7 +190,7 @@ import requests
 import json
 
 # 将 {vid} 替换为实际的父数据卷 ID
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}" 
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}" 
 headers = {
     "user-id": "your_user_id",
     "Access-Token": "your_access_token",
@@ -230,7 +230,7 @@ DELETE /byoa/api/v1/explore/volumes/{vid}
 import requests
 
 # 将 {vid} 替换为实际的数据卷 ID
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}"
 headers = {
     "user-id": "your_user_id",
     "Access-Token": "your_access_token",
@@ -316,7 +316,7 @@ import requests
 import json
 
 # 将 {vid} 替换为实际的数据卷 ID
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}/files"
 headers = {
     "user-id":"your_user_id",
     "Access-Token": "your_access_token",
@@ -425,7 +425,7 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}
 import requests
 
 # 将 {vid} 和 {fid} 替换为实际的 ID
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files/{fid}"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}/files/{fid}"
 headers = {
     "user-id": "your_user_id",
     "Access-Token": "your_access_token",
@@ -475,7 +475,7 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws
 ```python
 import requests
 
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws"
 headers = {
     "user-id":"your_user_id",
     "Access-Token": "your_access_token",
@@ -525,7 +525,7 @@ import requests
 import json
 
 # 将 {vid} 和 {fid} 替换为实际的 ID
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files/{fid}/jobs"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}/files/{fid}/jobs"
 headers = {
     "user-id": "your_user_id",
     "Access-Token": "your_access_token",
@@ -613,7 +613,7 @@ import requests
 import json
 
 # 将 {vid} 和 {fid} 替换为实际的 ID
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks"
 headers = {
     "user-id":"your_user_id_workspace_id",
     "Access-Token": "your_access_token",
@@ -723,7 +723,7 @@ import requests
 import json
 
 # 将 {vid} 和 {fid} 替换为实际的 ID
-url = "https://freetier-01.cn-hangzhou.cluster.cn-dev.matrixone.tech/byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks"
 headers = {
     "user-id": "your_user_id",
     "Access-Token": "your_access_token",
