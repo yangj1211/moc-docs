@@ -728,7 +728,7 @@ else:
 **返回：**
 成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。
 
-### 获取文件原始内容
+### 获取文件解析内容
 
 ```
 GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws
