@@ -489,7 +489,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 **输出参数 (`ListVolumeResp` 的 `data` 部分)：**
 与 "查看数据卷列表" 的输出参数一致。
 
-### 删除数据卷
+### 删除处理数据卷
 
 ```
 DELETE /byoa/api/v1/explore/volumes/{vid}
@@ -533,7 +533,7 @@ else:
 **返回：**
 成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。
 
-### 查看卷内文件列表
+### 查看处理数据卷内文件列表
 
 ```
 POST /byoa/api/v1/explore/volumes/{vid}/files
@@ -683,7 +683,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
   | end_time           | string  | 结束处理时间 (可选)    | null         |
   | delete_status      | integer | 删除状态 (0-未删除)    | 0            |
 
-### 删除卷内文件
+### 删除处理数据卷内文件
 
 ```
 DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}
