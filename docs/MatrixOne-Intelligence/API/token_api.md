@@ -36,9 +36,9 @@ headers = {
     "Content-Type": "application/json"
 }
 body = {
-    "account_name": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "username": "xxxx",
-    "password": "xxxx",
+    "account_name": "YOUR_ACCOUNT_NAME",
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD",
     "type": "workspace" # 可选。值为 "workspace" 时为工作区认证，不传或其他值则默认为 MOC 认证。
 }
 
@@ -58,16 +58,16 @@ Response Headers: {
     "Content-Type": "application/json; charset=utf-8",
     "Content-Length": "178",
     "Connection": "keep-alive",
-    "Access-Token": "xxxx",
-    "Refresh-Token": "xxxx",
-    "X-Request-Id": "e7d53eb7-80a2-4dc4-813f-8593aef9d9e1",
-    "Set-Cookie": "SERVERID=d576c819bbc92dbf22dc5fdfd690d8a6|1739331516|1739331516;Path=/"
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "Refresh-Token": "YOUR_REFRESH_TOKEN",
+    "X-Request-Id": "YOUR_REQUEST_ID",
+    "Set-Cookie": "SERVERID=YOUR_COOKIE_SERVERID_VALUE|TIMESTAMP|TIMESTAMP;Path=/"
 }
 Response Body: {
     "code": "OK",
     "msg": "OK",
     "data": {
-        "uid": "fa6467a6-bfcb-4df0-ac36-0e8dc56a124a-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin",
+        "uid": "YOUR_UID",
         "login_at": "2025-02-12T03:38:36.566638078Z"
     }
 }
@@ -97,9 +97,9 @@ url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/auth/refresh"
 headers = {
     "Accept": "application/json, text/plain, */*",
     "Content-Type": "application/json",
-    "Access-Token": "xxxx",
-    "Refresh-Token": "xxxx",
-    "uid": "fa6467a6-bfcb-4df0-ac36-0e8dc56a124a-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "Refresh-Token": "YOUR_REFRESH_TOKEN",
+    "uid": "YOUR_UID"
 }
 
 # 请求体（Body JSON）
@@ -123,9 +123,9 @@ Response Headers: {
     "Content-Type": "application/json; charset=utf-8",
     "Content-Length": "24",
     "Connection": "keep-alive",
-    "Access-Token": "xxxx",
-    "X-Request-Id": "82897e92-d37d-48fe-8b05-581705987651",
-    "Set-Cookie": "SERVERID=39529de3c161baaf8e06ec55d8dc5e95|1739331644|1739331644;Path=/"
+    "Access-Token": "YOUR_NEW_ACCESS_TOKEN",
+    "X-Request-Id": "YOUR_REQUEST_ID",
+    "Set-Cookie": "SERVERID=YOUR_COOKIE_SERVERID_VALUE|TIMESTAMP|TIMESTAMP;Path=/"
 }
 Response Body: {
     "code": "OK",

@@ -62,10 +62,15 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta"
 
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "user-name": "admin_user",
-    "Access-Token": "xxxx", # 实际的 Access Token
-    "uid": "dea010be-1a50-413a-aa7e-e0611a491cab-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN", 
+    "uid": "YOUR_UID" 
+}
+
+headers = {
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN", 
+    "uid": "YOUR_UID" 
 }
 
 body = {
@@ -194,9 +199,9 @@ import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta" # 更新的 URL
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx", # 实际的 Access Token
-    "uid": "d252447b-7f1d-4fd4-8b70-9bc2dd5cd505-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin" # 实际的 UID
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN", 
+    "uid": "YOUR_UID" 
 }
 params = {
     "limit": 5,
@@ -220,26 +225,26 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
         "total": 20, // 符合条件的工作流总数
         "workflows": [ // WorkflowListItem 数组
             {
-                "id": "workflow_uuid_1",
+                "id": "YOUR_WORKFLOW_ID_1",
                 "name": "Alpha Workflow",
                 "created_at": 1739377287000, // timestamp in ms
-                "creator": "admin_user",
+                "creator": "YOUR_USERNAME",
                 "updated_at": 1739377755000,
-                "modifier": "admin_user",
-                "source_volume_ids": ["1889223879880048640"],
+                "modifier": "YOUR_USERNAME",
+                "source_volume_ids": ["YOUR_SOURCE_VOLUME_ID_1"],
                 "source_volume_names": ["b-vol1"],
                 "file_types": [2],
-                "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
+                "target_volume_id": "YOUR_TARGET_VOLUME_ID_1",
                 "target_volume_name": "a-vol1",
                 "process_mode": {"interval": 0, "offset": 0},
                 "priority": 300,
                 "status": 2, // 示例：2-完成
                 "version": "1.0",
                 "branch_total": 1, // 该工作流下的分支数量
-                "branch_id": "main_branch_uuid_for_workflow1", // 最新或主分支 ID (需要确认此逻辑)
+                "branch_id": "YOUR_BRANCH_ID_1", 
                 "branch_name": "main",
                 "branch_status": 0, // 最新或主分支状态
-                "branch_volume_id": "target_vol_for_main_branch1"
+                "branch_volume_id": "YOUR_BRANCH_TARGET_VOLUME_ID_1"
             }
             // ... 其他工作流项
         ]
@@ -302,12 +307,12 @@ GET /byoa/api/v1/workflow_meta/{workflow_id}
 import requests
 import json
 
-workflow_to_get = "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c" # 替换为实际的 workflow_id
+workflow_to_get = "YOUR_WORKFLOW_ID" # 替换为实际的 workflow_id
 url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_get}" # 更新的 URL
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx", # 实际的 Access Token
-    "uid": "181c0bfb-486f-4e55-a4ea-7fa2a5dae4fa-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin" # 实际的 UID
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN", 
+    "uid": "YOUR_UID" 
 }
 response = requests.get(url, headers=headers)
 
@@ -322,19 +327,19 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     "code": "ok",
     "msg": "ok",
     "data": { // WorkflowDetailResponse 结构
-        "id": "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c",
+        "id": "YOUR_WORKFLOW_ID",
         "name": "Detailed Workflow Test",
-        "source_volume_ids": ["1889223879880048640"],
+        "source_volume_ids": ["YOUR_SOURCE_VOLUME_ID_1"],
         "source_volume_names": ["b-vol1"],
-        "target_volume_id": "dbcc0d71-31f9-4799-b404-096f9e8e57f9", // 主工作流的目标卷
+        "target_volume_id": "YOUR_TARGET_VOLUME_ID_W", 
         "target_volume_name": "a-vol2",
         "file_types": [2],
         "process_mode": {"interval": 5, "offset": 0},
         "priority": 300,
         "created_at": 1739435482000,
-        "creator": "admin",
+        "creator": "YOUR_USERNAME",
         "updated_at": 1739436347000,
-        "modifier": "admin",
+        "modifier": "YOUR_USERNAME",
         "status": 1, // 主工作流状态
         "workflow": { // 主工作流的 Haystack 配置
             "components": [ /* ... */ ],
@@ -342,35 +347,35 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
             "edges": [],
             "extra_components": []
         },
-        "branch_id": "main_branch_uuid_for_ff5d", // 主/默认分支 ID
-        "branch_name": "main",                    // 主/默认分支名称
-        "branch_status": 0,                       // 主/默认分支状态
-        "branch_volume_id": "target_vol_for_main_branch_ff5d", // 主/默认分支目标卷
+        "branch_id": "YOUR_MAIN_BRANCH_ID", 
+        "branch_name": "main",                    
+        "branch_status": 0,                       
+        "branch_volume_id": "YOUR_MAIN_BRANCH_TARGET_VOLUME_ID", 
         "version": "1.2",
         "branches": [ // 此工作流下的所有分支列表
             {
-                "branch_id": "main_branch_uuid_for_ff5d",
+                "branch_id": "YOUR_MAIN_BRANCH_ID",
                 "created_at": 1739435482000,
-                "creator": "admin",
+                "creator": "YOUR_USERNAME",
                 "updated_at": 1739436347000,
-                "modifier": "admin",
+                "modifier": "YOUR_USERNAME",
                 "status": 1, // 此分支对应的工作流部分的状态 (通常与父工作流状态一致)
-                "workflow": { /* main_branch_uuid_for_ff5d 分支的特定 Haystack 配置 */ },
+                "workflow": { /* YOUR_MAIN_BRANCH_ID 分支的特定 Haystack 配置 */ },
                 "branch_name": "main",
                 "branch_status": 0, // 该分支自身的状态
-                "branch_volume_id": "target_vol_for_main_branch_ff5d"
+                "branch_volume_id": "YOUR_MAIN_BRANCH_TARGET_VOLUME_ID"
             },
             {
-                "branch_id": "dev_branch_uuid_for_ff5d",
+                "branch_id": "YOUR_DEV_BRANCH_ID",
                 "created_at": 1739500000000,
-                "creator": "developer_x",
+                "creator": "YOUR_DEVELOPER_USERNAME",
                 "updated_at": 1739501000000,
-                "modifier": "developer_x",
+                "modifier": "YOUR_DEVELOPER_USERNAME",
                 "status": 1,
-                "workflow": { /* dev_branch_uuid_for_ff5d 分支的特定 Haystack 配置 */ },
+                "workflow": { /* YOUR_DEV_BRANCH_ID 分支的特定 Haystack 配置 */ },
                 "branch_name": "dev-feature-x",
                 "branch_status": 0,
-                "branch_volume_id": "target_vol_for_dev_branch_ff5d"
+                "branch_volume_id": "YOUR_DEV_BRANCH_TARGET_VOLUME_ID"
             }
         ]
     }
@@ -425,21 +430,21 @@ PUT /byoa/api/v1/workflow_meta/{workflow_id}
 import requests
 import json
 
-workflow_to_update = "fef28ca2-175e-4de9-9ac3-f4aa0da5a745" # 替换为实际的 workflow_id
+workflow_to_update = "YOUR_WORKFLOW_ID" # 替换为实际的 workflow_id
 url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_update}" # 更新的 URL
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "user-name": "updater_admin", # 可选
-    "Access-Token": "xxxx", # 实际的 Access Token
-    "uid": "fa9f114e-77e0-4c23-aa0f-e982a5ec80e2-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin" # 实际的 UID
+    "user-id": "YOUR_USER_ID",
+    "user-name": "YOUR_USERNAME", 
+    "Access-Token": "YOUR_ACCESS_TOKEN", 
+    "uid": "YOUR_UID" 
 }
 
 body = { # WorkflowRequest 结构
     "name": "wf-3-updated-name",
     "source_volume_names": ["b-vol1-updated"],
-    "source_volume_ids": [1889223879880048640], # OpenAPI 指定为 integer
-    "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95", // 通常不改变，除非业务需要
-    "create_target_volume_name": "", // 通常在更新时为空或不提供
+    "source_volume_ids": ["YOUR_SOURCE_VOLUME_ID_1"], 
+    "target_volume_id": "YOUR_TARGET_VOLUME_ID_W", 
+    "create_target_volume_name": "", 
         "process_mode": {
         "interval": 10, // 更新处理间隔为10分钟
             "offset": 0
@@ -452,7 +457,7 @@ body = { # WorkflowRequest 结构
                 {
                     "name": "DocumentCleaner",
                     "type": "haystack.components.preprocessors.document_cleaner.DocumentCleaner",
-                "component_id": "DocumentCleaner_Updated_ID",
+                "component_id": "YOUR_COMPONENT_ID_UPDATED",
                 "intro": "Updated DocumentCleaner",
                 "position": {"x": 0, "y": 0},
                 "input_keys": {}, "output_keys": {},
@@ -519,13 +524,13 @@ DELETE /byoa/api/v1/workflow_meta/{workflow_id}
 import requests
 import json
 
-workflow_to_delete = "729e7a03-652d-46e0-bdad-b05ec5b80cea" # 替换为实际的 workflow_id
+workflow_to_delete = "YOUR_WORKFLOW_ID_TO_DELETE" # 替换为实际的 workflow_id
 url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_delete}" # 更新的 URL
 
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx", # 实际的 Access Token
-    "uid": "011d4b66-ace5-4d58-88a4-bc76719acda5-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin" # 实际的 UID
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN", 
+    "uid": "YOUR_UID" 
 }
 params = {
     "delete_data": True # 或 False
@@ -1265,9 +1270,9 @@ import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job"
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "d252447b-7f1d-4fd4-8b70-9bc2dd5cd505-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID"
 }
 params = {
     "limit": 5,
@@ -1354,12 +1359,12 @@ GET /byoa/api/v1/workflow_job/{job_id}
 import requests
 import json
 
-job_to_get = "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c"
+job_to_get = "YOUR_JOB_ID"
 url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job/{job_to_get}"
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "181c0bfb-486f-4e55-a4ea-7fa2a5dae4fa-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID"
 }
 response = requests.get(url, headers=headers)
 
@@ -1374,7 +1379,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     "code": "ok",
     "msg": "ok",
     "data": {
-        "id": "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c",
+        "id": "YOUR_JOB_ID",
         "name": "Detailed Job Test",
         "created_at": 1739435482000,
         "creator": "admin",
