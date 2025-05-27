@@ -48,9 +48,9 @@ import requests
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors"  # 请替换为实际 API 地址
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "91a2234e-0a06-4d84-815e-840e379d9e1c-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 body = {
@@ -101,9 +101,9 @@ import requests
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/validate"  
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "2c5a7dc4-032a-42ac-b5ad-4db47f11772b-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 body = {
@@ -138,6 +138,16 @@ else:
 GET /connectors/list
 ```
 
+**输入参数：**
+
+|  参数             | 数据类型 | 是否必填 |含义 | 默认值 |
+|  --------------- | ---- | ----   | ----  | ---- |
+| is_desc          |boolean |否 |排序顺序 |false |
+| keyword          |string |否 |搜索的关键字（值为空时展示所有连接器） | |
+| order_by         |string |否 |排序的字段 | |
+| page             |int |否 |当前页码 |1 |
+| page_size        |int |否 |每页显示的数量 |10 |
+
 **输出参数：**
   
 |  参数             | 含义 |
@@ -163,12 +173,19 @@ import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/list" 
 headers = {
-    "user-id":"xxxx",
-    "uid": "f42d1006-b48f-4b1d-bd44-3a18dd7bb8ec-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
+}
+params = {
+    "is_desc": False,
+    "keyword": "c1",
+    "order_by": "",
+    "page": 1,
+    "page_size": 10
 }
 
-
-response = requests.get(url, headers=headers)
+response = requests.get(url, headers=headers, params=params)
 
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
@@ -194,34 +211,15 @@ Response Body: {
                 ],
                 "config": {
                     "oss": {
-                        "endpoint": "xxxx",
-                        "access_key_id": "xxxx",
-                        "access_key_secret": "xxxx",
-                        "bucket_name": "xxxx"
-                    }
-                }
-            },
-            {
-                "id": 100005,
-                "source_type": 5,
-                "name": "s3-test",
-                "status": "active",
-                "created_at": 1738919761,
-                "updated_at": 1738919761,
-                "username": "admin",
-                "related_task_ids": null,
-                "config": {
-                    "s3": {
-                        "endpoint": "xxxx",
-                        "access_key_id": "xxxx",
-                        "access_key_secret": "xxxx",
-                        "bucket_name": "xxxx",
-                        "region": "xxxx"
+                        "endpoint": "oss-cn-hangzhou.aliyuncs.com",
+                        "access_key_id": "admin",
+                        "access_key_secret": "Admin123",
+                        "bucket_name": "moc-test-data"
                     }
                 }
             }
         ],
-        "total": 2
+        "total": 1
     }
 }
 ```
@@ -248,9 +246,9 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/100005"
 
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "f42d1006-b48f-4b1d-bd44-3a18dd7bb8ec-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 body = {
@@ -306,9 +304,9 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/files/list"
 
 headers = {
-    "user-id": "<your_workspace_id>",
-    "Access-Token": "<your_access_token>",
-    "uid": "<your_uid>",
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 params = {
@@ -378,9 +376,9 @@ import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task" 
 headers = {
-    "user-id":"xxxx",
-    "Access-Token": "xxxx",
-    "uid": "f42d1006-b48f-4b1d-bd44-3a18dd7bb8ec-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 body = {
@@ -454,9 +452,9 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/list" 
 
 headers = {
-    "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "cef0d7a2-1505-4384-a89d-5ee5b8246f95-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin",
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 response = requests.get(url, headers=headers)
@@ -526,9 +524,9 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/update"  
 
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "f42d1006-b48f-4b1d-bd44-3a18dd7bb8ec-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 body = {
@@ -570,9 +568,9 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/delete/" 
 
 headers = {
-    "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "cef0d7a2-1505-4384-a89d-5ee5b8246f95-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin",
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 body = {
@@ -614,9 +612,9 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/pause" 
 
 headers = {
-    "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "cef0d7a2-1505-4384-a89d-5ee5b8246f95-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin",
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 body= {
@@ -658,9 +656,9 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/resume"  
 
 headers = {
-    "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "cef0d7a2-1505-4384-a89d-5ee5b8246f95-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin",
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 data = {
@@ -702,9 +700,9 @@ import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/retry"
 headers = {
-    "user-id":"0194e0c2-7e81-7040-ba44-f1d4f51axxxx",
-    "Access-Token": "",
-    "uid": "0401ffeb-592c-4472-bed4-fb4631c72688-0194e0c2-7e81-7040-ba44-f1d4f51axxxx:admin:accountadmin"
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 body = {
@@ -764,9 +762,9 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/get?task_id=1889613340219121664"
 
 headers = {
-    "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "cef0d7a2-1505-4384-a89d-5ee5b8246f95-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin",
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 response = requests.get(url, headers=headers)
@@ -847,9 +845,9 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/files?task_id=1889613340219121664"
 
 headers = {
-    "user-id": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "cef0d7a2-1505-4384-a89d-5ee5b8246f95-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin",
+    "user-id":"YOUR_USER_ID", # 请替换为您的 user-id
+    "Access-Token": "YOUR_ACCESS_TOKEN", # 请替换为您的 Access-Token
+    "uid": "YOUR_UID" # 请替换为您的 uid
 }
 
 params = {

@@ -45,13 +45,13 @@ import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/metric/observice"
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
-    "Access-Token": "xxxx",
-    "uid": "c0db5e70-8828-425f-bcd2-341b6e5321ba-0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx:admin:accountadmin"
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID"
 }
 
 body={
-  "account": "0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx",
+  "account": "YOUR_ACCOUNT_ID",
   "start": "2025-02-10T09:40:24+08:00",
   "end": "2025-02-10T10:00:24+08:00",
   "interval": 60,
@@ -82,7 +82,7 @@ Response Body: {
                 "labels": [
                     {
                         "labelKey": "user_id",
-                        "labelValue": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97"
+                        "labelValue": "YOUR_USER_ID"
                     }
                 ],
                 "values": [

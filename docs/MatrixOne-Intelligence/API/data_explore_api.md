@@ -20,9 +20,9 @@ POST /CreateOriginVolume
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/CreateOriginVolume"
 
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "",
-    "uid": "2de56399-0fda-4982-a26e-580fd666914d-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin"
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID"
 }
 
 body = {
@@ -66,9 +66,9 @@ import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DescribeOriginVolumes"
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "xxxx",
-    "uid": "ac8fd715-b39c-4edb-837b-e1ea1dae5f80-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin"
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID"
 }
 
 response = requests.post(url, headers=headers)
@@ -82,43 +82,25 @@ Response Body: {
     "code": "OK",
     "msg": "OK",
     "data": {
-        "total": 5,
+        "total": 2,
         "volumes": [
             {
-                "id": "1889223879880048640",
+                "id": "YOUR_VOLUME_ID_1",
                 "name": "b-vol1",
                 "size": 6787457,
                 "file_num": 1,
-                "owner": "admin",
+                "owner": "YOUR_USERNAME",
                 "created_at": 1739261047,
                 "updated_at": 1739261047
             },
             {
-                "id": "1889578498228068352",
+                "id": "YOUR_VOLUME_ID_2",
                 "name": "b-vol2",
                 "size": 40724742,
                 "file_num": 6,
-                "owner": "admin",
+                "owner": "YOUR_USERNAME",
                 "created_at": 1739345595,
                 "updated_at": 1739345595
-            },
-            {
-                "id": "1889868565396619264",
-                "name": "b_vol3",
-                "size": 0,
-                "file_num": 0,
-                "owner": "admin",
-                "created_at": 1739414752,
-                "updated_at": 1739414752
-            },
-            {
-                "id": "1889881472272465920",
-                "name": "b_vol6",
-                "size": 0,
-                "file_num": 0,
-                "owner": "admin",
-                "created_at": 1739417829,
-                "updated_at": 1739417829
             }
         ]
     }
@@ -149,13 +131,13 @@ import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DescribeOriginVolume"
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "xxxx",
-    "uid": "badb5c26-e335-453d-85ad-7e996bcebff4-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin",
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID",
 }
 
 body={
-        "id": "1889223879880048640"
+        "id": "YOUR_VOLUME_ID"
 }
 
 response = requests.post(url, headers=headers,json=body)
@@ -172,7 +154,7 @@ Response Body: {
         "total": 1,
         "items": [
             {
-                "id": "1889223944229060608",
+                "id": "YOUR_FILE_ID",
                 "name": "红楼梦(通行本)简体横排.pdf",
                 "type": 2,
                 "status": 5,
@@ -180,10 +162,10 @@ Response Body: {
                 "update_time": 1739261640,
                 "other_metadata": "",
                 "reason": "",
-                "user": "admin",
+                "user": "YOUR_USERNAME",
                 "start_time": 1739261063,
                 "end_time": 1739261640,
-                "path": "/b-vol1/红楼梦(通行本)简体横排.pdf"
+                "path": "/YOUR_VOLUME_NAME/红楼梦(通行本)简体横排.pdf"
             }
         ]
     }
@@ -211,14 +193,14 @@ import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/GetOriginVolumeFileLink"
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "xxxx",
-    "uid": "ac8fd715-b39c-4edb-837b-e1ea1dae5f80-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin"
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID"
 }
 
 body = {
-    "volume_id": 1889223879880048640,
-    "file_id": "1889578498228068352"
+    "volume_id": "YOUR_VOLUME_ID",
+    "file_id": "YOUR_FILE_ID"
 
 }
 
@@ -233,7 +215,7 @@ Response Body: {
     "code": "OK",
     "msg": "OK",
     "data": {
-        "link": "https://moi-dev-test.oss-cn-hangzhou.aliyuncs.com/connector_path%2F0194dfaa-3eda-7ea5-b47c-b4f4f594xxxx%2Fb-vol2?Expires=173944xxxx&OSSAccessKeyId=LTAI5t6RX4TpSC8Z2v4nGG4Y&Signature=bCy60Or%2B%2Fr8Na1OcfMn%2Fy2jso6Y%3D"
+        "link": "YOUR_OSS_BUCKET_FILE_LINK"
     }
 }
 ```
@@ -260,15 +242,15 @@ import json
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/DeleteOriginVolumeFiles"
 
 headers = {
-    "user-id":"0194dfaa-3eda-7ea5-b47c-b4f4f5940e97",
-    "Access-Token": "xxxx",
-    "uid": "badb5c26-e335-453d-85ad-7e996bcebff4-0194dfaa-3eda-7ea5-b47c-b4f4f5940e97:admin:accountadmin",
+    "user-id": "YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID",
 }
 
 
 body={
-    "volume_id": "1889578498228068352",
-    "file_ids": ["1889698920437940224"]
+    "volume_id": "YOUR_VOLUME_ID",
+    "file_ids": ["YOUR_FILE_ID_1", "YOUR_FILE_ID_2"]
 }
 
 
@@ -351,7 +333,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
     "code": "ok",
     "msg": "ok",
     "data": {
-        "id": "fb93a6c1-6d1e-4d68-bb7c-4d84facda670", 
+        "id": "YOUR_PROCESSED_VOLUME_ID", 
         "name": "b_vol3", 
         "created_at": "2025-02-13T11:44:36", 
         "updated_at": "2025-02-13T11:44:36"
@@ -420,17 +402,17 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
                 "name": "example-volume-1",
                 "created_at": "2025-02-11T16:06:55Z",
                 "updated_at": "2025-02-11T16:06:55Z",
-                "user_id": "your_user_id_workspace_id",
-                "id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
+                "user_id": "your_user_id",
+                "id": "YOUR_PROCESSED_VOLUME_ID_1",
                 "parent_volume_id": ""
             },
             {
                 "name": "example-volume-2",
                 "created_at": "2025-02-13T11:44:36Z",
                 "updated_at": "2025-02-13T11:44:36Z",
-                "user_id": "your_user_id_workspace_id",
-                "id": "fb93a6c1-6d1e-4d68-bb7c-4d84facda670",
-                "parent_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95"
+                "user_id": "your_user_id",
+                "id": "YOUR_PROCESSED_VOLUME_ID_2",
+                "parent_volume_id": "YOUR_PARENT_VOLUME_ID"
             }
         ]
     }
@@ -608,15 +590,15 @@ import json
 # 将 {vid} 替换为实际的数据卷 ID
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}/files"
 headers = {
-    "user-id":"your_user_id",
-    "Access-Token": "your_access_token",
-    "uid": "your_uid"
+    "user-id":"YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID"
 }
 body = { # 可选
     "limit": 5 
 }
 
-response = requests.post(url.replace("{vid}", "actual_volume_id"), json=body, headers=headers) # 使用 json=body
+response = requests.post(url.replace("{vid}", "YOUR_PROCESSED_VOLUME_ID"), json=body, headers=headers) # 使用 json=body
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
@@ -630,22 +612,22 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
         "total": 1,
         "items": [
             {
-                "id": "0194fb44-c44b-7713-b064-bff178ba30c3",
+                "id": "YOUR_FILE_ITEM_ID",
                 "created_at": "2025-02-12T17:46:16.000000+0000",
                 "updated_at": "2025-02-12T17:51:21.000000+0000",
-                "user_id": "your_user_id_workspace_id",
+                "user_id": "YOUR_USER_ID",
                 "priority": 300,
-                "source_volume_id": "1889223879880048640",
-                "source_file_id": "1889223944229060608",
-                "target_volume_id": "actual_volume_id",
+                "source_volume_id": "YOUR_SOURCE_VOLUME_ID",
+                "source_file_id": "YOUR_SOURCE_FILE_ID",
+                "target_volume_id": "YOUR_TARGET_VOLUME_ID",
                 "file_name": "红楼梦 (通行本) 简体横排.pdf",
                 "file_type": 2,
                 "file_size": 6787457,
-                "file_path": "0194dfaa-3eda-7ea5-b47c-b4f4f5940e97/b-vol1/1889223922712281088/红楼梦 (通行本) 简体横排.pdf",
+                "file_path": "YOUR_USER_ID/YOUR_SOURCE_VOLUME_NAME/YOUR_SOURCE_FILE_ID/红楼梦 (通行本) 简体横排.pdf",
                 "file_status": 2,
-                "workflow_meta_id": "5775ecd6-5918-42a1-a92f-7245fe96b2bf",
+                "workflow_meta_id": "YOUR_WORKFLOW_META_ID",
                 "workflow_branch_id": null,
-                "job_id": "0194fb44-c44b-7708-aab6-c67e094d0352",
+                "job_id": "YOUR_JOB_ID",
                 "error_message": "",
                 "duration": 300,
                 "start_time": "2025-02-12T17:46:20.000000+0000",
@@ -764,12 +746,13 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws
 
 ```python
 import requests
+import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws"
 headers = {
-    "user-id":"your_user_id",
-    "Access-Token": "your_access_token",
-    "uid": "your_uid"
+    "user-id":"YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID"
 }
 params = {
     "need_embeddings": False # 或者 True
@@ -833,7 +816,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
     "msg": "ok",
     "data": {
         "job": {
-            "id": "job_id_associated_with_file",
+            "id": "YOUR_JOB_ID",
             "workflow_name": "Associated Workflow",
             "status": 2,
             "start_time": "2025-02-13T12:00:00Z",
@@ -905,9 +888,9 @@ import json
 # 将 {vid} 和 {fid} 替换为实际的 ID
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks"
 headers = {
-    "user-id":"your_user_id_workspace_id",
-    "Access-Token": "your_access_token",
-    "uid": "your_uid"
+    "user-id":"YOUR_USER_ID",
+    "Access-Token": "YOUR_ACCESS_TOKEN",
+    "uid": "YOUR_UID"
 }
 body = {
     "limit": 2
@@ -926,22 +909,22 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
         "total": 10,
         "items": [
             {
-                "id": "000a9605-733f-4335-bc72-ac9aa8351e66",
+                "id": "YOUR_BLOCK_ID_1",
                 "content": "Matrix Search 利用 Efficient Net 模型对上传的图片进行特征提取...",
                 "type": "text", 
                 "content_type": "text", 
-                "file_id": "actual_file_id",
+                "file_id": "YOUR_FILE_ID",
                 "description": null,
                 "created_at": "2025-02-13T03:45:02",
                 "updated_at": "2025-02-13T03:45:02",
                 "text_and_image_id": null
             },
             {
-                "id": "08aaf135-f8ad-446c-9951-03e94777f608",
+                "id": "YOUR_BLOCK_ID_2",
                 "content": "![](/image.jpg) 接下来我们会逐个分析...",
                 "type": "markdown",
                 "content_type": "text",
-                "file_id": "actual_file_id",
+                "file_id": "YOUR_FILE_ID",
                 "description": "An image with text",
                 "created_at": "2025-02-13T03:45:03",
                 "updated_at": "2025-02-13T03:45:03",
