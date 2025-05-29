@@ -45,9 +45,7 @@ import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/metric/observice"
 headers = {
-    "user-id": "YOUR_USER_ID",
-    "Access-Token": "YOUR_ACCESS_TOKEN",
-    "uid": "YOUR_UID"
+    "moi-key": "xxxxx"
 }
 
 body={

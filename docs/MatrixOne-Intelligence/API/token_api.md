@@ -73,7 +73,7 @@ Response Body: {
 }
 ```
 
-在 Response Header 中获取 access-token 和 refresh-token，从返回结构体中获取 uid。Access-Token 有效期 15min，过期之前，需要调用下面 Refresh 接口，获取新的 Access-Token。后续请求中，Header 中带上 **Access-Token** 和 **uid**。
+在 Response Header 中获取 access-token 和 refresh-token，从返回结构体中获取 uid。Access-Token 有效期 15min，过期之前，需要调用下面 Refresh 接口，获取新的 Access-Token。后续请求中，**Access-Token** 和 **uid** 可用于生成/刷新 moi-key，方便调用其他 API。
 
 ## 刷新 token
 
@@ -130,5 +130,159 @@ Response Headers: {
 Response Body: {
     "code": "OK",
     "msg": "OK"
+}
+```
+
+## API Key 管理
+
+**说明：**下述接口用于管理 MOI 工作区的 API Key。成功获取或创建 API Key 后，其返回的 `moi-key` 在请求其他 MOI 业务 API 时，在 Header 中传递以进行鉴权。
+
+### 创建 API Key
+
+```
+POST /user/me/api-key
+```
+
+**描述：**为当前用户创建一个新的 API Key (moi-key)。
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述                        |
+| -------------- | ------ | -------- | --------------------------- |
+| `access-token` | string | 是       | 账户认证 token (Access Token) |
+| `uid`          | string | 是       | 账户唯一 ID (User ID)       |
+
+**响应参数：**
+
+| 参数名       | 类型   | 含义                         |
+| ------------ | ------ | ---------------------------- |
+| `key`        | string | 生成的 API Key (moi-key)       |
+| `created_at` | string | 创建时间 (ISO 8601 日期时间格式) |
+| `request_id` | string | 请求的唯一 ID                 |
+
+**示例 (Python):**
+
+```python
+import requests
+import json
+
+# 假设 access_token 和 uid 已通过登录接口获取
+access_token = "YOUR_ACCESS_TOKEN"
+uid = "YOUR_USER_ID"
+api_endpoint = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn"
+
+url = f"{api_endpoint}/user/me/api-key"
+
+headers = {
+    "access-token": access_token,
+    "uid": uid,
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+}
+
+response = requests.post(url, headers=headers, json={})
+
+print("Status Code:", response.status_code)
+if response.status_code == 200:
+    try:
+        response_data = response.json()
+        print("Response Body (new moi-key details):", json.dumps(response_data, indent=4, ensure_ascii=False))
+        new_moi_key = response_data.get("data", {}).get("key")
+        if new_moi_key:
+            print(f"Successfully created new moi-key: {new_moi_key}")
+        else:
+            print("New moi-key not found in response.")
+    except json.JSONDecodeError:
+        print("Error decoding JSON from response:", response.text)
+else:
+    print("Error Response Body:", response.text)
+```
+
+**示例 (JSON Response):**
+
+```json
+{
+  "code": "OK",
+  "msg": "OK",
+  "data": {
+    "key": "YOUR_NEW_MOI_KEY_STRING",
+    "created_at": "2023-05-29T08:06:42Z"
+  },
+  "request_id": "YOUR_REQUEST_ID"
+}
+```
+
+### 刷新 API Key
+
+```
+POST /user/me/api-key/refresh
+```
+
+**描述：**为当前用户生成一个新的 API Key (moi-key)，旧的 API Key 将失效。
+
+**Header 参数：**
+
+| 参数名         | 类型   | 是否必填 | 描述                        |
+| -------------- | ------ | -------- | --------------------------- |
+| `access-token` | string | 是       | 账户认证 token (Access Token) |
+| `uid`          | string | 是       | 账户唯一 ID (User ID)       |
+
+**响应参数 (`200 OK`):**
+
+| 参数名       | 类型   | 含义                               |
+| ------------ | ------ | ---------------------------------- |
+| `key`        | string | 新生成的 API Key (moi-key)           |
+| `created_at` | string | 新 Key 创建时间 (ISO 8601 日期时间格式) |
+| `request_id` | string | 请求的唯一 ID                       |
+
+**示例 (Python):**
+
+```python
+import requests
+import json
+
+# 假设 access_token 和 uid 已通过登录接口获取
+access_token = "YOUR_ACCESS_TOKEN"
+uid = "YOUR_USER_ID"
+api_endpoint = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn"
+
+url = f"{api_endpoint}/user/me/api-key/refresh"
+
+headers = {
+    "access-token": access_token,
+    "uid": uid,
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+}
+
+response = requests.post(url, headers=headers, json={})
+
+print("Status Code:", response.status_code)
+if response.status_code == 200:
+    try:
+        response_data = response.json()
+        print("Response Body (refreshed moi-key details):", json.dumps(response_data, indent=4, ensure_ascii=False))
+        refreshed_moi_key = response_data.get("data", {}).get("key")
+        if refreshed_moi_key:
+            print(f"Successfully refreshed moi-key: {refreshed_moi_key}")
+        else:
+            print("Refreshed moi-key not found in response.")
+    except json.JSONDecodeError:
+        print("Error decoding JSON from response:", response.text)
+else:
+    print("Error Response Body:", response.text)
+```
+
+**示例 (JSON Response):**
+
+```json
+{
+  "code": "OK",
+  "msg": "OK",
+  "data": {
+    "key": "YOUR_REFRESHED_MOI_KEY_STRING",
+    "created_at": "2023-05-29T08:10:00Z"
+  },
+  "request_id": "YOUR_REQUEST_ID"
 }
 ```
