@@ -137,6 +137,12 @@ Response Body: {
 
 **说明：**下述接口用于管理 MOI 工作区的 API Key。成功获取或创建 API Key 后，其返回的 `moi-key` 在请求其他 MOI 业务 API 时，在 Header 中传递以进行鉴权。
 
+**获取 API KEY 的操作步骤：**登录 GenAI 工作区平台后，点击页面右上角的用户头像，在下拉菜单中选择 "API 管理" 选项，即可查看、获取或更新您的 API 密钥。
+
+![API 管理入口](./images/api-management-entry.png)
+
+*图示：在页面右上角点击用户头像，可以看到下拉菜单中的 "API 管理" 选项*
+
 ### 创建 API Key
 
 ```
@@ -149,16 +155,16 @@ POST /user/me/api-key
 
 | 参数名         | 类型   | 是否必填 | 描述                        |
 | -------------- | ------ | -------- | --------------------------- |
-| `access-token` | string | 是       | 账户认证 token (Access Token) |
-| `uid`          | string | 是       | 账户唯一 ID (User ID)       |
+| `access-token` | string | 是       | 账户认证 token  |
+| `uid`          | string | 是       | 账户 ID      |
 
 **响应参数：**
 
 | 参数名       | 类型   | 含义                         |
 | ------------ | ------ | ---------------------------- |
 | `key`        | string | 生成的 API Key (moi-key)       |
-| `created_at` | string | 创建时间 (ISO 8601 日期时间格式) |
-| `request_id` | string | 请求的唯一 ID                 |
+| `created_at` | string | 创建时间|
+| `request_id` | string | 请求 ID                 |
 
 **示例 (Python):**
 
@@ -224,16 +230,16 @@ POST /user/me/api-key/refresh
 
 | 参数名         | 类型   | 是否必填 | 描述                        |
 | -------------- | ------ | -------- | --------------------------- |
-| `access-token` | string | 是       | 账户认证 token (Access Token) |
-| `uid`          | string | 是       | 账户唯一 ID (User ID)       |
+| `access-token` | string | 是       | 账户认证 token|
+| `uid`          | string | 是       | 账户 ID |
 
 **响应参数 (`200 OK`):**
 
 | 参数名       | 类型   | 含义                               |
 | ------------ | ------ | ---------------------------------- |
 | `key`        | string | 新生成的 API Key (moi-key)           |
-| `created_at` | string | 新 Key 创建时间 (ISO 8601 日期时间格式) |
-| `request_id` | string | 请求的唯一 ID                       |
+| `created_at` | string | 新 Key 创建时间|
+| `request_id` | string | 请求 ID                       |
 
 **示例 (Python):**
 
