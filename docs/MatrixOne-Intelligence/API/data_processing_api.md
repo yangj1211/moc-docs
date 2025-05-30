@@ -8,7 +8,8 @@
 POST /byoa/api/v1/workflow_meta
 ```
 
-**Body 输入参数 (`WorkflowRequest`)：**
+
+**Body 输入参数：**
 
 | 参数名                      | 是否必填 | 类型                         | 含义                           | 默认值 |
 | --------------------------- | -------- | ---------------------------- | ------------------------------ | ------ |
@@ -21,8 +22,8 @@ POST /byoa/api/v1/workflow_meta
 | `target_volume_id`          | 是       | string                       | 目标数据卷 ID                   |        |
 | `target_volume_name`        | 否       | string                       | 目标数据卷名称                 | ""     |
 | `create_target_volume_name` | 是       | string                       | 创建目标数据卷时使用的名称     |        |
-| `workflow`                  | 是       | object (`WorkflowConfig`)    | 工作流配置 (Haystack pipeline) |        |
-| `branch_name`               | 否       | string                       | 分支名 (如果同时创建分支)      | ""     |
+| `workflow`                  | 是       | object (`WorkflowConfig`)    | 工作流配置  |        |
+| `branch_name`               | 否       | string                       | 分支名    | ""     |
 
 * **`ProcessModeConfig` 结构:**
 
@@ -31,12 +32,12 @@ POST /byoa/api/v1/workflow_meta
   | `interval` | 是       | integer | 处理间隔（分钟）       |
   | `offset`   | 是       | integer | 处理时间偏移量（分钟） |
 
-* **`WorkflowConfig` 结构:** (参考 `workflow.openapi.json` -> `components.schemas.WorkflowConfig`)
+* **`WorkflowConfig` 结构:** 
 
-  * `components`: array[object] - 组件配置列表。每个组件对象包含 `name`, `type`, `component_id`, `intro`, `position`, `input_keys`, `output_keys`, `init_parameters`。
-  * `connections`: array[object] - 连接配置列表。每个连接对象包含 `sender` 和 `receiver`。
-  * `edges`: array[object] - 边配置列表 (通常为空数组 `[]`)。
-  * `extra_components`: array[object] - 额外组件配置列表 (通常为空数组 `[]`)。
+  * `components`: 组件配置列表。每个组件对象包含 `name`, `type`, `component_id`, `intro`, `position`, `input_keys`, `output_keys`, `init_parameters`。
+  * `connections`: 连接配置列表。每个连接对象包含 `sender` 和 `receiver`。
+  * `edges`: 边配置列表。
+  * `extra_components`: 额外组件配置列表。
 
 **示例 (Python)：**
 
@@ -73,15 +74,15 @@ body = {
                 "input_keys": {},
                 "output_keys": {},
                 "init_parameters": {
-                    "ascii_only": False, # boolean
-                    "keep_id": False,    # boolean
+                    "ascii_only": False,
+                    "keep_id": False,
                     "remove_empty_lines": True,
                     "remove_extra_whitespaces": True,
                     "remove_regex": "([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)|https?://[^\\s]+",
                     "remove_repeated_substrings": False
                 }
             },
-            // ... (其他组件和连接，参考 workflow.openapi.json 的 WorkflowRequest 示例)
+            // ... (其他组件和连接)
             {
                 "name":"DocumentWriter",
                 "type":"haystack.components.writers.document_writer.DocumentWriter",
@@ -124,7 +125,7 @@ print(response.status_code)
 print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`NoneDataResp`)：**
+**返回：**
 
 ```json
 {
@@ -157,13 +158,14 @@ GET /byoa/api/v1/workflow_meta
 | `sort_field`    | string, nullable                      | 否       | 排序字段                      | "created_at" |
 | `sort_order`    | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
 
+
 **示例 (Python)：**
 
 ```python
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta" # 更新的 URL
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta"
 headers = {
     "moi-key": "xxxxx"
 }
@@ -179,7 +181,7 @@ print(response.status_code)
 print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`MOIResponse_WorkflowListResponse_`)：**
+**返回：**
 
 ```json
 {
@@ -216,14 +218,14 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 }
 ```
 
-**输出参数 (`MOIResponse_WorkflowListResponse_` 的 `data` 部分 - `WorkflowListResponse`)：**
+**输出参数：**
 
 | 参数        | 类型                                    | 描述                                           |
 | ----------- | --------------------------------------- | ---------------------------------------------- |
 | `total`     | integer                                 | 符合条件的工作流总数                           |
-| `workflows` | array[object] (`WorkflowListItem` 结构) | 工作流列表，每个对象包含工作流及其主要分支信息 |
+| `workflows` | array[object] | 工作流列表，每个对象包含工作流及其主要分支信息 |
 
-* **`WorkflowListItem` 对象结构:** (参考 `workflow.openapi.json` components.schemas.WorkflowListItem)
+* **`WorkflowListItem` 对象结构:** 
     * `id` (string): 工作流 ID
     * `name` (string): 工作流名称
     * `created_at` (integer): 创建时间戳 (毫秒)
@@ -263,8 +265,8 @@ GET /byoa/api/v1/workflow_meta/{workflow_id}
 import requests
 import json
 
-workflow_to_get = "YOUR_WORKFLOW_ID" # 替换为实际的 workflow_id
-url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_get}" # 更新的 URL
+workflow_to_get = "YOUR_WORKFLOW_ID"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_get}"
 headers = {
     "moi-key": "xxxxx"
 }
@@ -336,11 +338,10 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 }
 ```
 
-**输出参数 (`MOIResponse_WorkflowDetailResponse_` 的 `data` 部分 - `WorkflowDetailResponse`)：**
-(参考 `workflow.openapi.json` components.schemas.WorkflowDetailResponse)
+**输出参数：**
 主要包含工作流的基础信息、主工作流的 Haystack 配置 (`workflow`)、主/默认分支的相关信息 (`branch_id`, `branch_name`, `branch_status`, `branch_volume_id`)，以及一个 `branches` 数组，其中每一项是 `WorkflowBranchItem`。
 
-* **`WorkflowBranchItem` 结构:**
+* **`WorkflowBranchItem` 结构:** 
     * `branch_id` (string): 分支 ID
     * `created_at` (integer): 创建时间戳
     * `creator` (string): 创建者
@@ -366,8 +367,9 @@ PUT /byoa/api/v1/workflow_meta/{workflow_id}
 | ------------- | ------ | -------- | -------- |
 | `workflow_id` | string | 是       | 工作流 ID |
 
-**Body 输入参数 (`WorkflowRequest`)：**
-与 "创建工作流" 的 Body (`WorkflowRequest`) 结构相同。所有字段都可以更新。
+
+**Body 输入参数：**
+与 "创建工作流" 的 Body结构相同。所有字段都可以更新。
 
 **示例 (Python)：**
 
@@ -375,7 +377,7 @@ PUT /byoa/api/v1/workflow_meta/{workflow_id}
 import requests
 import json
 
-workflow_to_update = "YOUR_WORKFLOW_ID" # 替换为实际的 workflow_id
+workflow_to_update = "YOUR_WORKFLOW_ID"
 url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_update}"
 headers = {
     "moi-key": "xxxxx"
@@ -391,7 +393,7 @@ body = { # WorkflowRequest 结构
         "interval": 10, // 更新处理间隔为10分钟
             "offset": 0
         },
-    "file_types": [2, 6], // 增加 markdown 支持
+    "file_types": [2, 6],
     "priority": 350,      // 更新优先级
         "workflow": {
         // 更新后的 Haystack 配置
@@ -404,7 +406,7 @@ body = { # WorkflowRequest 结构
                 "position": {"x": 0, "y": 0},
                 "input_keys": {}, "output_keys": {},
                     "init_parameters": {
-                    "remove_empty_lines": False, // 修改参数
+                    "remove_empty_lines": False,
                     "remove_extra_whitespaces": True
                 }
             }
@@ -414,7 +416,6 @@ body = { # WorkflowRequest 结构
         "edges": [],
         "extra_components": []
     }
-    // "branch_name": "main" // 通常更新主工作流时，此字段不需特别指定，或与 workflow_id 的主分支名一致
 }
 
 response = requests.put(url, json=body, headers=headers)
@@ -422,7 +423,7 @@ print(response.status_code)
 print(response.json())
 ```
 
-**返回 (`NoneDataResp`)：**
+**返回：**
 
 ```json
 {
@@ -465,23 +466,23 @@ headers = {
     "moi-key": "xxxxx"
 }
 params = {
-    "delete_data": True # 或 False
+    "delete_data": True
 }
 
 response = requests.delete(url, headers=headers, params=params)
 
 print(response.status_code)
-if response.content: # 检查是否有内容，因为成功可能返回空响应体
+if response.content: 
     try:
         print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     except json.JSONDecodeError:
-        print("Response text:", response.text) # 如果不是 JSON，打印文本
+        print("Response text:", response.text)
 else:
     print("Request successful, no content returned.")
 
 ```
 
-**返回 (`NoneDataResp`)：**
+**返回：**
 成功时通常返回此结构，或 HTTP 204 No Content。
 
 ```json
@@ -531,7 +532,7 @@ else:
     print("Request to stop workflow successful, no content returned.")
 ```
 
-**返回 (`NoneDataResp`)：**
+**返回：**
 成功时通常返回此结构，表示操作已接受。
 
 ```json
@@ -558,14 +559,12 @@ POST /byoa/api/v1/workflow_meta/{workflow_id}/branch
 | ------------- | ------ | -------- | -------- |
 | `workflow_id` | string | 是       | 工作流 ID |
 
-**Body 输入参数 (`WorkflowBranchRequest`)：**
+**Body 输入参数：**
 
 | 参数名        | 是否必填 | 类型                      | 含义       | 默认值 |
 | ------------- | -------- | ------------------------- | ---------- | ------ |
 | `branch_name` | 否       | string, nullable          | 分支名     | ""     |
-| `workflow`    | 是       | object (`WorkflowConfig`) | 工作流配置 |        |
-
-* **`WorkflowConfig` 结构:** (同主工作流创建/更新时的 `WorkflowConfig` 定义)
+| `workflow`    | 是       | object | 工作流配置 |        |
 
 **示例 (Python)：**
 
@@ -600,7 +599,7 @@ if response.content:
         print(response.text)
 ```
 
-**返回 (`NoneDataResp`)：**
+**返回：**
 
 ```json
 {
@@ -656,7 +655,7 @@ if response.content:
         print(response.text)
 ```
 
-**返回 (`MOIResponse_WorkflowListResponse_`)：**
+**返回：**
 返回结构与 "查看工作流列表" (`GET /byoa/api/v1/workflow_meta`) 类似，其中 `data.workflows` 数组的每一项是 `WorkflowListItem`，但此处代表的是该工作流下的各个分支的信息。请参考 `WorkflowListItem` 结构。
 
 ```json
@@ -690,7 +689,7 @@ if response.content:
 }
 ```
 
-**输出参数 (`MOIResponse_WorkflowListResponse_` 的 `data.workflows` 中的 `WorkflowListItem`):**
+**输出参数:**
 (具体字段参考 `GET /byoa/api/v1/workflow_meta` 的 `WorkflowListItem` 定义，此处 `id` 是父工作流 ID, `branch_id`, `branch_name`, `branch_status` 等描述分支特有属性)
 
 #### 获取工作流分支详情
@@ -727,7 +726,7 @@ if response.content:
         print(response.text)
 ```
 
-**返回 (`MOIResponse_WorkflowDetailResponse_`)：**
+**返回：**
 返回结构与 "查看工作流详情" (`GET /byoa/api/v1/workflow_meta/{workflow_id}`) 类似，但 `data` 部分描述的是该分支的详情。
 
 ```json
@@ -748,7 +747,7 @@ if response.content:
 }
 ```
 
-**输出参数 (`MOIResponse_WorkflowDetailResponse_` 的 `data` 部分 - `WorkflowDetailResponse`)：**
+**输出参数：**
 (参考 `GET /byoa/api/v1/workflow_meta/{workflow_id}` 的 `WorkflowDetailResponse` 定义，其中 `id` 为父工作流 ID，`workflow` 为此分支的配置，`branch_id`, `branch_name` 等为当前分支信息)
 
 #### 更新工作流分支
@@ -765,14 +764,12 @@ PUT /byoa/api/v1/workflow_meta/branch/{branch_id}
 | ----------- | ------ | -------- | ------------ |
 | `branch_id` | string | 是       | 工作流分支 ID |
 
-**Body 输入参数 (`UpdateWorkflowBranchRequest`)：**
+**Body 输入参数：**
 
 | 参数名        | 是否必填 | 类型                      | 含义           | 默认值 |
 | ------------- | -------- | ------------------------- | -------------- | ------ |
 | `branch_name` | 否       | string, nullable          | 新的分支名     | ""     |
-| `workflow`    | 是       | object (`WorkflowConfig`) | 新的工作流配置 |        |
-
-* **`WorkflowConfig` 结构:** (同主工作流创建/更新时的 `WorkflowConfig` 定义)
+| `workflow`    | 是       | object | 新的工作流配置 |        |
 
 **示例 (Python)：**
 
@@ -802,7 +799,7 @@ if response.content:
         print(response.text)
 ```
 
-**返回 (`NoneDataResp`)：**
+**返回：**
 
 ```json
 {
@@ -832,6 +829,7 @@ DELETE /byoa/api/v1/workflow_meta/branch/{branch_id}
 | ------------- | ------- | -------- | ---------------------------- | ------ |
 | `delete_data` | boolean | 否       | 是否删除该分支产生的所有数据 | false  |
 
+
 **示例 (Python)：**
 
 ```python
@@ -857,7 +855,7 @@ else:
     print("Request successful, no content returned or empty response.")
 ```
 
-**返回 (`NoneDataResp`)：**
+**返回：**
 
 ```json
 {
@@ -902,7 +900,7 @@ if response.content:
         print(response.text)
 ```
 
-**返回 (`MOIResponse_WorkflowDetailResponse_`)：**
+**返回：**
 成功启用后，通常返回该分支所属的父工作流的详细信息 (`WorkflowDetailResponse`)，其中该分支的状态会更新，并可能成为主分支。
 
 ```json
@@ -963,7 +961,7 @@ if response.content:
         print(response.text)
 ```
 
-**返回 (`MOIResponse_WorkflowDetailResponse_`)：**
+**返回：**
 成功禁用后，通常返回该分支所属的父工作流的详细信息 (`WorkflowDetailResponse`)，其中该分支的状态会更新。
 
 ```json
@@ -994,7 +992,7 @@ if response.content:
 POST /byoa/api/v1/workflow_job
 ```
 
-**Body 输入参数 (`JobCreateRequest`)：**
+**Body 输入参数：**
 
 | 参数               | 是否必填 | 类型                       | 含义                                                         | 默认值 |
 | ------------------ | -------- | -------------------------- | ------------------------------------------------------------ | ------ |
@@ -1004,7 +1002,7 @@ POST /byoa/api/v1/workflow_job
 | target_volume_id   | 是       | string                     | 目标数据卷 ID                    |        |
 | files              | 否       | array[object (`FileItem`)] | 要处理的文件列表。如果为空，则按工作流配置处理               | []     |
 
-* **`FileItem` 对象结构:**
+* **`FileItem` 对象结构:** 
 
   | 参数             | 是否必填 | 类型                      | 含义            |
   | ---------------- | -------- | ------------------------- | --------------- |
@@ -1015,7 +1013,7 @@ POST /byoa/api/v1/workflow_job
   | source_volume_id | 是       | integer                   | 源数据卷 ID      |
   | source_file_id   | 是       | integer                   | 源文件 ID        |
 
-**Body 示例 (`JobCreateRequest`)：**
+**Body 示例：**
 
 ```json
 {
@@ -1044,7 +1042,7 @@ POST /byoa/api/v1/workflow_job
 }
 ```
 
-**返回 (`NoneDataResp`)：**
+**返回：**
 
 ```json
 {
@@ -1126,14 +1124,14 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 }
 ```
 
-**输出参数 (`MOIResponse_JobListResponse_` 的 `data` 部分 - `JobListResponse`)：**
+**输出参数：**
 
 | 参数    | 类型                               | 描述                                       |
 | ------- | ---------------------------------- | ------------------------------------------ |
 | `total` | integer                            | 符合条件的工作流作业总数                   |
-| `jobs`  | array[object] (`JobListItem` 结构) | 作业列表，每个对象包含作业及其主要分支信息 |
+| `jobs`  | array[object]| 作业列表，每个对象包含作业及其主要分支信息 |
 
-* **`JobListItem` 对象结构:**
+* **`JobListItem` 对象结构:** 
     * `id` (string): 作业 ID
     * `name` (string): 作业名称
     * `created_at` (integer): 创建时间戳 (毫秒)
@@ -1176,7 +1174,7 @@ print(response.status_code)
 print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`MOIResponse_JobDetailResponse_`)：**
+**返回：**
 
 ```json
 {
@@ -1207,9 +1205,9 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 }
 ```
 
-**输出参数 (`MOIResponse_JobDetailResponse_` 的 `data` 部分 - `JobDetailResponse`)：**
+**输出参数：**
 
-* **`JobDetailResponse` 对象结构:**
+* **`JobDetailResponse` 对象结构:** 
     * `id` (string): 作业 ID
     * `name` (string): 作业名称
     * `created_at` (integer): 创建时间戳 (毫秒)
@@ -1222,7 +1220,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     * `workflow_branch_id` (string): 工作流分支 ID
     * `files` (array[object] (`FileItem` 结构)): 作业相关的文件列表
 
-* **`FileItem` 对象结构:**
+* **`FileItem` 对象结构:** 
     * `file_name` (string): 文件名
     * `file_type` (integer): 文件类型
     * `file_size` (integer): 文件大小 (bytes)
@@ -1254,6 +1252,7 @@ GET /byoa/api/v1/workflow_job/{job_id}/files
 | `offset`           | integer, >=0                          | 否       | 当页偏移量                    | 0            |
 | `limit`            | integer, >=1                          | 否       | 每页大小                      | 20           |
 
+
 **示例 (Python)：**
 
 ```python
@@ -1281,7 +1280,7 @@ if response.content:
         print(response.text)
 ```
 
-**返回 (`MOIResponse_JobListFileResponse_`)：**
+**返回：**
 
 ```json
 {
@@ -1309,14 +1308,14 @@ if response.content:
 }
 ```
 
-**输出参数 (`MOIResponse_JobListFileResponse_` 的 `data` 部分 - `JobListFileResponse`)：**
+**输出参数：**
 
 | 参数    | 类型                               | 描述               |
 | ------- | ---------------------------------- | ------------------ |
 | `total` | integer                            | 符合条件的文件总数 |
-| `files` | array[object] (`JobFileItem` 结构) | 作业相关的文件列表 |
+| `files` | array[object] | 作业相关的文件列表 |
 
-* **`JobFileItem` 对象结构:**
+* **`JobFileItem` 对象结构:** 
     * `id` (string): 文件项 ID
     * `name` (string): 文件名
     * `type` (integer): 文件类型 (`FileType` 枚举)
@@ -1350,6 +1349,7 @@ POST /byoa/api/v1/workflow_job/{job_id}/files
 | ---------- | ------------- | -------- | ---------------------------------------- | ------ |
 | `file_ids` | array[string] | 是       | 要重试的文件 ID 列表 (指 `JobFileItem.id`) |        |
 
+
 **示例 (Python)：**
 
 ```python
@@ -1382,7 +1382,7 @@ else:
     print("Request successful, no content returned or empty response.")
 ```
 
-**返回 (`NoneDataResp`)：**
+**返回：**
 
 ```json
 {
@@ -1405,6 +1405,7 @@ GET /byoa/api/v1/workflow_job/{job_id}/status
 | 参数名   | 类型   | 是否必填 | 描述   |
 | -------- | ------ | -------- | ------ |
 | `job_id` | string | 是       | 作业 ID |
+
 
 **示例 (Python)：**
 
@@ -1429,7 +1430,7 @@ if response.content:
         print(response.text)
 ```
 
-**返回 (`MOIResponse_JobStatusResponse_`)：**
+**返回：**
 
 ```json
 {
@@ -1446,7 +1447,7 @@ if response.content:
 }
 ```
 
-**输出参数 (`MOIResponse_JobStatusResponse_` 的 `data` 部分 - `JobStatusResponse`)：**
+**输出参数：**
 
 | 参数         | 类型              | 描述                                                         |
 | ------------ | ----------------- | ------------------------------------------------------------ |
