@@ -680,16 +680,30 @@ params = {
 response = requests.get(url.replace("{vid}", "actual_volume_id").replace("{fid}", "actual_file_id"), headers=headers, params=params)
 
 if response.status_code == 200:
-    try:
-        print("Response Body (if JSON):", response.json())
-    except requests.exceptions.JSONDecodeError:
-        print("Response is likely raw file content or an empty body for success.")
+    # 从Content-Disposition获取文件名，如果没有则使用file_id
+    filename = file_id + ".zip"
+    content_disposition = response.headers.get('Content-Disposition')
+    if content_disposition:
+        import re
+        matches = re.findall("filename=(.+)", content_disposition)
+        if matches:
+            filename = matches[0].strip('"')
+            if not filename.endswith('.zip'):
+                filename += '.zip'
+
+    # 保存文件
+    output_file = os.path.join(data_dir, filename)
+    with open(output_file, 'wb') as f:
+        f.write(response.content)
+    print(f"\n内容已保存到文件: {output_file}")
+    print(f"文件大小: {len(response.content)} 字节")
 else:
-    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+    print("获取失败！")
+    print("错误信息:", response.text) 
 ```
 
 **返回：**
-OpenAPI 定义成功响应为 200。
+成功响应为 200。
 
 ### 获取文件关联的作业信息
 

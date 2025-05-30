@@ -130,7 +130,26 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 {
     "code": "ok",
     "msg": "ok",
-    "data": null
+    "data": {
+        "created_at": "2025-05-30T09:45:58",
+        "id": "cf68d259-9cd6-4f44-a0a4-5674c79da083",
+        "user_id": "01960e07-60ec-7a3c-b45f-415b7e40e8bf",
+        "flow_interval": 0,
+        "creator": "admin",
+        "file_types": "[1, 2, 4, 5, 6, 7, 11, 12]",
+        "target_volume_id": "04614636-b858-4b13-99bf-a036d9351289",
+        "files": "[]",
+        "updated_at": "2025-05-30T09:45:58",
+        "version": "1",
+        "priority": 300,
+        "name": "test",
+        "group_id": "",
+        "flow_offset": 0,
+        "modifier": "admin",
+        "source_volume_ids": "[\"1928383194482323456\"]",
+        "source_volume_names": "[\"b_vol3\"]",
+        "target_volume_name": "b_vol3"
+    }
 }
 ```
 
@@ -1177,52 +1196,56 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     "code": "ok",
     "msg": "ok",
     "data": {
-        "id": "YOUR_JOB_ID",
-        "name": "Detailed Job Test",
-        "created_at": 1739435482000,
+        "created_at": "2025-05-30T09:45:58",
+        "id": "cf68d259-9cd6-4f44-a0a4-5674c79da083",
+        "user_id": "01960e07-60ec-7a3c-b45f-415b7e40e8bf",
+        "flow_interval": 0,
         "creator": "admin",
-        "updated_at": 1739436347000,
+        "file_types": "[1, 2, 4, 5, 6, 7, 11, 12]",
+        "target_volume_id": "04614636-b858-4b13-99bf-a036d9351289",
+        "files": "[]",
+        "updated_at": "2025-05-30T09:45:58",
+        "version": "1",
+        "priority": 300,
+        "name": "test",
+        "group_id": "",
+        "flow_offset": 0,
         "modifier": "admin",
-        "status": 1,
-        "version": "1.2",
-        "workflow_meta_id": "ff5d119a-4e94-4968-ac0c-6ef64fcabb6c",
-        "workflow_branch_id": "main",
-        "files": [
-            {
-                "file_name": "sample_file1.pdf",
-                "file_type": 2,
-                "file_size": 123456,
-                "file_path": "/path/to/sample_file1.pdf",
-                "source_volume_id": 1889223879880048640,
-                "source_file_id": 1
-            }
-        ]
+        "source_volume_ids": "[\"1928383194482323456\"]",
+        "source_volume_names": "[\"b_vol3\"]",
+        "target_volume_name": "b_vol3"
     }
 }
 ```
 
 **输出参数：**
 
-* **`JobDetailResponse` 对象结构:**
-    * `id` (string): 作业 ID
-    * `name` (string): 作业名称
-    * `created_at` (integer): 创建时间戳 (毫秒)
-    * `creator` (string): 创建者
-    * `updated_at` (integer): 更新时间戳 (毫秒)
-    * `modifier` (string): 更新者
-    * `status` (integer): 状态
-    * `version` (string): 版本号
-    * `workflow_meta_id` (string): 工作流元数据 ID
-    * `workflow_branch_id` (string): 工作流分支 ID
-    * `files` (array[object] (`FileItem` 结构)): 作业相关的文件列表
-
-* **`FileItem` 对象结构:**
-    * `file_name` (string): 文件名
-    * `file_type` (integer): 文件类型
-    * `file_size` (integer): 文件大小 (bytes)
-    * `file_path` (string): 文件路径
-    * `source_volume_id` (integer): 源数据卷 ID
-    * `source_file_id` (integer): 源文件 ID
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": {
+        "created_at": "2025-05-30T09:45:58",
+        "id": "cf68d259-9cd6-4f44-a0a4-5674c79da083",
+        "user_id": "01960e07-60ec-7a3c-b45f-415b7e40e8bf",
+        "flow_interval": 0,
+        "creator": "admin",
+        "file_types": "[1, 2, 4, 5, 6, 7, 11, 12]",
+        "target_volume_id": "04614636-b858-4b13-99bf-a036d9351289",
+        "files": "[]",
+        "updated_at": "2025-05-30T09:45:58",
+        "version": "1",
+        "priority": 300,
+        "name": "test",
+        "group_id": "",
+        "flow_offset": 0,
+        "modifier": "admin",
+        "source_volume_ids": "[\"1928383194482323456\"]",
+        "source_volume_names": "[\"b_vol3\"]",
+        "target_volume_name": "b_vol3"
+    }
+}
+```
 
 ### 查看作业文件列表
 
