@@ -28,8 +28,7 @@ body = {
 
 }
 response = requests.post(url, json=body, headers=headers)
-# 检查响应状态
-print(response.json())  # 打印返回的 JSON 数据
+print(response.json())
 ```
 
 返回：
@@ -270,22 +269,14 @@ else:
 POST /byoa/api/v1/explore/volumes
 ```
 
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
-
-**Body 输入参数 (`CreateVolumeReq`)：**
+**Body 输入参数：**
 
 | 参数             | 是否必填 | 类型   | 含义        | 默认值 |
 | ---------------- | -------- | ------ | ----------- | ------ |
 | name             | 是       | string | 数据卷名称  |        |
 | parent_volume_id | 否       | string | 处理数据卷 ID | ""     |
 
-**Body 示例 (`CreateVolumeReq`)：**
+**Body 示例：**
 
 ```json
 {
@@ -314,7 +305,7 @@ response = requests.post(url, json=body, headers=headers)
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`MOIResponse_CreateVolumeResp_`)：**
+**返回：**
 
 ```json
 {
@@ -329,7 +320,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 }
 ```
 
-**输出参数 (`CreateVolumeResp`)：**
+**输出参数：**
 
 | 参数       | 类型   | 含义       |
 | ---------- | ------ | ---------- |
@@ -343,14 +334,6 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 ```
 GET /byoa/api/v1/explore/volumes
 ```
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
 
 **Query 参数：**
 
@@ -369,13 +352,13 @@ headers = {
     "moi-key": "xxxxx"
 }
 params = {
-    "workflow_using": False # 可选参数，True 或 False
+    "workflow_using": False 
 }
 response = requests.get(url, headers=headers, params=params)
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`MOIResponse_ListVolumeResp_`)：**
+**返回：**
 
 ```json
 {
@@ -405,7 +388,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 }
 ```
 
-**输出参数 (`ListVolumeResp` 的 `data` 部分)：**
+**输出参数：**
 
 | 参数    | 类型                | 含义       |
 | ------- | ------------------- | ---------- |
@@ -431,15 +414,7 @@ DELETE /byoa/api/v1/explore/volumes/{vid}
 
 **路径参数：**
 
-* `vid` (string, 必填): 要删除的数据卷 ID
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
+* `vid` (string, 必填): 要删除的处理数据卷 ID
 
 **示例 (Python)：**
 
@@ -453,17 +428,17 @@ headers = {
 }
 response = requests.delete(url.replace("{vid}", "volume_id_to_delete"), headers=headers)
 
-if response.status_code == 200: # OpenAPI 定义成功响应为 200，内容为 {}
+if response.status_code == 200:
     try:
         print("Response Body:", response.json())
     except requests.exceptions.JSONDecodeError:
-        print("Success with empty response body.") # 实际可能返回空体
+        print("Success with empty response body.")
 else:
     print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
 ```
 
 **返回：**
-成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。
+成功时 HTTP 状态码为 200。
 
 ### 查看分支处理数据卷列表
 
@@ -474,14 +449,6 @@ GET /byoa/api/v1/explore/volumes/{vid}
 **路径参数：**
 
 * `vid` (string, 必填): 处理数据卷 ID
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
 
 **示例 (Python)：**
 
@@ -498,10 +465,10 @@ response = requests.get(url.replace("{vid}", "actual_parent_volume_id"), headers
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`MOIResponse_ListVolumeResp_`)：**
+**返回：**
 返回结构与 "查看数据卷列表" 相同，但 `volumes` 列表将只包含指定 `{vid}` 的分支卷。
 
-**输出参数 (`ListVolumeResp` 的 `data` 部分)：**
+**输出参数：**
 与 "查看数据卷列表" 的输出参数一致。
 
 ### 查看分支处理数据卷内文件列表
@@ -514,15 +481,7 @@ POST /byoa/api/v1/explore/volumes/{vid}/files
 
 * `vid` (string, 必填): 数据卷 ID
 
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
-
-**Body 输入参数 (`GetVolumeFilesReq`, 可选)：**
+**Body 输入参数 (可选)：**
 
 | 参数    | 类型              | 含义     | 默认值 |
 | ------- | ----------------- | -------- | ------ |
@@ -546,7 +505,7 @@ POST /byoa/api/v1/explore/volumes/{vid}/files
   | sort_by | string  | 排序字段 |        |
   | is_desc | boolean | 是否降序 | true   |
 
-**Body 示例 (`GetVolumeFilesReq`)：**
+**Body 示例：**
 
 ```json
 {
@@ -578,11 +537,11 @@ body = { # 可选
     "limit": 5 
 }
 
-response = requests.post(url.replace("{vid}", "YOUR_PROCESSED_VOLUME_ID"), json=body, headers=headers) # 使用 json=body
+response = requests.post(url.replace("{vid}", "YOUR_PROCESSED_VOLUME_ID"), json=body, headers=headers)
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`MOIResponse_GetVolumeFilesResp_`)：**
+**返回：**
 
 ```json
 {
@@ -619,7 +578,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 }
 ```
 
-**输出参数 (`GetVolumeFilesResp` 的 `data` 部分)：**
+**输出参数：**
 
 | 参数  | 类型          | 含义     |
 | ----- | ------------- | -------- |
@@ -663,14 +622,6 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}
 * `vid` (string, 必填): 数据卷 ID
 * `fid` (string, 必填): 文件 ID
 
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
-
 **示例 (Python)：**
 
 ```python
@@ -693,7 +644,7 @@ else:
 ```
 
 **返回：**
-成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。
+成功时 HTTP 状态码为 200。
 
 ### 获取分支处理数据卷文件解析内容
 
@@ -705,14 +656,6 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws
 
 * `vid` (string, 必填): 数据卷 ID
 * `fid` (string, 必填): 文件 ID
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
 
 **Query 参数：**
 
@@ -737,16 +680,30 @@ params = {
 response = requests.get(url.replace("{vid}", "actual_volume_id").replace("{fid}", "actual_file_id"), headers=headers, params=params)
 
 if response.status_code == 200:
-    try:
-        print("Response Body (if JSON):", response.json())
-    except requests.exceptions.JSONDecodeError:
-        print("Response is likely raw file content or an empty body for success.")
+    # 从 Content-Disposition 获取文件名，如果没有则使用 file_id
+    filename = file_id + ".zip"
+    content_disposition = response.headers.get('Content-Disposition')
+    if content_disposition:
+        import re
+        matches = re.findall("filename=(.+)", content_disposition)
+        if matches:
+            filename = matches[0].strip('"')
+            if not filename.endswith('.zip'):
+                filename += '.zip'
+
+    # 保存文件
+    output_file = os.path.join(data_dir, filename)
+    with open(output_file, 'wb') as f:
+        f.write(response.content)
+    print(f"\n内容已保存到文件：{output_file}")
+    print(f"文件大小：{len(response.content)} 字节")
 else:
-    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+    print("获取失败！")
+    print("错误信息：", response.text) 
 ```
 
 **返回：**
-OpenAPI 定义成功响应为 200，响应体为 `{}` (空 JSON 对象)。然而，这类接口通常直接返回文件流 (raw bytes)。如果 `need_embeddings` 为 true 且有 embedding，返回内容可能包含 embedding 信息，具体格式需进一步确认。
+成功响应为 200。
 
 ### 获取文件关联的作业信息
 
@@ -758,14 +715,6 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/jobs
 
 * `vid` (string, 必填): 数据卷 ID
 * `fid` (string, 必填): 文件 ID
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
 
 **示例 (Python)：**
 
@@ -782,7 +731,7 @@ response = requests.get(url.replace("{vid}", "actual_volume_id").replace("{fid}"
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`MOIResponse_GetFileJobResp_`)：**
+**返回：**
 
 ```json
 {
@@ -800,7 +749,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 }
 ```
 
-**输出参数 (`GetFileJobResp` 的 `data` 部分)：**
+**输出参数：**
 
 | 参数 | 类型   | 含义                                                         |
 | ---- | ------ | ------------------------------------------------------------ |
@@ -817,15 +766,7 @@ POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 * `vid` (string, 必填): 数据卷 ID
 * `fid` (string, 必填): 文件 ID
 
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
-
-**Body 输入参数 (`GetFileBlocksReq`, 可选)：**
+**Body 输入参数 (`可选)：**
 
 | 参数    | 类型                    | 含义     | 默认值 |
 | ------- | ----------------------- | -------- | ------ |
@@ -841,7 +782,7 @@ POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
   | search_content | string        | 内容搜索关键字                           |
   | block_ids      | array[string] | 指定数据块 ID 列表                         |
 
-**Body 示例 (`GetFileBlocksReq`)：**
+**Body 示例：**
 
 ```json
 {
@@ -871,7 +812,7 @@ response = requests.post(url.replace("{vid}", "actual_volume_id").replace("{fid}
 print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`MOIResponse_GetFileBlocksResp_`)：**
+**返回：**
 
 ```json
 {
@@ -907,7 +848,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 }
 ```
 
-**输出参数 (`GetFileBlocksResp` 的 `data` 部分)：**
+**输出参数：**
 
 | 参数  | 类型                           | 含义       |
 | ----- | ------------------------------ | ---------- |
@@ -939,21 +880,13 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 * `vid` (string, 必填): 数据卷 ID
 * `fid` (string, 必填): 文件 ID
 
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
-
-**Body 输入参数 (`DeleteFileBlocksReq`)：**
+**Body 输入参数：**
 
 | 参数 | 是否必填 | 类型          | 含义                 |
 | ---- | -------- | ------------- | -------------------- |
 | ids  | 是       | array[string] | 要删除的数据块 ID 列表 |
 
-**Body 示例 (`DeleteFileBlocksReq`)：**
+**Body 示例：**
 
 ```json
 {
@@ -987,4 +920,4 @@ else:
 ```
 
 **返回：**
-成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。原文档中提到 204，但 OpenAPI spec 中是 200。
+成功时 HTTP 状态码为 204。
