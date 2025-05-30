@@ -705,7 +705,7 @@ Response Body: {
 GET /task/get
 ```
 
-**输入参数：**
+**路径参数：**
   
 |  参数         | 是否必填 |含义       |
 | ------------ | ------- |---------  |
@@ -735,7 +735,8 @@ GET /task/get
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/get?task_id=1889613340219121664"
+task_id = "1889613340219121664"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/get?task_id={task_id}"
 
 headers = {
     "moi-key": "xxxxx"
@@ -816,7 +817,8 @@ GET /task/files
 import requests
 import json
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/files?task_id=1889613340219121664"
+task_id = "1889613340219121664"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/task/files?task_id={task_id}"
 
 headers = {
     "moi-key": "xxxxx"
