@@ -28,8 +28,7 @@ body = {
 
 }
 response = requests.post(url, json=body, headers=headers)
-# 检查响应状态
-print(response.json())  # 打印返回的 JSON 数据
+print(response.json())
 ```
 
 返回：
@@ -270,14 +269,6 @@ else:
 POST /byoa/api/v1/explore/volumes
 ```
 
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
-
 **Body 输入参数 (`CreateVolumeReq`)：**
 
 | 参数             | 是否必填 | 类型   | 含义        | 默认值 |
@@ -343,14 +334,6 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 ```
 GET /byoa/api/v1/explore/volumes
 ```
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
 
 **Query 参数：**
 
@@ -431,15 +414,7 @@ DELETE /byoa/api/v1/explore/volumes/{vid}
 
 **路径参数：**
 
-* `vid` (string, 必填): 要删除的数据卷 ID
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
+* `vid` (string, 必填): 要删除的处理数据卷 ID
 
 **示例 (Python)：**
 
@@ -463,7 +438,7 @@ else:
 ```
 
 **返回：**
-成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。
+成功时 HTTP 状态码为 200。
 
 ### 查看分支处理数据卷列表
 
@@ -474,14 +449,6 @@ GET /byoa/api/v1/explore/volumes/{vid}
 **路径参数：**
 
 * `vid` (string, 必填): 处理数据卷 ID
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
 
 **示例 (Python)：**
 
@@ -513,14 +480,6 @@ POST /byoa/api/v1/explore/volumes/{vid}/files
 **路径参数：**
 
 * `vid` (string, 必填): 数据卷 ID
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
 
 **Body 输入参数 (`GetVolumeFilesReq`, 可选)：**
 
@@ -663,14 +622,6 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}
 * `vid` (string, 必填): 数据卷 ID
 * `fid` (string, 必填): 文件 ID
 
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
-
 **示例 (Python)：**
 
 ```python
@@ -693,7 +644,7 @@ else:
 ```
 
 **返回：**
-成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。
+成功时 HTTP 状态码为 200。
 
 ### 获取分支处理数据卷文件解析内容
 
@@ -705,14 +656,6 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws
 
 * `vid` (string, 必填): 数据卷 ID
 * `fid` (string, 必填): 文件 ID
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
 
 **Query 参数：**
 
@@ -746,7 +689,7 @@ else:
 ```
 
 **返回：**
-OpenAPI 定义成功响应为 200，响应体为 `{}` (空 JSON 对象)。然而，这类接口通常直接返回文件流 (raw bytes)。如果 `need_embeddings` 为 true 且有 embedding，返回内容可能包含 embedding 信息，具体格式需进一步确认。
+OpenAPI 定义成功响应为 200。
 
 ### 获取文件关联的作业信息
 
@@ -758,14 +701,6 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/jobs
 
 * `vid` (string, 必填): 数据卷 ID
 * `fid` (string, 必填): 文件 ID
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
 
 **示例 (Python)：**
 
@@ -816,14 +751,6 @@ POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 
 * `vid` (string, 必填): 数据卷 ID
 * `fid` (string, 必填): 文件 ID
-
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
 
 **Body 输入参数 (`GetFileBlocksReq`, 可选)：**
 
@@ -939,14 +866,6 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 * `vid` (string, 必填): 数据卷 ID
 * `fid` (string, 必填): 文件 ID
 
-**Header 参数：**
-
-| 参数           | 类型   | 是否必填 | 描述             |
-| -------------- | ------ | -------- | ---------------- |
-| `user-id`      | string | 是       | 用户 ID (工作区 ID) |
-| `Access-Token` | string | 是       | 鉴权 Token        |
-| `uid`          | string | 是       | 用户登录 UID     |
-
 **Body 输入参数 (`DeleteFileBlocksReq`)：**
 
 | 参数 | 是否必填 | 类型          | 含义                 |
@@ -987,4 +906,4 @@ else:
 ```
 
 **返回：**
-成功时 HTTP 状态码为 200，响应体为 `{}` (空 JSON 对象) 或无内容。原文档中提到 204，但 OpenAPI spec 中是 200。
+成功时 HTTP 状态码为 204。

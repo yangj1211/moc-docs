@@ -46,7 +46,7 @@ body：
 ```python
 import requests
 
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors"  # 请替换为实际 API 地址
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors"
 headers = {
     "moi-key": "xxxxx"
 }
