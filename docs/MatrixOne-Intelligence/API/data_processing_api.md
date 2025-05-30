@@ -8,7 +8,6 @@
 POST /byoa/api/v1/workflow_meta
 ```
 
-
 **Body 输入参数：**
 
 | 参数名                      | 是否必填 | 类型                         | 含义                           | 默认值 |
@@ -32,7 +31,7 @@ POST /byoa/api/v1/workflow_meta
   | `interval` | 是       | integer | 处理间隔（分钟）       |
   | `offset`   | 是       | integer | 处理时间偏移量（分钟） |
 
-* **`WorkflowConfig` 结构:** 
+* **`WorkflowConfig` 结构:**
 
   * `components`: 组件配置列表。每个组件对象包含 `name`, `type`, `component_id`, `intro`, `position`, `input_keys`, `output_keys`, `init_parameters`。
   * `connections`: 连接配置列表。每个连接对象包含 `sender` 和 `receiver`。
@@ -158,7 +157,6 @@ GET /byoa/api/v1/workflow_meta
 | `sort_field`    | string, nullable                      | 否       | 排序字段                      | "created_at" |
 | `sort_order`    | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
 
-
 **示例 (Python)：**
 
 ```python
@@ -225,7 +223,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 | `total`     | integer                                 | 符合条件的工作流总数                           |
 | `workflows` | array[object] | 工作流列表，每个对象包含工作流及其主要分支信息 |
 
-* **`WorkflowListItem` 对象结构:** 
+* **`WorkflowListItem` 对象结构:**
     * `id` (string): 工作流 ID
     * `name` (string): 工作流名称
     * `created_at` (integer): 创建时间戳 (毫秒)
@@ -341,7 +339,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 **输出参数：**
 主要包含工作流的基础信息、主工作流的 Haystack 配置 (`workflow`)、主/默认分支的相关信息 (`branch_id`, `branch_name`, `branch_status`, `branch_volume_id`)，以及一个 `branches` 数组，其中每一项是 `WorkflowBranchItem`。
 
-* **`WorkflowBranchItem` 结构:** 
+* **`WorkflowBranchItem` 结构:**
     * `branch_id` (string): 分支 ID
     * `created_at` (integer): 创建时间戳
     * `creator` (string): 创建者
@@ -367,9 +365,8 @@ PUT /byoa/api/v1/workflow_meta/{workflow_id}
 | ------------- | ------ | -------- | -------- |
 | `workflow_id` | string | 是       | 工作流 ID |
 
-
 **Body 输入参数：**
-与 "创建工作流" 的 Body结构相同。所有字段都可以更新。
+与 "创建工作流" 的 Body 结构相同。所有字段都可以更新。
 
 **示例 (Python)：**
 
@@ -689,7 +686,7 @@ if response.content:
 }
 ```
 
-**输出参数:**
+**输出参数：**
 (具体字段参考 `GET /byoa/api/v1/workflow_meta` 的 `WorkflowListItem` 定义，此处 `id` 是父工作流 ID, `branch_id`, `branch_name`, `branch_status` 等描述分支特有属性)
 
 #### 获取工作流分支详情
@@ -828,7 +825,6 @@ DELETE /byoa/api/v1/workflow_meta/branch/{branch_id}
 | 参数名        | 类型    | 是否必填 | 描述                         | 默认值 |
 | ------------- | ------- | -------- | ---------------------------- | ------ |
 | `delete_data` | boolean | 否       | 是否删除该分支产生的所有数据 | false  |
-
 
 **示例 (Python)：**
 
@@ -1002,7 +998,7 @@ POST /byoa/api/v1/workflow_job
 | target_volume_id   | 是       | string                     | 目标数据卷 ID                    |        |
 | files              | 否       | array[object (`FileItem`)] | 要处理的文件列表。如果为空，则按工作流配置处理               | []     |
 
-* **`FileItem` 对象结构:** 
+* **`FileItem` 对象结构:**
 
   | 参数             | 是否必填 | 类型                      | 含义            |
   | ---------------- | -------- | ------------------------- | --------------- |
@@ -1131,7 +1127,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 | `total` | integer                            | 符合条件的工作流作业总数                   |
 | `jobs`  | array[object]| 作业列表，每个对象包含作业及其主要分支信息 |
 
-* **`JobListItem` 对象结构:** 
+* **`JobListItem` 对象结构:**
     * `id` (string): 作业 ID
     * `name` (string): 作业名称
     * `created_at` (integer): 创建时间戳 (毫秒)
@@ -1207,7 +1203,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **输出参数：**
 
-* **`JobDetailResponse` 对象结构:** 
+* **`JobDetailResponse` 对象结构:**
     * `id` (string): 作业 ID
     * `name` (string): 作业名称
     * `created_at` (integer): 创建时间戳 (毫秒)
@@ -1220,7 +1216,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     * `workflow_branch_id` (string): 工作流分支 ID
     * `files` (array[object] (`FileItem` 结构)): 作业相关的文件列表
 
-* **`FileItem` 对象结构:** 
+* **`FileItem` 对象结构:**
     * `file_name` (string): 文件名
     * `file_type` (integer): 文件类型
     * `file_size` (integer): 文件大小 (bytes)
@@ -1251,7 +1247,6 @@ GET /byoa/api/v1/workflow_job/{job_id}/files
 | `sort_order`       | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
 | `offset`           | integer, >=0                          | 否       | 当页偏移量                    | 0            |
 | `limit`            | integer, >=1                          | 否       | 每页大小                      | 20           |
-
 
 **示例 (Python)：**
 
@@ -1315,7 +1310,7 @@ if response.content:
 | `total` | integer                            | 符合条件的文件总数 |
 | `files` | array[object] | 作业相关的文件列表 |
 
-* **`JobFileItem` 对象结构:** 
+* **`JobFileItem` 对象结构:**
     * `id` (string): 文件项 ID
     * `name` (string): 文件名
     * `type` (integer): 文件类型 (`FileType` 枚举)
@@ -1348,7 +1343,6 @@ POST /byoa/api/v1/workflow_job/{job_id}/files
 | 参数名     | 类型          | 是否必填 | 描述                                     | 默认值 |
 | ---------- | ------------- | -------- | ---------------------------------------- | ------ |
 | `file_ids` | array[string] | 是       | 要重试的文件 ID 列表 (指 `JobFileItem.id`) |        |
-
 
 **示例 (Python)：**
 
@@ -1405,7 +1399,6 @@ GET /byoa/api/v1/workflow_job/{job_id}/status
 | 参数名   | 类型   | 是否必填 | 描述   |
 | -------- | ------ | -------- | ------ |
 | `job_id` | string | 是       | 作业 ID |
-
 
 **示例 (Python)：**
 
