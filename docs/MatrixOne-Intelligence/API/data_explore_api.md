@@ -680,7 +680,7 @@ params = {
 response = requests.get(url.replace("{vid}", "actual_volume_id").replace("{fid}", "actual_file_id"), headers=headers, params=params)
 
 if response.status_code == 200:
-    # 从Content-Disposition获取文件名，如果没有则使用file_id
+    # 从 Content-Disposition 获取文件名，如果没有则使用 file_id
     filename = file_id + ".zip"
     content_disposition = response.headers.get('Content-Disposition')
     if content_disposition:
@@ -695,11 +695,11 @@ if response.status_code == 200:
     output_file = os.path.join(data_dir, filename)
     with open(output_file, 'wb') as f:
         f.write(response.content)
-    print(f"\n内容已保存到文件: {output_file}")
-    print(f"文件大小: {len(response.content)} 字节")
+    print(f"\n内容已保存到文件：{output_file}")
+    print(f"文件大小：{len(response.content)} 字节")
 else:
     print("获取失败！")
-    print("错误信息:", response.text) 
+    print("错误信息：", response.text) 
 ```
 
 **返回：**
