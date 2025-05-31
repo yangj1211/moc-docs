@@ -406,40 +406,6 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
   | user_id          | string | 用户 ID                |
   | parent_volume_id | string | 处理数据卷 ID (可能为空) |
 
-### 删除处理数据卷
-
-```
-DELETE /byoa/api/v1/explore/volumes/{vid}
-```
-
-**路径参数：**
-
-* `vid` (string, 必填): 要删除的处理数据卷 ID
-
-**示例 (Python)：**
-
-```python
-import requests
-
-# 将 {vid} 替换为实际的数据卷 ID
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}"
-headers = {
-    "moi-key": "xxxxx"
-}
-response = requests.delete(url.replace("{vid}", "volume_id_to_delete"), headers=headers)
-
-if response.status_code == 200:
-    try:
-        print("Response Body:", response.json())
-    except requests.exceptions.JSONDecodeError:
-        print("Success with empty response body.")
-else:
-    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
-```
-
-**返回：**
-成功时 HTTP 状态码为 200。
-
 ### 查看分支处理数据卷列表
 
 ```
