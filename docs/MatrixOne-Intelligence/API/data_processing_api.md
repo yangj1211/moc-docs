@@ -226,7 +226,6 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 4. 通过创建工作流请求 `byoa/api/v1/workflow_meta` 创建工作流。创建之后，用户可在界面上查看工作流执行详情。
 
-
 #### 工作流组件介绍
 
 本节详细介绍工作流中可用的内置组件，包括它们的功能、初始化参数和运行方法规范。
