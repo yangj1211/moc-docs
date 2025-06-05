@@ -285,7 +285,7 @@ GET /connectors/files/list
 | uri              |表示源连接器中的唯一资源定位符。      |
 | filename         | 文件名称    |
 | size             | 文件大小    |
-| type             | 文件类型，0：空文件类型（可能作为默认或无效值）；1：TXT 文本文件类型；2：PDF 文档文件类型 3：图片文件类型；4：PPT 演示文稿文件类型；5：Word 文档文件类型；6：Markdown 标记语言文件类型；7：CSV 逗号分隔值文件类型；8：Parquet 列式存储文件类型；9：SQL 文件类型；10：目录类型。    |
+| type             | 文件类型，支持：<br>NIL = 0<br>TXT = 1<br>PDF = 2<br>IMAGE = 3<br>PPT = 4<br>WORD = 5<br>MARKDOWN = 6<br>CSV = 7<br>PARQUET = 8<br>SQL_FILES = 9<br>DIR = 10<br>DOCX = 11<br>PPTX = 12<br>WAV = 13<br>MP3 = 14<br>AAC = 15<br>FLAC = 16<br>MP4 = 17<br>MOV = 18<br>MKV = 19<br>PNG = 20<br>JPG = 21<br>JPEG = 22<br>BMP = 23    |
 
 **示例：**
 
@@ -803,7 +803,7 @@ GET /task/files
 |  -------------------- | ----  |
 | id                     |载入 id      |
 | name                  | 文件名称   |
-| type                  | 文件类型    |
+| type                  | 文件类型，支持：<br>NIL = 0<br>TXT = 1<br>PDF = 2<br>IMAGE = 3<br>PPT = 4<br>WORD = 5<br>MARKDOWN = 6<br>CSV = 7<br>PARQUET = 8<br>SQL_FILES = 9<br>DIR = 10<br>DOCX = 11<br>PPTX = 12<br>WAV = 13<br>MP3 = 14<br>AAC = 15<br>FLAC = 16<br>MP4 = 17<br>MOV = 18<br>MKV = 19<br>PNG = 20<br>JPG = 21<br>JPEG = 22<br>BMP = 23    |
 | status                | 文件载入状态    |
 | size                  |文件大小      |
 | update_time           | 更新时间   |

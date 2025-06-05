@@ -15,7 +15,7 @@ POST /byoa/api/v1/workflow_meta
 | `name`                      | 是       | string                       | 工作流名称                     |        |
 | `source_volume_names`       | 是       | array[string]                | 源数据卷名称列表               |        |
 | `source_volume_ids`         | 是       | array[integer]               | 源数据卷 ID 列表                 |        |
-| `file_types`                | 是       | array[integer]               | 文件类型列表                   |        |
+| `file_types`                | 是       | array[integer]               | 文件类型列表，支持：<br>NIL = 0<br>TXT = 1<br>PDF = 2<br>IMAGE = 3<br>PPT = 4<br>WORD = 5<br>MARKDOWN = 6<br>CSV = 7<br>PARQUET = 8<br>SQL_FILES = 9<br>DIR = 10<br>DOCX = 11<br>PPTX = 12<br>WAV = 13<br>MP3 = 14<br>AAC = 15<br>FLAC = 16<br>MP4 = 17<br>MOV = 18<br>MKV = 19<br>PNG = 20<br>JPG = 21<br>JPEG = 22<br>BMP = 23                   |        |
 | `process_mode`              | 是       | object (`ProcessModeConfig`) | 处理模式配置                   |        |
 | `priority`                  | 否       | integer                      | 优先级                         | 300    |
 | `target_volume_id`          | 是       | string                       | 目标数据卷 ID                   |        |
@@ -29,7 +29,7 @@ POST /byoa/api/v1/workflow_meta
   | 参数       | 是否必填 | 类型    | 含义                   |
   | ---------- | -------- | ------- | ---------------------- |
   | `interval` | 是       | integer | 处理间隔（分钟）       |
-  | `offset`   | 是       | integer | 处理时间偏移量（分钟） |
+  | `offset`   | 是       | integer | 处理时间偏移量（分钟），一次性载入时默认为0 |
 
 * **`WorkflowConfig` 结构:**
 
@@ -152,6 +152,568 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     }
 }
 ```
+
+#### 工作流组件介绍
+
+本节详细介绍工作流中可用的内置组件，包括它们的功能、初始化参数和运行方法规范。
+
+<!-- 下面是数据处理过程的流程图：
+
+![数据处理流程图](../images/data_processing_workflow.png) -->
+
+**AudioToDocument**
+
+**功能描述**：自定义的 Whisper 转录器，支持获取时间戳。
+
+**初始化参数**：无
+
+**运行方法**
+
+- 输入：
+  - `sources`: `List[Union[str, Path, ByteStream]]`
+  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+- 输出：
+  - `documents`: `list[Document]`
+
+**EnhancedDOCXToDocument**
+
+**功能描述**：增强版 DOCX 转 Document 组件。该组件扩展了 Haystack 的 DOCXToDocument 功能，增加了对文档中图片的处理能力，支持图片标注和 OCR 文本提取等功能。
+
+**初始化参数**：`image_process_types`: `list[str]`（可选，默认值：`None`）
+
+**运行方法**
+
+- 输入：
+  - `sources`: `List[Union[str, Path, ByteStream]]`
+  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+- 输出：
+  - `documents`: `List[Document]`
+
+**EnhancedPPTXToDocument**
+
+**功能描述**：增强版 PPTX 转 Document 组件。该组件扩展了 Haystack 的 PPTXToDocument 功能，增加了对 PPT 中图片的处理能力，支持图片标注和 OCR 文本提取等功能。
+
+**初始化参数**：`image_process_types`: `list[str]`（可选，默认值：`None`）
+
+**运行方法**
+
+- 输入：
+  - `sources`: `List[Union[str, Path, ByteStream]]`
+  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+- 输出：
+  - `documents`: `List[Document]`
+
+**EnhancedPlainToDocument**
+
+**功能描述**：增强的纯文本 [txt, md] 转换为文档组件，支持将原文本上传至 OSS，不做格式转换。
+
+**初始化参数**：无
+
+**运行方法**
+
+- 输入：
+  - `sources`: `Variadic[List[Union[str, Path, ByteStream]]]`
+  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+- 输出：
+  - `documents`: `List[Document]`
+
+**MagicPDFToDocument**
+
+**功能描述**：将 PDF 转换为 Documents。
+
+**初始化参数**：`image_process_types`: `list[str]`（可选，默认值：`None`）
+
+**运行方法**
+
+- 输入：
+  - `sources`: `list[Union[str, Path, ByteStream]]`
+  - `meta`: `Optional[Union[dict[str, Any], list[dict[str, Any]]]]`（可选）
+- 输出：
+  - `documents`: `list[Document]`
+
+- 使用示例：
+
+```python
+image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
+3457698c0ee4273ea686d71475cac0fe191375e0edc447c39b9f4d9de5c4e155.jpg"
+i2d = ImageToDocument()
+result = i2d.run([image_path])
+print(result)
+# 'This is a text from the image file.'
+```
+
+**ImageCaptionToDocument**
+
+**功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取标题。
+
+**初始化参数**：无
+
+**运行方法**
+
+- 输入：
+  - `documents`: `list[Document]`
+- 输出：
+  - `documents`: `list[Document]`
+
+- 使用示例：
+
+```python
+image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
+3457698c0ee4273ea686d71475cac0fe191375e0edc447c39b9f4d9de5c4e155.jpg"
+i2d = ImageToDocument()
+result = i2d.run([image_path])
+print(result)
+# 'This is a text from the image file.
+```
+
+**ImageOCRToDocument**
+
+**功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取文本 (OCR)。
+
+**初始化参数**：
+
+- `model`: `str`（可选，默认值：`'stepfun-ai/GOT-OCR2_0'`）
+- `tokenizer`: `str`（可选，默认值：`'stepfun-ai/GOT-OCR2_0'`）
+
+**运行方法**
+
+- 输入：
+  - `documents`: `list[Document]`
+- 输出：
+  - `documents`: `list[Document]`
+
+- 使用示例：
+
+```python
+image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
+3457698c0ee4273ea686d71475cac0fe191375e0edc447c39b9f4d9de5c4e155.jpg"
+i2d = ImageToDocument()
+result = i2d.run([image_path])
+print(result)
+# 'This is a text from the image file.'
+```
+
+**ImageToDocument**
+
+**功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取标题。
+
+**初始化参数**：`image_process_types`: `list[str]`（可选，默认值：`['caption', 'ocr']`）
+
+**运行方法**
+
+- 输入：
+  - `sources`: `list[Union[str, Path, ByteStream]]`
+  - `meta`: `Optional[Union[dict[str, Any], list[dict[str, Any]]]]`（可选）
+- 输出：
+  - `documents`: `list[Document]`
+
+- 使用示例：
+
+```python
+image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
+3457698c0ee4273ea686d71475cac0fe191375e0edc447c39b9f4d9de5c4e155.jpg"
+i2d = ImageToDocument()
+result = i2d.run([image_path])
+print(result)
+# 'This is a text from the image file.'
+```
+
+**ImageGenerateQA**
+
+**功能描述**：虚假的图片生成 QA 组件，实际使用匹配中的病历文字，依据几个样例 qa 对话，再次生成新的生成。
+
+**初始化参数**：
+
+- `api_key`: `Optional[str]`（可选）
+- `model`: `Optional[str]`（可选）
+- `api_base_url`: `Optional[str]`（可选）
+- `system_prompt`: `Optional[str]`（可选）
+- `user_prompt`: `Optional[str]`（可选）
+- `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+
+**运行方法**
+
+- 输入：
+  - `documents`: `List[Document]`
+  - `system_prompt`: `Optional[str]`（可选）
+  - `user_prompt`: `Optional[str]`（可选）
+  - `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+- 输出：
+  - `documents`: `List[Document]`
+
+- 使用示例：
+
+```python
+image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
+3457698c0ee4273ea686d71475cac0fe191375e0edc447c39b9f4d9de5c4e155.jpg"
+i2d = ImageGenerateQA()
+result = i2d.run([image_path])
+print(result)
+# 'This is a text from the image file.'
+```
+
+**GenerateImageContentByLLM**
+
+**功能描述**：使用视觉模型从图像生成结构化内容的组件。
+
+**初始化参数**：
+
+- `api_key`: `Optional[str]`（可选）
+- `model`: `Optional[str]`（可选）
+- `api_base_url`: `Optional[str]`（可选）
+- `system_prompt`: `Optional[str]`（可选）
+- `user_prompt`: `Optional[str]`（可选）
+- `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+
+**运行方法**
+
+- 输入：
+  - `documents`: `List[Document]`
+  - `system_prompt`: `Optional[str]`（可选）
+  - `user_prompt`: `Optional[str]`（可选）
+  - `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+- 输出：
+  - `documents`: `List[Document]`
+
+**ImageStructureOutput**
+
+**功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取标题。
+
+**初始化参数**：`image_process_types`: `list[str]`（可选，默认值：`['caption', 'ocr']`）
+
+**运行方法**
+
+- 输入：
+  - `sources`: `list[Union[str, Path, ByteStream]]`
+  - `meta`: `Optional[Union[dict[str, Any], list[dict[str, Any]]]]`（可选）
+- 输出：
+  - `documents`: `list[Document]`
+
+- 使用示例：
+
+```python
+image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
+3457698c0ee4273ea686d71475cac0fe191375e0edc447c39b9f4d9de5c4e155.jpg"
+i2d = ImageStructureOutput()
+result = i2d.run([image_path])
+print(result)
+# 'This is a text from the image file.'
+```
+
+**DocumentContentImageFiller**
+
+**功能描述**：处理文档集合中的文本和图片关系，完成以下功能：
+
+1. 识别文本中的图片引用
+
+2. 将图片的 `md_page_number` 和 `split_id` 与引用它的文本保持一致
+
+3. 为文档和图片分配统一的排序 ID
+
+**初始化参数**：无
+
+**运行方法**
+
+- 输入：
+  - `documents`: `List[Document]`
+- 输出：
+  - `documents`: `List[Document]`
+
+**EnhancedDocumentSplitter**
+
+**功能描述**：拆分文档。
+
+**初始化参数**：
+
+- `split_length`: `int`（可选，默认值：200）
+- `split_overlap`: `int`（可选，默认值：0）
+- `split_unit`: `Literal['word', 'char']`（可选，默认值：`'char'`）
+
+**运行方法**
+
+- 输入：
+  - `documents`: `List[Document]`
+- 输出：
+  - `documents`: `List[Document]`
+
+**MoiDocumentCleaner**
+
+**功能描述**：文档清理器。
+
+**初始化参数**：
+
+- `unicode_normalization`: `bool`
+- `traditional_chinese_to_simple`: `bool`
+- `remove_url`: `bool`
+- `remove_invisible_char`: `bool`
+- `remove_html_labels`: `bool`
+- `deduplication_ngram_ratio`: `float`
+- `deduplication_by_md5`: `bool`
+- `filter_special_char_ratio`: `float`
+- `deduplication_by_similarity`: `bool`（可选，默认值：`True`）
+- `remove_persional_message`: `bool`（可选，默认值：`True`）
+- `remove_sensitive_words`: `bool`（可选，默认值：`True`）
+- `remove_poison_word`: `bool`（可选，默认值：`True`）
+
+**运行方法**
+
+- 输入：
+  - `documents`: `List[Document]`
+- 输出：
+  - `documents`: `List[Document]`
+
+**DataAugmentation**
+
+**功能描述**：根据指定参数增强数据。
+
+**初始化参数**：
+
+- `type`: `str`
+- `json_schema_str`: `str`
+- `json_num_per_block`: `int`（可选，默认值：5）
+- `use_document_count`: `int`（可选，默认值：500）
+- `categories`: `list[str]`（可选，默认值：`None`）
+- `keyword_count`: `int`（可选，默认值：5）
+
+**运行方法**
+
+- 输入：
+  - `count`: `int`
+- 输出：
+  - `data_augmentation`: `Dict[str, Any]`
+
+**JavaScriptExecutor**
+
+**功能描述**：一个 Haystack 组件，用提供的参数执行 JavaScript 代码。
+
+**初始化参数**：
+
+- `js_code`: `Optional[str]`（可选）
+- `timeout`: `int`（可选，默认值：15）
+- `return_error`: `bool`（可选，默认值：`True`）
+- `variables`: `Optional[List[str]]`（可选）
+
+**运行方法**
+
+- 输入：
+  - `js_code`: `Optional[str]`（可选）
+  - `timeout`: `Optional[int]`（可选）
+- 输出：
+  - `js_output`: `str`
+  - `js_error_output`: `str`
+
+**PythonExecutor**
+
+**功能描述**：一个 Haystack 组件，用提供的参数执行 Python 代码。
+
+**初始化参数**：
+
+- `python_code`: `Optional[str]`（可选）
+- `timeout`: `int`（可选，默认值：15）
+- `return_error`: `bool`（可选，默认值：`True`）
+
+**运行方法**
+
+- 输入：
+  - `python_code`: `Optional[str]`（可选）
+  - `timeout`: `Optional[int]`（可选）
+  - `documents`: `Optional[List[Document]]`（可选）
+- 输出：
+  - `documents`: `List[Document]`
+  - `python_output`: `str`
+  - `python_error_output`: `str`
+
+**CustomLangfuseConnector**
+
+**功能描述**：LangfuseConnector 将 Haystack LLM 框架与 Langfuse 连接起来，以便能够追踪管道内各种组件的操作和数据流。只需将此组件添加到您的管道中，但不要将其连接到任何其他组件。LangfuseConnector 将自动追踪管道内的操作和数据流。
+
+**初始化参数**：
+
+- `name`: `str`
+- `public`: `bool`（可选，默认值：`False`）
+
+**运行方法**
+
+- 输入：
+  - `invocation_context`: `Optional[Dict[str, Any]]`（可选）
+- 输出：
+  - `name`: `str`
+  - `trace_url`: `str`
+
+- 使用示例：
+
+```python
+import os
+ os.environ["HAYSTACK_CONTENT_TRACING_ENABLED"] = "true"
+ from haystack import Pipeline
+ from haystack.components.builders import ChatPromptBuilder
+ from haystack.components.generators.chat import OpenAIChatGenerator
+ from haystack.dataclasses import ChatMessage
+ from haystack_integrations.components.connectors.langfuse import (
+ LangfuseConnector,
+ )
+ if __name__ == "__main__":
+ pipe = Pipeline()
+ pipe.add_component("tracer", LangfuseConnector("Chat example"))
+ pipe.add_component("prompt_builder", ChatPromptBuilder())
+ pipe.add_component("llm", OpenAIChatGenerator(model="gpt-3.5-
+turbo"))
+ pipe.connect("prompt_builder.prompt", "llm.messages")
+ messages = [
+ ChatMessage.from_system(
+ "Always respond in German even if some input data is in 
+other languages."
+ ),
+ ChatMessage.from_user("Tell me about {{location}}"),
+ ]
+ response = pipe.run(
+ data={
+ "prompt_builder": {
+ "template_variables": {"location": "Berlin"},
+ "template": messages,
+ }
+ }
+ )
+ print(response["llm"]["replies"][0])
+ print(response["tracer"]["trace_url"])
+```
+
+**MOCRetriever**
+
+**功能描述**：仅用于 MOC 向量搜索。它是一个特殊的检索器组件，因为我们没有文档存储。
+
+**初始化参数**：
+
+- `mo_knowledge_url`: `str`
+- `user_id`: `str`（可选，默认值：`""`）
+- `filters`: `Optional[Dict[str, Any]]`（可选）
+- `top_k`: `int`（可选，默认值：5）
+- `scale_score`: `bool`（可选，默认值：`False`）
+- `return_embedding`: `bool`（可选，默认值：`False`）
+
+**运行方法**
+
+- 输入：
+  - `query_text`: `str`
+  - `mo_knowledge_url`: `Optional[str]`（可选）
+  - `filters`: `Optional[Dict[str, Any]]`（可选）
+  - `top_k`: `Optional[int]`（可选）
+  - `scale_score`: `Optional[bool]`（可选）
+  - `return_embedding`: `Optional[bool]`（可选）
+  - `user_id`: `Optional[str]`（可选）
+- 输出：
+  - `system_chat_query`: `List[Document]`
+  - `user_chat_query`: `str`
+
+**OutputGenerator**
+
+**功能描述**：一个使用 OpenAI 的聊天完成 API 生成输出的组件。在工作流结束时用于处理流式和非流式响应。
+
+**初始化参数**：
+
+- `llm_endpoint`: `str`（可选，默认值：`'https://xxxxx.com/model/api/v1'`）
+- `api_key`: `Secret`（可选，默认值：`Secret.from_env_var('OPENAI_API_KEY')`）
+- `model`: `str`（可选，默认值：`""`）
+- `streaming`: `bool`（可选，默认值：`False`）
+- `max_retries`: `int`（可选，默认值：3）
+- `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+
+**运行方法**
+
+- 输入：
+  - `messages`: `List[ChatMessage]`
+  - `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+- 输出：
+  - `replies`: `List[str]`
+  - `stream`: `Generator[str, None, None]` (仅当流式传输为 `True` 时)
+
+**StartComponent**
+
+**功能描述**：一个 Haystack 组件，用于启动工作流。仅用于 UI。输入等于输出。
+
+**初始化参数**：
+
+- `variables`: `Optional[List[str]]`（可选）
+
+**运行方法**
+
+- 输入：
+  - `start_query`: `Optional[str]`（可选）
+- 输出：
+  - `user_chat_query`: `str`
+
+#### 添加自定义工作流组件
+
+在众多 component 中，ImageCaptionToDocument 是对一张图片进行总结描述的节点。假设我们要在图片总结之后，加上我们自己的一个说明，可以通过以下步骤做到：
+
+1. 编写自定义 Python 代码，例如：
+
+    ```python
+    custom_caption = '''
+
+    for doc in documents:
+
+        if isinstance(doc.content, str) and len (doc.content) > 0:
+
+            doc.content = doc.content + " add a suffix for each pic caption"
+    '''
+    ```
+
+2. 在 request body 里添加一个自定义组件，假设组件名字为 CustomCaptionComponent。
+
+    ```json
+    // 其他配置
+    "file_types": [2],
+    "priority": 300,
+    "workflow": {
+        "components": [
+            {
+                //这里是添加的自定义组件
+                "name": "CustomCaptionComponent",
+                "type": "byoa.integrations.components.python_executor.PythonExecutor",
+                "component_id": "CustomCaptionComponent_1748241281755",
+                "intro": "CustomCaptionComponent",
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "input_keys": {},
+                "output_keys": {},
+                "init_parameters": {
+                    // 这里指定自定义 python 代码
+                    "python_code": custom_caption
+                }
+            },{
+                "name": "DocumentCleaner"
+                // 后续其他配置
+            }
+    ```
+
+3. 将自定义组件 CustomCaptionComponent 添加到 pipeline 中。如果原来 ImageCaptionToDocument 指向的是 DocumentSplitter-ImageOCR 节点，现在需要将 CustomCaptionComponent 添加到这两个节点之间。
+
+    修改前：
+
+    ```json
+    {
+        "receiver": "DocumentSplitter-ImageOCR.documents",
+        "sender": "ImageCaptionToDocument.documents"
+    }
+    ```
+
+    修改后：
+
+    ```json
+    {
+        "receiver": "CustomCaptionComponent.documents",
+        "sender": "ImageCaptionToDocument.documents"
+    },
+    {
+        "receiver": "DocumentSplitter-ImageOCR.documents",
+        "sender": "CustomCaptionComponent.documents"
+    }
+    ```
+
+4. 通过创建工作流请求 `byoa/api/v1/workflow_meta` 创建工作流。创建之后，用户可在界面上查看工作流执行详情。
 
 ### 查看工作流列表
 
@@ -544,8 +1106,6 @@ if response.content:
         print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     except json.JSONDecodeError:
         print("Response text:", response.text)
-else:
-    print("Request to stop workflow successful, no content returned.")
 ```
 
 **返回：**
@@ -579,8 +1139,8 @@ POST /byoa/api/v1/workflow_meta/{workflow_id}/branch
 
 | 参数名        | 是否必填 | 类型                      | 含义       | 默认值 |
 | ------------- | -------- | ------------------------- | ---------- | ------ |
-| `branch_name` | 否       | string, nullable          | 分支名     | ""     |
-| `workflow`    | 是       | object | 工作流配置 |        |
+| `branch_name` | 否       | string, nullable          | 新的分支名     | ""     |
+| `workflow`    | 是       | object | 新的工作流配置 |        |
 
 **示例 (Python)：**
 
@@ -1144,7 +1704,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 | 参数    | 类型                               | 描述                                       |
 | ------- | ---------------------------------- | ------------------------------------------ |
 | `total` | integer                            | 符合条件的工作流作业总数                   |
-| `jobs`  | array[object]| 作业列表，每个对象包含作业及其主要分支信息 |
+| `jobs`  | array[object] | 作业列表，每个对象包含作业及其主要分支信息 |
 
 * **`JobListItem` 对象结构:**
     * `id` (string): 作业 ID
