@@ -707,12 +707,12 @@ other languages."
 
     ```json
     {
-        "receiver": "CustomCaptionComponent.documents",
-        "sender": "ImageCaptionToDocument.documents"
-    },
-    {
         "receiver": "DocumentSplitter-ImageOCR.documents",
         "sender": "CustomCaptionComponent.documents"
+    },
+    {
+        "receiver": "CustomCaptionComponent.documents",
+        "sender": "ImageCaptionToDocument.documents"
     }
     ```
 
