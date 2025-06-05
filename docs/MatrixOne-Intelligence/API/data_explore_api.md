@@ -406,40 +406,6 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
   | user_id          | string | 用户 ID                |
   | parent_volume_id | string | 处理数据卷 ID (可能为空) |
 
-### 删除处理数据卷
-
-```
-DELETE /byoa/api/v1/explore/volumes/{vid}
-```
-
-**路径参数：**
-
-* `vid` (string, 必填): 要删除的处理数据卷 ID
-
-**示例 (Python)：**
-
-```python
-import requests
-
-# 将 {vid} 替换为实际的数据卷 ID
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/{vid}"
-headers = {
-    "moi-key": "xxxxx"
-}
-response = requests.delete(url.replace("{vid}", "volume_id_to_delete"), headers=headers)
-
-if response.status_code == 200:
-    try:
-        print("Response Body:", response.json())
-    except requests.exceptions.JSONDecodeError:
-        print("Success with empty response body.")
-else:
-    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
-```
-
-**返回：**
-成功时 HTTP 状态码为 200。
-
 ### 查看分支处理数据卷列表
 
 ```
@@ -846,9 +812,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
         ]
     }
 }
-```
-
-**输出参数：**
+```**输出参数：**
 
 | 参数  | 类型                           | 含义       |
 | ----- | ------------------------------ | ---------- |
@@ -872,7 +836,9 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 ### 删除文件解析的数据块
 
 ```
+
 DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
+
 ```
 
 **路径参数：**
@@ -921,3 +887,125 @@ else:
 
 **返回：**
 成功时 HTTP 状态码为 204。
+
+## 查看工作流中间结果
+
+系统会自动将各组件的执行结果保存到数据库的 `debug_results` 表中，您可以通过以下方式查看 Pipeline 组件的中间结果数据，用于开发调试和问题排查。
+
+### API 查询
+
+```
+GET /byoa/api/v1/debug_results
+```
+
+**Query 参数：**
+
+| 参数名             | 类型              | 是否必填 | 描述                     | 默认值 |
+| ----------------- | ----------------- | -------- | ----------------------- | ------ |
+| `workflow_job_id` | string           | 否       | 工作流作业 ID            |        |
+| `workflow_branch_id` | string        | 否       | 工作流分支 ID            |        |
+| `workflow_meta_id` | string          | 否       | 工作流元数据 ID          |        |
+| `component_name`  | string           | 否       | 组件名称（支持部分匹配）  |        |
+| `file_id`        | string           | 否       | 文件 ID                  |        |
+| `limit`          | integer          | 否       | 限制返回结果数量          | 50     |
+
+**示例 (Python)：**
+
+```python
+import httpx
+import json
+from datetime import datetime
+from typing import Optional
+
+async def query_debug_results(
+    workflow_job_id: Optional[str] = None,
+    workflow_branch_id: Optional[str] = None,
+    workflow_meta_id: Optional[str] = None,
+    component_name: Optional[str] = None,
+    file_id: Optional[str] = None,
+    limit: int = 50,
+):
+    url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/debug_results"
+    params = {
+        "workflow_job_id": workflow_job_id,
+        "workflow_branch_id": workflow_branch_id,
+        "workflow_meta_id": workflow_meta_id,
+        "component_name": component_name,
+        "file_id": file_id,
+        "limit": limit
+    }
+    
+    # 移除 None 值的参数
+    params = {k: v for k, v in params.items() if v is not None}
+    
+    headers = {
+        "moi-key": "xxxxx"
+    }
+    
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url, params=params, headers=headers)
+        response.raise_for_status()
+        return response.json()
+
+# 使用示例
+async def main():
+    # 查询特定作业的调试结果
+    results = await query_debug_results(
+        workflow_job_id="your_job_id_here",
+        limit=20
+    )
+    print(json.dumps(results, indent=4))
+
+```
+
+**返回：**
+
+```json
+{
+    "code": "ok",
+    "msg": "ok",
+    "data": [
+        {
+            "id": "debug_result_id",
+            "workflow_job_id": "job_id",
+            "workflow_branch_id": "branch_id",
+            "workflow_meta_id": "meta_id",
+            "component_name": "PDFConverter",
+            "file_id": "file_id",
+            "component_results": "{...}", // JSON 格式的组件执行结果
+            "created_at": "2024-03-20T10:30:00Z"
+        }
+        // ... 更多结果
+    ]
+}
+```
+
+### 数据库直接查询
+
+如果您有数据库访问权限，也可以直接通过 SQL 查询中间结果：
+
+```sql
+-- 查看最近的中间结果
+SELECT component_name, workflow_job_id, created_at 
+FROM debug_results 
+ORDER BY created_at DESC LIMIT 20;
+
+-- 按作业 ID 查询特定作业的所有组件结果
+SELECT component_name, component_results, created_at
+FROM debug_results 
+WHERE workflow_job_id = 'your_job_id_here'
+ORDER BY created_at ASC;
+
+-- 按组件名称查询
+SELECT workflow_job_id, created_at
+FROM debug_results 
+WHERE component_name = 'PDFConverter'
+ORDER BY created_at DESC LIMIT 10;
+```
+
+注意事项
+
+1. 建议使用 `limit` 参数限制查询结果数量，避免返回过多数据
+2. 组件结果以 JSON 格式存储在 `component_results` 字段中
+3. 可以通过组合不同的查询参数来精确定位需要查看的结果
+4. 时间戳使用 UTC 时间
