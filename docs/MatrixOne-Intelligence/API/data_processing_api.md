@@ -126,6 +126,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **返回：**
 
+
 ```json
 {
     "code": "ok",
@@ -156,6 +157,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 #### 工作流组件介绍
 
 本节详细介绍工作流中可用的内置组件，包括它们的功能、初始化参数和运行方法规范。
+[点击查看完整 工作流组件 JSON 示例文件](./create-api-v2.json)
 
 <!-- 下面是数据处理过程的流程图：
 
