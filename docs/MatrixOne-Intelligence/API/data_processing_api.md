@@ -14,7 +14,7 @@ POST /byoa/api/v1/workflow_meta
 | --------------------------- | -------- | ---------------------------- | ------------------------------ | ------ |
 | `name`                      | 是       | string                       | 工作流名称                     |        |
 | `source_volume_names`       | 是       | array[string]                | 源数据卷名称列表               |        |
-| `source_volume_ids`         | 是       | array[integer]               | 源数据卷 ID 列表                 |        |
+| `source_volume_ids`         | 是       | array[String]               | 源数据卷 ID 列表                 |        |
 | `file_types`                | 是       | array[integer]               | 文件类型列表，支持：<br>NIL = 0<br>TXT = 1<br>PDF = 2<br>IMAGE = 3<br>PPT = 4<br>WORD = 5<br>MARKDOWN = 6<br>CSV = 7<br>PARQUET = 8<br>SQL_FILES = 9<br>DIR = 10<br>DOCX = 11<br>PPTX = 12<br>WAV = 13<br>MP3 = 14<br>AAC = 15<br>FLAC = 16<br>MP4 = 17<br>MOV = 18<br>MKV = 19<br>PNG = 20<br>JPG = 21<br>JPEG = 22<br>BMP = 23                   |        |
 | `process_mode`              | 是       | object (`ProcessModeConfig`) | 处理模式配置                   |        |
 | `priority`                  | 否       | integer                      | 优先级                         | 300    |
@@ -28,7 +28,7 @@ POST /byoa/api/v1/workflow_meta
 
   | 参数       | 是否必填 | 类型    | 含义                   |
   | ---------- | -------- | ------- | ---------------------- |
-  | `interval` | 是       | integer | 处理间隔（分钟）       |
+  | `interval` | 是       | integer | 处理模式：0 表示一次性处理，-1 表示关联处理，大于 0 表示周期性处理且值为处理间隔（分钟） |
   | `offset`   | 是       | integer | 处理时间偏移量（分钟），一次性载入时默认为 0 |
 
 * **`WorkflowConfig` 结构:**
@@ -53,7 +53,7 @@ headers = {
 body = {
     "name": "wf-from-meta-api",
     "source_volume_names": ["b-vol1"],
-    "source_volume_ids": [1889223879880048640],
+    "source_volume_ids": ["1889223879880048640"],
     "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
     "create_target_volume_name": "new-target-for-wf-from-meta",
     "process_mode": {
@@ -152,6 +152,81 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     }
 }
 ```
+
+#### 添加自定义工作流组件
+
+概括来讲，自定义处理节点就是添加一段自定义的 python 代码，对数据流中的文档进行处理，这段代码的输入是文档的数据。后面通过具体的例子说明如何自定节点。
+
+在目前数据处理工作流（[点击查看完整工作流组件 JSON 示例文件](./workflow.json)）中，ImageCaptionToDocument 是对一张图片进行总结描述的节点，假设我们要在图片总结之后，加上我们的一个自定义的说明（如：自定义 caption 说明），可以通过下面步骤做到。
+
+1. 编写自定义 Python 代码，例如：
+
+    ```python
+    custom_caption = '''
+
+    for doc in documents:
+
+        if isinstance(doc.content, str) and len (doc.content) > 0:
+
+            doc.content = doc.content + " add a suffix for each pic caption"
+    '''
+    ```
+
+2. 在 request body 里添加一个自定义组件，假设组件名字为 CustomCaptionComponent。
+
+    ```json
+    // 其他配置
+    "file_types": [2],
+    "priority": 300,
+    "workflow": {
+        "components": [
+            {
+                //这里是添加的自定义组件
+                "name": "CustomCaptionComponent",
+                "type": "byoa.integrations.components.python_executor.PythonExecutor",
+                "component_id": "CustomCaptionComponent_1748241281755",
+                "intro": "CustomCaptionComponent",
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "input_keys": {},
+                "output_keys": {},
+                "init_parameters": {
+                    // 这里指定自定义 python 代码
+                    "python_code": custom_caption
+                }
+            },{
+                "name": "DocumentCleaner"
+                // 后续其他配置
+            }
+    ```
+
+3. 将自定义组件 CustomCaptionComponent 添加到 pipeline 中。如果原来 ImageCaptionToDocument 指向的是 DocumentSplitter-ImageOCR 节点，现在需要将 CustomCaptionComponent 添加到这两个节点之间。
+
+    修改前：
+
+    ```json
+    {
+        "receiver": "DocumentSplitter-ImageOCR.documents",
+        "sender": "ImageCaptionToDocument.documents"
+    }
+    ```
+
+    修改后：
+
+    ```json
+    {
+        "receiver": "DocumentSplitter-ImageOCR.documents",
+        "sender": "CustomCaptionComponent.documents"
+    },
+    {
+        "receiver": "CustomCaptionComponent.documents",
+        "sender": "ImageCaptionToDocument.documents"
+    }
+    ```
+
+4. 通过创建工作流请求 `byoa/api/v1/workflow_meta` 创建工作流。创建之后，用户可在界面上查看工作流执行详情。
 
 #### 工作流组件介绍
 
@@ -641,79 +716,6 @@ other languages."
   - `start_query`: `Optional[str]`（可选）
 - 输出：
   - `user_chat_query`: `str`
-
-#### 添加自定义工作流组件
-
-在众多 component 中，ImageCaptionToDocument 是对一张图片进行总结描述的节点。假设我们要在图片总结之后，加上我们自己的一个说明，可以通过以下步骤做到：
-
-1. 编写自定义 Python 代码，例如：
-
-    ```python
-    custom_caption = '''
-
-    for doc in documents:
-
-        if isinstance(doc.content, str) and len (doc.content) > 0:
-
-            doc.content = doc.content + " add a suffix for each pic caption"
-    '''
-    ```
-
-2. 在 request body 里添加一个自定义组件，假设组件名字为 CustomCaptionComponent。
-
-    ```json
-    // 其他配置
-    "file_types": [2],
-    "priority": 300,
-    "workflow": {
-        "components": [
-            {
-                //这里是添加的自定义组件
-                "name": "CustomCaptionComponent",
-                "type": "byoa.integrations.components.python_executor.PythonExecutor",
-                "component_id": "CustomCaptionComponent_1748241281755",
-                "intro": "CustomCaptionComponent",
-                "position": {
-                    "x": 0,
-                    "y": 0
-                },
-                "input_keys": {},
-                "output_keys": {},
-                "init_parameters": {
-                    // 这里指定自定义 python 代码
-                    "python_code": custom_caption
-                }
-            },{
-                "name": "DocumentCleaner"
-                // 后续其他配置
-            }
-    ```
-
-3. 将自定义组件 CustomCaptionComponent 添加到 pipeline 中。如果原来 ImageCaptionToDocument 指向的是 DocumentSplitter-ImageOCR 节点，现在需要将 CustomCaptionComponent 添加到这两个节点之间。
-
-    修改前：
-
-    ```json
-    {
-        "receiver": "DocumentSplitter-ImageOCR.documents",
-        "sender": "ImageCaptionToDocument.documents"
-    }
-    ```
-
-    修改后：
-
-    ```json
-    {
-        "receiver": "CustomCaptionComponent.documents",
-        "sender": "ImageCaptionToDocument.documents"
-    },
-    {
-        "receiver": "DocumentSplitter-ImageOCR.documents",
-        "sender": "CustomCaptionComponent.documents"
-    }
-    ```
-
-4. 通过创建工作流请求 `byoa/api/v1/workflow_meta` 创建工作流。创建之后，用户可在界面上查看工作流执行详情。
 
 ### 查看工作流列表
 
