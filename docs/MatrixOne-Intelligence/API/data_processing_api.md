@@ -153,6 +153,80 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 }
 ```
 
+#### 添加自定义工作流组件
+
+在众多 component 中，ImageCaptionToDocument 是对一张图片进行总结描述的节点。假设我们要在图片总结之后，加上我们自己的一个说明，可以通过以下步骤做到：
+
+1. 编写自定义 Python 代码，例如：
+
+    ```python
+    custom_caption = '''
+
+    for doc in documents:
+
+        if isinstance(doc.content, str) and len (doc.content) > 0:
+
+            doc.content = doc.content + " add a suffix for each pic caption"
+    '''
+    ```
+
+2. 在 request body 里添加一个自定义组件，假设组件名字为 CustomCaptionComponent。
+
+    ```json
+    // 其他配置
+    "file_types": [2],
+    "priority": 300,
+    "workflow": {
+        "components": [
+            {
+                //这里是添加的自定义组件
+                "name": "CustomCaptionComponent",
+                "type": "byoa.integrations.components.python_executor.PythonExecutor",
+                "component_id": "CustomCaptionComponent_1748241281755",
+                "intro": "CustomCaptionComponent",
+                "position": {
+                    "x": 0,
+                    "y": 0
+                },
+                "input_keys": {},
+                "output_keys": {},
+                "init_parameters": {
+                    // 这里指定自定义 python 代码
+                    "python_code": custom_caption
+                }
+            },{
+                "name": "DocumentCleaner"
+                // 后续其他配置
+            }
+    ```
+
+3. 将自定义组件 CustomCaptionComponent 添加到 pipeline 中。如果原来 ImageCaptionToDocument 指向的是 DocumentSplitter-ImageOCR 节点，现在需要将 CustomCaptionComponent 添加到这两个节点之间。
+
+    修改前：
+
+    ```json
+    {
+        "receiver": "DocumentSplitter-ImageOCR.documents",
+        "sender": "ImageCaptionToDocument.documents"
+    }
+    ```
+
+    修改后：
+
+    ```json
+    {
+        "receiver": "DocumentSplitter-ImageOCR.documents",
+        "sender": "CustomCaptionComponent.documents"
+    },
+    {
+        "receiver": "CustomCaptionComponent.documents",
+        "sender": "ImageCaptionToDocument.documents"
+    }
+    ```
+
+4. 通过创建工作流请求 `byoa/api/v1/workflow_meta` 创建工作流。创建之后，用户可在界面上查看工作流执行详情。
+
+
 #### 工作流组件介绍
 
 本节详细介绍工作流中可用的内置组件，包括它们的功能、初始化参数和运行方法规范。
@@ -643,79 +717,6 @@ other languages."
   - `start_query`: `Optional[str]`（可选）
 - 输出：
   - `user_chat_query`: `str`
-
-#### 添加自定义工作流组件
-
-在众多 component 中，ImageCaptionToDocument 是对一张图片进行总结描述的节点。假设我们要在图片总结之后，加上我们自己的一个说明，可以通过以下步骤做到：
-
-1. 编写自定义 Python 代码，例如：
-
-    ```python
-    custom_caption = '''
-
-    for doc in documents:
-
-        if isinstance(doc.content, str) and len (doc.content) > 0:
-
-            doc.content = doc.content + " add a suffix for each pic caption"
-    '''
-    ```
-
-2. 在 request body 里添加一个自定义组件，假设组件名字为 CustomCaptionComponent。
-
-    ```json
-    // 其他配置
-    "file_types": [2],
-    "priority": 300,
-    "workflow": {
-        "components": [
-            {
-                //这里是添加的自定义组件
-                "name": "CustomCaptionComponent",
-                "type": "byoa.integrations.components.python_executor.PythonExecutor",
-                "component_id": "CustomCaptionComponent_1748241281755",
-                "intro": "CustomCaptionComponent",
-                "position": {
-                    "x": 0,
-                    "y": 0
-                },
-                "input_keys": {},
-                "output_keys": {},
-                "init_parameters": {
-                    // 这里指定自定义 python 代码
-                    "python_code": custom_caption
-                }
-            },{
-                "name": "DocumentCleaner"
-                // 后续其他配置
-            }
-    ```
-
-3. 将自定义组件 CustomCaptionComponent 添加到 pipeline 中。如果原来 ImageCaptionToDocument 指向的是 DocumentSplitter-ImageOCR 节点，现在需要将 CustomCaptionComponent 添加到这两个节点之间。
-
-    修改前：
-
-    ```json
-    {
-        "receiver": "DocumentSplitter-ImageOCR.documents",
-        "sender": "ImageCaptionToDocument.documents"
-    }
-    ```
-
-    修改后：
-
-    ```json
-    {
-        "receiver": "DocumentSplitter-ImageOCR.documents",
-        "sender": "CustomCaptionComponent.documents"
-    },
-    {
-        "receiver": "CustomCaptionComponent.documents",
-        "sender": "ImageCaptionToDocument.documents"
-    }
-    ```
-
-4. 通过创建工作流请求 `byoa/api/v1/workflow_meta` 创建工作流。创建之后，用户可在界面上查看工作流执行详情。
 
 ### 查看工作流列表
 
