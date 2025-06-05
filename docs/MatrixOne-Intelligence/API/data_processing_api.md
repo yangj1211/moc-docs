@@ -14,7 +14,7 @@ POST /byoa/api/v1/workflow_meta
 | --------------------------- | -------- | ---------------------------- | ------------------------------ | ------ |
 | `name`                      | 是       | string                       | 工作流名称                     |        |
 | `source_volume_names`       | 是       | array[string]                | 源数据卷名称列表               |        |
-| `source_volume_ids`         | 是       | array[integer]               | 源数据卷 ID 列表                 |        |
+| `source_volume_ids`         | 是       | array[String]               | 源数据卷 ID 列表                 |        |
 | `file_types`                | 是       | array[integer]               | 文件类型列表，支持：<br>NIL = 0<br>TXT = 1<br>PDF = 2<br>IMAGE = 3<br>PPT = 4<br>WORD = 5<br>MARKDOWN = 6<br>CSV = 7<br>PARQUET = 8<br>SQL_FILES = 9<br>DIR = 10<br>DOCX = 11<br>PPTX = 12<br>WAV = 13<br>MP3 = 14<br>AAC = 15<br>FLAC = 16<br>MP4 = 17<br>MOV = 18<br>MKV = 19<br>PNG = 20<br>JPG = 21<br>JPEG = 22<br>BMP = 23                   |        |
 | `process_mode`              | 是       | object (`ProcessModeConfig`) | 处理模式配置                   |        |
 | `priority`                  | 否       | integer                      | 优先级                         | 300    |
@@ -53,7 +53,7 @@ headers = {
 body = {
     "name": "wf-from-meta-api",
     "source_volume_names": ["b-vol1"],
-    "source_volume_ids": [1889223879880048640],
+    "source_volume_ids": ["1889223879880048640"],
     "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
     "create_target_volume_name": "new-target-for-wf-from-meta",
     "process_mode": {
