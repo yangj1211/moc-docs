@@ -29,7 +29,7 @@ POST /byoa/api/v1/workflow_meta
   | 参数       | 是否必填 | 类型    | 含义                   |
   | ---------- | -------- | ------- | ---------------------- |
   | `interval` | 是       | integer | 处理间隔（分钟）       |
-  | `offset`   | 是       | integer | 处理时间偏移量（分钟），一次性载入时默认为0 |
+  | `offset`   | 是       | integer | 处理时间偏移量（分钟），一次性载入时默认为 0 |
 
 * **`WorkflowConfig` 结构:**
 
