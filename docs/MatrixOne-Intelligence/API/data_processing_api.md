@@ -155,7 +155,9 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 #### 添加自定义工作流组件
 
-在众多 component 中，ImageCaptionToDocument 是对一张图片进行总结描述的节点。假设我们要在图片总结之后，加上我们自己的一个说明，可以通过以下步骤做到：
+概括来讲，自定义处理节点就是添加一段自定义的 python 代码，对数据流中的文档进行处理，这段代码的输入是文档的数据。后面通过具体的例子说明如何自定节点。
+
+在目前数据处理工作流（[点击查看完整工作流组件 JSON 示例文件](./create-api-v2.json)）中，ImageCaptionToDocument 是对一张图片进行总结描述的节点，假设我们要在图片总结之后，加上我们的一个自定义的说明（如：自定义 caption 说明），可以通过下面步骤做到。
 
 1. 编写自定义 Python 代码，例如：
 
@@ -229,8 +231,6 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 #### 工作流组件介绍
 
 本节详细介绍工作流中可用的内置组件，包括它们的功能、初始化参数和运行方法规范。
-
-[点击查看完整工作流组件 JSON 示例文件](./create-api-v2.json)
 
 <!-- 下面是数据处理过程的流程图：
 
