@@ -240,7 +240,41 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **功能描述**：自定义的 Whisper 转录器，支持获取时间戳。
 
-**初始化参数**：无
+**参数结构示例**：
+
+```json
+{
+    "name": "AudioToDocument",
+    "type": "byoa.integrations.components.converters.audio_to_document.AudioToDocument",
+    "component_id": "AudioToDocument_1749126721750",
+    "intro": "AudioToDocument",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "asr_model": "sensevoice-v1",
+        "enable_noise_reduction": false,
+        "enable_speaker_diarization": false,
+        "max_segment_duration": 30,
+        "min_silence_duration": 0.5
+    },
+    "extra_node_info": {
+        "name": "音频解析节点",
+        "description": ""
+    }
+}
+```
+
+**初始化参数**：
+
+- `asr_model`: `str`（可选，默认值：`'sensevoice-v1'`）- ASR 模型名称
+- `enable_noise_reduction`: `bool`（可选，默认值：`False`）- 是否启用噪音消除
+- `enable_speaker_diarization`: `bool`（可选，默认值：`False`）- 是否启用说话人分离
+- `max_segment_duration`: `int`（可选，默认值：30）- 最大分段时长（秒）
+- `min_silence_duration`: `float`（可选，默认值：0.5）- 最小静音时长（秒）
 
 **运行方法**
 
@@ -254,7 +288,29 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **功能描述**：增强版 DOCX 转 Document 组件。该组件扩展了 Haystack 的 DOCXToDocument 功能，增加了对文档中图片的处理能力，支持图片标注和 OCR 文本提取等功能。
 
-**初始化参数**：`image_process_types`: `list[str]`（可选，默认值：`None`）
+**参数结构示例**：
+
+```json
+{
+    "name": "DOCXToDocument",
+    "type": "byoa.integrations.components.converters.enhanced_docx_to_document.EnhancedDOCXToDocument",
+    "component_id": "DOCXToDocument_1749126721750",
+    "intro": "DOCXToDocument",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "image_process_types": ["caption", "ocr"]
+    }
+}
+```
+
+**初始化参数**：
+
+- `image_process_types`: `list[str]`（可选，默认值：`None`）- 图片处理类型列表，支持 `["caption", "ocr"]`
 
 **运行方法**
 
@@ -268,7 +324,29 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **功能描述**：增强版 PPTX 转 Document 组件。该组件扩展了 Haystack 的 PPTXToDocument 功能，增加了对 PPT 中图片的处理能力，支持图片标注和 OCR 文本提取等功能。
 
-**初始化参数**：`image_process_types`: `list[str]`（可选，默认值：`None`）
+**参数结构示例**：
+
+```json
+{
+    "name": "PPTXToDocument",
+    "type": "byoa.integrations.components.converters.enhanced_pptx_to_document.EnhancedPPTXToDocument",
+    "component_id": "PPTXToDocument_1749126721750",
+    "intro": "PPTXToDocument",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "image_process_types": ["caption", "ocr"]
+    }
+}
+```
+
+**初始化参数**：
+
+- `image_process_types`: `list[str]`（可选，默认值：`None`）- 图片处理类型列表，支持 `["caption", "ocr"]`
 
 **运行方法**
 
@@ -281,6 +359,28 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 **EnhancedPlainToDocument**
 
 **功能描述**：增强的纯文本 [txt, md] 转换为文档组件，支持将原文本上传至 OSS，不做格式转换。
+
+**参数结构示例**：
+
+```json
+{
+    "name": "PlainToDocument",
+    "type": "byoa.integrations.components.converters.enhanced_plain_to_document.EnhancedPlainToDocument",
+    "component_id": "PlainToDocument_1749126721750",
+    "intro": "PlainToDocument",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {},
+    "extra_node_info": {
+        "name": "文本解析节点",
+        "description": ""
+    }
+}
+```
 
 **初始化参数**：无
 
@@ -296,7 +396,29 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **功能描述**：将 PDF 转换为 Documents。
 
-**初始化参数**：`image_process_types`: `list[str]`（可选，默认值：`None`）
+**参数结构示例**：
+
+```json
+{
+    "name": "PDFToDocument",
+    "type": "byoa.integrations.components.converters.magic_pdf_to_document.MagicPDFToDocument",
+    "component_id": "PDFToDocument_1749126721750",
+    "intro": "PDFToDocument",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "image_process_types": ["caption", "ocr"]
+    }
+}
+```
+
+**初始化参数**：
+
+- `image_process_types`: `list[str]`（可选，默认值：`None`）- 图片处理类型列表，支持 `["caption", "ocr"]`
 
 **运行方法**
 
@@ -320,6 +442,24 @@ print(result)
 **ImageCaptionToDocument**
 
 **功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取标题。
+
+**参数结构示例**：
+
+```json
+{
+    "name": "ImageCaptionToDocument",
+    "type": "byoa.integrations.components.converters.image_caption_to_document.ImageCaptionToDocument",
+    "component_id": "ImageCaptionToDocument_1749126721751",
+    "intro": "ImageCaptionToDocument",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {}
+}
+```
 
 **初始化参数**：无
 
@@ -345,10 +485,31 @@ print(result)
 
 **功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取文本 (OCR)。
 
+**参数结构示例**：
+
+```json
+{
+    "name": "ImageOCRToDocument",
+    "type": "byoa.integrations.components.converters.image_ocr_to_document.ImageOCRToDocument",
+    "component_id": "ImageOCRToDocument_1749126721751",
+    "intro": "ImageOCRToDocument",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "model": "stepfun-ai/GOT-OCR2_0",
+        "tokenizer": "stepfun-ai/GOT-OCR2_0"
+    }
+}
+```
+
 **初始化参数**：
 
-- `model`: `str`（可选，默认值：`'stepfun-ai/GOT-OCR2_0'`）
-- `tokenizer`: `str`（可选，默认值：`'stepfun-ai/GOT-OCR2_0'`）
+- `model`: `str`（可选，默认值：`'stepfun-ai/GOT-OCR2_0'`）- OCR 模型名称
+- `tokenizer`: `str`（可选，默认值：`'stepfun-ai/GOT-OCR2_0'`）- 分词器名称
 
 **运行方法**
 
@@ -372,7 +533,33 @@ print(result)
 
 **功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取标题。
 
-**初始化参数**：`image_process_types`: `list[str]`（可选，默认值：`['caption', 'ocr']`）
+**参数结构示例**：
+
+```json
+{
+    "name": "ImageToDocument",
+    "type": "byoa.integrations.components.converters.image_to_document.ImageToDocument",
+    "component_id": "ImageToDocument_1749126721750",
+    "intro": "ImageToDocument",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "image_process_types": ["ocr", "caption"]
+    },
+    "extra_node_info": {
+        "name": "图片解析节点",
+        "description": ""
+    }
+}
+```
+
+**初始化参数**：
+
+- `image_process_types`: `list[str]`（可选，默认值：`['caption', 'ocr']`）- 图片处理类型列表，支持 `["caption", "ocr"]`
 
 **运行方法**
 
@@ -485,6 +672,24 @@ print(result)
 
 3. 为文档和图片分配统一的排序 ID
 
+**参数结构示例**：
+
+```json
+{
+    "name": "DocumentContentImageFiller",
+    "type": "byoa.integrations.components.converters.document_content_image_filler.DocumentContentImageFiller",
+    "component_id": "DocumentContentImageFiller_1749126721751",
+    "intro": "DocumentContentImageFiller",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {}
+}
+```
+
 **初始化参数**：无
 
 **运行方法**
@@ -498,11 +703,33 @@ print(result)
 
 **功能描述**：拆分文档。
 
+**参数结构示例**：
+
+```json
+{
+    "name": "DocumentSplitter",
+    "type": "byoa.integrations.components.enhance_document_splitter.EnhancedDocumentSplitter",
+    "component_id": "DocumentSplitter_1749126721750",
+    "intro": "DocumentSplitter",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "split_unit": "char",
+        "split_length": 800,
+        "split_overlap": 0
+    }
+}
+```
+
 **初始化参数**：
 
-- `split_length`: `int`（可选，默认值：200）
-- `split_overlap`: `int`（可选，默认值：0）
-- `split_unit`: `Literal['word', 'char']`（可选，默认值：`'char'`）
+- `split_length`: `int`（可选，默认值：800）- 分割长度
+- `split_overlap`: `int`（可选，默认值：0）- 分割重叠长度
+- `split_unit`: `Literal['word', 'char']`（可选，默认值：`'char'`）- 分割单位，支持按词或字符
 
 **运行方法**
 
@@ -515,20 +742,58 @@ print(result)
 
 **功能描述**：文档清理器。
 
+**参数结构示例**：
+
+```json
+{
+    "name": "DocumentCleaner",
+    "type": "byoa.integrations.components.cleaner.moi_document_cleaner.MoiDocumentCleaner",
+    "component_id": "DocumentCleaner_1749126721750",
+    "intro": "DocumentCleaner",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "switch_deduplication": false,
+        "switch_special_char_filter": false,
+        "switch_special_char_remove": false,
+        "switch_text_standardization": false,
+        "deduplication_by_md5": false,
+        "deduplication_by_similarity": false,
+        "deduplication_ngram_ratio": 0.5,
+        "filter_special_char_ratio": 0.5,
+        "remove_html_labels": false,
+        "remove_invisible_char": false,
+        "remove_persional_message": false,
+        "remove_sensitive_words": false,
+        "remove_url": false,
+        "traditional_chinese_to_simple": false,
+        "unicode_normalization": false
+    },
+    "extra_node_info": {
+        "name": "数据清洗节点",
+        "description": ""
+    }
+}
+```
+
 **初始化参数**：
 
-- `unicode_normalization`: `bool`
-- `traditional_chinese_to_simple`: `bool`
-- `remove_url`: `bool`
-- `remove_invisible_char`: `bool`
-- `remove_html_labels`: `bool`
-- `deduplication_ngram_ratio`: `float`
-- `deduplication_by_md5`: `bool`
-- `filter_special_char_ratio`: `float`
-- `deduplication_by_similarity`: `bool`（可选，默认值：`True`）
-- `remove_persional_message`: `bool`（可选，默认值：`True`）
-- `remove_sensitive_words`: `bool`（可选，默认值：`True`）
-- `remove_poison_word`: `bool`（可选，默认值：`True`）
+- `unicode_normalization`: `bool` - 是否进行 Unicode 标准化
+- `traditional_chinese_to_simple`: `bool` - 是否将繁体中文转换为简体中文
+- `remove_url`: `bool` - 是否移除 URL
+- `remove_invisible_char`: `bool` - 是否移除不可见字符
+- `remove_html_labels`: `bool` - 是否移除 HTML 标签
+- `deduplication_ngram_ratio`: `float` - N-gram 去重比率
+- `deduplication_by_md5`: `bool` - 是否通过 MD5 去重
+- `filter_special_char_ratio`: `float` - 特殊字符过滤比率
+- `deduplication_by_similarity`: `bool`（可选，默认值：`True`）- 是否通过相似度去重
+- `remove_persional_message`: `bool`（可选，默认值：`True`）- 是否移除个人信息
+- `remove_sensitive_words`: `bool`（可选，默认值：`True`）- 是否移除敏感词
+- `remove_poison_word`: `bool`（可选，默认值：`True`）- 是否移除有害词汇
 
 **运行方法**
 
@@ -541,51 +806,84 @@ print(result)
 
 **功能描述**：根据指定参数增强数据。
 
+**参数结构示例**：
+
+```json
+{
+    "name": "DataAugmentation",
+    "type": "byoa.integrations.components.data_augmentation.DataAugmentation",
+    "component_id": "DataAugmentation_1749126721750",
+    "intro": "DataAugmentation",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "categories": null,
+        "json_num_per_block": 10,
+        "json_schema_str": {
+            "instruction": "翻译成法语",
+            "input": "Hello",
+            "output": "Bonjour"
+        },
+        "keyword_count": 5,
+        "type": "general",
+        "use_document_count": 30
+    },
+    "extra_node_info": {
+        "name": "数据增强节点",
+        "description": ""
+    }
+}
+```
+
 **初始化参数**：
 
-- `type`: `str`
-- `json_schema_str`: `str`
-- `json_num_per_block`: `int`（可选，默认值：5）
-- `use_document_count`: `int`（可选，默认值：500）
-- `categories`: `list[str]`（可选，默认值：`None`）
-- `keyword_count`: `int`（可选，默认值：5）
+- `type`: `str` - 数据增强类型
+- `json_schema_str`: `str` - JSON 模式字符串，定义增强数据的结构
+- `json_num_per_block`: `int`（可选，默认值：10）- 每个块的 JSON 数量
+- `use_document_count`: `int`（可选，默认值：30）- 使用的文档数量
+- `categories`: `list[str]`（可选，默认值：`None`）- 类别列表
+- `keyword_count`: `int`（可选，默认值：5）- 关键词数量
 
 **运行方法**
 
 - 输入：
-  - `count`: `int`
+  - `documents`: `List[Document]`
 - 输出：
-  - `data_augmentation`: `Dict[str, Any]`
-
-**JavaScriptExecutor**
-
-**功能描述**：一个 Haystack 组件，用提供的参数执行 JavaScript 代码。
-
-**初始化参数**：
-
-- `js_code`: `Optional[str]`（可选）
-- `timeout`: `int`（可选，默认值：15）
-- `return_error`: `bool`（可选，默认值：`True`）
-- `variables`: `Optional[List[str]]`（可选）
-
-**运行方法**
-
-- 输入：
-  - `js_code`: `Optional[str]`（可选）
-  - `timeout`: `Optional[int]`（可选）
-- 输出：
-  - `js_output`: `str`
-  - `js_error_output`: `str`
+  - `documents`: `List[Document]`
 
 **PythonExecutor**
 
 **功能描述**：一个 Haystack 组件，用提供的参数执行 Python 代码。
 
+**参数结构示例**：
+
+```json
+{
+    "name": "PythonExecutor",
+    "type": "byoa.integrations.components.python_executor.PythonExecutor",
+    "component_id": "PythonExecutor_1749126721751",
+    "intro": "PythonExecutor",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "python_code": ""
+    }
+}
+```
+
 **初始化参数**：
 
-- `python_code`: `Optional[str]`（可选）
-- `timeout`: `int`（可选，默认值：15）
-- `return_error`: `bool`（可选，默认值：`True`）
+- `python_code`: `Optional[str]`（可选）- 要执行的 Python 代码
+- `timeout`: `int`（可选，默认值：15）- 执行超时时间（秒）
+- `return_error`: `bool`（可选，默认值：`True`）- 是否返回错误信息
 
 **运行方法**
 
@@ -2035,3 +2333,126 @@ if response.content:
 | `progress`   | integer, nullable | 作业进度 (0-100)                                             |
 | `start_time` | integer, nullable | 作业开始时间戳 (毫秒)                                        |
 | `end_time`   | integer, nullable | 作业结束时间戳 (毫秒)                                        |
+
+**DocumentEmbedder**
+
+**功能描述**：使用 OpenAI 的聊天完成 API 生成输出的组件。在工作流结束时用于处理流式和非流式响应。
+
+**参数结构示例**：
+
+```json
+{
+    "name": "DocumentEmbedder",
+    "type": "haystack.components.embedders.openai_document_embedder.OpenAIDocumentEmbedder",
+    "component_id": "DocumentEmbedder_1749126721751",
+    "intro": "DocumentEmbedder",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "api_base_url": "",
+        "api_key": {
+            "env_vars": ["OPENAI_API_KEY"],
+            "strict": true,
+            "type": "env_var"
+        },
+        "batch_size": 32,
+        "dimensions": null,
+        "embedding_separator": "\n",
+        "meta_fields_to_embed": [],
+        "model": "",
+        "organization": null,
+        "prefix": "",
+        "progress_bar": true,
+        "suffix": ""
+    }
+}
+```
+
+**初始化参数**：
+
+- `api_base_url`: `str`（可选，默认值：`'https://xxxxx.com/model/api/v1'`）- API 基础 URL
+- `api_key`: `Secret`（可选，默认值：`Secret.from_env_var('OPENAI_API_KEY')`）- API 密钥
+- `model`: `str`（可选，默认值：`""`）- 模型名称
+- `batch_size`: `int`（可选，默认值：32）- 批处理大小
+- `dimensions`: `Optional[int]`（可选，默认值：`None`）- 嵌入维度
+- `embedding_separator`: `str`（可选，默认值：`"\n"`）- 嵌入分隔符
+- `meta_fields_to_embed`: `list`（可选，默认值：`[]`）- 要嵌入的元字段列表
+- `organization`: `Optional[str]`（可选，默认值：`None`）- 组织 ID
+- `prefix`: `str`（可选，默认值：`""`）- 前缀
+- `progress_bar`: `bool`（可选，默认值：`True`）- 是否显示进度条
+- `suffix`: `str`（可选，默认值：`""`）- 后缀
+
+**运行方法**
+
+- 输入：
+  - `documents`: `List[Document]`
+  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+- 输出：
+  - `documents`: `List[Document]`
+
+**DocumentWriter**
+
+**功能描述**：文档写入器组件。
+
+**参数结构示例**：
+
+```json
+{
+    "name": "DocumentWriter",
+    "type": "haystack.components.writers.document_writer.DocumentWriter",
+    "component_id": "DocumentWriter_1749126721751",
+    "intro": "DocumentWriter",
+    "position": {
+        "x": 0,
+        "y": 0
+    },
+    "input_keys": {},
+    "output_keys": {},
+    "init_parameters": {
+        "document_store": {
+            "init_parameters": {
+                "connection_string": {
+                    "env_vars": ["DATABASE_SYNC_URI"],
+                    "strict": true,
+                    "type": "env_var"
+                },
+                "embedding_dimension": 1024,
+                "keyword_index_name": "haystack_keyword_index",
+                "recreate_table": true,
+                "table_name": "embedding_results",
+                "vector_function": "cosine_similarity"
+            },
+            "type": "byoa.integrations.document_stores.mo_document_store.MOIDocumentStore"
+        },
+        "policy": "NONE"
+    }
+}
+```
+
+**初始化参数**：
+
+- `document_store`: 文档存储配置对象
+  - `init_parameters`: 初始化参数
+    - `connection_string`: `Dict[str, Any]` - 数据库连接字符串配置
+      - `env_vars`: `List[str]` - 环境变量列表
+      - `strict`: `bool` - 是否严格模式
+      - `type`: `str` - 类型
+    - `embedding_dimension`: `int` - 嵌入维度
+    - `keyword_index_name`: `str` - 关键词索引名称
+    - `recreate_table`: `bool` - 是否重新创建表
+    - `table_name`: `str` - 表名
+    - `vector_function`: `str` - 向量相似度函数
+  - `type`: `str` - 文档存储类型
+- `policy`: `str` - 写入策略
+
+**运行方法**
+
+- 输入：
+  - `documents`: `List[Document]`
+  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+- 输出：
+  - `documents`: `List[Document]`
