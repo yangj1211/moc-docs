@@ -2,6 +2,13 @@
 
 ## 工作流
 
+工作流是一套数据处理流程，由一些数据处理节点组成，每个节点是一个处理单元，这些节点组成一个 DAG 图。文档处理过程就是文档的数据按照这个 DAG 图进行处理和流转的过程。
+
+一个工作流包含两部分重要内容：
+
+* 节点：一个文档处理单元，输入是具体的文档，比如一个 pdf 文件，或者 pdf 文件分段后的结果（如以 800 个字符大小进行分段），输出是经过节点处理后的文档或者分段。
+* 节点之间的连线：表示数据处理流向，将所有节点构成一个 DAG 图。如果 A 节点有一条指向 B 节点的连线，表示 A 节点的输出是 B 节点的输入。
+
 ### 创建工作流
 
 ```
@@ -155,78 +162,102 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 #### 添加自定义工作流组件
 
-概括来讲，自定义处理节点就是添加一段自定义的 python 代码，对数据流中的文档进行处理，这段代码的输入是文档的数据。后面通过具体的例子说明如何自定节点。
+概括来讲，自定义处理节点就是添加一段自定义的 python 代码，对数据流中的文档进行处理。
 
-在目前数据处理工作流（[点击查看完整工作流组件 JSON 示例文件](./workflow.json)）中，ImageCaptionToDocument 是对一张图片进行总结描述的节点，假设我们要在图片总结之后，加上我们的一个自定义的说明（如：自定义 caption 说明），可以通过下面步骤做到。
+下面将通过一个具体的例子说明如何自定节点。在目前数据处理工作流中，ImageCaptionToDocument 是对一张图片进行总结描述的节点，假设我们要在图片总结之后，加上我们的一个自定义的说明（如：`自定义 caption 说明`），可以通过下面步骤做到：
 
-1. 编写自定义 Python 代码，例如：
+1\. **编写自定义 Python 代码**
 
-    ```python
-    custom_caption = '''
+   自定义 python 代码需要放在一个字符串中，并且使用 documents 作为局部变量，该自定义 python 代码最终会通过 python 的内置函数 exec 通过 `exec(code, {}, {"documents": documents})` 的方式执行。
 
-    for doc in documents:
+   示例代码：
 
-        if isinstance(doc.content, str) and len (doc.content) > 0:
+   ```python
+   custom_caption = '''
+   for doc in documents:
+       if isinstance(doc.content, str) and len(doc.content) > 0:
+           doc.content = doc.content + " add a suffix for each pic caption"
+   '''
+   ```
 
-            doc.content = doc.content + " add a suffix for each pic caption"
-    '''
-    ```
+   其中 documents 的具体类型是 List[Document]，是一个文档按照特定大小分段后的列表。Document 的具体类型参考 [haystack Document 定义](https://github.com/deepset-ai/haystack/blob/f025501792a5870c062d1d0ecfb2bf2c27d1cfc1/haystack/dataclasses/document.py#L46)。
 
-2. 在 request body 里添加一个自定义组件，假设组件名字为 CustomCaptionComponent。
+2\. **添加自定义组件配置**
 
-    ```json
-    // 其他配置
-    "file_types": [2],
-    "priority": 300,
-    "workflow": {
-        "components": [
-            {
-                //这里是添加的自定义组件
-                "name": "CustomCaptionComponent",
-                "type": "byoa.integrations.components.python_executor.PythonExecutor",
-                "component_id": "CustomCaptionComponent_1748241281755",
-                "intro": "CustomCaptionComponent",
-                "position": {
-                    "x": 0,
-                    "y": 0
-                },
-                "input_keys": {},
-                "output_keys": {},
-                "init_parameters": {
-                    // 这里指定自定义 python 代码
-                    "python_code": custom_caption
-                }
-            },{
-                "name": "DocumentCleaner"
-                // 后续其他配置
-            }
-    ```
+   在创建工作流的 request 中添加自定义组件，配置路径为 `data -> workflow -> components`。components 是一个列表，自定义组件可以添加在列表的任何位置，与顺序无关。假设自定义组件的名称为 CustomCaptionComponent，并且引用第一步中的 custom_caption 代码。
 
-3. 将自定义组件 CustomCaptionComponent 添加到 pipeline 中。如果原来 ImageCaptionToDocument 指向的是 DocumentSplitter-ImageOCR 节点，现在需要将 CustomCaptionComponent 添加到这两个节点之间。
+   配置示例：
 
-    修改前：
+   ```json
+   {
+       "name": "CustomCaptionComponent",
+       "type": "byoa.integrations.components.python_executor.PythonExecutor",
+       "component_id": "CustomCaptionComponent_1748241281755",
+       "intro": "CustomCaptionComponent",
+       "position": {
+           "x": 0,
+           "y": 0
+       },
+       "input_keys": {},
+       "output_keys": {},
+       "init_parameters": {
+           // 这里配置自定义 python 代码
+           "python_code": custom_caption
+       }
+   }
+   ```
 
-    ```json
-    {
-        "receiver": "DocumentSplitter-ImageOCR.documents",
-        "sender": "ImageCaptionToDocument.documents"
-    }
-    ```
+   配置参数说明：
 
-    修改后：
+   * `name`: 自定义组件的名称，不可以与现有组件重名
+   * `type`: 固定配置为 `byoa.integrations.components.python_executor.PythonExecutor`
+   * `component_id`：唯一 id，格式与现有组件保持一致，如 `<name_id>`
+   * `intro`: 对组件的说明，自定义
+   * `position`: 目前配置为 `{"x":0, "y":0}` 即可
+   * `input_keys`/`output_keys`: 保持为 `{}`
+   * `init_parameters.python_code`: 配置第一步中编写的自定义 Python 代码
 
-    ```json
-    {
-        "receiver": "DocumentSplitter-ImageOCR.documents",
-        "sender": "CustomCaptionComponent.documents"
-    },
-    {
-        "receiver": "CustomCaptionComponent.documents",
-        "sender": "ImageCaptionToDocument.documents"
-    }
-    ```
+3\. **配置组件连线**
 
-4. 通过创建工作流请求 `byoa/api/v1/workflow_meta` 创建工作流。创建之后，用户可在界面上查看工作流执行详情。
+   将自定义组件添加到工作流中，需要修改 request 配置，在 connections 中添加连线。配置路径为 `data -> workflow -> connections`。connections 是一个列表，可添加在列表的任意位置，与顺序无关。
+
+   例如，在原 workflow 中，如果 ImageCaptionToDocument 指向 DocumentSplitter-ImageOCR 节点（即按照特定字符长度对文档进行分割的节点），现在需要将 CustomCaptionComponent 添加到这两个节点之间。
+
+   修改前：
+
+   ```json
+   {
+       "receiver": "DocumentSplitter-ImageOCR.documents",
+       "sender": "ImageCaptionToDocument.documents"
+   }
+   ```
+
+   修改后：
+
+   ```json
+   {
+       "receiver": "DocumentSplitter-ImageOCR.documents",
+       "sender": "CustomCaptionComponent.documents"
+   },
+   {
+       "receiver": "CustomCaptionComponent.documents",
+       "sender": "ImageCaptionToDocument.documents"
+   }
+   ```
+
+   连线配置说明：
+
+   * `sender`: 连线的起始节点。以 `CustomCaptionComponent.documents` 为例：
+
+     - CustomCaptionComponent 是组件名称
+
+     - documents 是节点的输出，对于自定义组件，输出固定为 documents，具体类型是 List[Document]
+
+   * `receiver`: 连线的目标节点。documents 是节点的输入，即将上游的 documents 输出作为下游的 documents 输入。
+
+4\. **完成工作流创建**
+
+   通过创建工作流请求 `byoa/api/v1/workflow_meta` 创建工作流。创建之后，用户可通过中间节点处理结果 api 进行查看和验证自定义节点的处理结果。
 
 #### 工作流组件介绍
 

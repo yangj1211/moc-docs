@@ -955,10 +955,9 @@ async def main():
         limit=20
     )
     print(json.dumps(results, indent=4))
-
 ```
 
-**返回：**
+**返回示例：**
 
 ```json
 {
@@ -966,19 +965,58 @@ async def main():
     "msg": "ok",
     "data": [
         {
-            "id": "debug_result_id",
-            "workflow_job_id": "job_id",
-            "workflow_branch_id": "branch_id",
-            "workflow_meta_id": "meta_id",
-            "component_name": "PDFConverter",
-            "file_id": "file_id",
-            "component_results": "{...}", // JSON 格式的组件执行结果
-            "created_at": "2024-03-20T10:30:00Z"
+            "id": "72f66505-8f26-458b-9621-ef9ce9acf268",
+            "workflow_branch_id": "82f1064d-49a7-4c18-851d-8a7419090af3",
+            "workflow_meta_id": "69985cd1-cc08-4be5-adac-4de14a5fc4e0",
+            "component_name": "EnhancedDOCXToDocument",
+            "component_results": "{\"documents\": [{\"_type\": \"Document\", \"id\": \"d0f523a6af915a9ad4c6ca017b3ea79e958305902cd366d600298e00bb318b62\", \"content\": \"云原生应用的高可用架构设计...\", \"content_length\": 1540, \"meta\": {...}}]}",
+            "workflow_job_id": "019742c0-ee10-79b3-902b-41df812d0de1",
+            "file_id": "019742c0-ee10-79ce-9020-7b266182e431",
+            "created_at": "2025-06-06T01:00:41",
+            "updated_at": "2025-06-06T01:00:41"
         }
-        // ... 更多结果
     ]
 }
 ```
+
+**返回参数说明：**
+
+1. **基础信息字段**
+   - `id`: 调试结果记录的唯一标识符
+   - `workflow_job_id`: 工作流作业的 ID
+   - `workflow_branch_id`: 工作流分支的 ID
+   - `workflow_meta_id`: 工作流元数据的 ID
+   - `component_name`: 组件名称，例如 "EnhancedDOCXToDocument"
+   - `file_id`: 处理的文件 ID
+   - `created_at`: 记录创建时间
+   - `updated_at`: 记录更新时间
+
+2. **component_results 字段**（JSON 字符串，包含以下结构）：
+   - `documents`: 文档数组，每个文档包含：
+     - `_type`: 文档类型，通常为 "Document"
+     - `id`: 文档的唯一标识符
+     - `content`: 文档的实际内容
+     - `content_length`: 内容长度
+     - `meta`: 元数据对象，包含：
+       - `content_type`: 内容类型（如 "text"）
+       - `file_name`: 文件名
+       - `file_id`: 文件 ID
+       - `target_volume_id`: 目标数据卷 ID
+       - `source_volume_id`: 源数据卷 ID
+       - `source_file_id`: 源文件 ID
+       - `job_id`: 作业 ID
+       - `job_version`: 作业版本
+       - `workflow_meta_id`: 工作流元数据 ID
+       - `workflow_branch_id`: 工作流分支 ID
+       - `user_id`: 用户 ID
+       - `docx`: DOCX 特有的元数据（如果是 DOCX 文件）
+         - `author`: 作者
+         - `created`: 创建时间
+         - `modified`: 修改时间
+         - 其他 DOCX 相关属性
+       - `md_file_url`: 生成的 Markdown 文件 URL（如果有）
+
+通过这个 API，您可以查询工作流中各个组件的处理结果，用于调试和验证工作流的执行情况。每个组件的处理结果都会被记录下来，包括输入文档的处理结果以及相关的元数据信息。
 
 ### 数据库直接查询
 
