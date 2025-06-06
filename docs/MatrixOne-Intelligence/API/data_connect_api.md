@@ -350,7 +350,7 @@ POST /task
   
 |  参数                    | 是否必填 |含义|
 |  -----------------------| ------- |----  |
-| source_connector_id     | 是      | 连接器id |
+| source_connector_id     | 是      | 连接器 id |
 | volume_id               | 是      | 要载入的原始卷的的 id |
 | source_config           | 是      | 为载入任务源配置 |
 | common_file_task_config | 是      | 为通用文件配置 |
