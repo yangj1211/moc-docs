@@ -50,35 +50,19 @@
 
 ## 数据处理
 
-### 1. 创建阿里云 OSS 连接器
-
-- 在菜单栏的数据接入中点击并进入**连接器**页面。
-- 在连接器界面右上角，找到并点击**创建连接器**按钮。
-- 输入阿里云 OSS 连接信息。
-- 点击测试连接，确保连接信息正确后点击保存。
-
-<div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-connect/oss_1.png
- width=60% heigth=60%/>
-</div>
-
-### 2. 数据载入
+### 1. 数据载入
 
 - 在菜单栏的数据接入中点击并进入**数据载入**页面。
 - 在编数据载入页面右上角点击**载入数据**。
-- 在创建工作流界面输入以下信息
-    - 连接器：选择刚才创建的阿里云 OSS 连接器
+- 在数据载入页面选择**本地上传**，并输入以下配置信息：
     - 载入位置：下拉处添加原始数据卷
-    - 载入模式为：一次载入
+    - 上传 PDF 文件
     - 选择需要载入的文件
 - 查看数据载入列表，等待状态变成**完成**
 
-<div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-connect/oss_2.png
- width=60% heigth=60%/>
-</div>
+![Alt text](../images/workspace_1.png)
 
-### 3. 创建工作流
+### 2. 创建工作流
 
 - 在菜单栏的数据处理处中点击并进入**工作流**页面
 - 在工作流页面右上角点击**创建工作流**
@@ -86,17 +70,16 @@
     - 工作流名称
     - 源数据卷：选择上一步创建的原始数据卷
     - 目标数据卷：在下拉处添加目标数据卷
-    - 文件类型：选择 PDF
-    - 处理模式：一次处理
-    - 处理流程：保持默认值
+    - 处理模式：保持默认值
+    - 优先级：保持默认值
+    - 文件类型：选择文本类型
+    - 分支名称：保持默认值
+    - 处理流程图：只需保留文本解析节点
 - 查看工作流列表，等待状态变成**完成**
 
-<div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-processing/workflow_1.png
- width=60% heigth=60%/>
-</div>
+![Alt text](../images/workspace_2.png)
 
-### 4. 查看文件解析结果
+### 3. 查看文件解析结果
 
 - 在菜单栏的数据探索处中点击并进入 **Catalog** 页面
 - 在处理数据卷中找到上一步创建的目标数据卷
@@ -107,17 +90,15 @@
  width=100% heigth=100%/>
 </div>
 
-### 5. 下载解析数据
+### 4. 下载解析数据
 
 点击右侧下载按钮，即可获得一个包含文字解析信息和图片资源的文件夹，文件夹内包括：
 
 - JSON 文件：记录完整的文字解析内容，包括文件基础信息、分段类型、分段所在页码以及对应图片的原始元数据。
 - 图片文件夹：存放文档中解析生成的图片资源，便于后续查看与使用。
+- full.md 文件：完整 Markdown 内容文件。
 
-<div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/catalog/vol_5.png
- width=100% heigth=100%/>
-</div>
+![Alt text](../images/workspace_3.png)
 
 恭喜您成功创建 GenAI 工作区并完成文件处理全流程！有关 GenAI 工作区的更多操作详情，可参阅 [GenAI 工作区](../Workspace-Mgmt/overview.md)相关章节。
 
