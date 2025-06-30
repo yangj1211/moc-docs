@@ -352,11 +352,12 @@ POST /task
 |  -----------------------| ------- |----  |
 | source_connector_id     | 是      | 连接器 id |
 | volume_id               | 是      | 要载入的原始卷的的 id |
-| source_config           | 是      | 为载入任务源配置 |
-| common_file_task_config | 是      | 为通用文件配置 |
-| load_mode_config        | 是      | 载入模式设置，interval 为载入周期，load_interval_type 表示载入周期单位和类型，0：未知的加载间隔类型，可作为默认的无效值）；1：按天进行加载，可能表示每天固定时间加载；2：按小时进行加载，可能表示每小时的某个固定时间加载 3：按分钟进行加载，可能表示每分钟的某个固定时刻加载；4：默认类型，仅加载一次。|
-| uris                    | 是      | 要载入的文件 |
-| config_type             | 是      | 表示通用文件载入配置类型，默认为 1 |
+| source_config           | 是      | 载入任务源配置对象 |
+| source_config.common_file_task_config | 是      | 通用文件任务配置对象 |
+| source_config.common_file_task_config.load_mode_config | 是      | 载入模式设置对象 |
+| source_config.common_file_task_config.load_mode_config.load_interval_type | 是      | 载入周期单位和类型，0：未知的加载间隔类型；1：按天进行加载；2：按小时进行加载；3：按分钟进行加载；4：默认类型，仅加载一次 |
+| source_config.common_file_task_config.uris | 是      | 要载入的文件列表 |
+| config_type             | 是      | 通用文件载入配置类型，默认为 1 |
 
 **示例：**
 
