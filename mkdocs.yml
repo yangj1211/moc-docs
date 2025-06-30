@@ -59,12 +59,14 @@ nav:
       - 用户权限:
         - 用户管理: MatrixOne-Intelligence/Workspace-Mgmt/user-privilge/user_mgmt.md
         - 角色权限: MatrixOne-Intelligence/Workspace-Mgmt/user-privilge/role_mgmt.md
-      - API 说明: 
-        - 鉴权: MatrixOne-Intelligence/API/token_api.md
-        - 数据接入: MatrixOne-Intelligence/API/data_connect_api.md
-        - 数据处理: MatrixOne-Intelligence/API/data_processing_api.md
-        - 数据探索: MatrixOne-Intelligence/API/data_explore_api.md
-        - 指标: MatrixOne-Intelligence/API/indicator_api.md
+      - 工作流 API 说明:
+        - 鉴权: MatrixOne-Intelligence/workflow api/token_api.md
+        - 数据接入: MatrixOne-Intelligence/workflow api/data_connect_api.md
+        - 数据处理: MatrixOne-Intelligence/workflow api/data_processing_api.md
+        - 数据探索: MatrixOne-Intelligence/workflow api/data_explore_api.md
+        - 指标: MatrixOne-Intelligence/workflow api/indicator_api.md
+      - 快速体验 API 说明:
+        - 结构化抽取: MatrixOne-Intelligence/quick-start api/structured_extraction_api.md
     - 数据库实例: 
       - 管理实例:
         - 创建实例:
