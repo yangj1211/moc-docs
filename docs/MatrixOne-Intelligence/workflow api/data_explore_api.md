@@ -395,7 +395,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 | total   | integer             | 数据卷总数 |
 | volumes | array[TargetVolume] | 数据卷列表 |
 
-* **`TargetVolume` 对象结构:**
+* **TargetVolume** 对象结构:**
 
   | 参数             | 类型   | 含义                   |
   | ---------------- | ------ | ---------------------- |
@@ -414,7 +414,7 @@ GET /byoa/api/v1/explore/volumes/{vid}
 
 **路径参数：**
 
-* `vid` (string, 必填): 处理数据卷 ID
+* **vid** (string, 必填): 处理数据卷 ID
 
 **示例 (Python)：**
 
@@ -432,7 +432,7 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 ```
 
 **返回：**
-返回结构与 "查看数据卷列表" 相同，但 `volumes` 列表将只包含指定 `{vid}` 的分支卷。
+返回结构与 "查看数据卷列表" 相同，但 **volumes** 列表将只包含指定 **{vid}** 的分支卷。
 
 **输出参数：**
 与 "查看数据卷列表" 的输出参数一致。
@@ -445,18 +445,18 @@ POST /byoa/api/v1/explore/volumes/{vid}/files
 
 **路径参数：**
 
-* `vid` (string, 必填): 数据卷 ID
+* **vid** (string, 必填): 数据卷 ID
 
 **Body 输入参数 (可选)：**
 
 | 参数    | 类型              | 含义     | 默认值 |
 | ------- | ----------------- | -------- | ------ |
-| filters | object (`Filter`) | 过滤器   |        |
-| sorter  | object (`Sorter`) | 排序器   |        |
+| filters | object (**Filter**) | 过滤器   |        |
+| sorter  | object (**Sorter**) | 排序器   |        |
 | offset  | integer           | 偏移量   | 0      |
 | limit   | integer           | 每页数量 | 30     |
 
-* **`Filter` 对象结构:**
+* **Filter** 对象结构:**
 
   | 参数           | 类型           | 含义           |
   | -------------- | -------------- | -------------- |
@@ -464,7 +464,7 @@ POST /byoa/api/v1/explore/volumes/{vid}/files
   | status         | array[integer] | 文件状态过滤   |
   | exclude_status | array[integer] | 排除的文件状态 |
 
-* **`Sorter` 对象结构：**
+* **Sorter** 对象结构：**
 
   | 参数    | 类型    | 含义     | 默认值 |
   | ------- | ------- | -------- | ------ |
@@ -549,9 +549,9 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
 | 参数  | 类型          | 含义     |
 | ----- | ------------- | -------- |
 | total | integer       | 文件总数 |
-| items | array[`File`] | 文件列表 |
+| items | array[**File**] | 文件列表 |
 
-* **`File` 对象结构:**
+* **File** 对象结构:**
 
   | 参数               | 类型    | 含义                   | 默认值       |
   | ------------------ | ------- | ---------------------- | ------------ |
@@ -585,8 +585,8 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}
 
 **路径参数：**
 
-* `vid` (string, 必填): 数据卷 ID
-* `fid` (string, 必填): 文件 ID
+* **vid** (string, 必填): 数据卷 ID
+* **fid** (string, 必填): 文件 ID
 
 **示例 (Python)：**
 
@@ -620,8 +620,8 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/raws
 
 **路径参数：**
 
-* `vid` (string, 必填): 数据卷 ID
-* `fid` (string, 必填): 文件 ID
+* **vid** (string, 必填): 数据卷 ID
+* **fid** (string, 必填): 文件 ID
 
 **Query 参数：**
 
@@ -679,8 +679,8 @@ GET /byoa/api/v1/explore/volumes/{vid}/files/{fid}/jobs
 
 **路径参数：**
 
-* `vid` (string, 必填): 数据卷 ID
-* `fid` (string, 必填): 文件 ID
+* **vid** (string, 必填): 数据卷 ID
+* **fid** (string, 必填): 文件 ID
 
 **示例 (Python)：**
 
@@ -729,18 +729,18 @@ POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 
 **路径参数：**
 
-* `vid` (string, 必填): 数据卷 ID
-* `fid` (string, 必填): 文件 ID
+* **vid** (string, 必填): 数据卷 ID
+* **fid** (string, 必填): 文件 ID
 
 **Body 输入参数 (`可选)：**
 
 | 参数    | 类型                    | 含义     | 默认值 |
 | ------- | ----------------------- | -------- | ------ |
-| filters | object (`BlocksFilter`) | 过滤器   |        |
+| filters | object (**BlocksFilter**) | 过滤器   |        |
 | offset  | integer                 | 偏移量   | 0      |
 | limit   | integer                 | 每页数量 | 30     |
 
-* **`BlocksFilter` 对象结构:**
+* **BlocksFilter** 对象结构:**
 
   | 参数           | 类型          | 含义                                     |
   | -------------- | ------------- | ---------------------------------------- |
@@ -812,14 +812,18 @@ print("Response Body:", json.dumps(response.json(), indent=4, ensure_ascii=False
         ]
     }
 }
-```**输出参数：**
+
+
+```
+
+**输出参数：**
 
 | 参数  | 类型                           | 含义       |
 | ----- | ------------------------------ | ---------- |
 | total | integer                        | 数据块总数 |
-| items | array[`SampleEmbeddingResult`] | 数据块列表 |
+| items | array[**SampleEmbeddingResult**] | 数据块列表 |
 
-* **`SampleEmbeddingResult` 对象结构:**
+* **SampleEmbeddingResult** 对象结构:**
 
   | 参数              | 类型    | 含义                                             |
   | ----------------- | ------- | ------------------------------------------------ |
@@ -843,8 +847,8 @@ DELETE /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 
 **路径参数：**
 
-* `vid` (string, 必填): 数据卷 ID
-* `fid` (string, 必填): 文件 ID
+* **vid** (string, 必填): 数据卷 ID
+* **fid** (string, 必填): 文件 ID
 
 **Body 输入参数：**
 
@@ -890,7 +894,7 @@ else:
 
 ## 查看工作流中间结果
 
-系统会自动将各组件的执行结果保存到数据库的 `debug_results` 表中，您可以通过以下方式查看 Pipeline 组件的中间结果数据，用于开发调试和问题排查。
+系统会自动将各组件的执行结果保存到数据库的 **debug_results** 表中，您可以通过以下方式查看 Pipeline 组件的中间结果数据，用于开发调试和问题排查。
 
 ### API 查询
 
@@ -902,12 +906,12 @@ GET /byoa/api/v1/debug_results
 
 | 参数名             | 类型              | 是否必填 | 描述                     | 默认值 |
 | ----------------- | ----------------- | -------- | ----------------------- | ------ |
-| `workflow_job_id` | string           | 否       | 工作流作业 ID            |        |
-| `workflow_branch_id` | string        | 否       | 工作流分支 ID            |        |
-| `workflow_meta_id` | string          | 否       | 工作流元数据 ID          |        |
-| `component_name`  | string           | 否       | 组件名称（支持部分匹配）  |        |
-| `file_id`        | string           | 否       | 文件 ID                  |        |
-| `limit`          | integer          | 否       | 限制返回结果数量          | 50     |
+| **workflow_job_id** | string           | 否       | 工作流作业 ID            |        |
+| **workflow_branch_id** | string        | 否       | 工作流分支 ID            |        |
+| **workflow_meta_id** | string          | 否       | 工作流元数据 ID          |        |
+| **component_name**  | string           | 否       | 组件名称（支持部分匹配）  |        |
+| **file_id**        | string           | 否       | 文件 ID                  |        |
+| **limit**          | integer          | 否       | 限制返回结果数量          | 50     |
 
 **示例 (Python)：**
 
@@ -982,39 +986,39 @@ async def main():
 **返回参数说明：**
 
 1. **基础信息字段**
-   - `id`: 调试结果记录的唯一标识符
-   - `workflow_job_id`: 工作流作业的 ID
-   - `workflow_branch_id`: 工作流分支的 ID
-   - `workflow_meta_id`: 工作流元数据的 ID
-   - `component_name`: 组件名称，例如 "EnhancedDOCXToDocument"
-   - `file_id`: 处理的文件 ID
-   - `created_at`: 记录创建时间
-   - `updated_at`: 记录更新时间
+   - **id**: 调试结果记录的唯一标识符
+   - **workflow_job_id**: 工作流作业的 ID
+   - **workflow_branch_id**: 工作流分支的 ID
+   - **workflow_meta_id**: 工作流元数据的 ID
+   - **component_name**: 组件名称，例如 "EnhancedDOCXToDocument"
+   - **file_id**: 处理的文件 ID
+   - **created_at**: 记录创建时间
+   - **updated_at**: 记录更新时间
 
 2. **component_results 字段**（JSON 字符串，包含以下结构）：
-   - `documents`: 文档数组，每个文档包含：
-     - `_type`: 文档类型，通常为 "Document"
-     - `id`: 文档的唯一标识符
-     - `content`: 文档的实际内容
-     - `content_length`: 内容长度
-     - `meta`: 元数据对象，包含：
-       - `content_type`: 内容类型（如 "text"）
-       - `file_name`: 文件名
-       - `file_id`: 文件 ID
-       - `target_volume_id`: 目标数据卷 ID
-       - `source_volume_id`: 源数据卷 ID
-       - `source_file_id`: 源文件 ID
-       - `job_id`: 作业 ID
-       - `job_version`: 作业版本
-       - `workflow_meta_id`: 工作流元数据 ID
-       - `workflow_branch_id`: 工作流分支 ID
-       - `user_id`: 用户 ID
-       - `docx`: DOCX 特有的元数据（如果是 DOCX 文件）
-         - `author`: 作者
-         - `created`: 创建时间
-         - `modified`: 修改时间
+   - **documents**: 文档数组，每个文档包含：
+     - **_type**: 文档类型，通常为 "Document"
+     - **id**: 文档的唯一标识符
+     - **content**: 文档的实际内容
+     - **content_length**: 内容长度
+     - **meta**: 元数据对象，包含：
+       - **content_type**: 内容类型（如 "text"）
+       - **file_name**: 文件名
+       - **file_id**: 文件 ID
+       - **target_volume_id**: 目标数据卷 ID
+       - **source_volume_id**: 源数据卷 ID
+       - **source_file_id**: 源文件 ID
+       - **job_id**: 作业 ID
+       - **job_version**: 作业版本
+       - **workflow_meta_id**: 工作流元数据 ID
+       - **workflow_branch_id**: 工作流分支 ID
+       - **user_id**: 用户 ID
+       - **docx**: DOCX 特有的元数据（如果是 DOCX 文件）
+         - **author**: 作者
+         - **created**: 创建时间
+         - **modified**: 修改时间
          - 其他 DOCX 相关属性
-       - `md_file_url`: 生成的 Markdown 文件 URL（如果有）
+       - **md_file_url**: 生成的 Markdown 文件 URL（如果有）
 
 通过这个 API，您可以查询工作流中各个组件的处理结果，用于调试和验证工作流的执行情况。每个组件的处理结果都会被记录下来，包括输入文档的处理结果以及相关的元数据信息。
 
@@ -1043,7 +1047,7 @@ ORDER BY created_at DESC LIMIT 10;
 
 注意事项
 
-1. 建议使用 `limit` 参数限制查询结果数量，避免返回过多数据
-2. 组件结果以 JSON 格式存储在 `component_results` 字段中
+1. 建议使用 **limit** 参数限制查询结果数量，避免返回过多数据
+2. 组件结果以 JSON 格式存储在 **component_results** 字段中
 3. 可以通过组合不同的查询参数来精确定位需要查看的结果
 4. 时间戳使用 UTC 时间

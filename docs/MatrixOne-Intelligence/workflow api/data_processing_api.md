@@ -19,31 +19,31 @@ POST /byoa/api/v1/workflow_meta
 
 | 参数名                      | 是否必填 | 类型                         | 含义                           | 默认值 |
 | --------------------------- | -------- | ---------------------------- | ------------------------------ | ------ |
-| `name`                      | 是       | string                       | 工作流名称                     |        |
-| `source_volume_names`       | 是       | array[string]                | 源数据卷名称列表               |        |
-| `source_volume_ids`         | 是       | array[String]               | 源数据卷 ID 列表                 |        |
-| `file_types`                | 是       | array[integer]               | 文件类型列表，支持：<br>NIL = 0<br>TXT = 1<br>PDF = 2<br>IMAGE = 3<br>PPT = 4<br>WORD = 5<br>MARKDOWN = 6<br>CSV = 7<br>PARQUET = 8<br>SQL_FILES = 9<br>DIR = 10<br>DOCX = 11<br>PPTX = 12<br>WAV = 13<br>MP3 = 14<br>AAC = 15<br>FLAC = 16<br>MP4 = 17<br>MOV = 18<br>MKV = 19<br>PNG = 20<br>JPG = 21<br>JPEG = 22<br>BMP = 23                   |        |
-| `process_mode`              | 是       | object (`ProcessModeConfig`) | 处理模式配置                   |        |
-| `priority`                  | 否       | integer                      | 优先级                         | 300    |
-| `target_volume_id`          | 是       | string                       | 目标数据卷 ID                   |        |
-| `target_volume_name`        | 否       | string                       | 目标数据卷名称                 | ""     |
-| `create_target_volume_name` | 是       | string                       | 创建目标数据卷时使用的名称     |        |
-| `workflow`                  | 是       | object (`WorkflowConfig`)    | 工作流配置  |        |
-| `branch_name`               | 否       | string                       | 分支名    | ""     |
+| **name**                      | 是       | string                       | 工作流名称                     |        |
+| **source_volume_names**       | 是       | array[string]                | 源数据卷名称列表               |        |
+| **source_volume_ids**         | 是       | array[String]               | 源数据卷 ID 列表                 |        |
+| **file_types**                | 是       | array[integer]               | 文件类型列表，支持：<br>NIL = 0<br>TXT = 1<br>PDF = 2<br>IMAGE = 3<br>PPT = 4<br>WORD = 5<br>MARKDOWN = 6<br>CSV = 7<br>PARQUET = 8<br>SQL_FILES = 9<br>DIR = 10<br>DOCX = 11<br>PPTX = 12<br>WAV = 13<br>MP3 = 14<br>AAC = 15<br>FLAC = 16<br>MP4 = 17<br>MOV = 18<br>MKV = 19<br>PNG = 20<br>JPG = 21<br>JPEG = 22<br>BMP = 23                   |        |
+| **process_mode**              | 是       | object (**ProcessModeConfig**) | 处理模式配置                   |        |
+| **priority**                  | 否       | integer                      | 优先级                         | 300    |
+| **target_volume_id**          | 是       | string                       | 目标数据卷 ID                   |        |
+| **target_volume_name**        | 否       | string                       | 目标数据卷名称                 | ""     |
+| **create_target_volume_name** | 是       | string                       | 创建目标数据卷时使用的名称     |        |
+| **workflow**                  | 是       | object (**WorkflowConfig**)    | 工作流配置  |        |
+| **branch_name**               | 否       | string                       | 分支名    | ""     |
 
-* **`ProcessModeConfig` 结构:**
+* **ProcessModeConfig 结构：**
 
   | 参数       | 是否必填 | 类型    | 含义                   |
   | ---------- | -------- | ------- | ---------------------- |
-  | `interval` | 是       | integer | 处理模式：0 表示一次性处理，-1 表示关联处理，大于 0 表示周期性处理且值为处理间隔（分钟） |
-  | `offset`   | 是       | integer | 处理时间偏移量（分钟），一次性载入时默认为 0 |
+  | **interval** | 是       | integer | 处理模式：0 表示一次性处理，-1 表示关联处理，大于 0 表示周期性处理且值为处理间隔（分钟） |
+  | **offset**   | 是       | integer | 处理时间偏移量（分钟），一次性载入时默认为 0 |
 
-* **`WorkflowConfig` 结构:**
+* **WorkflowConfig 结构：**
 
-  * `components`: 组件配置列表。每个组件对象包含 `name`, `type`, `component_id`, `intro`, `position`, `input_keys`, `output_keys`, `init_parameters`。
-  * `connections`: 连接配置列表。每个连接对象包含 `sender` 和 `receiver`。
-  * `edges`: 边配置列表。
-  * `extra_components`: 额外组件配置列表。
+  * **components**: 组件配置列表。每个组件对象包含 **name**, **type**, **component_id**, **intro**, **position**, **input_keys**, **output_keys**, **init_parameters**。
+  * **connections**: 连接配置列表。每个连接对象包含 **sender** 和 **receiver**。
+  * **edges**: 边配置列表。
+  * **extra_components**: 额外组件配置列表。
 
 **示例 (Python)：**
 
@@ -209,13 +209,13 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
    配置参数说明：
 
-   * `name`: 自定义组件的名称，不可以与现有组件重名
-   * `type`: 固定配置为 `byoa.integrations.components.python_executor.PythonExecutor`
-   * `component_id`：唯一 id，格式与现有组件保持一致，如 `<name_id>`
-   * `intro`: 对组件的说明，自定义
-   * `position`: 目前配置为 `{"x":0, "y":0}` 即可
-   * `input_keys`/`output_keys`: 保持为 `{}`
-   * `init_parameters.python_code`: 配置第一步中编写的自定义 Python 代码
+   * **name**: 自定义组件的名称，不可以与现有组件重名
+   * **type**: 固定配置为 **byoa.integrations.components.python_executor.PythonExecutor**
+   * **component_id**：唯一 id，格式与现有组件保持一致，如 **<name_id>**
+   * **intro**: 对组件的说明，自定义
+   * **position**: 目前配置为 **{"x": 0, "y": 0}** 即可
+   * **input_keys**/**output_keys**: 保持为 **{}**
+   * **init_parameters.python_code**: 配置第一步中编写的自定义 Python 代码
 
 3\. **配置组件连线**
 
@@ -247,13 +247,13 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
    连线配置说明：
 
-   * `sender`: 连线的起始节点。以 `CustomCaptionComponent.documents` 为例：
+   * **sender**: 连线的起始节点。以 **CustomCaptionComponent.documents** 为例：
 
      - CustomCaptionComponent 是组件名称
 
      - documents 是节点的输出，对于自定义组件，输出固定为 documents，具体类型是 List[Document]
 
-   * `receiver`: 连线的目标节点。documents 是节点的输入，即将上游的 documents 输出作为下游的 documents 输入。
+   * **receiver**: 连线的目标节点。documents 是节点的输入，即将上游的 documents 输出作为下游的 documents 输入。
 
 4\. **完成工作流创建**
 
@@ -301,19 +301,19 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **初始化参数**：
 
-- `asr_model`: `str`（可选，默认值：`'sensevoice-v1'`）- ASR 模型名称
-- `enable_noise_reduction`: `bool`（可选，默认值：`False`）- 是否启用噪音消除
-- `enable_speaker_diarization`: `bool`（可选，默认值：`False`）- 是否启用说话人分离
-- `max_segment_duration`: `int`（可选，默认值：30）- 最大分段时长（秒）
-- `min_silence_duration`: `float`（可选，默认值：0.5）- 最小静音时长（秒）
+- **asr_model**: str（可选，默认值：'sensevoice-v1'）- ASR 模型名称
+- **enable_noise_reduction**: bool（可选，默认值：False）- 是否启用噪音消除
+- **enable_speaker_diarization**: bool（可选，默认值：False）- 是否启用说话人分离
+- **max_segment_duration**: int（可选，默认值：30）- 最大分段时长（秒）
+- **min_silence_duration**: float（可选，默认值：0.5）- 最小静音时长（秒）
 
 **运行方法**
 
 - 输入：
-  - `sources`: `List[Union[str, Path, ByteStream]]`
-  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+  - **sources**: List[Union[str, Path, ByteStream]]
+  - **meta**: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]（可选）
 - 输出：
-  - `documents`: `list[Document]`
+  - **documents**: list[Document]
 
 **EnhancedDOCXToDocument**
 
@@ -341,15 +341,15 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **初始化参数**：
 
-- `image_process_types`: `list[str]`（可选，默认值：`None`）- 图片处理类型列表，支持 `["caption", "ocr"]`
+- **image_process_types**: list[str]（可选，默认值：None）- 图片处理类型列表，支持 ["caption", "ocr"]
 
 **运行方法**
 
 - 输入：
-  - `sources`: `List[Union[str, Path, ByteStream]]`
-  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+  - **sources**: List[Union[str, Path, ByteStream]]
+  - **meta**: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]（可选）
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 
 **EnhancedPPTXToDocument**
 
@@ -377,15 +377,15 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **初始化参数**：
 
-- `image_process_types`: `list[str]`（可选，默认值：`None`）- 图片处理类型列表，支持 `["caption", "ocr"]`
+- **image_process_types**: list[str]（可选，默认值：None）- 图片处理类型列表，支持 ["caption", "ocr"]
 
 **运行方法**
 
 - 输入：
-  - `sources`: `List[Union[str, Path, ByteStream]]`
-  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+  - **sources**: List[Union[str, Path, ByteStream]]
+  - **meta**: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]（可选）
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 
 **EnhancedPlainToDocument**
 
@@ -418,10 +418,10 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 **运行方法**
 
 - 输入：
-  - `sources`: `Variadic[List[Union[str, Path, ByteStream]]]`
-  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+  - **sources**: Variadic[List[Union[str, Path, ByteStream]]]
+  - **meta**: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]（可选）
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 
 **MagicPDFToDocument**
 
@@ -449,15 +449,15 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 **初始化参数**：
 
-- `image_process_types`: `list[str]`（可选，默认值：`None`）- 图片处理类型列表，支持 `["caption", "ocr"]`
+- **image_process_types**: list[str]（可选，默认值：None）- 图片处理类型列表，支持 ["caption", "ocr"]
 
 **运行方法**
 
 - 输入：
-  - `sources`: `list[Union[str, Path, ByteStream]]`
-  - `meta`: `Optional[Union[dict[str, Any], list[dict[str, Any]]]]`（可选）
+  - **sources**: list[Union[str, Path, ByteStream]]
+  - **meta**: Optional[Union[dict[str, Any], list[dict[str, Any]]]]（可选）
 - 输出：
-  - `documents`: `list[Document]`
+  - **documents**: list[Document]
 
 - 使用示例：
 
@@ -472,7 +472,7 @@ print(result)
 
 **ImageCaptionToDocument**
 
-**功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取标题。
+**功能描述**：将图像文档转换为 Document 对象。使用多模态转换器从图像中获取标题。
 
 **参数结构示例**：
 
@@ -497,9 +497,9 @@ print(result)
 **运行方法**
 
 - 输入：
-  - `documents`: `list[Document]`
+  - **documents**: list[Document]
 - 输出：
-  - `documents`: `list[Document]`
+  - **documents**: list[Document]
 
 - 使用示例：
 
@@ -514,7 +514,7 @@ print(result)
 
 **ImageOCRToDocument**
 
-**功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取文本 (OCR)。
+**功能描述**：将图像文档转换为 Document 对象。使用多模态转换器从图像中获取文本 (OCR)。
 
 **参数结构示例**：
 
@@ -539,15 +539,15 @@ print(result)
 
 **初始化参数**：
 
-- `model`: `str`（可选，默认值：`'stepfun-ai/GOT-OCR2_0'`）- OCR 模型名称
-- `tokenizer`: `str`（可选，默认值：`'stepfun-ai/GOT-OCR2_0'`）- 分词器名称
+- **model**: str（可选，默认值：'stepfun-ai/GOT-OCR2_0'）- OCR 模型名称
+- **tokenizer**: str（可选，默认值：'stepfun-ai/GOT-OCR2_0'）- 分词器名称
 
 **运行方法**
 
 - 输入：
-  - `documents`: `list[Document]`
+  - **documents**: list[Document]
 - 输出：
-  - `documents`: `list[Document]`
+  - **documents**: list[Document]
 
 - 使用示例：
 
@@ -562,7 +562,7 @@ print(result)
 
 **ImageToDocument**
 
-**功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取标题。
+**功能描述**：将图像文档转换为 Document 对象。使用多模态转换器从图像中获取标题。
 
 **参数结构示例**：
 
@@ -590,15 +590,15 @@ print(result)
 
 **初始化参数**：
 
-- `image_process_types`: `list[str]`（可选，默认值：`['caption', 'ocr']`）- 图片处理类型列表，支持 `["caption", "ocr"]`
+- **image_process_types**: list[str]（可选，默认值：['caption', 'ocr']）- 图片处理类型列表，支持 ["caption", "ocr"]
 
 **运行方法**
 
 - 输入：
-  - `sources`: `list[Union[str, Path, ByteStream]]`
-  - `meta`: `Optional[Union[dict[str, Any], list[dict[str, Any]]]]`（可选）
+  - **sources**: list[Union[str, Path, ByteStream]]
+  - **meta**: Optional[Union[dict[str, Any], list[dict[str, Any]]]]（可选）
 - 输出：
-  - `documents`: `list[Document]`
+  - **documents**: list[Document]
 
 - 使用示例：
 
@@ -617,22 +617,22 @@ print(result)
 
 **初始化参数**：
 
-- `api_key`: `Optional[str]`（可选）
-- `model`: `Optional[str]`（可选）
-- `api_base_url`: `Optional[str]`（可选）
-- `system_prompt`: `Optional[str]`（可选）
-- `user_prompt`: `Optional[str]`（可选）
-- `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+- **api_key**: Optional[str]（可选）
+- **model**: Optional[str]（可选）
+- **api_base_url**: Optional[str]（可选）
+- **system_prompt**: Optional[str]（可选）
+- **user_prompt**: Optional[str]（可选）
+- **generation_kwargs**: Optional[Dict[str, Any]]（可选）
 
 **运行方法**
 
 - 输入：
-  - `documents`: `List[Document]`
-  - `system_prompt`: `Optional[str]`（可选）
-  - `user_prompt`: `Optional[str]`（可选）
-  - `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+  - **documents**: List[Document]
+  - **system_prompt**: Optional[str]（可选）
+  - **user_prompt**: Optional[str]（可选）
+  - **generation_kwargs**: Optional[Dict[str, Any]]（可选）
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 
 - 使用示例：
 
@@ -651,36 +651,36 @@ print(result)
 
 **初始化参数**：
 
-- `api_key`: `Optional[str]`（可选）
-- `model`: `Optional[str]`（可选）
-- `api_base_url`: `Optional[str]`（可选）
-- `system_prompt`: `Optional[str]`（可选）
-- `user_prompt`: `Optional[str]`（可选）
-- `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+- **api_key**: Optional[str]（可选）
+- **model**: Optional[str]（可选）
+- **api_base_url**: Optional[str]（可选）
+- **system_prompt**: Optional[str]（可选）
+- **user_prompt**: Optional[str]（可选）
+- **generation_kwargs**: Optional[Dict[str, Any]]（可选）
 
 **运行方法**
 
 - 输入：
-  - `documents`: `List[Document]`
-  - `system_prompt`: `Optional[str]`（可选）
-  - `user_prompt`: `Optional[str]`（可选）
-  - `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+  - **documents**: List[Document]
+  - **system_prompt**: Optional[str]（可选）
+  - **user_prompt**: Optional[str]（可选）
+  - **generation_kwargs**: Optional[Dict[str, Any]]（可选）
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 
 **ImageStructureOutput**
 
-**功能描述**：将图像文档转换为 `Document` 对象。使用多模态转换器从图像中获取标题。
+**功能描述**：将图像文档转换为 Document 对象。使用多模态转换器从图像中获取标题。
 
-**初始化参数**：`image_process_types`: `list[str]`（可选，默认值：`['caption', 'ocr']`）
+**初始化参数**：**image_process_types**: list[str]（可选，默认值：['caption', 'ocr']）
 
 **运行方法**
 
 - 输入：
-  - `sources`: `list[Union[str, Path, ByteStream]]`
-  - `meta`: `Optional[Union[dict[str, Any], list[dict[str, Any]]]]`（可选）
+  - **sources**: list[Union[str, Path, ByteStream]]
+  - **meta**: Optional[Union[dict[str, Any], list[dict[str, Any]]]]（可选）
 - 输出：
-  - `documents`: `list[Document]`
+  - **documents**: list[Document]
 
 - 使用示例：
 
@@ -699,7 +699,7 @@ print(result)
 
 1. 识别文本中的图片引用
 
-2. 将图片的 `md_page_number` 和 `split_id` 与引用它的文本保持一致
+2. 将图片的 **md_page_number** 和 **split_id** 与引用它的文本保持一致
 
 3. 为文档和图片分配统一的排序 ID
 
@@ -726,9 +726,9 @@ print(result)
 **运行方法**
 
 - 输入：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 
 **EnhancedDocumentSplitter**
 
@@ -758,16 +758,16 @@ print(result)
 
 **初始化参数**：
 
-- `split_length`: `int`（可选，默认值：800）- 分割长度
-- `split_overlap`: `int`（可选，默认值：0）- 分割重叠长度
-- `split_unit`: `Literal['word', 'char']`（可选，默认值：`'char'`）- 分割单位，支持按词或字符
+- **split_length**: int（可选，默认值：800）- 分割长度
+- **split_overlap**: int（可选，默认值：0）- 分割重叠长度
+- **split_unit**: Literal ['word', 'char']（可选，默认值：'char'）- 分割单位，支持按词或字符
 
 **运行方法**
 
 - 输入：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 
 **MoiDocumentCleaner**
 
@@ -813,25 +813,25 @@ print(result)
 
 **初始化参数**：
 
-- `unicode_normalization`: `bool` - 是否进行 Unicode 标准化
-- `traditional_chinese_to_simple`: `bool` - 是否将繁体中文转换为简体中文
-- `remove_url`: `bool` - 是否移除 URL
-- `remove_invisible_char`: `bool` - 是否移除不可见字符
-- `remove_html_labels`: `bool` - 是否移除 HTML 标签
-- `deduplication_ngram_ratio`: `float` - N-gram 去重比率
-- `deduplication_by_md5`: `bool` - 是否通过 MD5 去重
-- `filter_special_char_ratio`: `float` - 特殊字符过滤比率
-- `deduplication_by_similarity`: `bool`（可选，默认值：`True`）- 是否通过相似度去重
-- `remove_persional_message`: `bool`（可选，默认值：`True`）- 是否移除个人信息
-- `remove_sensitive_words`: `bool`（可选，默认值：`True`）- 是否移除敏感词
-- `remove_poison_word`: `bool`（可选，默认值：`True`）- 是否移除有害词汇
+- **unicode_normalization**: bool - 是否进行 Unicode 标准化
+- **traditional_chinese_to_simple**: bool - 是否将繁体中文转换为简体中文
+- **remove_url**: bool - 是否移除 URL
+- **remove_invisible_char**: bool - 是否移除不可见字符
+- **remove_html_labels**: bool - 是否移除 HTML 标签
+- **deduplication_ngram_ratio**: float - N-gram 去重比率
+- **deduplication_by_md5**: bool - 是否通过 MD5 去重
+- **filter_special_char_ratio**: float - 特殊字符过滤比率
+- **deduplication_by_similarity**: bool（可选，默认值：True）- 是否通过相似度去重
+- **remove_persional_message**: bool（可选，默认值：True）- 是否移除个人信息
+- **remove_sensitive_words**: bool（可选，默认值：True）- 是否移除敏感词
+- **remove_poison_word**: bool（可选，默认值：True）- 是否移除有害词汇
 
 **运行方法**
 
 - 输入：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 
 **DataAugmentation**
 
@@ -872,19 +872,19 @@ print(result)
 
 **初始化参数**：
 
-- `type`: `str` - 数据增强类型
-- `json_schema_str`: `str` - JSON 模式字符串，定义增强数据的结构
-- `json_num_per_block`: `int`（可选，默认值：10）- 每个块的 JSON 数量
-- `use_document_count`: `int`（可选，默认值：30）- 使用的文档数量
-- `categories`: `list[str]`（可选，默认值：`None`）- 类别列表
-- `keyword_count`: `int`（可选，默认值：5）- 关键词数量
+- **type**: str - 数据增强类型
+- **json_schema_str**: str - JSON 模式字符串，定义增强数据的结构
+- **json_num_per_block**: int（可选，默认值：10）- 每个块的 JSON 数量
+- **use_document_count**: int（可选，默认值：30）- 使用的文档数量
+- **categories**: list[str]（可选，默认值：None）- 类别列表
+- **keyword_count**: int（可选，默认值：5）- 关键词数量
 
 **运行方法**
 
 - 输入：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 
 **PythonExecutor**
 
@@ -912,20 +912,20 @@ print(result)
 
 **初始化参数**：
 
-- `python_code`: `Optional[str]`（可选）- 要执行的 Python 代码
-- `timeout`: `int`（可选，默认值：15）- 执行超时时间（秒）
-- `return_error`: `bool`（可选，默认值：`True`）- 是否返回错误信息
+- **python_code**: Optional[str]（可选）- 要执行的 Python 代码
+- **timeout**: int（可选，默认值：15）- 执行超时时间（秒）
+- **return_error**: bool（可选，默认值：True）- 是否返回错误信息
 
 **运行方法**
 
 - 输入：
-  - `python_code`: `Optional[str]`（可选）
-  - `timeout`: `Optional[int]`（可选）
-  - `documents`: `Optional[List[Document]]`（可选）
+  - **python_code**: Optional[str]（可选）
+  - **timeout**: Optional[int]（可选）
+  - **documents**: Optional[List[Document]]（可选）
 - 输出：
-  - `documents`: `List[Document]`
-  - `python_output`: `str`
-  - `python_error_output`: `str`
+  - **documents**: List[Document]
+  - **python_output**: str
+  - **python_error_output**: str
 
 **CustomLangfuseConnector**
 
@@ -933,16 +933,16 @@ print(result)
 
 **初始化参数**：
 
-- `name`: `str`
-- `public`: `bool`（可选，默认值：`False`）
+- **name**: str
+- **public**: bool（可选，默认值：False）
 
 **运行方法**
 
 - 输入：
-  - `invocation_context`: `Optional[Dict[str, Any]]`（可选）
+  - **invocation_context**: Optional[Dict[str, Any]]（可选）
 - 输出：
-  - `name`: `str`
-  - `trace_url`: `str`
+  - **name**: str
+  - **trace_url**: str
 
 - 使用示例：
 
@@ -988,26 +988,26 @@ other languages."
 
 **初始化参数**：
 
-- `mo_knowledge_url`: `str`
-- `user_id`: `str`（可选，默认值：`""`）
-- `filters`: `Optional[Dict[str, Any]]`（可选）
-- `top_k`: `int`（可选，默认值：5）
-- `scale_score`: `bool`（可选，默认值：`False`）
-- `return_embedding`: `bool`（可选，默认值：`False`）
+- **mo_knowledge_url**: str
+- **user_id**: str（可选，默认值：""）
+- **filters**: Optional[Dict[str, Any]]（可选）
+- **top_k**: int（可选，默认值：5）
+- **scale_score**: bool（可选，默认值：False）
+- **return_embedding**: bool（可选，默认值：False）
 
 **运行方法**
 
 - 输入：
-  - `query_text`: `str`
-  - `mo_knowledge_url`: `Optional[str]`（可选）
-  - `filters`: `Optional[Dict[str, Any]]`（可选）
-  - `top_k`: `Optional[int]`（可选）
-  - `scale_score`: `Optional[bool]`（可选）
-  - `return_embedding`: `Optional[bool]`（可选）
-  - `user_id`: `Optional[str]`（可选）
+  - **query_text**: str
+  - **mo_knowledge_url**: Optional[str]（可选）
+  - **filters**: Optional[Dict[str, Any]]（可选）
+  - **top_k**: Optional[int]（可选）
+  - **scale_score**: Optional[bool]（可选）
+  - **return_embedding**: Optional[bool]（可选）
+  - **user_id**: Optional[str]（可选）
 - 输出：
-  - `system_chat_query`: `List[Document]`
-  - `user_chat_query`: `str`
+  - **system_chat_query**: List[Document]
+  - **user_chat_query**: str
 
 **OutputGenerator**
 
@@ -1015,21 +1015,21 @@ other languages."
 
 **初始化参数**：
 
-- `llm_endpoint`: `str`（可选，默认值：`'https://xxxxx.com/model/api/v1'`）
-- `api_key`: `Secret`（可选，默认值：`Secret.from_env_var('OPENAI_API_KEY')`）
-- `model`: `str`（可选，默认值：`""`）
-- `streaming`: `bool`（可选，默认值：`False`）
-- `max_retries`: `int`（可选，默认值：3）
-- `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+- **llm_endpoint**: str（可选，默认值：'<https://xxxxx.com/model/api/v1'）>
+- **api_key**: Secret（可选，默认值：Secret.from_env_var ('OPENAI_API_KEY')）
+- **model**: str（可选，默认值：""）
+- **streaming**: bool（可选，默认值：False）
+- **max_retries**: int（可选，默认值：3）
+- **generation_kwargs**: Optional[Dict[str, Any]]（可选）
 
 **运行方法**
 
 - 输入：
-  - `messages`: `List[ChatMessage]`
-  - `generation_kwargs`: `Optional[Dict[str, Any]]`（可选）
+  - **messages**: List[ChatMessage]
+  - **generation_kwargs**: Optional[Dict[str, Any]]（可选）
 - 输出：
-  - `replies`: `List[str]`
-  - `stream`: `Generator[str, None, None]` (仅当流式传输为 `True` 时)
+  - **replies**: List[str]
+  - **stream**: Generator[str, None, None] (仅当流式传输为 True 时)
 
 **StartComponent**
 
@@ -1037,14 +1037,14 @@ other languages."
 
 **初始化参数**：
 
-- `variables`: `Optional[List[str]]`（可选）
+- **variables**: Optional[List[str]]（可选）
 
 **运行方法**
 
 - 输入：
-  - `start_query`: `Optional[str]`（可选）
+  - **start_query**: Optional[str]（可选）
 - 输出：
-  - `user_chat_query`: `str`
+  - **user_chat_query**: str
 
 ### 查看工作流列表
 
@@ -1056,18 +1056,18 @@ GET /byoa/api/v1/workflow_meta
 
 | 参数名          | 类型                                  | 是否必填 | 描述                          | 默认值       |
 | --------------- | ------------------------------------- | -------- | ----------------------------- | ------------ |
-| `name_search`   | string, nullable                      | 否       | 名称搜索 (工作流名)           |              |
-| `start_time`    | integer, nullable                     | 否       | 开始时间戳 (毫秒)             |              |
-| `end_time`      | integer, nullable                     | 否       | 结束时间戳 (毫秒)             |              |
-| `process_modes` | array[integer], nullable              | 否       | 处理模式 (通常指 interval 值) |              |
-| `status`        | array[integer], nullable              | 否       | 状态 (例如：1-运行中，2-完成) |              |
-| `file_types`    | array[integer], nullable              | 否       | 文件类型                      |              |
-| `priority`      | array[integer], nullable              | 否       | 优先级                        |              |
-| `creator`       | string, nullable                      | 否       | 创建者                        |              |
-| `offset`        | integer, >=0                          | 否       | 当页偏移量                    | 0            |
-| `limit`         | integer, >=1                          | 否       | 每页大小                      | 20           |
-| `sort_field`    | string, nullable                      | 否       | 排序字段                      | "created_at" |
-| `sort_order`    | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
+| **name_search**   | string, nullable                      | 否       | 名称搜索 (工作流名)           |              |
+| **start_time**    | integer, nullable                     | 否       | 开始时间戳 (毫秒)             |              |
+| **end_time**      | integer, nullable                     | 否       | 结束时间戳 (毫秒)             |              |
+| **process_modes** | array[integer], nullable              | 否       | 处理模式 (通常指 interval 值) |              |
+| **status**        | array[integer], nullable              | 否       | 状态 (例如：1-运行中，2-完成) |              |
+| **file_types**    | array[integer], nullable              | 否       | 文件类型                      |              |
+| **priority**      | array[integer], nullable              | 否       | 优先级                        |              |
+| **creator**       | string, nullable                      | 否       | 创建者                        |              |
+| **offset**        | integer, >=0                          | 否       | 当页偏移量                    | 0            |
+| **limit**         | integer, >=1                          | 否       | 每页大小                      | 20           |
+| **sort_field**    | string, nullable                      | 否       | 排序字段                      | "created_at" |
+| **sort_order**    | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
 
 **示例 (Python)：**
 
@@ -1132,30 +1132,30 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 | 参数        | 类型                                    | 描述                                           |
 | ----------- | --------------------------------------- | ---------------------------------------------- |
-| `total`     | integer                                 | 符合条件的工作流总数                           |
-| `workflows` | array[object] | 工作流列表，每个对象包含工作流及其主要分支信息 |
+| **total**     | integer                                 | 符合条件的工作流总数                           |
+| **workflows** | array[object] | 工作流列表，每个对象包含工作流及其主要分支信息 |
 
 * **`WorkflowListItem` 对象结构:**
-    * `id` (string): 工作流 ID
-    * `name` (string): 工作流名称
-    * `created_at` (integer): 创建时间戳 (毫秒)
-    * `creator` (string): 创建者
-    * `updated_at` (integer): 更新时间戳 (毫秒)
-    * `modifier` (string, nullable): 更新者
-    * `source_volume_ids` (array[string]): 源数据卷 ID 列表
-    * `source_volume_names` (array[string]): 源数据卷名称列表
-    * `file_types` (array[integer]): 文件类型列表
-    * `target_volume_id` (string): 目标数据卷 ID
-    * `target_volume_name` (string): 目标数据卷名称
-    * `process_mode` (object `ProcessModeConfig`): 处理模式配置
-    * `priority` (integer): 优先级
-    * `status` (integer): 状态
-    * `version` (string, nullable): 版本号
-    * `branch_total` (integer, nullable): 该工作流下的分支总数
-    * `branch_id` (string, nullable): (通常是) 主分支或最新活动分支的 ID
-    * `branch_name` (string, nullable): (通常是) 主分支或最新活动分支的名称
-    * `branch_status` (integer, nullable): (通常是) 主分支或最新活动分支的状态
-    * `branch_volume_id` (string, nullable): (通常是) 主分支或最新活动分支的目标数据卷 ID
+    * id (string): 工作流 ID
+    * name (string): 工作流名称
+    * created_at (integer): 创建时间戳 (毫秒)
+    * creator (string): 创建者
+    * updated_at (integer): 更新时间戳 (毫秒)
+    * modifier (string, nullable): 更新者
+    * source_volume_ids (array[string]): 源数据卷 ID 列表
+    * source_volume_names (array[string]): 源数据卷名称列表
+    * file_types (array[integer]): 文件类型列表
+    * target_volume_id (string): 目标数据卷 ID
+    * target_volume_name (string): 目标数据卷名称
+    * process_mode (object `ProcessModeConfig`): 处理模式配置
+    * priority (integer): 优先级
+    * status (integer): 状态
+    * version (string, nullable): 版本号
+    * branch_total (integer, nullable): 该工作流下的分支总数
+    * branch_id (string, nullable): (通常是) 主分支或最新活动分支的 ID
+    * branch_name (string, nullable): (通常是) 主分支或最新活动分支的名称
+    * branch_status (integer, nullable): (通常是) 主分支或最新活动分支的状态
+    * branch_volume_id (string, nullable): (通常是) 主分支或最新活动分支的目标数据卷 ID
 
 ### 查看工作流详情
 
@@ -1167,7 +1167,7 @@ GET /byoa/api/v1/workflow_meta/{workflow_id}
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流 ID |
+| **workflow_id** | string | 是       | 工作流 ID |
 
 **示例 (Python)：**
 
@@ -1186,7 +1186,7 @@ print(response.status_code)
 print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`MOIResponse_WorkflowDetailResponse_`)：**
+**返回 (\1)：**
 
 ```json
 {
@@ -1249,19 +1249,19 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
 **输出参数：**
-主要包含工作流的基础信息、主工作流的 Haystack 配置 (`workflow`)、主/默认分支的相关信息 (`branch_id`, `branch_name`, `branch_status`, `branch_volume_id`)，以及一个 `branches` 数组，其中每一项是 `WorkflowBranchItem`。
+主要包含工作流的基础信息、主工作流的 Haystack 配置 (**workflow**)、主/默认分支的相关信息 (**branch_id**, **branch_name**, **branch_status**, **branch_volume_id**)，以及一个 **branches** 数组，其中每一项是 **WorkflowBranchItem**。
 
 * **`WorkflowBranchItem` 结构:**
-    * `branch_id` (string): 分支 ID
-    * `created_at` (integer): 创建时间戳
-    * `creator` (string): 创建者
-    * `updated_at` (integer): 更新时间戳
-    * `modifier` (string): 更新者
-    * `status` (integer): 此分支应用的工作流部分的状态
-    * `workflow` (object `WorkflowConfig`): 此分支特定的 Haystack 配置
-    * `branch_name` (string): 分支名
-    * `branch_status` (integer): 分支自身的状态
-    * `branch_volume_id` (string): 分支的目标数据卷 ID
+    * branch_id (string): 分支 ID
+    * created_at (integer): 创建时间戳
+    * creator (string): 创建者
+    * updated_at (integer): 更新时间戳
+    * modifier (string): 更新者
+    * status (integer): 此分支应用的工作流部分的状态
+    * workflow (object `WorkflowConfig`): 此分支特定的 Haystack 配置
+    * branch_name (string): 分支名
+    * branch_status (integer): 分支自身的状态
+    * branch_volume_id (string): 分支的目标数据卷 ID
 
 ### 修改工作流
 
@@ -1275,7 +1275,7 @@ PUT /byoa/api/v1/workflow_meta/{workflow_id}
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流 ID |
+| **workflow_id** | string | 是       | 工作流 ID |
 
 **Body 输入参数：**
 与 "创建工作流" 的 Body 结构相同。所有字段都可以更新。
@@ -1354,13 +1354,13 @@ DELETE /byoa/api/v1/workflow_meta/{workflow_id}
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流 ID |
+| **workflow_id** | string | 是       | 工作流 ID |
 
 **Query 参数：**
 
 | 参数名        | 类型    | 是否必填 | 描述                           | 默认值 |
 | ------------- | ------- | -------- | ------------------------------ | ------ |
-| `delete_data` | boolean | 否       | 是否删除该工作流产生的所有数据 | false  |
+| **delete_data** | boolean | 否       | 是否删除该工作流产生的所有数据 | false  |
 
 **示例 (Python)：**
 
@@ -1414,7 +1414,7 @@ PUT /byoa/api/v1/workflow_meta/{workflow_id}/stop
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流 ID |
+| **workflow_id** | string | 是       | 工作流 ID |
 
 **示例 (Python)：**
 
@@ -1464,14 +1464,14 @@ POST /byoa/api/v1/workflow_meta/{workflow_id}/branch
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流 ID |
+| **workflow_id** | string | 是       | 工作流 ID |
 
 **Body 输入参数：**
 
 | 参数名        | 是否必填 | 类型                      | 含义       | 默认值 |
 | ------------- | -------- | ------------------------- | ---------- | ------ |
-| `branch_name` | 否       | string, nullable          | 新的分支名     | ""     |
-| `workflow`    | 是       | object | 新的工作流配置 |        |
+| **branch_name** | 否       | string, nullable          | 新的分支名     | ""     |
+| **workflow**    | 是       | object | 新的工作流配置 |        |
 
 **示例 (Python)：**
 
@@ -1528,14 +1528,14 @@ GET /byoa/api/v1/workflow_meta/{workflow_id}/branch
 
 | 参数名        | 类型   | 是否必填 | 描述     |
 | ------------- | ------ | -------- | -------- |
-| `workflow_id` | string | 是       | 工作流 ID |
+| **workflow_id** | string | 是       | 工作流 ID |
 
 **Query 参数：**
 
 | 参数名          | 类型                     | 是否必填 | 描述                                    |
 | --------------- | ------------------------ | -------- | --------------------------------------- |
-| `status_in`     | array[integer], nullable | 否       | 工作流状态 (分支应用的工作流部分的状态) |
-| `branch_status` | array[integer], nullable | 否       | 分支自身的状态                          |
+| **status_in**     | array[integer], nullable | 否       | 工作流状态 (分支应用的工作流部分的状态) |
+| **branch_status** | array[integer], nullable | 否       | 分支自身的状态                          |
 
 **示例 (Python)：**
 
@@ -1563,7 +1563,7 @@ if response.content:
 ```
 
 **返回：**
-返回结构与 "查看工作流列表" (`GET /byoa/api/v1/workflow_meta`) 类似，其中 `data.workflows` 数组的每一项是 `WorkflowListItem`，但此处代表的是该工作流下的各个分支的信息。请参考 `WorkflowListItem` 结构。
+返回结构与 "查看工作流列表" (**GET /byoa/api/v1/workflow_meta**) 类似，其中 **data.workflows** 数组的每一项是 **WorkflowListItem**，但此处代表的是该工作流下的各个分支的信息。请参考 **WorkflowListItem** 结构。
 
 ```json
 {
@@ -1597,7 +1597,7 @@ if response.content:
 ```
 
 **输出参数：**
-(具体字段参考 `GET /byoa/api/v1/workflow_meta` 的 `WorkflowListItem` 定义，此处 `id` 是父工作流 ID, `branch_id`, `branch_name`, `branch_status` 等描述分支特有属性)
+(具体字段参考 `GET /byoa/api/v1/workflow_meta` 的 `WorkflowListItem` 定义，此处 id 是父工作流 ID, `branch_id`, `branch_name`, `branch_status` 等描述分支特有属性)
 
 #### 获取工作流分支详情
 
@@ -1611,7 +1611,7 @@ GET /byoa/api/v1/workflow_meta/branch/{branch_id}
 
 | 参数名      | 类型   | 是否必填 | 描述         |
 | ----------- | ------ | -------- | ------------ |
-| `branch_id` | string | 是       | 工作流分支 ID |
+| **branch_id** | string | 是       | 工作流分支 ID |
 
 **示例 (Python)：**
 
@@ -1634,7 +1634,7 @@ if response.content:
 ```
 
 **返回：**
-返回结构与 "查看工作流详情" (`GET /byoa/api/v1/workflow_meta/{workflow_id}`) 类似，但 `data` 部分描述的是该分支的详情。
+返回结构与 "查看工作流详情" (**GET /byoa/api/v1/workflow_meta/{workflow_id}**) 类似，但 **data** 部分描述的是该分支的详情。
 
 ```json
 {
@@ -1655,7 +1655,7 @@ if response.content:
 ```
 
 **输出参数：**
-(参考 `GET /byoa/api/v1/workflow_meta/{workflow_id}` 的 `WorkflowDetailResponse` 定义，其中 `id` 为父工作流 ID，`workflow` 为此分支的配置，`branch_id`, `branch_name` 等为当前分支信息)
+(参考 `GET /byoa/api/v1/workflow_meta/{workflow_id}` 的 `WorkflowDetailResponse` 定义，其中 id 为父工作流 ID，`workflow` 为此分支的配置，`branch_id`, `branch_name` 等为当前分支信息)
 
 #### 更新工作流分支
 
@@ -1669,14 +1669,14 @@ PUT /byoa/api/v1/workflow_meta/branch/{branch_id}
 
 | 参数名      | 类型   | 是否必填 | 描述         |
 | ----------- | ------ | -------- | ------------ |
-| `branch_id` | string | 是       | 工作流分支 ID |
+| **branch_id** | string | 是       | 工作流分支 ID |
 
 **Body 输入参数：**
 
 | 参数名        | 是否必填 | 类型                      | 含义           | 默认值 |
 | ------------- | -------- | ------------------------- | -------------- | ------ |
-| `branch_name` | 否       | string, nullable          | 新的分支名     | ""     |
-| `workflow`    | 是       | object | 新的工作流配置 |        |
+| **branch_name** | 否       | string, nullable          | 新的分支名     | ""     |
+| **workflow**    | 是       | object | 新的工作流配置 |        |
 
 **示例 (Python)：**
 
@@ -1728,13 +1728,13 @@ DELETE /byoa/api/v1/workflow_meta/branch/{branch_id}
 
 | 参数名      | 类型   | 是否必填 | 描述         |
 | ----------- | ------ | -------- | ------------ |
-| `branch_id` | string | 是       | 工作流分支 ID |
+| **branch_id** | string | 是       | 工作流分支 ID |
 
 **Query 参数：**
 
 | 参数名        | 类型    | 是否必填 | 描述                         | 默认值 |
 | ------------- | ------- | -------- | ---------------------------- | ------ |
-| `delete_data` | boolean | 否       | 是否删除该分支产生的所有数据 | false  |
+| **delete_data** | boolean | 否       | 是否删除该分支产生的所有数据 | false  |
 
 **示例 (Python)：**
 
@@ -1783,7 +1783,7 @@ PUT /byoa/api/v1/workflow_meta/branch/{branch_id}/enable
 
 | 参数名      | 类型   | 是否必填 | 描述         |
 | ----------- | ------ | -------- | ------------ |
-| `branch_id` | string | 是       | 工作流分支 ID |
+| **branch_id** | string | 是       | 工作流分支 ID |
 
 **示例 (Python)：**
 
@@ -1807,7 +1807,7 @@ if response.content:
 ```
 
 **返回：**
-成功启用后，通常返回该分支所属的父工作流的详细信息 (`WorkflowDetailResponse`)，其中该分支的状态会更新，并可能成为主分支。
+成功启用后，通常返回该分支所属的父工作流的详细信息 (\1)，其中该分支的状态会更新，并可能成为主分支。
 
 ```json
 {
@@ -1844,7 +1844,7 @@ PUT /byoa/api/v1/workflow_meta/branch/{branch_id}/disable
 
 | 参数名      | 类型   | 是否必填 | 描述         |
 | ----------- | ------ | -------- | ------------ |
-| `branch_id` | string | 是       | 工作流分支 ID |
+| **branch_id** | string | 是       | 工作流分支 ID |
 
 **示例 (Python)：**
 
@@ -1868,7 +1868,7 @@ if response.content:
 ```
 
 **返回：**
-成功禁用后，通常返回该分支所属的父工作流的详细信息 (`WorkflowDetailResponse`)，其中该分支的状态会更新。
+成功禁用后，通常返回该分支所属的父工作流的详细信息 (\1)，其中该分支的状态会更新。
 
 ```json
 {
@@ -1906,14 +1906,14 @@ POST /byoa/api/v1/workflow_job
 | workflow_meta_id   | 是       | string                     | 工作流元数据 ID                               |        |
 | workflow_branch_id | 是       | string                     | 工作流分支 ID |        |
 | target_volume_id   | 是       | string                     | 目标数据卷 ID                    |        |
-| files              | 否       | array[object (`FileItem`)] | 要处理的文件列表。如果为空，则按工作流配置处理               | []     |
+| files              | 否       | array[object (\1)] | 要处理的文件列表。如果为空，则按工作流配置处理               | []     |
 
-* **`FileItem` 对象结构:**
+* **`FileItem` 对象结构：**
 
   | 参数             | 是否必填 | 类型                      | 含义            |
   | ---------------- | -------- | ------------------------- | --------------- |
   | file_name        | 是       | string                    | 文件名          |
-  | file_type        | 是       | integer (`FileType` enum) | 文件类型        |
+  | file_type        | 是       | integer (**FileType** enum) | 文件类型        |
   | file_size        | 是       | integer                   | 文件大小 (bytes) |
   | file_path        | 是       | string                    | 文件路径        |
   | source_volume_id | 是       | integer                   | 源数据卷 ID      |
@@ -1970,17 +1970,17 @@ GET /byoa/api/v1/workflow_job
 
 | 参数名        | 类型                                  | 是否必填 | 描述                          | 默认值       |
 | ------------- | ------------------------------------- | -------- | ----------------------------- | ------------ |
-| `name_search` | string, nullable                      | 否       | 名称搜索 (作业名)             |              |
-| `start_time`  | integer, nullable                     | 否       | 开始时间戳 (毫秒)             |              |
-| `end_time`    | integer, nullable                     | 否       | 结束时间戳 (毫秒)             |              |
-| `status`      | array[integer], nullable              | 否       | 状态 (例如：1-运行中，2-完成) |              |
-| `file_types`  | array[integer], nullable              | 否       | 文件类型                      |              |
-| `priority`    | array[integer], nullable              | 否       | 优先级                        |              |
-| `creator`     | string, nullable                      | 否       | 创建者                        |              |
-| `offset`      | integer, >=0                          | 否       | 当页偏移量                    | 0            |
-| `limit`       | integer, >=1                          | 否       | 每页大小                      | 20           |
-| `sort_field`  | string, nullable                      | 否       | 排序字段                      | "created_at" |
-| `sort_order`  | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
+| **name_search** | string, nullable                      | 否       | 名称搜索 (作业名)             |              |
+| **start_time**  | integer, nullable                     | 否       | 开始时间戳 (毫秒)             |              |
+| **end_time**    | integer, nullable                     | 否       | 结束时间戳 (毫秒)             |              |
+| **status**      | array[integer], nullable              | 否       | 状态 (例如：1-运行中，2-完成) |              |
+| **file_types**  | array[integer], nullable              | 否       | 文件类型                      |              |
+| **priority**    | array[integer], nullable              | 否       | 优先级                        |              |
+| **creator**     | string, nullable                      | 否       | 创建者                        |              |
+| **offset**      | integer, >=0                          | 否       | 当页偏移量                    | 0            |
+| **limit**       | integer, >=1                          | 否       | 每页大小                      | 20           |
+| **sort_field**  | string, nullable                      | 否       | 排序字段                      | "created_at" |
+| **sort_order**  | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
 
 **示例 (Python)：**
 
@@ -2004,7 +2004,7 @@ print(response.status_code)
 print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (`MOIResponse_JobListResponse_`)：**
+**返回 (\1)：**
 
 ```json
 {
@@ -2034,20 +2034,20 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 | 参数    | 类型                               | 描述                                       |
 | ------- | ---------------------------------- | ------------------------------------------ |
-| `total` | integer                            | 符合条件的工作流作业总数                   |
-| `jobs`  | array[object] | 作业列表，每个对象包含作业及其主要分支信息 |
+| **total** | integer                            | 符合条件的工作流作业总数                   |
+| **jobs**  | array[object] | 作业列表，每个对象包含作业及其主要分支信息 |
 
 * **`JobListItem` 对象结构:**
-    * `id` (string): 作业 ID
-    * `name` (string): 作业名称
-    * `created_at` (integer): 创建时间戳 (毫秒)
-    * `creator` (string): 创建者
-    * `updated_at` (integer): 更新时间戳 (毫秒)
-    * `modifier` (string, nullable): 更新者
-    * `status` (integer): 状态
-    * `version` (string, nullable): 版本号
-    * `workflow_meta_id` (string): 工作流元数据 ID
-    * `workflow_branch_id` (string): 工作流分支 ID
+    * id (string): 作业 ID
+    * name (string): 作业名称
+    * created_at (integer): 创建时间戳 (毫秒)
+    * creator (string): 创建者
+    * updated_at (integer): 更新时间戳 (毫秒)
+    * modifier (string, nullable): 更新者
+    * status (integer): 状态
+    * version (string, nullable): 版本号
+    * workflow_meta_id (string): 工作流元数据 ID
+    * workflow_branch_id (string): 工作流分支 ID
 
 ### 查看作业详情
 
@@ -2061,7 +2061,7 @@ GET /byoa/api/v1/workflow_job/{job_id}
 
 | 参数名   | 类型   | 是否必填 | 描述   |
 | -------- | ------ | -------- | ------ |
-| `job_id` | string | 是       | 作业 ID |
+| **job_id** | string | 是       | 作业 ID |
 
 **示例 (Python)：**
 
@@ -2148,19 +2148,19 @@ GET /byoa/api/v1/workflow_job/{job_id}/files
 
 | 参数名   | 类型   | 是否必填 | 描述   |
 | -------- | ------ | -------- | ------ |
-| `job_id` | string | 是       | 作业 ID |
+| **job_id** | string | 是       | 作业 ID |
 
 **Query 参数：**
 
 | 参数名             | 类型                                  | 是否必填 | 描述                          | 默认值       |
 | ------------------ | ------------------------------------- | -------- | ----------------------------- | ------------ |
-| `file_name_search` | string, nullable                      | 否       | 文件名搜索                    |              |
-| `file_types`       | array[integer], nullable              | 否       | 文件类型 (见 `FileType` 枚举) |              |
-| `status`           | array[integer], nullable              | 否       | 文件处理状态                  |              |
-| `sort_field`       | string, nullable                      | 否       | 排序字段                      | "created_at" |
-| `sort_order`       | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
-| `offset`           | integer, >=0                          | 否       | 当页偏移量                    | 0            |
-| `limit`            | integer, >=1                          | 否       | 每页大小                      | 20           |
+| **file_name_search** | string, nullable                      | 否       | 文件名搜索                    |              |
+| **file_types**       | array[integer], nullable              | 否       | 文件类型 (见 **FileType** 枚举) |              |
+| **status**           | array[integer], nullable              | 否       | 文件处理状态                  |              |
+| **sort_field**       | string, nullable                      | 否       | 排序字段                      | "created_at" |
+| **sort_order**       | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
+| **offset**           | integer, >=0                          | 否       | 当页偏移量                    | 0            |
+| **limit**            | integer, >=1                          | 否       | 每页大小                      | 20           |
 
 **示例 (Python)：**
 
@@ -2221,22 +2221,22 @@ if response.content:
 
 | 参数    | 类型                               | 描述               |
 | ------- | ---------------------------------- | ------------------ |
-| `total` | integer                            | 符合条件的文件总数 |
-| `files` | array[object] | 作业相关的文件列表 |
+| **total** | integer                            | 符合条件的文件总数 |
+| **files** | array[object] | 作业相关的文件列表 |
 
 * **`JobFileItem` 对象结构:**
-    * `id` (string): 文件项 ID
-    * `name` (string): 文件名
-    * `type` (integer): 文件类型 (`FileType` 枚举)
-    * `size` (integer): 文件大小 (bytes)
-    * `status` (integer): 文件处理状态
-    * `created_at` (integer): 创建时间戳 (毫秒)
-    * `updated_at` (integer): 更新时间戳 (毫秒)
-    * `path` (string, nullable): 文件在目标数据卷中的路径
-    * `volume_id` (string, nullable): 文件所在的目标数据卷 ID
-    * `job_id` (string): 关联的作业 ID
-    * `meta_id` (string, nullable): 关联的工作流元数据 ID
-    * `branch_id` (string, nullable): 关联的工作流分支 ID
+    * id (string): 文件项 ID
+    * name (string): 文件名
+    * type (integer): 文件类型 (**FileType** 枚举)
+    * size (integer): 文件大小 (bytes)
+    * status (integer): 文件处理状态
+    * created_at (integer): 创建时间戳 (毫秒)
+    * updated_at (integer): 更新时间戳 (毫秒)
+    * path (string, nullable): 文件在目标数据卷中的路径
+    * volume_id (string, nullable): 文件所在的目标数据卷 ID
+    * job_id (string): 关联的作业 ID
+    * meta_id (string, nullable): 关联的工作流元数据 ID
+    * branch_id (string, nullable): 关联的工作流分支 ID
 
 ### 重试处理作业文件
 
@@ -2250,13 +2250,13 @@ POST /byoa/api/v1/workflow_job/{job_id}/files
 
 | 参数名   | 类型   | 是否必填 | 描述   |
 | -------- | ------ | -------- | ------ |
-| `job_id` | string | 是       | 作业 ID |
+| **job_id** | string | 是       | 作业 ID |
 
 **Query 参数：**
 
 | 参数名     | 类型          | 是否必填 | 描述                                     | 默认值 |
 | ---------- | ------------- | -------- | ---------------------------------------- | ------ |
-| `file_ids` | array[string] | 是       | 要重试的文件 ID 列表 (指 `JobFileItem.id`) |        |
+| **file_ids** | array[string] | 是       | 要重试的文件 ID 列表 (指 `JobFileItem.id`) |        |
 
 **示例 (Python)：**
 
@@ -2312,7 +2312,7 @@ GET /byoa/api/v1/workflow_job/{job_id}/status
 
 | 参数名   | 类型   | 是否必填 | 描述   |
 | -------- | ------ | -------- | ------ |
-| `job_id` | string | 是       | 作业 ID |
+| **job_id** | string | 是       | 作业 ID |
 
 **示例 (Python)：**
 
@@ -2358,12 +2358,12 @@ if response.content:
 
 | 参数         | 类型              | 描述                                                         |
 | ------------ | ----------------- | ------------------------------------------------------------ |
-| `job_id`     | string            | 作业 ID                                                       |
-| `status`     | integer           | 作业的当前状态 |
-| `message`    | string, nullable  | 状态相关的附加信息                                           |
-| `progress`   | integer, nullable | 作业进度 (0-100)                                             |
-| `start_time` | integer, nullable | 作业开始时间戳 (毫秒)                                        |
-| `end_time`   | integer, nullable | 作业结束时间戳 (毫秒)                                        |
+| **job_id**     | string            | 作业 ID                                                       |
+| **status**     | integer           | 作业的当前状态 |
+| **message**    | string, nullable  | 状态相关的附加信息                                           |
+| **progress**   | integer, nullable | 作业进度 (0-100)                                             |
+| **start_time** | integer, nullable | 作业开始时间戳 (毫秒)                                        |
+| **end_time**   | integer, nullable | 作业结束时间戳 (毫秒)                                        |
 
 **DocumentEmbedder**
 
@@ -2405,25 +2405,25 @@ if response.content:
 
 **初始化参数**：
 
-- `api_base_url`: `str`（可选，默认值：`'https://xxxxx.com/model/api/v1'`）- API 基础 URL
-- `api_key`: `Secret`（可选，默认值：`Secret.from_env_var('OPENAI_API_KEY')`）- API 密钥
-- `model`: `str`（可选，默认值：`""`）- 模型名称
-- `batch_size`: `int`（可选，默认值：32）- 批处理大小
-- `dimensions`: `Optional[int]`（可选，默认值：`None`）- 嵌入维度
-- `embedding_separator`: `str`（可选，默认值：`"\n"`）- 嵌入分隔符
-- `meta_fields_to_embed`: `list`（可选，默认值：`[]`）- 要嵌入的元字段列表
-- `organization`: `Optional[str]`（可选，默认值：`None`）- 组织 ID
-- `prefix`: `str`（可选，默认值：`""`）- 前缀
-- `progress_bar`: `bool`（可选，默认值：`True`）- 是否显示进度条
-- `suffix`: `str`（可选，默认值：`""`）- 后缀
+- **api_base_url**: str（可选，默认值：'<https://xxxxx.com/model/api/v1'）-> API 基础 URL
+- **api_key**: Secret（可选，默认值：Secret.from_env_var ('OPENAI_API_KEY')）- API 密钥
+- **model**: str（可选，默认值：""）- 模型名称
+- **batch_size**: int（可选，默认值：32）- 批处理大小
+- **dimensions**: Optional[int]（可选，默认值：None）- 嵌入维度
+- **embedding_separator**: str（可选，默认值："\n"）- 嵌入分隔符
+- **meta_fields_to_embed**: list（可选，默认值：[]）- 要嵌入的元字段列表
+- **organization**: Optional[str]（可选，默认值：None）- 组织 ID
+- **prefix**: str（可选，默认值：""）- 前缀
+- **progress_bar**: bool（可选，默认值：True）- 是否显示进度条
+- **suffix**: str（可选，默认值：""）- 后缀
 
 **运行方法**
 
 - 输入：
-  - `documents`: `List[Document]`
-  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+  - **documents**: List[Document]
+  - **meta**: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]（可选）
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
 
 **DocumentWriter**
 
@@ -2466,24 +2466,24 @@ if response.content:
 
 **初始化参数**：
 
-- `document_store`: 文档存储配置对象
-  - `init_parameters`: 初始化参数
-    - `connection_string`: `Dict[str, Any]` - 数据库连接字符串配置
-      - `env_vars`: `List[str]` - 环境变量列表
-      - `strict`: `bool` - 是否严格模式
-      - `type`: `str` - 类型
-    - `embedding_dimension`: `int` - 嵌入维度
-    - `keyword_index_name`: `str` - 关键词索引名称
-    - `recreate_table`: `bool` - 是否重新创建表
-    - `table_name`: `str` - 表名
-    - `vector_function`: `str` - 向量相似度函数
-  - `type`: `str` - 文档存储类型
-- `policy`: `str` - 写入策略
+- **document_store**: 文档存储配置对象
+  - **init_parameters**: 初始化参数
+    - **connection_string**: Dict[str, Any] - 数据库连接字符串配置
+      - **env_vars**: List[str] - 环境变量列表
+      - **strict**: bool - 是否严格模式
+      - **type**: str - 类型
+    - **embedding_dimension**: int - 嵌入维度
+    - **keyword_index_name**: str - 关键词索引名称
+    - **recreate_table**: bool - 是否重新创建表
+    - **table_name**: str - 表名
+    - **vector_function**: str - 向量相似度函数
+  - **type**: str - 文档存储类型
+- **policy**: str - 写入策略
 
 **运行方法**
 
 - 输入：
-  - `documents`: `List[Document]`
-  - `meta`: `Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]`（可选）
+  - **documents**: List[Document]
+  - **meta**: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]（可选）
 - 输出：
-  - `documents`: `List[Document]`
+  - **documents**: List[Document]
