@@ -22,7 +22,7 @@ MOI MCP（MatrixOne Intelligence Model Context Protocol）是 MatrixOne Intellig
   "mcpServers": {
     "moi": {
       "type": "sse",
-      "url": "https://mcp.cn-dev.matrixone.tech",
+      "url": "https://mcp.cn-dev.matrixone.tech/mcp",
       "headers": {
         "moi-key": "<your-api-key>"
       }
