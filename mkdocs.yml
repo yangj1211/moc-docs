@@ -67,6 +67,7 @@ nav:
         - 指标: MatrixOne-Intelligence/workflow api/indicator_api.md
       - 快速体验 API 说明:
         - 结构化抽取: MatrixOne-Intelligence/quick-start api/structured_extraction_api.md
+      - MCP 使用说明: MatrixOne-Intelligence/mcp/mcp.md
     - 数据库实例: 
       - 管理实例:
         - 创建实例:

@@ -119,9 +119,3 @@ curl --location --request POST 'https://freetier-01.cn-hangzhou.cluster.matrixon
     }
 }
 ```
-
-**主要字段说明：**
-
-- `data.results`：根据 json_schema 抽取的结构化数据
-- `data.req_id`：请求唯一标识符
-- `data.file_size_bytes`：文件大小（字节）
