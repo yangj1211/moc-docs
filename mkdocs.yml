@@ -50,6 +50,7 @@ nav:
       - 数据接入:
         - 连接器: MatrixOne-Intelligence/Data-Connect/connector.md
         - 数据载入: MatrixOne-Intelligence/Data-Connect/loading.md
+        - 数据导出: MatrixOne-Intelligence/Data-Connect/export.md
       - 数据处理:
         - 工作流: MatrixOne-Intelligence/Data-Processing/workflow.md
         - 作业: MatrixOne-Intelligence/Data-Processing/operation.md
