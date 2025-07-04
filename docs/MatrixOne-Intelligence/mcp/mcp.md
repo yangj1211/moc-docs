@@ -13,7 +13,7 @@ MOI MCP（MatrixOne Intelligence Model Context Protocol）是 MatrixOne Intellig
 
 ## 1. MCP 配置
 
-1. 进入您的 MCP 客户端设置，找到配置 MCP 服务器的地方（不同客户端位置可能不同）
+1. 进入您的 MCP 客户端（Cursor、Claude 等）设置，找到配置 MCP 服务器的地方（不同客户端位置可能不同）
 
 2. 注册新的 MCP 服务器，在 `mcpServers` 下添加 "moi" 配置块，配置内容如下：
 
