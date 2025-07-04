@@ -20,9 +20,10 @@ MOI MCP（MatrixOne Intelligence Model Context Protocol）是 MatrixOne Intellig
 ```json
 {
   "mcpServers": {
-    "moi": {
-      "type": "sse",
-      "url": "https://mcp.cn-dev.matrixone.tech/mcp",
+    "mcp-moi-server": {
+      "type": "streamable-http",
+      "url": "https://mcp.cn-dev.m1intelligence.cn/mcp/",
+      "note": "For Streamable HTTP connections, add this URL directly in your MCP Client",
       "headers": {
         "moi-key": "<your-api-key>"
       }
@@ -30,6 +31,8 @@ MOI MCP（MatrixOne Intelligence Model Context Protocol）是 MatrixOne Intellig
   }
 }
 ```
+
+3. 保存配置文件后，**退出客户端并重新进入**，使配置生效
 
 ## 2. 获取 API Key
 
