@@ -41,8 +41,6 @@ nav:
     - 快速开始:
       - 快速创建 GenAI 工作区: MatrixOne-Intelligence/Get-Started/workspace.md
       - 快速创建数据库实例: MatrixOne-Intelligence/Get-Started/quickstart.md
-      - 快速上手 AI 搜索: MatrixOne-Intelligence/Get-Started/ai_search.md
-      - 快速上手简历智搜: MatrixOne-Intelligence/Get-Started/cv_search.md
       - 快速上手向量能力: MatrixOne-Intelligence/Get-Started/vector.md
     - GenAI 工作区: 
       - 概述: MatrixOne-Intelligence/Workspace-Mgmt/overview.md
@@ -50,6 +48,7 @@ nav:
       - 数据接入:
         - 连接器: MatrixOne-Intelligence/Data-Connect/connector.md
         - 数据载入: MatrixOne-Intelligence/Data-Connect/loading.md
+        - 数据导出: MatrixOne-Intelligence/Data-Connect/export.md
       - 数据处理:
         - 工作流: MatrixOne-Intelligence/Data-Processing/workflow.md
         - 作业: MatrixOne-Intelligence/Data-Processing/operation.md
@@ -560,9 +559,6 @@ nav:
           - MatrixOne 的 JDBC 功能支持列表: MatrixOne-Intelligence/Reference/Limitations/mo-jdbc-feature-list.md
           - MatrixOne DDL 语句分区支持的说明: MatrixOne-Intelligence/Reference/Limitations/mo-partition-support.md
           - MatrixOne 的 Load Data 支持的说明: MatrixOne-Intelligence/Reference/Limitations/load-data-support.md
-    - AI 应用市场: 
-      - AI 搜索: MatrixOne-Intelligence/AI-Application/universal_search.md  
-      - 简历智搜: MatrixOne-Intelligence/AI-Application/cv_search.md  
     - 监控:
       - 监控指标: MatrixOne-Intelligence/Monitor/Monitoring.md
       - 监控数据: MatrixOne-Intelligence/Monitor/Data-Monitoring.md
