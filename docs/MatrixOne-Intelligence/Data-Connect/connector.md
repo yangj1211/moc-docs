@@ -1,6 +1,6 @@
 # 连接器
 
-MatrixOne Intellogence 平台提供了一个强大的数据连接器，允许用户轻松地将存储在阿里云 OSS 或标准 S3 上的数据导入到 MatrixOne Intellogence 平台中。只需提供必要的连接信息，即可实现数据的无缝导入，为后续的数据分析和处理提供便利。
+MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支持数据的载入和导出，允许用户轻松地将存储在阿里云 OSS 或标准 S3 上的数据导入到 MatrixOne Intellogence 平台中。只需提供必要的连接信息，即可实现数据的无缝导入，为后续的数据分析和处理提供便利。同时支持将数据导出到知识库，目前支持导出到 dify。
 
 ## 如何使用连接器
 
@@ -34,4 +34,12 @@ MatrixOne Intellogence 平台提供了一个强大的数据连接器，允许用
 <div align="center">
     <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-connect/conn_2.png
  width=60% heigth=60%/>
+</div>
+
+### 连接 Dify 知识库
+
+要将处理好的文件导出到 Dify 知识库，需要提供 API URL 和 API Key，具体配置方法请参考[数据导出](./export.md)
+
+<div align="center">
+  <img src="/assets/images/dify_conn.png" width="50%" height="50%">
 </div>
