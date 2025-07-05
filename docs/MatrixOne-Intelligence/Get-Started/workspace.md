@@ -61,7 +61,7 @@
 - 查看数据载入列表，等待状态变成**完成**
 
 <div align="center">
-  <img src="/assets/images/workspace_1.png" width="60%" height="60%">
+  <img src="../images/workspace_1.png" width="60%" height="60%">
 </div>
 
 ### 2. 创建工作流
@@ -80,7 +80,7 @@
 - 查看工作流列表，等待状态变成**完成**
 
 <div align="center">
-  <img src="/assets/images/workspace_2.png" width="60%" height="60%">
+  <img src="../images/workspace_2.png" width="60%" height="60%">
 </div>
 
 ### 3. 查看文件解析结果
@@ -103,7 +103,7 @@
 - full.md 文件：完整 Markdown 内容文件。
 
 <div align="center">
-  <img src="/assets/images/workspace_3.png" width="60%" height="60%">
+  <img src="../images/workspace_3.png" width="60%" height="60%">
 </div>
 
 恭喜您成功创建 GenAI 工作区并完成文件处理全流程！有关 GenAI 工作区的更多操作详情，可参阅 [GenAI 工作区](../Workspace-Mgmt/overview.md)相关章节。
