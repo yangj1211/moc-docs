@@ -49,5 +49,5 @@ MOI MCP（MatrixOne Intelligence Model Context Protocol）是 MatrixOne Intellig
 完成上述两个步骤后，就可以在对话中使用 MOI MCP 功能了：
 
 <div align="center">
-  <img src="/assets/images/mcp.png" width="50%" height="50%">
+  <img src="../../assets/images/mcp.png" width="50%" height="50%">
 </div>
