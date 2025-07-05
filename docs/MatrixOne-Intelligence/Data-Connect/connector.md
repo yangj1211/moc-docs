@@ -41,5 +41,5 @@ MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支
 要将处理好的文件导出到 Dify 知识库，需要提供 API URL 和 API Key，具体配置方法请参考[数据导出](./export.md)
 
 <div align="center">
-  <img src="/assets/images/dify_conn.png" width="50%" height="50%">
+  <img src="../../assets/images/dify_conn.png" width="50%" height="50%">
 </div>

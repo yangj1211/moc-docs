@@ -32,7 +32,7 @@
    | 说明      | 节点备注                              |
 
 <div align="center">
-  <img src="/assets/images/wf_doc_parse.png" width="50%" height="50%">
+  <img src="../../assets/images/wf_doc_parse.png" width="50%" height="50%">
 </div>
 
 #### 图片解析节点
@@ -45,7 +45,7 @@
    | 说明      | 节点备注                              |
 
 <div align="center">
-  <img src="/assets/images/wf_img_parse.png" width="50%" height="50%">
+  <img src="../../assets/images/wf_img_parse.png" width="50%" height="50%">
 </div>
 
 #### 音频解析节点
@@ -59,7 +59,7 @@
    | 说明      | 节点备注                              |
 
 <div align="center">
-  <img src="/assets/images/wf_voice_parse.png" width="50%" height="50%">
+  <img src="../../assets/images/wf_voice_parse.png" width="50%" height="50%">
 </div>
 
 #### 视频解析节点
@@ -73,7 +73,7 @@
    | 说明      | 节点备注                              |
 
 <div align="center">
-  <img src="/assets/images/wf_studio_parse.png" width="50%" height="50%">
+  <img src="../../assets/images/wf_studio_parse.png" width="50%" height="50%">
 </div>
 
 #### 文本嵌入节点
@@ -85,7 +85,7 @@
    | 说明      | 节点备注                              |
 
 <div align="center">
-  <img src="/assets/images/wf_embedding.png" width="50%" height="50%">
+  <img src="../../assets/images/wf_embedding.png" width="50%" height="50%">
 </div>
 
 #### 结构化提取节点
@@ -98,7 +98,7 @@
    | 说明      | 节点备注                              |
 
 <div align="center">
-  <img src="/assets/images/wf_extract.png" width="50%" height="50%">
+  <img src="../../assets/images/wf_extract.png" width="50%" height="50%">
 </div>
 
 #### 数据清洗节点
@@ -115,7 +115,7 @@
    | 说明      | 节点备注                              |
 
 <div align="center">
-  <img src="/assets/images/wf_clean.png" width="50%" height="50%">
+  <img src="../../assets/images/wf_clean.png" width="50%" height="50%">
 </div>
 
 #### 数据增强节点
@@ -129,7 +129,7 @@
    | 说明      | 节点备注                              |
 
 <div align="center">
-  <img src="/assets/images/wf_enhance.png" width="50%" height="50%">
+  <img src="../../assets/images/wf_enhance.png" width="50%" height="50%">
 </div>
 
 #### 节点上下游关系
