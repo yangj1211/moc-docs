@@ -22,7 +22,7 @@ MOI MCP（MatrixOne Intelligence Model Context Protocol）是 MatrixOne Intellig
   "mcpServers": {
     "mcp-moi-server": {
       "type": "streamable-http",
-      "url": "https://mcp.cn-dev.m1intelligence.cn/mcp/",
+      "url": "https://mcp.m1intelligence.cn/mcp/",
       "note": "For Streamable HTTP connections, add this URL directly in your MCP Client",
       "headers": {
         "moi-key": "<your-api-key>"
