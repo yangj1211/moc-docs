@@ -6,10 +6,10 @@ MOI MCP（MatrixOne Intelligence Model Context Protocol）是 MatrixOne Intellig
 
 **MOI MCP 主要功能：**
 
-- **创建连接器** - 连接各种数据源（数据库、文件、API 等）
+- **创建连接器** - 连接各种数据源
 - **载入数据** - 从不同数据源导入和处理数据
 - **创建工作流** - 构建自动化的数据处理流程
-- **获取解析后的数据** - 获取经过 AI 处理和分析的结构化数据
+- **获取解析后的数据** - 获取经过 MOI 处理和分析的结构化数据
 
 ## 可用工具
 
@@ -42,7 +42,7 @@ MOI MCP 提供了丰富的工具来满足不同的数据处理需求。以下是
 - **GetWorkflowMeta** - 获取指定工作流
 - **DeleteWorkflowMeta** - 删除工作流
 
-### 🌿 工作流分支管理
+### 工作流分支管理
 
 - **CreateWorkflowBranch** - 创建工作流分支
 - **ListWorkflowBranches** - 列出所有工作流分支
