@@ -407,7 +407,7 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
     "output_keys": {},
     "init_parameters": {},
     "extra_node_info": {
-        "name": "文本解析节点",
+        "name": "文档解析节点",
         "description": ""
     }
 }
