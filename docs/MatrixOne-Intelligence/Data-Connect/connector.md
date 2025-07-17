@@ -1,12 +1,14 @@
 # 连接器
 
-MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支持数据的载入和导出，允许用户轻松地将存储在阿里云 OSS 或标准 S3 上的数据导入到 MatrixOne Intellogence 平台中。只需提供必要的连接信息，即可实现数据的无缝导入，为后续的数据分析和处理提供便利。同时支持将数据导出到知识库，目前支持导出到 dify。
+MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支持数据的载入和导出，允许用户轻松地将存储在对象存储和分布式文件系统上的数据导入到 MatrixOne Intellogence 平台中。只需提供必要的连接信息，即可实现数据的无缝导入，为后续的数据分析和处理提供便利。同时支持将数据导出到知识库，目前支持导出到 dify。
 
 ## 如何使用连接器
 
 进入到 MatrixOne Intelligence 工作区，依次点击**数据接入**>**连接器**>**创建连接器**，选择需要连接的数据源类型。
 
-### 连接阿里云 OSS
+### 对象存储
+
+#### 阿里云 OSS
 
 要将阿里云 OSS 上的文件导入到 MatrixOne Intellogence 平台，您需要提供以下连接信息：
 
@@ -20,7 +22,7 @@ MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支
  width=60% heigth=60%/>
 </div>
 
-### 连接标准 S3
+#### 标准 S3
 
 要将兼容 S3 协议的存储服务（如 AWS S3、MinIO 等）上的文件导入到 MatrixOne Intelligence 平台，您需要提供以下连接信息：
 
@@ -36,7 +38,84 @@ MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支
  width=60% heigth=60%/>
 </div>
 
-### 连接 Dify 知识库
+#### 分布式文件系统
+
+#### HDFS
+
+- HDFS 地址：如 `hdfs://namenode:9000`
+- 认证方式：目前仅支持 Simple
+- HDFS 用户名：HDFS 访问用户名
+- 文件路径：HDFS 文件路径
+
+![](../../assets/images/hdfs.png)
+
+**连接问题排查**:
+
+如果出现连接错误 (`service: new connector by config err: failed to create hdfs client: no available namenodes: dial tcp 43.139.183.124:9000: i/o timeout"`)，请检查：
+
+1. **端口开放**:
+
+确保以下端口在网络环境中已开放：
+	·	NameNode 默认端口：9000
+	·	DataNode 默认端口：9866
+
+如使用了非默认端口，请相应开放对应端口。
+
+2. **Hadoop 配置**:
+
+检查 core-site.xml 和 hdfs-site.xml 配置文件是否包含如下配置：
+
+core-site.xml 中 hdfs://10.1.19.23:9000 为主机 namenode 的内网 IP 地址。端口 9000 是 HDFS NameNode 的默认端口
+
+```xml
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://10.1.19.23:9000</value>
+    </property>
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/home/hadoop/hdfs/tmp</value>
+    </property>
+</configuration>
+```
+
+hdfs-site.xml 中 dfs.datanode.hostname 为 DataNode 的公网 IP（47.111.156.240），需在 hdfs-site.xml 中添加配置 dfs.datanode.hostname，强制 DataNode 报告公网 IP 47.111.156.240。
+
+```xml
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:///home/hadoop/hdfs/namenode</value>
+    </property>
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///home/hadoop/hdfs/datanode</value>
+    </property>
+    <property>
+        <name>dfs.datanode.hostname</name>
+        <value>47.111.156.240</value>
+    </property>
+</configuration>
+```
+
+3. **主机名绑定**:
+  
+检查主机名（/etc/hosts）是否绑定的是内网 ip，避免使用公网 ip 绑定，例如以下主机名 iZbp14hbhigjmqticskavqZ 映射到内网 IP
+
+```bash
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+10.1.19.23  iZbp14hbhigjmqticskavqZ
+```
+  
+### 知识库
+
+#### 连接 Dify 知识库
 
 要将处理好的文件导出到 Dify 知识库，需要提供 API URL 和 API Key，具体配置方法请参考[数据导出](./export.md)
 
