@@ -24,11 +24,11 @@ Catalog 是数据存储与管理的关键组件，专为多模态数据场景打
 
 点击文件名可查看该文件的处理详情页面，在此页面中，用户可对解析生成的文本块进行查看与删除操作。对于文本类型的识别内容，系统已将其中提取的图片按照对应的块 ID 命名，实现图片与文本块的精准关联，便于内容管理与溯源。
 
-![](../../assets/images/catalog_1.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/catalog_1.png)
 
 点击文件列表右侧的预览按钮可查看该文件的解析情况。
 
-![](../../assets/images/catalog_2.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/catalog_2.png)
 
 ### 结果下载
 

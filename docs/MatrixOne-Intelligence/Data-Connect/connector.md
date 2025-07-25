@@ -47,7 +47,7 @@ MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支
 - HDFS 用户名：HDFS 访问用户名
 - 文件路径：HDFS 文件路径
 
-![](../../assets/images/hdfs.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/hdfs.png)
 
 **连接问题排查**:
 
@@ -119,4 +119,4 @@ hdfs-site.xml 中 dfs.datanode.hostname 为 DataNode 的公网 IP（47.111.156.2
 
 要将处理好的文件导出到 Dify 知识库，需要提供 API URL 和 API Key，具体配置方法请参考[数据导出](./export.md)
 
-![](../../assets/images/dify_conn.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/dify_conn.png)

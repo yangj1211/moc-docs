@@ -104,4 +104,4 @@ MOI MCP 提供了丰富的工具来满足不同的数据处理需求。以下是
 
 完成上述两个步骤后，就可以在对话中使用 MOI MCP 功能了：
 
-![](../../assets/images/mcp.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/mcp.png)
