@@ -60,7 +60,7 @@
     - 选择需要载入的文件
 - 查看数据载入列表，等待状态变成**完成**
 
-![](../../assets/images/workspace_1.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/workspace_1.png)
 
 ### 2. 创建工作流
 
@@ -77,7 +77,7 @@
     - 处理流程图：只需保留文档解析节点
 - 查看工作流列表，等待状态变成**完成**
 
-![](../../assets/images/workspace_2.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/workspace_2.png)
 
 ### 3. 查看文件解析结果
 
@@ -98,7 +98,7 @@
 - 图片文件夹：存放文档中解析生成的图片资源，便于后续查看与使用。
 - full.md 文件：完整 Markdown 内容文件。
 
-![](../../assets/images/workspace_3.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/workspace_3.png)
 
 恭喜您成功创建 GenAI 工作区并完成文件处理全流程！有关 GenAI 工作区的更多操作详情，可参阅 [GenAI 工作区](../Workspace-Mgmt/overview.md)相关章节。
 

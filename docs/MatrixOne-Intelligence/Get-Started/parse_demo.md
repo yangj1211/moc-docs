@@ -5,6 +5,6 @@
 
 ## 第一步：进入体验页面
 
-![](../../assets/images/demo_1.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/demo_1.png)
 
 使用样例数据，点击开始解析，你也可以上传自有文件，然后输入需要抽取的字段，然后点击开始解析

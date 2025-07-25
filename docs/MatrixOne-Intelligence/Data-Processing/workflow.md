@@ -31,7 +31,7 @@
    | OCR 识别       | 采用 ucaslcl/GOT-OCR2_0 模型提取图像文字                                     |
    | 说明      | 节点备注                              |
 
-![](../../assets/images/wf_doc_parse.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/wf_doc_parse.png)
 
 #### 图片解析节点
 
@@ -42,7 +42,7 @@
    | OCR 识别       | 采用 ucaslcl/GOT-OCR2_0 模型提取图像文字                                     |
    | 说明      | 节点备注                              |
 
-![](../../assets/images/wf_img_parse.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/wf_img_parse.png)
 
 #### 音频解析节点
 
@@ -54,7 +54,7 @@
    | 语音模型       | 采用 SenseVoice 模型进行自动语音识别（ASR）转写。                                     |
    | 说明      | 节点备注                              |
 
-![](../../assets/images/wf_voice_parse.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/wf_voice_parse.png)
 
 #### 视频解析节点
 
@@ -66,7 +66,7 @@
    | 语音模型       | 采用 SenseVoice 模型进行自动语音识别（ASR）转写。                                     |
    | 说明      | 节点备注                              |
 
-![](../../assets/images/wf_studio_parse.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/wf_studio_parse.png)
 
 #### 文本嵌入节点
 
@@ -76,7 +76,7 @@
    | 文本嵌入      | 通过 BAAl/bge-m3 模型生成文本向量                                |
    | 说明      | 节点备注                              |
 
-![](../../assets/images/wf_embedding.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/wf_embedding.png)
 
 #### 结构化提取节点
 
@@ -87,7 +87,7 @@
    | 提取信息      | 支持通过表单方式配置字段，系统将根据字段名称、类型、含义及必填项自动生成对应的 JSON Schema。支持最多 4 层嵌套结构，字段数量上限为 40 个。可随时切换至 JSON 预览，查看生成的实际 Schema 内容。    |
    | 说明      | 节点备注                              |
 
-![](../../assets/images/wf_extract.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/wf_extract.png)
 
 #### 数据清洗节点
 
@@ -102,7 +102,7 @@
    | 数据去重      | 通过设置 N-Gram 重复比率过滤阈值基于文字重复比率对文本块中的重复数据进行去重                             |
    | 说明      | 节点备注                              |
 
-![](../../assets/images/wf_clean.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/wf_clean.png)
 
 #### 数据增强节点
 
@@ -114,7 +114,7 @@
    | 模型           | 采用 qwen-turbo 模型生成数据集                                 |
    | 说明      | 节点备注                              |
 
-![](../../assets/images/wf_enhance.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/wf_enhance.png)
 
 #### 节点上下游关系
 
