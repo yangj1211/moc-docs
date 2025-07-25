@@ -13,8 +13,13 @@ POST /connectors
 |  参数             | 是否必填 |含义|
 |  --------------- | ------- |----  |
 | name             | 是      | 连接器名称|
-| source_type      | 是      | 连接器类型，4 为 OSS，5 为标准 S3 |
-| config           | 是      | 配置 oss 和 s3 的连接信息，如果是 oss 需填写 endpoint、access_key_id、access_key_secret、bucket_name，如果是 s3 除了 oss 中的参数还需填写 region 和 path_style（路径风格）信息。|
+| source_type      | 是      | 连接器类型，1: DIFY, 2: HDFS, 3: MO, 4: OSS, 5: S3 |
+| oss              | 否      | OSS 连接配置（当 source_type=4 时必填）|
+| s3               | 否      | S3 连接配置（当 source_type=5 时必填）|
+| dify             | 否      | DIFY 连接配置（当 source_type=1 时必填）|
+| hdfs             | 否      | HDFS 连接配置（当 source_type=2 时必填）|
+| mo               | 否      | MO 连接配置（当 source_type=3 时必填）|
+| usage_type       | 否      | 使用类型数组|
 
 body：
 
@@ -22,21 +27,35 @@ body：
 {
     "name": "new_connector_name",
     "source_type": 4,
-    "config": {
-        "oss": { // 如果source_type为4，填此字段
-            "endpoint": "example_oss_endpoint",
-            "access_key_id": "example_access_key_id",
-            "access_key_secret": "example_access_key_secret",
-            "bucket_name": "example_bucket_name"
-        },
-        "s3": { // 如果source_type为5，填此字段
-            "endpoint": "example_s3_endpoint",
-            "access_key_id": "example_access_key_id",
-            "access_key_secret": "example_access_key_secret",
-            "bucket_name": "example_bucket_name",
-            "region": "example_region",
-            "path_style": true //路径风格，true为path style，false为virtual hoste
-        }
+    "oss": { // 如果source_type为4，填此字段
+        "endpoint": "example_oss_endpoint",
+        "access_key_id": "example_access_key_id",
+        "access_key_secret": "example_access_key_secret",
+        "bucket_name": "example_bucket_name"
+    },
+    "s3": { // 如果source_type为5，填此字段
+        "endpoint": "example_s3_endpoint",
+        "access_key_id": "example_access_key_id",
+        "access_key_secret": "example_access_key_secret",
+        "bucket_name": "example_bucket_name",
+        "region": "example_region",
+        "path_style": true //路径风格，true为path style，false为virtual hosted style
+    },
+    "dify": { // 如果source_type为1，填此字段
+        "api_key": "example_api_key",
+        "api_url": "example_api_url"
+    },
+    "hdfs": { // 如果source_type为2，填此字段
+        "address": "172.21.107.12:8020",
+        "auth_type": 1, // 认证方式
+        "username": "example_username",
+        "file_path": "example_file_path"
+    },
+    "mo": { // 如果source_type为3，填此字段
+        "host": "example_host",
+        "port": 6001,
+        "username": "example_username",
+        "password": "example_password"
     }
 }
 ```
@@ -54,13 +73,11 @@ headers = {
 body = {
     "name": "oss-test2",  
     "source_type": 4, 
-    "config": {
-        "oss": {  
-            "endpoint": "xxxx",
-            "access_key_id": "xxxx",
-            "access_key_secret": "xxxx",
-            "bucket_name": "xxxx"
-        }
+    "oss": {  
+        "endpoint": "xxxx",
+        "access_key_id": "xxxx",
+        "access_key_secret": "xxxx",
+        "bucket_name": "xxxx"
     }
 }
 
@@ -88,9 +105,13 @@ POST /connectors/validate
   
 |  参数             | 是否必填 |含义|
 |  --------------- | ------- |----  |
-| source_type      | 是      | 连接器类型，4 为 OSS，5 为标准 S3 |
-| connector_id     | 否      | 填写 connector_id 则无需填写 config 信息。|
-| config           | 否      | 填写 config 则无需填写 connector_id 信息配置 oss 和 s3 的连接信息，如果是 oss 需填写 endpoint、access_key_id、access_key_secret、bucket_name，如果是 s3 除了 oss 中的参数还需填写 region 和 path_style 信息。 |
+| source_type      | 是      | 连接器类型，1: DIFY, 2: HDFS, 3: MO, 4: OSS, 5: S3 |
+| connector_id     | 否      | 填写 connector_id 则无需填写配置信息 |
+| oss              | 否      | OSS 连接配置（当 source_type=4 时必填）|
+| s3               | 否      | S3 连接配置（当 source_type=5 时必填）|
+| dify             | 否      | DIFY 连接配置（当 source_type=1 时必填）|
+| hdfs             | 否      | HDFS 连接配置（当 source_type=2 时必填）|
+| mo               | 否      | MO 连接配置（当 source_type=3 时必填）|
 
 **示例：**
 
@@ -104,13 +125,11 @@ headers = {
 
 body = {
     "source_type": 4,
-    "config": {
-        "oss": {
-            "endpoint": "xxxx",
-            "access_key_id": "xxxx",
-            "access_key_secret": "xxxx",
-            "bucket_name": "xxxx"
-        }
+    "oss": {
+        "endpoint": "xxxx",
+        "access_key_id": "xxxx",
+        "access_key_secret": "xxxx",
+        "bucket_name": "xxxx"
     }
 }
 
@@ -143,6 +162,11 @@ GET /connectors/list
 | order_by         |string |否 |排序的字段 | |
 | page             |int |否 |当前页码 |1 |
 | page_size        |int |否 |每页显示的数量 |10 |
+| source_type      |int |否 |连接器类型筛选 | |
+| source_type_list |array |否 |连接器类型列表筛选 | |
+| status           |string |否 |连接状态筛选 | |
+| status_list      |array |否 |连接状态列表筛选 | |
+| usage_type       |array |否 |使用类型筛选 | |
 
 **输出参数：**
   
@@ -158,7 +182,12 @@ GET /connectors/list
 | updated_at       | 更新时间    |
 | username         | 创建人    |
 | related_task_ids | 关联的 TaskID   |
-| config           | 连接器配置信息    |
+| usage_type       | 使用类型数组    |
+| oss              | OSS 连接配置信息 |
+| s3               | S3 连接配置信息  |
+| dify             | DIFY 连接配置信息 |
+| hdfs             | HDFS 连接配置信息 |
+| mo               | MO 连接配置信息  |
 | total            | 返回数目    |
 
 **示例：**
@@ -203,13 +232,12 @@ Response Body: {
                 "related_task_ids": [
                     1889223922712281088
                 ],
-                "config": {
-                    "oss": {
-                        "endpoint": "oss-cn-hangzhou.aliyuncs.com",
-                        "access_key_id": "admin",
-                        "access_key_secret": "Admin123",
-                        "bucket_name": "moc-test-data"
-                    }
+                "usage_type": [],
+                "oss": {
+                    "endpoint": "oss-cn-hangzhou.aliyuncs.com",
+                    "access_key_id": "admin",
+                    "access_key_secret": "Admin123",
+                    "bucket_name": "moc-test-data"
                 }
             }
         ],
@@ -228,8 +256,13 @@ PUT /connectors/{id}
   
 |  参数             | 是否必填 |含义|
 |  --------------- | ------- |----  |
-| name             | 是      | 连接器名称 |
-| config           | 是      | 连接器配置信息 |
+| name             | 否      | 连接器名称 |
+| oss              | 否      | OSS 连接配置（当连接器为OSS类型时填写）|
+| s3               | 否      | S3 连接配置（当连接器为S3类型时填写）|
+| dify             | 否      | DIFY 连接配置（当连接器为DIFY类型时填写）|
+| hdfs             | 否      | HDFS 连接配置（当连接器为HDFS类型时填写）|
+| mo               | 否      | MO 连接配置（当连接器为MO类型时填写）|
+| usage_type       | 否      | 使用类型数组|
 
 **示例：**
 
@@ -245,16 +278,13 @@ headers = {
 
 body = {
     "name": "s3-test1",  
-    "config": {
-                    "s3": {
-                        "endpoint": "xxxx",
-                        "access_key_id": "xxxx",
-                        "access_key_secret": "xxxx",
-                        "bucket_name": "xxxx",
-                        "region": "xxxx"
-                    }
-
-}
+    "s3": {
+        "endpoint": "xxxx",
+        "access_key_id": "xxxx",
+        "access_key_secret": "xxxx",
+        "bucket_name": "xxxx",
+        "region": "xxxx"
+    }
 }
 
 response = requests.put(url, json=body, headers=headers)
@@ -263,6 +293,42 @@ if response.status_code == 200:
     print(response.json()) 
 else:
     print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+```
+
+### 删除连接器
+
+```
+DELETE /connectors/{id}
+```
+
+**路径参数：**
+
+|  参数             | 是否必填 |含义|
+|  --------------- | ------- |----  |
+| id               | 是      | 连接器 ID |
+
+**示例：**
+
+```python
+import requests
+
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/100004"
+headers = {
+    "moi-key": "xxxxx"
+}
+
+response = requests.delete(url, headers=headers)
+
+if response.status_code == 200:
+    print(response.json()) 
+else:
+    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+```
+
+返回：
+
+```
+{'code': 'OK', 'msg': 'OK'}
 ```
 
 ### 查询连接器源文件
@@ -337,6 +403,65 @@ Response Body: {
     }
 }
 ```
+
+
+### 上传文件到连接器
+
+```
+POST /connectors/upload
+```
+
+**输入参数：**
+
+|  参数             | 是否必填 |含义|
+|  --------------- | ------- |----  |
+| data             | 是      | 多文件数据和请求参数 |
+
+**示例：**
+
+```python
+import requests
+
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/upload"
+headers = {
+    "moi-key": "xxxxx"
+}
+
+files = {'data': open('example.txt', 'rb')}
+
+response = requests.post(url, headers=headers, files=files)
+
+if response.status_code == 200:
+    print(response.json()) 
+else:
+    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+```
+
+### 获取连接器摘要
+
+```
+GET /connectors/summary
+```
+
+**示例：**
+
+```python
+import requests
+
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/connectors/summary"
+headers = {
+    "moi-key": "xxxxx"
+}
+
+response = requests.get(url, headers=headers)
+
+if response.status_code == 200:
+    print(response.json()) 
+else:
+    print(f"请求失败，状态码：{response.status_code}, 错误信息：{response.text}")
+```
+
+
   
 ## 数据载入
 
