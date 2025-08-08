@@ -64,7 +64,7 @@ nav:
         - 鉴权: MatrixOne-Intelligence/workflow api/token_api.md
         - 数据接入: MatrixOne-Intelligence/workflow api/data_connect_api.md
         - 数据处理: MatrixOne-Intelligence/workflow api/data_processing_api.md
-        - 数据探索: MatrixOne-Intelligence/workflow api/data_explore_api.md
+        - 数据探索: MatrixOne-Intelligence/workflow api/data_explore_api_v2.md
         - 数据导出: MatrixOne-Intelligence/workflow api/data_export_api.md
         - 告警: MatrixOne-Intelligence/workflow api/alarm_api.md
         - 指标: MatrixOne-Intelligence/workflow api/indicator_api.md
