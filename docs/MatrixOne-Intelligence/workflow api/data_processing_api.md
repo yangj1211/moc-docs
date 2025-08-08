@@ -21,7 +21,7 @@ POST /byoa/api/v1/workflow_meta
 | --------------------------- | -------- | ---------------------------- | ------------------------------ | ------ |
 | **name**                      | 是       | string                       | 工作流名称                     |        |
 | **source_volume_names**       | 是       | array[string]                | 源数据卷名称列表               |        |
-| **source_volume_ids**         | 是       | array[String]               | 源数据卷 ID 列表                 |        |
+| **source_volume_ids**         | 是       | array[integer]               | 源数据卷 ID 列表                 |        |
 | **file_types**                | 是       | array[integer]               | 文件类型列表，支持：<br>NIL = 0<br>TXT = 1<br>PDF = 2<br>IMAGE = 3<br>PPT = 4<br>WORD = 5<br>MARKDOWN = 6<br>CSV = 7<br>PARQUET = 8<br>SQL_FILES = 9<br>DIR = 10<br>DOCX = 11<br>PPTX = 12<br>WAV = 13<br>MP3 = 14<br>AAC = 15<br>FLAC = 16<br>MP4 = 17<br>MOV = 18<br>MKV = 19<br>PNG = 20<br>JPG = 21<br>JPEG = 22<br>BMP = 23                   |        |
 | **process_mode**              | 是       | object (**ProcessModeConfig**) | 处理模式配置                   |        |
 | **priority**                  | 否       | integer                      | 优先级                         | 300    |
@@ -29,7 +29,9 @@ POST /byoa/api/v1/workflow_meta
 | **target_volume_name**        | 否       | string                       | 目标数据卷名称                 | ""     |
 | **create_target_volume_name** | 是       | string                       | 创建目标数据卷时使用的名称     |        |
 | **workflow**                  | 是       | object (**WorkflowConfig**)    | 工作流配置  |        |
-| **branch_name**               | 否       | string                       | 分支名    | ""     |
+| **branch_name**               | 否       | string                       | 分支名    | "main"     |
+| **files**                     | 否       | array[object]                | 预处理文件列表（`SourceFileInfo`） |        |
+| **content**                   | 否       | object                        | 工作流额外说明                   |        |
 
 * **ProcessModeConfig 结构：**
 
@@ -60,7 +62,7 @@ headers = {
 body = {
     "name": "wf-from-meta-api",
     "source_volume_names": ["b-vol1"],
-    "source_volume_ids": ["1889223879880048640"],
+    "source_volume_ids": [1889223879880048640],
     "target_volume_id": "eb42f0a1-ab18-4010-b95c-cd1716dd5e95",
     "create_target_volume_name": "new-target-for-wf-from-meta",
     "process_mode": {
@@ -87,9 +89,9 @@ body = {
                     "remove_regex": "([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+)|https?://[^\\s]+",
                     "remove_repeated_substrings": False
                 }
-            },
-            // ... (其他组件和连接)
-            {
+            }
+            
+            ,{
                 "name":"DocumentWriter",
                 "type":"haystack.components.writers.document_writer.DocumentWriter",
                 "component_id":"DocumentWriter_1739377283742",
@@ -117,9 +119,7 @@ body = {
                 }
             }
         ],
-        "connections": [
-            // ... (连接定义)
-        ],
+        "connections": [],
         "edges": [],
         "extra_components": []
     }
@@ -467,7 +467,7 @@ image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
 i2d = ImageToDocument()
 result = i2d.run([image_path])
 print(result)
-# 'This is a text from the image file.'
+# This is a text from the image file.
 ```
 
 **ImageCaptionToDocument**
@@ -509,7 +509,7 @@ image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
 i2d = ImageToDocument()
 result = i2d.run([image_path])
 print(result)
-# 'This is a text from the image file.
+# This is a text from the image file.
 ```
 
 **ImageOCRToDocument**
@@ -557,7 +557,7 @@ image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
 i2d = ImageToDocument()
 result = i2d.run([image_path])
 print(result)
-# 'This is a text from the image file.'
+# This is a text from the image file.
 ```
 
 **ImageToDocument**
@@ -608,7 +608,7 @@ image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
 i2d = ImageToDocument()
 result = i2d.run([image_path])
 print(result)
-# 'This is a text from the image file.'
+# This is a text from the image file.
 ```
 
 **ImageGenerateQA**
@@ -642,7 +642,7 @@ image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
 i2d = ImageGenerateQA()
 result = i2d.run([image_path])
 print(result)
-# 'This is a text from the image file.'
+# This is a text from the image file.
 ```
 
 **GenerateImageContentByLLM**
@@ -690,7 +690,7 @@ image_path = "/Users/lhq/Downloads/NVIDIA-2024-Annual-Report_Maximum.pdf-
 i2d = ImageStructureOutput()
 result = i2d.run([image_path])
 print(result)
-# 'This is a text from the image file.'
+# This is a text from the image file.
 ```
 
 **DocumentContentImageFiller**
@@ -1097,13 +1097,13 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 {
     "code": "ok",
     "msg": "ok",
-    "data": { // WorkflowListResponse 结构
-        "total": 20, // 符合条件的工作流总数
-        "workflows": [ // WorkflowListItem 数组
+    "data": {
+        "total": 20,
+        "workflows": [
             {
                 "id": "YOUR_WORKFLOW_ID_1",
                 "name": "Alpha Workflow",
-                "created_at": 1739377287000, // timestamp in ms
+                "created_at": 1739377287000,
                 "creator": "YOUR_USERNAME",
                 "updated_at": 1739377755000,
                 "modifier": "YOUR_USERNAME",
@@ -1114,15 +1114,15 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
                 "target_volume_name": "a-vol1",
                 "process_mode": {"interval": 0, "offset": 0},
                 "priority": 300,
-                "status": 2, // 示例：2-完成
+                "status": 2,
                 "version": "1.0",
-                "branch_total": 1, // 该工作流下的分支数量
+                "branch_total": 1,
                 "branch_id": "YOUR_BRANCH_ID_1", 
                 "branch_name": "main",
-                "branch_status": 0, // 最新或主分支状态
+                "branch_status": 0,
                 "branch_volume_id": "YOUR_BRANCH_TARGET_VOLUME_ID_1"
             }
-            // ... 其他工作流项
+            
         ]
     }
 }
@@ -1186,13 +1186,13 @@ print(response.status_code)
 print(json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (\1)：**
+**返回：**
 
 ```json
 {
     "code": "ok",
     "msg": "ok",
-    "data": { // WorkflowDetailResponse 结构
+    "data": {
         "id": "YOUR_WORKFLOW_ID",
         "name": "Detailed Workflow Test",
         "source_volume_ids": ["YOUR_SOURCE_VOLUME_ID_1"],
@@ -1206,8 +1206,8 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
         "creator": "YOUR_USERNAME",
         "updated_at": 1739436347000,
         "modifier": "YOUR_USERNAME",
-        "status": 1, // 主工作流状态
-        "workflow": { // 主工作流的 Haystack 配置
+        "status": 1
+        "workflow": {
             "components": [ /* ... */ ],
             "connections": [ /* ... */ ],
             "edges": [],
@@ -1218,17 +1218,17 @@ print(json.dumps(response.json(), indent=4, ensure_ascii=False))
         "branch_status": 0,                       
         "branch_volume_id": "YOUR_MAIN_BRANCH_TARGET_VOLUME_ID", 
         "version": "1.2",
-        "branches": [ // 此工作流下的所有分支列表
+        "branches": [
             {
                 "branch_id": "YOUR_MAIN_BRANCH_ID",
                 "created_at": 1739435482000,
                 "creator": "YOUR_USERNAME",
                 "updated_at": 1739436347000,
                 "modifier": "YOUR_USERNAME",
-                "status": 1, // 此分支对应的工作流部分的状态 (通常与父工作流状态一致)
+                "status": 1
                 "workflow": { /* YOUR_MAIN_BRANCH_ID 分支的特定 Haystack 配置 */ },
                 "branch_name": "main",
-                "branch_status": 0, // 该分支自身的状态
+                "branch_status": 0
                 "branch_volume_id": "YOUR_MAIN_BRANCH_TARGET_VOLUME_ID"
             },
             {
@@ -1569,24 +1569,22 @@ if response.content:
 {
     "code": "ok",
     "msg": "ok",
-    "data": { // WorkflowListResponse 结构
-        "total": 2, // 该工作流下的分支总数
-        "workflows": [ // WorkflowListItem 数组，代表分支
+    "data": {
+        "total": 2
+        "workflows": [
             {
-                "id": "workflow_id_for_branch_1", // 父工作流 ID
-                "name": "Parent Workflow Name - Branch Alpha", // 分支可能会有特定命名展示
-                // ... 其他 WorkflowListItem 字段 ...
+                "id": "workflow_id_for_branch_1",
+                "name": "Parent Workflow Name - Branch Alpha"
                 "branch_id": "branch_uuid_alpha",
                 "branch_name": "alpha-feature",
-                "branch_status": 0, // 分支状态
+                "branch_status": 0
                 "branch_volume_id": "target_vol_for_alpha_branch"
-                // status 字段此时代表此分支应用的工作流部分的状态
+
             },
             {
-                "id": "workflow_id_for_branch_1", // 父工作流 ID
+                "id": "workflow_id_for_branch_1",
                 "name": "Parent Workflow Name - Branch Beta",
-                // ... 其他 WorkflowListItem 字段 ...
-                "branch_id": "branch_uuid_beta",
+                                  "branch_id": "branch_uuid_beta",
                 "branch_name": "beta-experiment",
                 "branch_status": 1,
                 "branch_volume_id": "target_vol_for_beta_branch"
@@ -1640,16 +1638,15 @@ if response.content:
 {
     "code": "ok",
     "msg": "ok",
-    "data": { // WorkflowDetailResponse 结构，但聚焦于分支
-        "id": "parent_workflow_uuid", // 父工作流 ID
-        "name": "Parent Workflow Name (Branch: feature-x)", // 可能包含分支信息
-        // ... (父工作流的详细信息) ...
-        "workflow": { /* 该分支应用的 Haystack 配置 */ },
+    "data": {
+                  "id": "parent_workflow_uuid"
+                  "name": "Parent Workflow Name (Branch: feature-x)",
+                  "workflow": {},
         "branch_id": "your_branch_id",       // 当前分支 ID
         "branch_name": "feature-x",          // 当前分支名称
         "branch_status": 0,                  // 当前分支状态
         "branch_volume_id": "target_vol_for_feature_x_branch", // 当前分支目标卷
-        "branches": null // 通常获取单个分支详情时，此字段可能为 null 或不包含其他分支
+                  "branches": null
     }
 }
 ```
@@ -1807,26 +1804,23 @@ if response.content:
 ```
 
 **返回：**
-成功启用后，通常返回该分支所属的父工作流的详细信息 (\1)，其中该分支的状态会更新，并可能成为主分支。
+成功启用后，通常返回该分支所属的父工作流的详细信息，其中该分支的状态会更新，并可能成为主分支。
 
 ```json
 {
     "code": "ok",
     "msg": "ok",
-    "data": { // WorkflowDetailResponse 结构
+    "data": {
         "id": "parent_workflow_uuid",
-        // ... (父工作流的详细信息) ...
-        "branch_id": "your_branch_id_to_enable", // 现在启用的分支成为主分支
+        "branch_id": "your_branch_id_to_enable",
         "branch_name": "enabled-branch-name",
-        "branch_status": 0, // 状态变为启用/活跃
+        "branch_status": 0,
         "branches": [
             {
                 "branch_id": "your_branch_id_to_enable",
                 "branch_name": "enabled-branch-name",
-                "branch_status": 0, // 更新后的状态
-                // ...other 分支详情...
+                "branch_status": 0
             }
-            // ...other 分支列表...
         ]
     }
 }
@@ -1868,23 +1862,21 @@ if response.content:
 ```
 
 **返回：**
-成功禁用后，通常返回该分支所属的父工作流的详细信息 (\1)，其中该分支的状态会更新。
+成功禁用后，通常返回该分支所属的父工作流的详细信息，其中该分支的状态会更新。
 
 ```json
 {
     "code": "ok",
     "msg": "ok",
-    "data": { // WorkflowDetailResponse 结构
+    "data": {
         "id": "parent_workflow_uuid",
-        // ... (父工作流的详细信息) ...
         "branches": [
             {
                 "branch_id": "your_branch_id_to_disable",
                 "branch_name": "disabled-branch-name",
-                "branch_status": 1, // 示例：状态变为禁用/非活跃
-                // ...other 分支详情...
+                "branch_status": 1
+                
             }
-            // ...other 分支列表...
         ]
     }
 }
@@ -1906,7 +1898,7 @@ POST /byoa/api/v1/workflow_job
 | workflow_meta_id   | 是       | string                     | 工作流元数据 ID                               |        |
 | workflow_branch_id | 是       | string                     | 工作流分支 ID |        |
 | target_volume_id   | 是       | string                     | 目标数据卷 ID                    |        |
-| files              | 否       | array[object (\1)] | 要处理的文件列表。如果为空，则按工作流配置处理               | []     |
+| files              | 否       | array[object] | 要处理的文件列表。如果为空，则按工作流配置处理               | []     |
 
 * **`FileItem` 对象结构：**
 
@@ -1968,19 +1960,18 @@ GET /byoa/api/v1/workflow_job
 
 **Query 参数：**
 
-| 参数名        | 类型                                  | 是否必填 | 描述                          | 默认值       |
-| ------------- | ------------------------------------- | -------- | ----------------------------- | ------------ |
-| **name_search** | string, nullable                      | 否       | 名称搜索 (作业名)             |              |
-| **start_time**  | integer, nullable                     | 否       | 开始时间戳 (毫秒)             |              |
-| **end_time**    | integer, nullable                     | 否       | 结束时间戳 (毫秒)             |              |
-| **status**      | array[integer], nullable              | 否       | 状态 (例如：1-运行中，2-完成) |              |
-| **file_types**  | array[integer], nullable              | 否       | 文件类型                      |              |
-| **priority**    | array[integer], nullable              | 否       | 优先级                        |              |
-| **creator**     | string, nullable                      | 否       | 创建者                        |              |
-| **offset**      | integer, >=0                          | 否       | 当页偏移量                    | 0            |
-| **limit**       | integer, >=1                          | 否       | 每页大小                      | 20           |
-| **sort_field**  | string, nullable                      | 否       | 排序字段                      | "created_at" |
-| **sort_order**  | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
+| 参数名          | 类型                                  | 是否必填 | 描述                          | 默认值 |
+| --------------- | ------------------------------------- | -------- | ----------------------------- | ------ |
+| **workflow_id**   | string, nullable                      | 否       | 工作流 ID                     |        |
+| **name_search**   | string, nullable                      | 否       | 名称搜索 (作业名)             |        |
+| **file_types**    | array[integer], nullable              | 否       | 文件类型                      |        |
+| **priority**      | array[integer], nullable              | 否       | 优先级                        |        |
+| **page_num**      | integer, >=1                          | 否       | 页码                          | 1      |
+| **page_size**     | integer, >=1                          | 否       | 每页大小                      | 10     |
+| **count_le**      | integer, nullable                     | 否       | 小于等于的文件数量            |        |
+| **count_ge**      | integer, nullable                     | 否       | 大于等于的文件数量            |        |
+| **sort_field**    | string, nullable                      | 否       | 排序字段（未设置时按创建时间降序） |        |
+| **sort_order**    | string, nullable                      | 否       | 排序方式（asc/desc）          | asc    |
 
 **示例 (Python)：**
 
@@ -1989,22 +1980,13 @@ import requests
 import json
 
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job"
-headers = {
-    "moi-key": "xxxxx"
-}
-params = {
-    "limit": 5,
-    "sort_field": "name",
-    "sort_order": "ascend"
-}
-
-response = requests.get(url, headers=headers, params=params)
-
-print(response.status_code)
-print(json.dumps(response.json(), indent=4, ensure_ascii=False))
+headers = {"moi-key": "xxxxx"}
+params = {"page_num": 1, "page_size": 10, "sort_order": "asc"}
+resp = requests.get(url, headers=headers, params=params)
+print(json.dumps(resp.json(), indent=4, ensure_ascii=False))
 ```
 
-**返回 (\1)：**
+**返回：**
 
 ```json
 {
@@ -2152,41 +2134,22 @@ GET /byoa/api/v1/workflow_job/{job_id}/files
 
 **Query 参数：**
 
-| 参数名             | 类型                                  | 是否必填 | 描述                          | 默认值       |
-| ------------------ | ------------------------------------- | -------- | ----------------------------- | ------------ |
-| **file_name_search** | string, nullable                      | 否       | 文件名搜索                    |              |
-| **file_types**       | array[integer], nullable              | 否       | 文件类型 (见 **FileType** 枚举) |              |
-| **status**           | array[integer], nullable              | 否       | 文件处理状态                  |              |
-| **sort_field**       | string, nullable                      | 否       | 排序字段                      | "created_at" |
-| **sort_order**       | string, nullable ("ascend"/"descend") | 否       | 排序方式                      | "descend"    |
-| **offset**           | integer, >=0                          | 否       | 当页偏移量                    | 0            |
-| **limit**            | integer, >=1                          | 否       | 每页大小                      | 20           |
+| 参数名       | 类型                     | 是否必填 | 描述       | 默认值 |
+| ------------ | ------------------------ | -------- | ---------- | ------ |
+| **page_num**   | integer, >=1             | 否       | 页码       | 1      |
+| **page_size**  | integer, >=1             | 否       | 每页大小   | 10     |
+| **statuses**   | array[integer], nullable | 否       | 文件状态筛选 | []     |
 
 **示例 (Python)：**
 
 ```python
-import requests
-import json
-
+import requests, json
 job_id_for_files = "your_job_id"
 url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job/{job_id_for_files}/files"
-
-headers = {
-    "moi-key": "xxxxx"
-}
-params = {
-    "limit": 10,
-    "file_name_search": ".pdf"
-}
-
-response = requests.get(url, headers=headers, params=params)
-
-print(response.status_code)
-if response.content:
-    try:
-        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
-    except json.JSONDecodeError:
-        print(response.text)
+headers = {"moi-key": "xxxxx"}
+params = {"page_num": 1, "page_size": 10, "statuses": [2,3]}
+resp = requests.get(url, headers=headers, params=params)
+print(json.dumps(resp.json(), indent=4, ensure_ascii=False))
 ```
 
 **返回：**
@@ -2244,7 +2207,7 @@ if response.content:
 POST /byoa/api/v1/workflow_job/{job_id}/files
 ```
 
-**描述：**删除指定作业关联的特定文件记录。
+**描述：**重试处理指定作业下的文件列表。
 
 **路径参数：**
 
@@ -2252,51 +2215,33 @@ POST /byoa/api/v1/workflow_job/{job_id}/files
 | -------- | ------ | -------- | ------ |
 | **job_id** | string | 是       | 作业 ID |
 
-**Query 参数：**
+**Body 输入参数：**
 
-| 参数名     | 类型          | 是否必填 | 描述                                     | 默认值 |
-| ---------- | ------------- | -------- | ---------------------------------------- | ------ |
-| **file_ids** | array[string] | 是       | 要重试的文件 ID 列表 (指 `JobFileItem.id`) |        |
+| 参数名    | 是否必填 | 类型            | 描述                         |
+| --------- | -------- | --------------- | ---------------------------- |
+| **files** | 是       | array[string]   | 需要重试的文件 ID 列表（`JobFileItem.id`） |
 
 **示例 (Python)：**
 
 ```python
-import requests
-import json
-
-job_id_for_file_retry = "your_job_id"
-file_ids_to_retry = ["file_item_uuid_1", "file_item_uuid_2"]
-
-url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job/{job_id_for_file_retry}/files"
-
-headers = {
-    "moi-key": "xxxxx"
-}
-
-params = {
-    "file_ids": file_ids_to_retry, 
-    "delete_data": True
-}
-
-response = requests.post(url, headers=headers, params=params)
-
-print(response.status_code)
-if response.content and response.text.strip():
-    try:
-        print(json.dumps(response.json(), indent=4, ensure_ascii=False))
-    except json.JSONDecodeError:
-        print(f"Response Text: {response.text}")
-else:
-    print("Request successful, no content returned or empty response.")
+import requests, json
+job_id_for_retry = "your_job_id"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_job/{job_id_for_retry}/files"
+headers = {"moi-key": "xxxxx"}
+body = {"files": ["file_item_uuid_1", "file_item_uuid_2"]}
+resp = requests.post(url, headers=headers, json=body)
+print(resp.status_code)
+if resp.content and resp.text.strip():
+    print(json.dumps(resp.json(), indent=4, ensure_ascii=False))
 ```
 
 **返回：**
 
 ```json
 {
-    "code": "ok",
-    "msg": "ok",
-    "data": "string"
+  "code": "ok",
+  "msg": "ok",
+  "data": null
 }
 ```
 
@@ -2487,3 +2432,29 @@ if response.content:
   - **meta**: Optional[Union[Dict[str, Any], List[Dict[str, Any]]]]（可选）
 - 输出：
   - **documents**: List[Document]
+
+### 重新运行工作流
+
+```
+PUT /byoa/api/v1/workflow_meta/{workflow_id}/rerun
+```
+
+**描述：**重新运行指定工作流。
+
+**路径参数：**
+
+| 参数名        | 类型   | 是否必填 | 描述     |
+| ------------- | ------ | -------- | -------- |
+| **workflow_id** | string | 是       | 工作流 ID |
+
+**示例 (Python)：**
+
+```python
+import requests
+workflow_to_rerun = "YOUR_WORKFLOW_ID"
+url = f"https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/workflow_meta/{workflow_to_rerun}/rerun"
+headers = {"moi-key": "xxxxx"}
+resp = requests.put(url, headers=headers)
+print(resp.status_code)
+print(resp.json() if resp.content else "OK")
+```

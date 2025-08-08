@@ -26,9 +26,22 @@ POST /export/task/create
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataset_id | 是 | 数据集 ID|
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataset_name | 是 | 数据集名称|
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;embedding_model | 是 | 嵌入模型|
+| &nbsp;&nbsp;&nbsp;&nbsp;mo_config | 否    | MatrixOne 导出配置对象|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;database_name | 是 | 数据库名|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table_name | 是 | 表名|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_table | 否 | 是否新建表，默认 false|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;column | 是 | 列配置对象|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;export_column | 是 | 字段映射列表|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;source_column | 是 | 源字段名|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mapping_column | 是 | 目标字段名|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;combine_column | 是 | 需要合并的字段名列表|
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;duplicated_strategy | 是 | 重复数据处理策略（整数）|
+| &nbsp;&nbsp;&nbsp;&nbsp;merge_title_to_text | 否    | 是否将标题合并到文本，默认 false|
 | files            | 是      | 文件列表|
 | &nbsp;&nbsp;&nbsp;&nbsp;file_id    | 是      | 文件 ID|
 | &nbsp;&nbsp;&nbsp;&nbsp;full_path  | 是      | 文件完整路径数组|
+
+提示：如果仅导出到 Dify，可只提供 `dify_config`；导出到 MatrixOne 时，需要提供 `mo_config` 并按要求配置列映射与重复策略。
 
 **示例：**
 
@@ -51,7 +64,8 @@ body = {
              "dataset_id": "dataset_123",
              "dataset_name": "测试数据集",
              "embedding_model": "text-embedding-ada-002"
-         }
+         },
+         "merge_title_to_text": False
      },
     "files": [
         {
@@ -388,6 +402,7 @@ POST /export/volumes/{vid}/files
 | &nbsp;&nbsp;&nbsp;&nbsp;is_desc   |boolean |否 |是否降序 |true |
 | offset           |int |否 |分页偏移量 |0 |
 | limit            |int |否 |分页限制 |30 |
+| task_id          |string |否 |任务 ID | |
 
 **输出参数：**
 

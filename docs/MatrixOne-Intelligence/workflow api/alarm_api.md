@@ -4,6 +4,8 @@
 
 ### 创建通知接收者
 
+用途：新增一个用于接收告警的联系人。
+
 ```
 POST /alerting/receiver
 ```
@@ -14,7 +16,7 @@ POST /alerting/receiver
 | --------------- | ------- | --------------------------------------------------------- |
 | group_id        | 是      | 组 ID，应该为 org_id 或 workspace_id                        |
 | name            | 是      | 接收者名称                                                 |
-| notify_type     | 是      | 通知类型：0-邮件，1-短信，2-电话，3-企业微信                   |
+| notify_type     | 是      | 通知类型：0-邮件，1-短信，2-语音，3-企业微信                   |
 | status          | 是      | 状态：0-禁用，1-启用                                        |
 | email           | 否      | 邮箱地址（notify_type 为 0 时必填）                         |
 | phone           | 否      | 电话号码（notify_type 为 1 或 2 时必填）                     |
@@ -68,6 +70,8 @@ print("Response:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 ### 获取接收者列表
 
+用途：按条件分页查询接收者。
+
 ```
 POST /alerting/receiver/list
 ```
@@ -85,10 +89,15 @@ POST /alerting/receiver/list
 | 参数               | 是否必填 | 含义                                                      |
 | ----------------- | ------- | --------------------------------------------------------- |
 | group_ids         | 否      | 组 ID 列表                                                   |
+| ids               | 否      | 接收者 ID 列表                                               |
 | name_keyword      | 否      | 名称关键词                                                 |
+| email_keyword     | 否      | 邮箱关键词                                                 |
+| phone_keyword     | 否      | 电话关键词                                                 |
 | notify_types      | 否      | 通知类型列表                                               |
 | statuses          | 否      | 状态列表                                                   |
 | search_keyword    | 否      | 搜索关键词                                                 |
+| create_time_order | 否      | 创建时间排序：asc/desc                                     |
+| update_time_order | 否      | 更新时间排序：asc/desc                                     |
 
 **输出参数：**
 
@@ -124,6 +133,8 @@ print("Response:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
 ### 获取单个接收者详情
+
+用途：根据接收者 ID 查询详细信息。
 
 ```
 GET /alerting/receiver?id={receiver_id}
@@ -172,6 +183,8 @@ print("Response:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 ### 更新通知接收者
 
+用途：更新指定 ID 的接收者信息。
+
 ```
 PUT /alerting/receiver
 ```
@@ -182,7 +195,7 @@ PUT /alerting/receiver
 | ------------ | ------- | --------------------------------------------------------- |
 | id           | 是      | 接收者 ID                                                   |
 | name         | 否      | 接收者名称                                                 |
-| notify_type  | 否      | 通知类型：0-邮件，1-短信，2-电话，3-企业微信                   |
+| notify_type  | 否      | 通知类型：0-邮件，1-短信，2-语音，3-企业微信                   |
 | status       | 否      | 状态：0-禁用，1-启用                                        |
 | email        | 否      | 邮箱地址                                                   |
 | phone        | 否      | 电话号码                                                   |
@@ -221,6 +234,8 @@ print("Response:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 ### 删除通知接收者
 
+用途：删除指定 ID 的接收者，并同步更新相关告警规则。
+
 ```
 DELETE /alerting/receiver
 ```
@@ -254,6 +269,8 @@ print("Response:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 
 ### 获取默认通知类型
 
+用途：查询系统支持的通知类型。
+
 ```
 POST /alerting/receiver/default_notify_types/list
 ```
@@ -282,6 +299,8 @@ print("Response:", json.dumps(response.json(), indent=4, ensure_ascii=False))
 ```
 
 ### 发送企业微信通知
+
+用途：通过企业微信机器人发送通知消息。
 
 ```
 POST /alerting/receiver/wecom/notify
