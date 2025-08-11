@@ -1,9 +1,9 @@
 # 数据中心 API
 
-本文档介绍 MatrixOne Intelligence 数据中心的资源结构与 API。数据中心由“目录 → 数据库 → 卷 → 文件”构成，并通过“卷引用”建立跨资源的关联关系。
+本文档介绍 MatrixOne Intelligence 数据中心的资源结构与 API。数据中心由“目录 → 库 → 卷 → 文件”构成，并通过“卷引用”建立跨资源的关联关系。
 
 - 目录：用于组织业务域与资源边界
-- 数据库：承载表与数据对象的逻辑库
+- 库：承载表与数据对象的逻辑库
 - 卷：面向文件与处理结果的资源容器
 - 文件：卷内的具体文件条目
 - 卷引用：跨卷/跨资源的引用绑定
@@ -26,7 +26,7 @@
 
 ### 创建目录
 
-用途：创建一个新的目录，用于组织数据库与卷。
+用途：创建一个新的目录，用于组织库与卷。
 
 ```
 POST /catalog/create
@@ -256,7 +256,7 @@ print(requests.post(url, headers=headers, json=body).json())
 
 ### 获取目录树
 
-用途：以树形结构返回目录下的数据库与卷层级。
+用途：以树形结构返回目录下的库与卷层级。
 
 ```
 POST /catalog/tree
@@ -283,7 +283,7 @@ POST /catalog/tree
             "id": "db-100",
             "name": "db1",
             "type": "database",
-            "description": "业务数据库",
+            "description": "业务库",
             "node_list": [
               {
                 "id": "vol-abc",
@@ -301,11 +301,11 @@ POST /catalog/tree
 }
 ```
 
-## 数据库
+## 库
 
-### 创建数据库
+### 创建库
 
-用途：在指定目录下创建数据库。
+用途：在指定目录下创建库。
 
 ```
 POST /catalog/database/create
@@ -316,7 +316,7 @@ POST /catalog/database/create
 | 参数       | 是否必填 | 类型    | 含义     |
 | ---------- | -------- | ------- | -------- |
 | catalog_id | 是       | integer | 目录 ID   |
-| name       | 是       | string  | 数据库名 |
+| name       | 是       | string  | 库名 |
 | description| 否       | string  | 描述     |
 
 **示例 (Python)：**
@@ -347,9 +347,9 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 获取数据库列表
+### 获取库列表
 
-用途：返回某个目录下的数据库集合及统计信息。
+用途：返回某个目录下的库集合及统计信息。
 
 ```
 POST /catalog/database/list
@@ -400,9 +400,9 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 根据 ID 获取数据库详情
+### 根据 ID 获取库详情
 
-用途：根据数据库 ID 获取详细信息（含创建/更新时间）。
+用途：根据库 ID 获取详细信息（含创建/更新时间）。
 
 ```
 POST /catalog/database/info
@@ -412,7 +412,7 @@ POST /catalog/database/info
 
 | 参数 | 是否必填 | 类型    | 含义   |
 | ---- | -------- | ------- | ------ |
-| id   | 是       | integer | 数据库 ID |
+| id   | 是       | integer | 库 ID |
 
 **示例 (Python)：**
 
@@ -444,9 +444,9 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 更新数据库
+### 更新库
 
-用途：修改数据库的描述信息。
+用途：修改库的描述信息。
 
 ```
 POST /catalog/database/update
@@ -456,7 +456,7 @@ POST /catalog/database/update
 
 | 参数        | 是否必填 | 类型    | 含义   |
 | ----------- | -------- | ------- | ------ |
-| id          | 是       | integer | 数据库 ID |
+| id          | 是       | integer | 库 ID |
 | description | 否       | string  | 描述     |
 
 **示例 (Python)：**
@@ -486,9 +486,9 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 删除数据库
+### 删除库
 
-用途：删除指定数据库（需确保无依赖资源）。
+用途：删除指定库（需确保无依赖资源）。
 
 ```
 POST /catalog/database/delete
@@ -498,7 +498,7 @@ POST /catalog/database/delete
 
 | 参数 | 是否必填 | 类型    | 含义   |
 | ---- | -------- | ------- | ------ |
-| id   | 是       | integer | 数据库 ID |
+| id   | 是       | integer | 库 ID |
 
 **示例 (Python)：**
 
@@ -526,9 +526,9 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 获取数据库子列表
+### 获取库子列表
 
-用途：查询数据库下的子资源列表（如卷）。
+用途：查询库下的子资源列表（如卷）。
 
 ```
 POST /catalog/database/children
@@ -538,7 +538,7 @@ POST /catalog/database/children
 
 | 参数 | 是否必填 | 类型    | 含义   |
 | ---- | -------- | ------- | ------ |
-| id   | 是       | integer | 数据库 ID |
+| id   | 是       | integer | 库 ID |
 
 **示例 (Python)：**
 
@@ -583,7 +583,7 @@ print(requests.post(url, headers=headers, json=body).json())
 
 ### 创建卷
 
-用途：在数据库下创建卷，用于存放文件与处理结果。
+用途：在库下创建卷，用于存放文件与处理结果。
 
 ```
 POST /catalog/volume/create
@@ -593,7 +593,7 @@ POST /catalog/volume/create
 
 | 参数        | 是否必填 | 类型    | 含义     |
 | ----------- | -------- | ------- | -------- |
-| database_id | 是       | integer | 数据库 ID |
+| database_id | 是       | integer | 库 ID |
 | name        | 是       | string  | 卷名称   |
 | description | 否       | string  | 描述     |
 
