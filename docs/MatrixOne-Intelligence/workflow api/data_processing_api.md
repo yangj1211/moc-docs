@@ -1584,7 +1584,7 @@ if response.content:
             {
                 "id": "workflow_id_for_branch_1",
                 "name": "Parent Workflow Name - Branch Beta",
-                                  "branch_id": "branch_uuid_beta",
+                "branch_id": "branch_uuid_beta",
                 "branch_name": "beta-experiment",
                 "branch_status": 1,
                 "branch_volume_id": "target_vol_for_beta_branch"
@@ -2239,8 +2239,8 @@ if resp.content and resp.text.strip():
 
 ```json
 {
-  "code": "ok",
-  "msg": "ok",
+    "code": "ok",
+    "msg": "ok",
   "data": null
 }
 ```

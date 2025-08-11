@@ -755,55 +755,6 @@ print(requests.post(url, headers=headers, json=body).json())
 
 ## 文件
 
-### 创建文件
-
-用途：在卷内创建文件元数据或占位记录。
-
-```
-POST /catalog/file/create
-```
-
-**Body 输入参数：**
-
-| 参数            | 是否必填 | 类型   | 含义           |
-| --------------- | -------- | ------ | -------------- |
-| name            | 是       | string | 文件名         |
-| show_type       | 是       | string | 展示类型       |
-| parent_id       | 否       | string | 父文件夹 ID     |
-| ref_file_id     | 否       | string | 引用文件 ID     |
-| origin_file_ext | 否       | string | 原始扩展名     |
-| save_path       | 否       | string | 保存路径       |
-| size            | 否       | integer| 大小           |
-| volume_id       | 否       | string | 卷 ID           |
-
-**示例 (Python)：**
-
-```python
-import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/create"
-headers = {
-    "moi-key": "xxxxx"
-}
-body = {
-    "name": "demo.md",
-    "show_type": "markdown",
-    "volume_id": "vol-abc"
-}
-print(requests.post(url, headers=headers, json=body).json())
-```
-
-**返回：**
-
-```json
-{
-  "code": "OK",
-  "msg": "OK",
-  "data": {
-    "id": "file-xyz",
-    "name": "demo.md"
-  }
-}
-```
 
 ### 获取文件信息
 
@@ -928,103 +879,6 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 获取文件预览链接
-
-用途：获取文件的临时可访问链接（用于浏览器预览/下载）。
-
-```
-POST /catalog/file/preview_link
-```
-
-**Body 输入参数：**
-
-| 参数      | 是否必填 | 类型   | 含义   |
-| --------- | -------- | ------ | ------ |
-| file_id   | 是       | string | 文件 ID |
-| volume_id | 否       | string | 卷 ID   |
-
-**示例 (Python)：**
-
-```python
-import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/preview_link"
-headers = {
-    "moi-key": "xxxxx"
-}
-body = {
-    "file_id": "file-xyz",
-    "volume_id": "vol-abc"
-}
-print(requests.post(url, headers=headers, json=body).json())
-```
-
-**返回：**
-
-```json
-{
-  "code": "OK",
-  "msg": "OK",
-  "data": {
-    "link": "https://oss.example.com/bucket/user_a/origin/file-xyz/demo.md"
-  }
-}
-```
-
-### 获取文件预览流
-
-用途：以二进制流形式返回文件内容（不经跳转）。
-
-```
-POST /catalog/file/preview_stream
-```
-
-**Body 输入参数：**`{"id": string}`（文件 ID）
-
-**说明：**返回为二进制流，此处不展示样例。
-
-### 上传文件
-
-用途：提交一个上传任务，返回文件占位 ID（结合其他能力完成实际上传）。
-
-```
-POST /catalog/file/upload
-```
-
-**Body 输入参数：**
-
-| 参数      | 是否必填 | 类型   | 含义     |
-| --------- | -------- | ------ | -------- |
-| name      | 是       | string | 文件名   |
-| volume_id | 是       | string | 卷 ID     |
-| parent_id | 否       | string | 父文件夹 |
-
-**示例 (Python)：**
-
-```python
-import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/upload"
-headers = {
-    "moi-key": "xxxxx"
-}
-body = {
-    "name": "report.pdf",
-    "volume_id": "vol-abc"
-}
-print(requests.post(url, headers=headers, json=body).json())
-```
-
-**返回：**
-
-```json
-{
-  "code": "OK",
-  "msg": "OK",
-  "data": {
-    "id": "file-uvw"
-  }
-}
-```
-
 ### 更新文件
 
 用途：修改文件名称等元数据。
@@ -1107,45 +961,6 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 通过引用文件 ID 删除文件
-
-用途：根据引用文件 ID 删除目标文件（常用于清理派生/引用关系）。
-
-```
-POST /catalog/file/delete_ref
-```
-
-**Body 输入参数：**
-
-| 参数 | 是否必填 | 类型   | 含义       |
-| ---- | -------- | ------ | ---------- |
-| id   | 是       | string | 引用文件 ID |
-
-**示例 (Python)：**
-
-```python
-import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/delete_ref"
-headers = {
-    "moi-key": "xxxxx"
-}
-body = {
-    "id": "file-xyz"
-}
-print(requests.post(url, headers=headers, json=body).json())
-```
-
-**返回：**
-
-```json
-{
-  "code": "OK",
-  "msg": "OK",
-  "data": {
-    "id": "file-xyz"
-  }
-}
-```
 
 ### 下载文件链接
 
