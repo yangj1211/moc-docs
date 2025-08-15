@@ -50,10 +50,15 @@ nav:
         - 数据载入: MatrixOne-Intelligence/Data-Connect/loading.md
         - 数据导出: MatrixOne-Intelligence/Data-Connect/export.md
       - 数据处理:
+        - 工作流模版:
+          - 概述: MatrixOne-Intelligence/Data-Processing/workflow_template/overview.md
+          - 图文混合文档 RAG 数据准备: MatrixOne-Intelligence/Data-Processing/workflow_template/multimodal_doc_rag_prep.md
+          - 人才简历信息提取: MatrixOne-Intelligence/Data-Processing/workflow_template/resume_info_extraction.md
+          - 法律数据微调生成: MatrixOne-Intelligence/Data-Processing/workflow_template/legal_sft_data_gen.md
         - 工作流: MatrixOne-Intelligence/Data-Processing/workflow.md
         - 作业: MatrixOne-Intelligence/Data-Processing/operation.md
       - 探索数据:
-        - Catalog: MatrixOne-Intelligence/Data-Explore/catalog.md
+        - 数据中心: MatrixOne-Intelligence/Data-Explore/catalog.md
       - 告警: MatrixOne-Intelligence/Workspace-Mgmt/alarm.md
       - 用户权限:
         - 用户管理: MatrixOne-Intelligence/Workspace-Mgmt/user-privilge/user_mgmt.md

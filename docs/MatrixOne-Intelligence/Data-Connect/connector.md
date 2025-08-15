@@ -1,6 +1,16 @@
 # 连接器
 
-MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支持数据的载入和导出，允许用户轻松地将存储在对象存储和分布式文件系统上的数据导入到 MatrixOne Intellogence 平台中。只需提供必要的连接信息，即可实现数据的无缝导入，为后续的数据分析和处理提供便利。同时支持将数据导出到知识库，目前支持导出到 dify。
+MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支持数据的载入和导出，允许用户轻松地将存储在对象存储和分布式文件系统上的数据导入到 MatrixOne Intellogence 平台中。只需提供必要的连接信息，即可实现数据的无缝导入，为后续的数据分析和处理提供便利。
+
+## 支持连接器
+
+   | 类型          | 连接器        |载入   |导出         |
+   |---------------|-------------|-------|-----------|
+   | 对象存储       | 阿里云 OSS   | ✅      | ✅   |
+   | 对象存储       | 标准 S3       | ✅      | ✅   |
+   | 分布式文件系统  | HDFS        | ✅      | ❌  |
+   | 数据库         | MatrixOne   | ❌      | ✅   |
+   | 知识库         | Dify        | ❌      | ✅   |
 
 ## 如何使用连接器
 
@@ -10,21 +20,18 @@ MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支
 
 #### 阿里云 OSS
 
-要将阿里云 OSS 上的文件导入到 MatrixOne Intellogence 平台，您需要提供以下连接信息：
+要将文件从阿里云 OSS 导入至 MatrixOne Intelligence 平台，或将处理结果导出至 OSS，您需提供以下连接配置信息：
 
 - 地区：OSS 服务的访问地址。
 - AccessKeyId: 您的阿里云账号的 AccessKey ID。
 - AccessKeySecret: 您的阿里云账号的 AccessKey Secret。
 - 文件路径：OSS 上文件的路径。例如：`bucket-name/path/to/your/file.csv`。
 
-<div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-connect/conn_1.png
- width=60% heigth=60%/>
-</div>
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/conn_oss.png)
 
 #### 标准 S3
 
-要将兼容 S3 协议的存储服务（如 AWS S3、MinIO 等）上的文件导入到 MatrixOne Intelligence 平台，您需要提供以下连接信息：
+要将兼容 S3 协议的对象存储服务（如 AWS S3、MinIO 等）中的文件导入至 MatrixOne Intelligence 平台，您需提供以下连接配置信息：
 
 - Endpoint: 标准 S3 服务的访问地址。例如：`https://s3.amazonaws.com`。
 - AccessKeyId: 您的标准 S3 账号的 AccessKey ID。
@@ -33,14 +40,13 @@ MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支
 - S3 地址风格：S3 地址风格决定了访问存储桶（Bucket）的 URL 结构，虚拟主机风格（Virtual Host）（推荐）：https: //my-bucket.s3.amazonaws.com/my-object，路径风格（Path Style）（部分旧系统）：https: //s3.amazonaws.com/my-bucket/my-object，AWS 目前推荐使用虚拟主机风格，部分私有 S3 兼容存储（如 MinIO）仍可能需要路径风格。
 - 地区：S3 存储桶所在的地区。例如：us-east-1。
 
-<div align="center">
-    <img src=https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/data-connect/conn_2.png
- width=60% heigth=60%/>
-</div>
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/conn_s3.png)
 
-#### 分布式文件系统
+### 分布式文件系统
 
 #### HDFS
+
+要将 HDFS 中的文件导入至 MatrixOne Intelligence 平台，您需要提供以下连接配置信息以完成数据接入配置：
 
 - HDFS 地址：如 `hdfs://namenode:9000`
 - 认证方式：目前仅支持 Simple
@@ -113,9 +119,17 @@ hdfs-site.xml 中 dfs.datanode.hostname 为 DataNode 的公网 IP（47.111.156.2
 10.1.19.23  iZbp14hbhigjmqticskavqZ
 ```
   
+### 数据库
+
+#### MatrixOne
+
+要将处理好的文件导出到 MatrixOne 知识库，需要提供数据库连接信息，包括主机、端口、用户名、密码。
+
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/conn_mo.png)
+
 ### 知识库
 
-#### 连接 Dify 知识库
+#### Dify
 
 要将处理好的文件导出到 Dify 知识库，需要提供 API URL 和 API Key，具体配置方法请参考[数据导出](./export.md)
 
