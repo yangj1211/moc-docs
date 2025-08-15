@@ -1,9 +1,9 @@
 # 数据中心 API
 
-本文档介绍 MatrixOne Intelligence 数据中心的资源结构与 API。数据中心由“目录 → 数据库 → 卷 → 文件”构成，并通过“卷引用”建立跨资源的关联关系。
+本文档介绍 MatrixOne Intelligence 数据中心的资源结构与 API。数据中心由“目录 → 库 → 卷 → 文件”构成，并通过“卷引用”建立跨资源的关联关系。
 
 - 目录：用于组织业务域与资源边界
-- 数据库：承载表与数据对象的逻辑库
+- 库：承载表与数据对象的逻辑库
 - 卷：面向文件与处理结果的资源容器
 - 文件：卷内的具体文件条目
 - 卷引用：跨卷/跨资源的引用绑定
@@ -26,7 +26,7 @@
 
 ### 创建目录
 
-用途：创建一个新的目录，用于组织数据库与卷。
+用途：创建一个新的目录，用于组织库与卷。
 
 ```
 POST /catalog/create
@@ -256,7 +256,7 @@ print(requests.post(url, headers=headers, json=body).json())
 
 ### 获取目录树
 
-用途：以树形结构返回目录下的数据库与卷层级。
+用途：以树形结构返回目录下的库与卷层级。
 
 ```
 POST /catalog/tree
@@ -283,7 +283,7 @@ POST /catalog/tree
             "id": "db-100",
             "name": "db1",
             "type": "database",
-            "description": "业务数据库",
+            "description": "业务库",
             "node_list": [
               {
                 "id": "vol-abc",
@@ -301,11 +301,11 @@ POST /catalog/tree
 }
 ```
 
-## 数据库
+## 库
 
-### 创建数据库
+### 创建库
 
-用途：在指定目录下创建数据库。
+用途：在指定目录下创建库。
 
 ```
 POST /catalog/database/create
@@ -316,7 +316,7 @@ POST /catalog/database/create
 | 参数       | 是否必填 | 类型    | 含义     |
 | ---------- | -------- | ------- | -------- |
 | catalog_id | 是       | integer | 目录 ID   |
-| name       | 是       | string  | 数据库名 |
+| name       | 是       | string  | 库名 |
 | description| 否       | string  | 描述     |
 
 **示例 (Python)：**
@@ -347,9 +347,9 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 获取数据库列表
+### 获取库列表
 
-用途：返回某个目录下的数据库集合及统计信息。
+用途：返回某个目录下的库集合及统计信息。
 
 ```
 POST /catalog/database/list
@@ -400,9 +400,9 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 根据 ID 获取数据库详情
+### 根据 ID 获取库详情
 
-用途：根据数据库 ID 获取详细信息（含创建/更新时间）。
+用途：根据库 ID 获取详细信息（含创建/更新时间）。
 
 ```
 POST /catalog/database/info
@@ -412,7 +412,7 @@ POST /catalog/database/info
 
 | 参数 | 是否必填 | 类型    | 含义   |
 | ---- | -------- | ------- | ------ |
-| id   | 是       | integer | 数据库 ID |
+| id   | 是       | integer | 库 ID |
 
 **示例 (Python)：**
 
@@ -444,9 +444,9 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 更新数据库
+### 更新库
 
-用途：修改数据库的描述信息。
+用途：修改库的描述信息。
 
 ```
 POST /catalog/database/update
@@ -456,7 +456,7 @@ POST /catalog/database/update
 
 | 参数        | 是否必填 | 类型    | 含义   |
 | ----------- | -------- | ------- | ------ |
-| id          | 是       | integer | 数据库 ID |
+| id          | 是       | integer | 库 ID |
 | description | 否       | string  | 描述     |
 
 **示例 (Python)：**
@@ -486,9 +486,9 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 删除数据库
+### 删除库
 
-用途：删除指定数据库（需确保无依赖资源）。
+用途：删除指定库（需确保无依赖资源）。
 
 ```
 POST /catalog/database/delete
@@ -498,7 +498,7 @@ POST /catalog/database/delete
 
 | 参数 | 是否必填 | 类型    | 含义   |
 | ---- | -------- | ------- | ------ |
-| id   | 是       | integer | 数据库 ID |
+| id   | 是       | integer | 库 ID |
 
 **示例 (Python)：**
 
@@ -526,9 +526,9 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 获取数据库子列表
+### 获取库子列表
 
-用途：查询数据库下的子资源列表（如卷）。
+用途：查询库下的子资源列表（如卷）。
 
 ```
 POST /catalog/database/children
@@ -538,7 +538,7 @@ POST /catalog/database/children
 
 | 参数 | 是否必填 | 类型    | 含义   |
 | ---- | -------- | ------- | ------ |
-| id   | 是       | integer | 数据库 ID |
+| id   | 是       | integer | 库 ID |
 
 **示例 (Python)：**
 
@@ -583,7 +583,7 @@ print(requests.post(url, headers=headers, json=body).json())
 
 ### 创建卷
 
-用途：在数据库下创建卷，用于存放文件与处理结果。
+用途：在库下创建卷，用于存放文件与处理结果。
 
 ```
 POST /catalog/volume/create
@@ -593,7 +593,7 @@ POST /catalog/volume/create
 
 | 参数        | 是否必填 | 类型    | 含义     |
 | ----------- | -------- | ------- | -------- |
-| database_id | 是       | integer | 数据库 ID |
+| database_id | 是       | integer | 库 ID |
 | name        | 是       | string  | 卷名称   |
 | description | 否       | string  | 描述     |
 
@@ -755,55 +755,6 @@ print(requests.post(url, headers=headers, json=body).json())
 
 ## 文件
 
-### 创建文件
-
-用途：在卷内创建文件元数据或占位记录。
-
-```
-POST /catalog/file/create
-```
-
-**Body 输入参数：**
-
-| 参数            | 是否必填 | 类型   | 含义           |
-| --------------- | -------- | ------ | -------------- |
-| name            | 是       | string | 文件名         |
-| show_type       | 是       | string | 展示类型       |
-| parent_id       | 否       | string | 父文件夹 ID     |
-| ref_file_id     | 否       | string | 引用文件 ID     |
-| origin_file_ext | 否       | string | 原始扩展名     |
-| save_path       | 否       | string | 保存路径       |
-| size            | 否       | integer| 大小           |
-| volume_id       | 否       | string | 卷 ID           |
-
-**示例 (Python)：**
-
-```python
-import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/create"
-headers = {
-    "moi-key": "xxxxx"
-}
-body = {
-    "name": "demo.md",
-    "show_type": "markdown",
-    "volume_id": "vol-abc"
-}
-print(requests.post(url, headers=headers, json=body).json())
-```
-
-**返回：**
-
-```json
-{
-  "code": "OK",
-  "msg": "OK",
-  "data": {
-    "id": "file-xyz",
-    "name": "demo.md"
-  }
-}
-```
 
 ### 获取文件信息
 
@@ -928,103 +879,6 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 获取文件预览链接
-
-用途：获取文件的临时可访问链接（用于浏览器预览/下载）。
-
-```
-POST /catalog/file/preview_link
-```
-
-**Body 输入参数：**
-
-| 参数      | 是否必填 | 类型   | 含义   |
-| --------- | -------- | ------ | ------ |
-| file_id   | 是       | string | 文件 ID |
-| volume_id | 否       | string | 卷 ID   |
-
-**示例 (Python)：**
-
-```python
-import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/preview_link"
-headers = {
-    "moi-key": "xxxxx"
-}
-body = {
-    "file_id": "file-xyz",
-    "volume_id": "vol-abc"
-}
-print(requests.post(url, headers=headers, json=body).json())
-```
-
-**返回：**
-
-```json
-{
-  "code": "OK",
-  "msg": "OK",
-  "data": {
-    "link": "https://oss.example.com/bucket/user_a/origin/file-xyz/demo.md"
-  }
-}
-```
-
-### 获取文件预览流
-
-用途：以二进制流形式返回文件内容（不经跳转）。
-
-```
-POST /catalog/file/preview_stream
-```
-
-**Body 输入参数：**`{"id": string}`（文件 ID）
-
-**说明：**返回为二进制流，此处不展示样例。
-
-### 上传文件
-
-用途：提交一个上传任务，返回文件占位 ID（结合其他能力完成实际上传）。
-
-```
-POST /catalog/file/upload
-```
-
-**Body 输入参数：**
-
-| 参数      | 是否必填 | 类型   | 含义     |
-| --------- | -------- | ------ | -------- |
-| name      | 是       | string | 文件名   |
-| volume_id | 是       | string | 卷 ID     |
-| parent_id | 否       | string | 父文件夹 |
-
-**示例 (Python)：**
-
-```python
-import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/upload"
-headers = {
-    "moi-key": "xxxxx"
-}
-body = {
-    "name": "report.pdf",
-    "volume_id": "vol-abc"
-}
-print(requests.post(url, headers=headers, json=body).json())
-```
-
-**返回：**
-
-```json
-{
-  "code": "OK",
-  "msg": "OK",
-  "data": {
-    "id": "file-uvw"
-  }
-}
-```
-
 ### 更新文件
 
 用途：修改文件名称等元数据。
@@ -1107,45 +961,6 @@ print(requests.post(url, headers=headers, json=body).json())
 }
 ```
 
-### 通过引用文件 ID 删除文件
-
-用途：根据引用文件 ID 删除目标文件（常用于清理派生/引用关系）。
-
-```
-POST /catalog/file/delete_ref
-```
-
-**Body 输入参数：**
-
-| 参数 | 是否必填 | 类型   | 含义       |
-| ---- | -------- | ------ | ---------- |
-| id   | 是       | string | 引用文件 ID |
-
-**示例 (Python)：**
-
-```python
-import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/delete_ref"
-headers = {
-    "moi-key": "xxxxx"
-}
-body = {
-    "id": "file-xyz"
-}
-print(requests.post(url, headers=headers, json=body).json())
-```
-
-**返回：**
-
-```json
-{
-  "code": "OK",
-  "msg": "OK",
-  "data": {
-    "id": "file-xyz"
-  }
-}
-```
 
 ### 下载文件链接
 
@@ -1186,85 +1001,5 @@ print(requests.post(url, headers=headers, json=body).json())
   "data": {
     "link": "https://oss.example.com/bucket/user_a/origin/file-xyz/demo.md?signature=..."
   }
-}
-```
-
-## 卷引用
-
-### 创建卷引用
-
-用途：建立跨卷/跨资源的引用绑定关系。
-
-```
-POST /catalog/volume_ref/create
-```
-
-**Body 输入参数：**
-
-| 参数     | 是否必填 | 类型       | 含义     |
-| -------- | -------- | ---------- | -------- |
-| ref_list | 是       | array[Ref] | 引用列表 |
-
-- `Ref` 对象：`{ ref_id: string, ref_type: string, volume_id: string }`
-
-**示例 (Python)：**
-
-```python
-import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/volume_ref/create"
-headers = {
-    "moi-key": "xxxxx"
-}
-body = {
-    "ref_list": [
-        {"ref_id": "file-xyz", "ref_type": "file", "volume_id": "vol-abc"}
-    ]
-}
-print(requests.post(url, headers=headers, json=body).json())
-```
-
-**返回：**
-
-```json
-{
-  "code": "OK",
-  "msg": "OK",
-  "data": {}
-}
-```
-
-### 删除卷引用
-
-用途：删除既有的引用关系。
-
-```
-POST /catalog/volume_ref/delete
-```
-
-**Body 输入参数：**同上（`ref_list`）。
-
-**示例 (Python)：**
-
-```python
-import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/volume_ref/delete"
-headers = {
-    "moi-key": "xxxxx"
-}
-body = {
-    "ref_list": [
-        {"ref_id": "file-xyz", "ref_type": "file", "volume_id": "vol-abc"}
-    ]
-}
-print(requests.post(url, headers=headers, json=body).json())
-```
-
-**返回：**
-
-```json
-{
-  "code": "OK",
-  "msg": "OK",
-  "data": {}
 }
 ```
