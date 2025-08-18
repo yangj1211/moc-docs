@@ -26,4 +26,4 @@
 
 ## **加入我们！**
 
-热情洋溢的社区在 [MatrixOne Slack](https://matrixoneworkspace.slack.com/) 频道及 [MatrixOne 官网](https://www.matrixorigin.cn/)等待着您。
+热情洋溢的社区在 [MatrixOne Slack](https://matrixoneworkspace.slack.com/) 频道及 [MatrixOne 官网](https://matrixorigin.cn/)等待着您。
