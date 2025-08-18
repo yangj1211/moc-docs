@@ -57,7 +57,7 @@ nav:
           - 法律数据微调生成: MatrixOne-Intelligence/Data-Processing/workflow_template/legal_sft_data_gen.md
         - 工作流: MatrixOne-Intelligence/Data-Processing/workflow.md
         - 作业: MatrixOne-Intelligence/Data-Processing/operation.md
-      - 探索数据:
+      - 数据管理:
         - 数据中心: MatrixOne-Intelligence/Data-Explore/catalog.md
       - 告警: MatrixOne-Intelligence/Workspace-Mgmt/alarm.md
       - 用户权限:
