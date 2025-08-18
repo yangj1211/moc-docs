@@ -4,7 +4,7 @@
 
 1. 登录您的 MO Intelligence 账号，进入到管理平台。
 
-    如果您还没有 MO Intelligence 账号，您可以点击[注册登录](https://www.matrixorigin.cn/moi-signup)开始注册，或者参照[快速体验 MatrixOne Intelligence](../../Get-Started/quickstart.md) 的注册指南。
+    如果您还没有 MO Intelligence 账号，您可以点击[注册登录](https://matrixorigin.cn/moi-signup)开始注册，或者参照[快速体验 MatrixOne Intelligence](../../Get-Started/quickstart.md) 的注册指南。
 
 2. 在菜单栏中点击 **GenAI 工作区**进入工作区列表页面，然后点击**创建工作区**。
 

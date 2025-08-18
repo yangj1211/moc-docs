@@ -17,7 +17,7 @@ theme:
 repo_url: https://github.com/matrixorigin/moc-docs
 edit_uri: edit/main/docs/
 extra:
-  homepage: https://www.matrixorigin.cn/matrixone-intelligence
+  homepage: https://matrixorigin.cn/matrixone-intelligence
   version:
     provider: mike
 extra_css:
