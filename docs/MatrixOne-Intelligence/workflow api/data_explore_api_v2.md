@@ -755,7 +755,6 @@ print(requests.post(url, headers=headers, json=body).json())
 
 ## 文件
 
-
 ### 获取文件信息
 
 用途：根据文件 ID 获取文件详情（类型、大小、归属卷等）。
@@ -960,7 +959,6 @@ print(requests.post(url, headers=headers, json=body).json())
   }
 }
 ```
-
 
 ### 下载文件链接
 
