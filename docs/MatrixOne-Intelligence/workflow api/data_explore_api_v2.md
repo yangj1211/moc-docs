@@ -1029,3 +1029,113 @@ print(requests.post(url, headers=headers, json=body).json())
   }
 }
 ```
+
+## 文件分块
+
+### 获取文件分块
+
+用途：获取文件的块数据，支持数据增强结果和普通嵌入块数据两种模式。
+
+```
+POST /catalog/file/blocks
+```
+
+**Body 输入参数：**
+
+| 参数    | 是否必填 | 类型   | 含义   |
+| ------- | -------- | ------ | ------ |
+| file_id | 是       | string | 文件 ID |
+| volume_id | 是     | string | 卷 ID   |
+| filters | 否       | object | 过滤条件 |
+| offset  | 否       | integer | 偏移量（默认 0） |
+| limit   | 否       | integer | 限制数量（默认 30） |
+
+**Filters 对象结构：**
+
+| 参数           | 类型     | 含义                     |
+| -------------- | -------- | ------------------------ |
+| types          | string[] | 块类型筛选               |
+| levels         | string[] | 层级筛选                 |
+| search_content | string   | 搜索内容                 |
+| block_ids      | string[] | 指定块 ID 列表           |
+| list_embedding | boolean  | 是否列出嵌入信息         |
+
+**示例 (Python)：**
+
+基础查询示例：
+
+```python
+import requests
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/blocks"
+headers = {
+    "moi-key": "xxxxx"
+}
+body = {
+    "file_id": "file-xyz",
+    "volume_id": "vol-abc",
+    "offset": 0,
+    "limit": 30
+}
+print(requests.post(url, headers=headers, json=body).json())
+```
+
+带过滤条件查询示例：
+
+```python
+import requests
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/blocks"
+headers = {
+    "moi-key": "xxxxx"
+}
+body = {
+    "file_id": "file-xyz",
+    "volume_id": "vol-abc",
+    "filters": {
+        "types": ["text", "table"],
+        "search_content": "关键词",
+        "list_embedding": true
+    },
+    "offset": 0,
+    "limit": 30
+}
+print(requests.post(url, headers=headers, json=body).json())
+```
+
+**返回：**
+
+```json
+{
+  "code": "OK",
+  "msg": "OK",
+  "data": {
+    "total": 25,
+    "type": 0,
+    "items": [
+      {
+        "block_id": "block-123",
+        "content": "这是文档的一个文本块内容...",
+        "type": "text",
+        "level": "paragraph",
+        "position": {
+          "page": 1,
+          "start": 0,
+          "end": 100
+        },
+        "embedding": [0.1, 0.2, 0.3, ...]
+      },
+      {
+        "block_id": "block-124",
+        "content": "这是另一个文本块内容...",
+        "type": "text",
+        "level": "paragraph",
+        "position": {
+          "page": 1,
+          "start": 100,
+          "end": 200
+        },
+        "embedding": [0.4, 0.5, 0.6, ...]
+      }
+    ]
+  }
+}
+```
