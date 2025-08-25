@@ -825,11 +825,14 @@ POST /catalog/file/list
 | page       | integer           | 页码（默认 1）        |
 | page_size  | integer           | 每页数量（默认 10）   |
 
-- `Filter`:
-  - `name`: string, `values`: string []，`fuzzy`: boolean
+- `Filter` 对象结构：
+  - `name`: string - 过滤字段名称（如："volume_id" 表示按卷名过滤）
+  - `values`: string[] - 过滤值数组（如：["vol-abc", "vol-def"] 表示卷ID列表）
+  - `fuzzy`: boolean - 是否模糊匹配
 
 **示例 (Python)：**
 
+基础查询示例：
 ```python
 import requests
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/list"
@@ -837,6 +840,29 @@ headers = {
     "moi-key": "xxxxx"
 }
 body = {
+    "order": "desc",
+    "order_by": "created_at",
+    "page": 1,
+    "page_size": 10
+}
+print(requests.post(url, headers=headers, json=body).json())
+```
+
+按卷过滤查询示例：
+```python
+import requests
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/list"
+headers = {
+    "moi-key": "xxxxx"
+}
+body = {
+    "filters": [
+        {
+            "name": "volume_name",
+            "values": ["vol-abc", "vol-def"],
+            "fuzzy": false
+        }
+    ],
     "order": "desc",
     "order_by": "created_at",
     "page": 1,
