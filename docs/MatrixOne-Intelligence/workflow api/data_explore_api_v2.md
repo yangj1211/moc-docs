@@ -755,7 +755,6 @@ print(requests.post(url, headers=headers, json=body).json())
 
 ## 文件
 
-
 ### 获取文件信息
 
 用途：根据文件 ID 获取文件详情（类型、大小、归属卷等）。
@@ -827,12 +826,13 @@ POST /catalog/file/list
 
 - `Filter` 对象结构：
   - `name`: string - 过滤字段名称（如："volume_id" 表示按卷名过滤）
-  - `values`: string[] - 过滤值数组（如：["vol-abc", "vol-def"] 表示卷ID列表）
+  - `values`: string [] - 过滤值数组（如：["vol-abc", "vol-def"] 表示卷 ID 列表）
   - `fuzzy`: boolean - 是否模糊匹配
 
 **示例 (Python)：**
 
 基础查询示例：
+
 ```python
 import requests
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/list"
@@ -849,6 +849,7 @@ print(requests.post(url, headers=headers, json=body).json())
 ```
 
 按卷过滤查询示例：
+
 ```python
 import requests
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/list"
@@ -986,7 +987,6 @@ print(requests.post(url, headers=headers, json=body).json())
   }
 }
 ```
-
 
 ### 下载文件链接
 
