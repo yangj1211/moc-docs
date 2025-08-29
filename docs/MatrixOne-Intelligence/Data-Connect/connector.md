@@ -49,9 +49,16 @@ MatrixOne Intellogence 平台提供了一个强大的数据连接器，用于支
 要将 HDFS 中的文件导入至 MatrixOne Intelligence 平台，您需要提供以下连接配置信息以完成数据接入配置：
 
 - HDFS 地址：如 `hdfs://namenode:9000`
-- 认证方式：目前仅支持 Simple
-- HDFS 用户名：HDFS 访问用户名
-- 文件路径：HDFS 文件路径
+- 认证方式：支持 Simple 和 Kerberos 两种认证方法
+- Simple
+    - HDFS 用户名：HDFS 访问用户名
+    - 文件路径：HDFS 文件路径
+- Kerberos
+    - Kerberos Principal：Kerberos 中用于标识用户或服务的主体（Principal），客户端通过它向 Kerberos 认证服务请求票据，从而证明身份。
+    - Keytab 文件：存储 Kerberos 主体和加密密钥的文件，通常用于自动化认证，客户端可以使用它向 Kerberos 获取票据而无需手动输入密码，需要妥善保管。
+    - Krb5 配置文件：Kerberos 客户端配置文件，定义了 Realm、KDC 等信息，告诉客户端如何与 Kerberos 服务器交互进行身份验证。
+    - 代理用户：在某些场景下，Kerberos 认证主体需要以其他用户身份访问 HDFS，可指定代理用户以实现权限委托，让主用户代表代理用户执行操作，如果不使用代理用户可以留空。
+    - 文件路径：HDFS 文件路径
 
 ![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/hdfs.png)
 
