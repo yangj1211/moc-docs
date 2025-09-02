@@ -15,55 +15,59 @@ MOI MCP（MatrixOne Intelligence Model Context Protocol）是 MatrixOne Intellig
 
 MOI MCP 提供了丰富的工具来满足不同的数据处理需求。以下是所有可用工具的详细说明：
 
-### 原始数据卷管理
+> 术语说明：本文中的“目录/库/卷”均为数据中心下的资源层级概念，并非传统意义上的数据库概念。
 
-- **CreateOriginVolume** - 创建原始数据卷
-- **DescribeOriginVolume** - 获取指定原始数据卷的详细信息
-- **DescribeOriginVolumes** - 列出所有原始数据卷
-- **DeleteOriginVolumeFiles** - 删除原始数据卷中的文件
-- **GetOriginVolumeFileLink** - 获取原始数据卷文件的访问链接
+### 📁 目录管理工具
 
-### 连接器管理
+- CreateCatalog - 创建新目录
+- GetCatalogInfo - 获取目录详情
+- GetCatalogList - 获取目录列表
+- GetCatalogTree - 获取完整目录树结构
+- DeleteCatalog - 删除目录
 
-- **CreateConnector** - 创建新的数据连接器
-- **ListConnectors** - 列出所有可用的连接器
-- **UpdateConnector** - 更新连接器配置
-- **ListConnectorFiles** - 列出连接器中的文件
+### 🗄️ 库管理工具
 
-### 数据加载任务
+- CreateDatabase - 在指定目录下创建库
+- GetDatabaseInfo - 获取库详细信息
+- GetDatabaseList - 获取指定目录下的库列表
+- GetDatabaseChildren - 获取库的子资源列表
+- DeleteDatabase - 删除库
 
-- **CreateLoadTask** - 创建数据加载任务
-- **ListLoadTasks** - 列出所有数据加载任务
+### 📦 卷管理工具
 
-### 工作流管理
+- CreateVolume - 在指定库下创建卷
+- GetVolumeInfo - 获取卷详细信息
+- DeleteVolume - 删除卷
 
-- **CreateWorkflowMeta** - 创建工作流
-- **ListWorkflowMetas** - 列出所有工作流
-- **GetWorkflowMeta** - 获取指定工作流
-- **DeleteWorkflowMeta** - 删除工作流
+### 📄 文件管理工具
 
-### 工作流分支管理
+- GetFileList - 列出卷内的文件条目
+- DownloadFile - 下载文件
 
-- **CreateWorkflowBranch** - 创建工作流分支
-- **ListWorkflowBranches** - 列出所有工作流分支
-- **GetWorkflowBranch** - 获取指定工作流分支信息
-- **UpdateWorkflowBranch** - 更新工作流分支
-- **DeleteWorkflowBranch** - 删除工作流分支
-- **EnableWorkflowBranch** - 启用工作流分支
-- **DisableWorkflowBranch** - 禁用工作流分支
+### 🔌 连接器管理工具
 
-### 处理后数据管理
+- CreateConnector - 创建新的数据源连接器（OSS、S3 等）
+- ListConnectors - 获取现有连接器列表
+- UpdateConnector - 更新连接器配置
+- ListConnectorFiles - 列出连接器中的文件
 
-- **ListProcessedVolumes** - 列出所有处理后的数据卷
-- **CreateProcessedVolume** - 创建处理后的数据卷
-- **ListBranchedVolumes** - 列出分支数据卷
+### 📋 任务管理工具
 
-### 文件管理
+- CreateLoadTask - 创建数据加载任务
+- ListLoadTasks - 获取所有数据加载任务列表
 
-- **ListVolumeFiles** - 列出数据卷中的文件
-- **DeleteVolumeFile** - 删除数据卷中的文件
-- **ListFileBlocks** - 列出文件块信息
-- **DeleteFileBlocks** - 删除文件块
+### 🔄 工作流管理工具
+
+- GetWorkflowMeta - 获取工作流详情
+- CreateWorkflowMeta - 创建工作流
+- ListWorkflowMetas - 获取工作流列表
+- CreateWorkflowBranch - 创建工作流分支
+- ListWorkflowBranches - 获取工作流分支列表
+- GetWorkflowBranch - 获取工作流分支详情
+- UpdateWorkflowBranch - 更新工作流分支
+- DeleteWorkflowBranch - 删除工作流分支
+- EnableWorkflowBranch - 启用工作流分支
+- DisableWorkflowBranch - 禁用工作流分支
 
 > 💡 **使用提示**：这些工具可以通过自然语言调用，AI 助手会自动选择合适的工具来完成您的请求。
 
