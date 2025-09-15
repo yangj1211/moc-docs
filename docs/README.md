@@ -13,7 +13,7 @@ MatrixOne Intelligence 是一个 AI 原生多模态数据智能平台，它融�
 - 如果您是第一次接触，请从[概述](MatrixOne-Intelligence/Overview/matrixone-intelligence-introduction.md)开始，了解平台的定位、核心功能与整体架构。
 - 如果您希望快速体验多模态数据处理与 GenAI 工作流，请从[快速上手](MatrixOne-Intelligence/Get-Started/workspace.md)开始。
 - 如果您是一名开发者，想要深度使用 MatrixOne Intelligence 作为云数据库，请参阅[开发指南](MatrixOne-Intelligence/App-Develop/Tutorial/develop-python-crud-demo.md)。
-- 如果您需要查询 SQL、数据类型、向量检索或系统函数等细节，请参考[ SQL 参考指南](MatrixOne-Intelligence/Reference/SQL-Reference/Data-Definition-Language/create-database.md)。
+- 如果您需要查询 SQL、数据类型、向量检索或系统函数等细节，请参考[SQL 参考指南](MatrixOne-Intelligence/Reference/SQL-Reference/Data-Definition-Language/create-database.md)。
 
 ## **持续改进**
 
