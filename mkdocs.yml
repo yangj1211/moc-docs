@@ -26,6 +26,13 @@ extra:
   homepage: https://matrixorigin.cn/matrixone-intelligence
   version:
     provider: mike
+  alternate:
+    - name: English
+      link: /en/m1intelligence/
+      lang: en
+    - name: 中文简体
+      link: /zh/m1intelligence/
+      lang: zh
 extra_css:
   - stylesheets/extra.css
 markdown_extensions:
