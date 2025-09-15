@@ -36,8 +36,6 @@ nav:
     - 主页: README.md
     - 关于 MatrixOne Intelligence:
       - MatrixOne Intelligence 简介: MatrixOne-Intelligence/Overview/matrixone-intelligence-introduction.md
-      - MySQL 兼容性: MatrixOne-Intelligence/Overview/mysql-compatibility.md
-      - MOne 助手: MatrixOne-Intelligence/Overview/mone-introduction.md
     - 快速开始:
       - 快速创建 GenAI 工作区: MatrixOne-Intelligence/Get-Started/workspace.md
       - 快速创建数据库实例: MatrixOne-Intelligence/Get-Started/quickstart.md
@@ -75,6 +73,7 @@ nav:
         - 结构化抽取: MatrixOne-Intelligence/quick-start api/structured_extraction_api.md
       - MCP 使用说明: MatrixOne-Intelligence/mcp/mcp.md
     - 数据库实例: 
+      - MySQL 兼容性: MatrixOne-Intelligence/Overview/mysql-compatibility.md
       - 管理实例:
         - 创建实例:
           - 创建 Serverless 实例: MatrixOne-Intelligence/Instance-Mgmt/create-instance/create-serverless-instance.md

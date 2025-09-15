@@ -2,28 +2,23 @@
 
 欢迎来到 MatrixOne Intelligence 官方文档网站！
 
-这个官方文档网站提供了相关概念及技术架构介绍、产品特性、使用指南和参考手册，以帮助您使用 MatrixOne Intelligence。
+MatrixOne Intelligence 是一个 AI 原生多模态数据智能平台，它融合了超融合数据库、AI 模型服务、多模态数据处理与智能体开发能力，为企业提供从数据接入、治理、存储到检索与应用构建的一站式方案。
+
+在这里，您可以找到平台的核心概念、技术架构、功能特性，以及使用指南和参考手册，帮助您快速上手并深入应用 MatrixOne Intelligence。
 
 ## **推荐阅读 👉**
 
-从下面的文章中选择一篇，开始您的 MatrixOne Intelligence 之旅。如果您：
+从下面的内容开始您的 MatrixOne Intelligence 之旅：
 
-- 对 MatrixOne Intelligence 还不熟悉，请从**概述**开始，了解 MatrixOne Intelligence 的基本概念，关键功能和技术架构。
-
-- 如果您想要快速体验 MatrixOne Intelligence 基本功能，请从**快速上手**开始。
-
-- 如果您是一个应用开发者，想要深度使用 MatrixOne Intelligence 作为云数据库，请选择**开发指南**开始。
-
-- 如果您是一位经验丰富的 MatrixOne 开发者，想寻找详细的 SQL 语句，数据类型或者函数的细节参数，请至**参考文档**。
-
-|  概述   | 快速上手  | 开发指南 | 参考文档   |
-|  ----  | ----  |  ----  | ----  |
-| [MatrixOne Intelligence 简介](MatrixOne-Intelligence/Overview/matrixone-intelligence-introduction.md)  | [快速开始：注册账号并创建实例](MatrixOne-Intelligence/Get-Started/quickstart.md) | [Java 基础示例](MatrixOne-Intelligence/App-Develop/Tutorial/develop-java-crud-demo.md)	|[SQL 参考指南](MatrixOne-Intelligence/Reference/SQL-Reference/Data-Definition-Language/create-database.md)|
+- 如果您是第一次接触，请从 [概述](MatrixOne-Intelligence/Overview/matrixone-intelligence-introduction.md)开始，了解平台的定位、核心功能与整体架构。
+- 如果您希望快速体验多模态数据处理与 GenAI 工作流，请从 [快速上手](MatrixOne-Intelligence/Get-Started/workspace.md) 开始。
+- 如果您是一名开发者，想要深度使用 MatrixOne Intelligence 作为云数据库，请参阅 [开发指南](MatrixOne-Intelligence/App-Develop/Tutorial/develop-python-crud-demo.md)。
+- 如果您需要查询 SQL、数据类型、向量检索或系统函数等细节，请参考 [SQL 参考指南](MatrixOne-Intelligence/Reference/SQL-Reference/Data-Definition-Language/create-database.md)。
 
 ## **持续改进**
 
-无论您需要了解基本概念、操作指南、开发指南还是参考资料，我们都在为您量身打造内容。
+我们将不断完善文档内容，覆盖从数据接入、解析治理到 GenAI 应用开发的全流程，确保您能快速掌握平台的每一项能力。
 
 ## **加入我们！**
 
-热情洋溢的社区在 [MatrixOne Slack](https://matrixoneworkspace.slack.com/) 频道及 [MatrixOne 官网](https://matrixorigin.cn/)等待着您。
+热情洋溢的社区在 [MatrixOne Slack](https://matrixoneworkspace.slack.com/) 频道及 [MatrixOne Intelligence 官网](https://matrixorigin.cn/)等待着您。
