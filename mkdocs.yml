@@ -15,6 +15,12 @@ theme:
   font:
     text: Ubuntu
 repo_url: https://github.com/matrixorigin/moc-docs
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"/]+|[，。！？…：“”‘’（）—【】《》]|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - print-site:
+      print_page_title: ''
+      toc_title: '目录'
 edit_uri: edit/main/docs/
 extra:
   homepage: https://matrixorigin.cn/matrixone-intelligence
