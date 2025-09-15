@@ -564,6 +564,9 @@ nav:
           - MatrixOne 的 JDBC 功能支持列表: MatrixOne-Intelligence/Reference/Limitations/mo-jdbc-feature-list.md
           - MatrixOne DDL 语句分区支持的说明: MatrixOne-Intelligence/Reference/Limitations/mo-partition-support.md
           - MatrixOne 的 Load Data 支持的说明: MatrixOne-Intelligence/Reference/Limitations/load-data-support.md
+      - 常见问题:
+        - SQL 常见问题: MatrixOne-Intelligence/FAQs/sql-faqs.md
+        - MatrixOne Intelligence 常见问题: MatrixOne-Intelligence/FAQs/FAQ-Product.md
     - 监控:
       - 监控指标: MatrixOne-Intelligence/Monitor/Monitoring.md
       - 监控数据: MatrixOne-Intelligence/Monitor/Data-Monitoring.md
@@ -582,9 +585,6 @@ nav:
       - 现金透支: MatrixOne-Intelligence/Charging/overdraft.md
       - 变更配置: MatrixOne-Intelligence/Charging/adjust-policy.md
       - 退订说明: MatrixOne-Intelligence/Charging/cancellation-policy.md    
-    - 常见问题:
-        - SQL 常见问题: MatrixOne-Intelligence/FAQs/sql-faqs.md
-        - MatrixOne Intelligence 常见问题: MatrixOne-Intelligence/FAQs/FAQ-Product.md
     - 版本发布纪要:
         - '2025': MatrixOne-Intelligence/Release-Notes/2025.md
         - '2024': MatrixOne-Intelligence/Release-Notes/2024.md
