@@ -1037,18 +1037,29 @@ print(requests.post(url, headers=headers, json=body).json())
 用途：获取文件的块数据，支持数据增强结果和普通嵌入块数据两种模式。
 
 ```
-POST /catalog/file/blocks
+POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 ```
 
-**Body 输入参数：**
+**路径参数：**
 
-| 参数    | 是否必填 | 类型   | 含义   |
-| ------- | -------- | ------ | ------ |
-| file_id | 是       | string | 文件 ID |
-| volume_id | 是     | string | 卷 ID   |
-| filters | 否       | object | 过滤条件 |
-| offset  | 否       | integer | 偏移量（默认 0） |
-| limit   | 否       | integer | 限制数量（默认 30） |
+| 参数 | 是否必填 | 类型   | 含义   |
+| ---- | -------- | ------ | ------ |
+| vid  | 是       | string | 卷 ID  |
+| fid  | 是       | string | 文件 ID |
+
+**请求头：**
+
+| 参数     | 是否必填 | 类型   | 含义   |
+| -------- | -------- | ------ | ------ |
+| user-id  | 是       | string | 用户 ID |
+
+**Body 输入参数（可选）：**
+
+| 参数    | 类型    | 含义                     |
+| ------- | ------- | ------------------------ |
+| filters | object  | 过滤条件                 |
+| offset  | integer | 偏移量（默认 0）         |
+| limit   | integer | 限制数量（默认 30）      |
 
 **Filters 对象结构：**
 
@@ -1066,13 +1077,11 @@ POST /catalog/file/blocks
 
 ```python
 import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/blocks"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/vol-abc/files/file-xyz/blocks"
 headers = {
-    "moi-key": "xxxxx"
+    "user-id": "user_123"
 }
 body = {
-    "file_id": "file-xyz",
-    "volume_id": "vol-abc",
     "offset": 0,
     "limit": 30
 }
@@ -1083,13 +1092,11 @@ print(requests.post(url, headers=headers, json=body).json())
 
 ```python
 import requests
-url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/catalog/file/blocks"
+url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/vol-abc/files/file-xyz/blocks"
 headers = {
-    "moi-key": "xxxxx"
+    "user-id": "user_123"
 }
 body = {
-    "file_id": "file-xyz",
-    "volume_id": "vol-abc",
     "filters": {
         "types": ["text", "table"],
         "search_content": "关键词",
@@ -1105,35 +1112,37 @@ print(requests.post(url, headers=headers, json=body).json())
 
 ```json
 {
-  "code": "OK",
-  "msg": "OK",
+  "code": "ok",
+  "msg": "ok",
   "data": {
     "total": 25,
     "type": 0,
     "items": [
       {
-        "block_id": "block-123",
+        "id": "block-123",
         "content": "这是文档的一个文本块内容...",
         "type": "text",
-        "level": "paragraph",
-        "position": {
-          "page": 1,
-          "start": 0,
-          "end": 100
-        },
-        "embedding": [0.1, 0.2, 0.3, ...]
+        "content_type": "text",
+        "file_id": "file-xyz",
+        "description": "段落内容",
+        "created_at": "2025-02-13T12:00:00Z",
+        "updated_at": "2025-02-13T12:00:00Z",
+        "text_and_image_id": null,
+        "image_process_type": null,
+        "level": "paragraph"
       },
       {
-        "block_id": "block-124",
+        "id": "block-124", 
         "content": "这是另一个文本块内容...",
         "type": "text",
-        "level": "paragraph",
-        "position": {
-          "page": 1,
-          "start": 100,
-          "end": 200
-        },
-        "embedding": [0.4, 0.5, 0.6, ...]
+        "content_type": "text",
+        "file_id": "file-xyz",
+        "description": "段落内容",
+        "created_at": "2025-02-13T12:01:00Z",
+        "updated_at": "2025-02-13T12:01:00Z",
+        "text_and_image_id": null,
+        "image_process_type": null,
+        "level": "paragraph"
       }
     ]
   }
