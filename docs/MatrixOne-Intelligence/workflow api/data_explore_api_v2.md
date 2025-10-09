@@ -1049,9 +1049,9 @@ POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 
 **请求头：**
 
-| 参数     | 是否必填 | 类型   | 含义   |
-| -------- | -------- | ------ | ------ |
-| user-id  | 是       | string | 用户 ID |
+| 参数     | 是否必填 | 类型   | 含义    |
+| -------- | -------- | ------ | ------- |
+| moi-key  | 是       | string | API Key |
 
 **Body 输入参数（可选）：**
 
@@ -1079,7 +1079,7 @@ POST /byoa/api/v1/explore/volumes/{vid}/files/{fid}/blocks
 import requests
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/vol-abc/files/file-xyz/blocks"
 headers = {
-    "user-id": "user_123"
+    "moi-key": "xxxxx"
 }
 body = {
     "offset": 0,
@@ -1094,7 +1094,7 @@ print(requests.post(url, headers=headers, json=body).json())
 import requests
 url = "https://freetier-01.cn-hangzhou.cluster.matrixonecloud.cn/byoa/api/v1/explore/volumes/vol-abc/files/file-xyz/blocks"
 headers = {
-    "user-id": "user_123"
+    "moi-key": "xxxxx"
 }
 body = {
     "filters": {
