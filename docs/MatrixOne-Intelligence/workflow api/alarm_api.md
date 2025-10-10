@@ -395,7 +395,7 @@ POST /alerting/workspace/alert/rule/create
 | --------------- | ------- | --------------------------------------------------------- |
 | workspace_id    | 是      | 工作区 ID（工作区模式下必填）                                 |
 | expression_id   | 是      | 表达式 ID                                                   |
-| category        | 是      | 类别：0-metric（指标），1-event（事件）                       |
+| category        | 是      | 类别：0-metric（数据处理），1-event（数据加载）                       |
 | level           | 是      | 告警级别                                                   |
 | args            | 否      | 参数列表                                                   |
 | receivers       | 否      | 接收者 ID 列表                                               |
@@ -723,7 +723,7 @@ POST /alerting/history/list
 
 | 参数             | 是否必填 | 含义                                                      |
 | --------------- | ------- | --------------------------------------------------------- |
-| group_id        | 否      | 组 ID                                                       |
+| group_id        | 否      | 工作区 ID                                                    |
 | start           | 否      | 开始时间                                                   |
 | end             | 否      | 结束时间                                                   |
 | create_at_order | 否      | 告警时间排序                                               |
@@ -743,7 +743,7 @@ POST /alerting/history/list
 | ------------------- | --------------------------------------------------------- |
 | id                  | 告警记录 ID                                                 |
 | rule_id             | 告警规则 ID                                                 |
-| group_id            | 组 ID                                                       |
+| group_id            | 工作区 ID                                                    |
 | rule_template_id    | 表达式 ID                                                   |
 | rule_expression     | 告警表达式（英文）                                         |
 | rule_expression_cn  | 告警表达式（中文）                                         |
