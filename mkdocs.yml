@@ -56,7 +56,7 @@ nav:
     - GenAI 工作区: 
       - 概述: MatrixOne-Intelligence/Workspace-Mgmt/overview.md
       - 工作区管理: MatrixOne-Intelligence/Workspace-Mgmt/workspace.md
-      - 数据接入:
+      - 数据连接:
         - 连接器: MatrixOne-Intelligence/Data-Connect/connector.md
         - 数据载入: MatrixOne-Intelligence/Data-Connect/loading.md
         - 数据导出: MatrixOne-Intelligence/Data-Connect/export.md
