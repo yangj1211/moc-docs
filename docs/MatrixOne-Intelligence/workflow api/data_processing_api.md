@@ -879,9 +879,7 @@ else:
 }
 ```
 
-
 ## 作业
-
 
 ### 查看作业列表
 
@@ -1124,7 +1122,7 @@ print(json.dumps(resp.json(), indent=4, ensure_ascii=False))
 | 参数          | 类型                  | 描述                   |
 | ------------- | --------------------- | ---------------------- |
 | **files**     | array[object]         | 文件列表               |
-| **file_total** | integer               | 总文件数(过滤后的)     |
+| **file_total** | integer               | 总文件数 (过滤后的)     |
 | **total**     | integer               | 总数                   |
 | **completed** | integer               | 已完成                 |
 | **failed**    | integer               | 失败                   |
@@ -1133,16 +1131,16 @@ print(json.dumps(resp.json(), indent=4, ensure_ascii=False))
 | **stopped**   | integer               | 已停止                 |
 
 * **`FileInfo` 对象结构:**
-    * id (string): 文件ID
+    * id (string): 文件 ID
     * file_name (string): 文件名
     * file_type (integer): 文件类型
     * file_status (integer): 文件状态
     * error_message (string, nullable): 错误信息
     * start_time (string): 开始处理时间
     * end_time (string): 结束处理时间
-    * source_id (string, nullable): 源文件ID
-    * ref_file_id (string, nullable): 原生的file_id
-    * target_volume_id (string, nullable): 目标卷ID,可用于raw下载接口
+    * source_id (string, nullable): 源文件 ID
+    * ref_file_id (string, nullable): 原生的 file_id
+    * target_volume_id (string, nullable): 目标卷 ID，可用于 raw 下载接口
 
 ### 重试处理作业文件
 
@@ -1252,7 +1250,6 @@ if response.content:
 | **progress**   | integer, nullable | 作业进度 (0-100)                                             |
 | **start_time** | integer, nullable | 作业开始时间戳 (毫秒)                                        |
 | **end_time**   | integer, nullable | 作业结束时间戳 (毫秒)                                        |
-
 
 ### 重新运行工作流
 
