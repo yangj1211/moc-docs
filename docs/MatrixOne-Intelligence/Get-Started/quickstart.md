@@ -6,7 +6,7 @@
 
 ### 1. 注册 MatrixOne Intelligence
 
-- 访问 [MatrixOne Intelligence 注册页面](https://www.matrixorigin.cn/moi-signup)。
+- 访问 [MatrixOne Intelligence 注册页面](https://matrixorigin.cn/moi-signup)。
 - 填写您的注册信息，并点击**注册**。
 
 **注意：**注册时填写的邮箱将自动注册成为您的 MatrixOne Intelligence 账户。
@@ -17,7 +17,7 @@
 
 ### 3. 登录 MatrixOne Intelligence 账户
 
-激活成功后，会跳转到登录界面，输入账户密码即可登录至 MatrixOne Intelligence 管理平台。
+激活成功后，系统会跳转至登录界面。首次输入账号密码后，将进入 GenAI 工作区及 MatrixOne 实例选择页面，在此选择 MatrixOne 实例后直接进入实例管理平台。后续登录时，系统会自动记住上一次的选择，如需更换，可直接在 MatrixOne 实例管理界面切换 GenAI 工作区。
 
 ## 第二步：创建一个 Serverless 实例
 

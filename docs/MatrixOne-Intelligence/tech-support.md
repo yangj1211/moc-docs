@@ -34,4 +34,4 @@
 
 联系邮箱：<moc-support@matrixorigin.io>
 
-您还可以访问 [MatrixOne 官网](https://www.matrixorigin.cn/)，访问更多频道，了解更多资源。
+您还可以访问 [MatrixOne 官网](https://matrixorigin.cn/)，访问更多频道，了解更多资源。

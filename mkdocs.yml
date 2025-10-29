@@ -15,11 +15,24 @@ theme:
   font:
     text: Ubuntu
 repo_url: https://github.com/matrixorigin/moc-docs
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"/]+|[，。！？…：“”‘’（）—【】《》]|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - print-site:
+      print_page_title: ''
+      toc_title: '目录'
 edit_uri: edit/main/docs/
 extra:
-  homepage: https://www.matrixorigin.cn/matrixone-intelligence
+  homepage: https://matrixorigin.cn/matrixone-intelligence
   version:
     provider: mike
+  alternate:
+    - name: English
+      link: /en/m1intelligence/
+      lang: en
+    - name: 中文简体
+      link: /zh/m1intelligence/
+      lang: zh
 extra_css:
   - stylesheets/extra.css
 markdown_extensions:
@@ -36,26 +49,27 @@ nav:
     - 主页: README.md
     - 关于 MatrixOne Intelligence:
       - MatrixOne Intelligence 简介: MatrixOne-Intelligence/Overview/matrixone-intelligence-introduction.md
-      - MySQL 兼容性: MatrixOne-Intelligence/Overview/mysql-compatibility.md
-      - MOne 助手: MatrixOne-Intelligence/Overview/mone-introduction.md
     - 快速开始:
       - 快速创建 GenAI 工作区: MatrixOne-Intelligence/Get-Started/workspace.md
       - 快速创建数据库实例: MatrixOne-Intelligence/Get-Started/quickstart.md
-      - 快速上手 AI 搜索: MatrixOne-Intelligence/Get-Started/ai_search.md
-      - 快速上手简历智搜: MatrixOne-Intelligence/Get-Started/cv_search.md
       - 快速上手向量能力: MatrixOne-Intelligence/Get-Started/vector.md
     - GenAI 工作区: 
       - 概述: MatrixOne-Intelligence/Workspace-Mgmt/overview.md
       - 工作区管理: MatrixOne-Intelligence/Workspace-Mgmt/workspace.md
-      - 数据接入:
+      - 数据连接:
         - 连接器: MatrixOne-Intelligence/Data-Connect/connector.md
         - 数据载入: MatrixOne-Intelligence/Data-Connect/loading.md
         - 数据导出: MatrixOne-Intelligence/Data-Connect/export.md
       - 数据处理:
+        - 工作流模版:
+          - 概述: MatrixOne-Intelligence/Data-Processing/workflow_template/overview.md
+          - 图文混合文档 RAG 数据准备: MatrixOne-Intelligence/Data-Processing/workflow_template/multimodal_doc_rag_prep.md
+          - 人才简历信息提取: MatrixOne-Intelligence/Data-Processing/workflow_template/resume_info_extraction.md
+          - 法律数据微调生成: MatrixOne-Intelligence/Data-Processing/workflow_template/legal_sft_data_gen.md
         - 工作流: MatrixOne-Intelligence/Data-Processing/workflow.md
         - 作业: MatrixOne-Intelligence/Data-Processing/operation.md
-      - 探索数据:
-        - Catalog: MatrixOne-Intelligence/Data-Explore/catalog.md
+      - 数据管理:
+        - 数据中心: MatrixOne-Intelligence/Data-Explore/catalog.md
       - 告警: MatrixOne-Intelligence/Workspace-Mgmt/alarm.md
       - 用户权限:
         - 用户管理: MatrixOne-Intelligence/Workspace-Mgmt/user-privilge/user_mgmt.md
@@ -72,6 +86,7 @@ nav:
         - 结构化抽取: MatrixOne-Intelligence/quick-start api/structured_extraction_api.md
       - MCP 使用说明: MatrixOne-Intelligence/mcp/mcp.md
     - 数据库实例: 
+      - MySQL 兼容性: MatrixOne-Intelligence/Overview/mysql-compatibility.md
       - 管理实例:
         - 创建实例:
           - 创建 Serverless 实例: MatrixOne-Intelligence/Instance-Mgmt/create-instance/create-serverless-instance.md
@@ -562,9 +577,9 @@ nav:
           - MatrixOne 的 JDBC 功能支持列表: MatrixOne-Intelligence/Reference/Limitations/mo-jdbc-feature-list.md
           - MatrixOne DDL 语句分区支持的说明: MatrixOne-Intelligence/Reference/Limitations/mo-partition-support.md
           - MatrixOne 的 Load Data 支持的说明: MatrixOne-Intelligence/Reference/Limitations/load-data-support.md
-    - AI 应用市场: 
-      - AI 搜索: MatrixOne-Intelligence/AI-Application/universal_search.md  
-      - 简历智搜: MatrixOne-Intelligence/AI-Application/cv_search.md  
+      - 常见问题:
+        - SQL 常见问题: MatrixOne-Intelligence/FAQs/sql-faqs.md
+        - MatrixOne Intelligence 常见问题: MatrixOne-Intelligence/FAQs/FAQ-Product.md
     - 监控:
       - 监控指标: MatrixOne-Intelligence/Monitor/Monitoring.md
       - 监控数据: MatrixOne-Intelligence/Monitor/Data-Monitoring.md
@@ -583,9 +598,6 @@ nav:
       - 现金透支: MatrixOne-Intelligence/Charging/overdraft.md
       - 变更配置: MatrixOne-Intelligence/Charging/adjust-policy.md
       - 退订说明: MatrixOne-Intelligence/Charging/cancellation-policy.md    
-    - 常见问题:
-        - SQL 常见问题: MatrixOne-Intelligence/FAQs/sql-faqs.md
-        - MatrixOne Intelligence 常见问题: MatrixOne-Intelligence/FAQs/FAQ-Product.md
     - 版本发布纪要:
         - '2025': MatrixOne-Intelligence/Release-Notes/2025.md
         - '2024': MatrixOne-Intelligence/Release-Notes/2024.md

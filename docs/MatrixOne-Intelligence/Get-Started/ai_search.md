@@ -6,7 +6,7 @@ AI 搜索结合先进的大型语言模型与混合检索算法，能够精准�
 
 ### 1. 注册 MatrixOne Intelligence
 
-- 访问 [MatrixOne Intelligence 注册页面](https://www.matrixorigin.cn/moi-signup)。
+- 访问 [MatrixOne Intelligence 注册页面](https://matrixorigin.cn/moi-signup)。
 - 填写您的注册信息，并点击**注册**。
 
 **注意：**注册时填写的邮箱将自动注册成为您的 MatrixOne Intelligence 账户。
