@@ -69,7 +69,8 @@ nav:
         - 工作流: MatrixOne-Intelligence/Data-Processing/workflow.md
         - 作业: MatrixOne-Intelligence/Data-Processing/operation.md
       - 数据管理:
-        - 数据中心: MatrixOne-Intelligence/Data-Explore/catalog.md
+        - 数据中心: MatrixOne-Intelligence/Workspace-Mgmt/data_mgt/catalog.md
+        - 数据探索: MatrixOne-Intelligence/Workspace-Mgmt/data_mgt/data_explore.md
       - 告警: MatrixOne-Intelligence/Workspace-Mgmt/alarm.md
       - 用户权限:
         - 用户管理: MatrixOne-Intelligence/Workspace-Mgmt/user-privilge/user_mgmt.md

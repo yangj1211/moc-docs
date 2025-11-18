@@ -28,13 +28,9 @@ MOI 平台采用三级结构进行数据管理：**目录 → 库 → 卷**，�
 
 ### 结果展示
 
-点击文件名可查看该文件最终的处理详情页面。
+点击文件列表右侧的预览按钮可查看该文件的血缘信息。
 
-![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/catalog_1.png)
-
-点击文件列表右侧的预览按钮可查看该文件的解析情况，目前只有 pdf 类型文件解析后才可以做原文映射。
-
-![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/catalog_2.png)
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/data_lineage_1.png)
 
 ### 结果下载
 
