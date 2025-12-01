@@ -79,6 +79,7 @@ nav:
          - MCP 使用说明: MatrixOne-Intelligence/mcp/mcp.md
          - Deerflow 结合 MOI RAG 服务使用说明: MatrixOne-Intelligence/develop/deerflow.md
       - API 说明:
+        - 原子能力 API 说明: MatrixOne-Intelligence/workflow api/automic_api.md
         - 工作流 API 说明:
           - 鉴权: MatrixOne-Intelligence/workflow api/token_api.md
           - 数据接入: MatrixOne-Intelligence/workflow api/data_connect_api.md
@@ -87,8 +88,6 @@ nav:
           - 数据导出: MatrixOne-Intelligence/workflow api/data_export_api.md
           - 告警: MatrixOne-Intelligence/workflow api/alarm_api.md
           - 指标: MatrixOne-Intelligence/workflow api/indicator_api.md
-        - 快速体验 API 说明:
-          - 结构化抽取: MatrixOne-Intelligence/quick-start api/structured_extraction_api.md
     - 数据库实例: 
       - MySQL 兼容性: MatrixOne-Intelligence/Overview/mysql-compatibility.md
       - 管理实例:
