@@ -35,7 +35,9 @@ MatrixOne Intelligence 提供高性能的数据载入能力，支持从多种渠
 
 ## 非结构化数据载入
 
-适用于文档、文本、图片等非结构化文件。用户只需：选择要载入的文件，指定目标数据卷既可创建载入任务。
+适用于文档、图片、音频和视频类非结构化文件。用户只需选择要载入的文件，指定目标数据卷既可创建载入任务。
+
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/load_1.png)
 
 ## 结构化数据载入（表数据导入）
 
@@ -44,6 +46,8 @@ MatrixOne Intelligence 提供高性能的数据载入能力，支持从多种渠
 对于结构化文件，可配置分隔符、定界符和转义符（仅 CSV 适用）。文件列名可选择是否启用（默认开启），并可指定列名所在行（最多 20 行）；数据起始行默认为列名行的下一行。
 
 载入流程中，系统会预览从导入数据起始行开始的前 5 条数据样例，当导入的起始行超过 1000 时，则无法展示。
+
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/load_2.png)
 
 ### 导入到已有表的数据处理逻辑
 
@@ -58,6 +62,8 @@ MatrixOne Intelligence 提供高性能的数据载入能力，支持从多种渠
 - 系统展示目标表的字段名、类型、主键信息
 - 每个目标字段可映射：文件列 / NULL / 默认值
 - 所有字段完成映射后方可创建任务
+
+![](https://community-shared-data-1308875761.cos.ap-beijing.myqcloud.com/artwork/mocdocs/images/load_3.png)
 
 ### 创建新表并导入
 
