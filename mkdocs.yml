@@ -602,6 +602,7 @@ nav:
       - 变更配置: MatrixOne-Intelligence/Charging/adjust-policy.md
       - 退订说明: MatrixOne-Intelligence/Charging/cancellation-policy.md    
     - 版本发布纪要:
+        - '2026': MatrixOne-Intelligence/Release-Notes/2026.md
         - '2025': MatrixOne-Intelligence/Release-Notes/2025.md
         - '2024': MatrixOne-Intelligence/Release-Notes/2024.md
         - '2023': MatrixOne-Intelligence/Release-Notes/2023.md
